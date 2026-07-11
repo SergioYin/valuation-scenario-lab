@@ -1,0 +1,47 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "demo_company": "Example Components Inc.",
+  "demo_outputs": [
+    "demo/valuation-packet.html",
+    "demo/quickstart-check.md",
+    "demo/visual-receipt.html",
+    "demo/decision-journal.md",
+    "demo/public-readiness-landing.html"
+  ],
+  "demo_ticker": "EXCO",
+  "generated_on": "static-local",
+  "headline": "Offline valuation scenario lab",
+  "primary_ctas": [
+    {
+      "artifact": "demo/valuation-packet.html",
+      "command": "valuation-scenario-lab demo",
+      "label": "Run the demo"
+    },
+    {
+      "artifact": "release/release-manifest.md",
+      "command": "valuation-scenario-lab validate-release --format markdown",
+      "label": "Validate release"
+    },
+    {
+      "artifact": "demo/decision-journal.md",
+      "command": "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
+      "label": "Read the journal"
+    }
+  ],
+  "readiness_checks": [
+    "zero runtime dependencies",
+    "static local fixtures",
+    "deterministic demo artifacts",
+    "public-neutral boundary text",
+    "no workflow automation"
+  ],
+  "schema_version": "valuation-scenario-lab.public-readiness.v0.3",
+  "subhead": "Deterministic Markdown, JSON, and static HTML artifacts from local assumptions."
+}

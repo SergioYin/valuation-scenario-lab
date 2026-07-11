@@ -1,0 +1,58 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "company": "Example Components Inc.",
+  "current_price": 42.0,
+  "generated_on": "static-local",
+  "journal_entries": [
+    {
+      "decision": "recorded for research review",
+      "evidence": [
+        "valuation-packet.json",
+        "review-ledger.json"
+      ],
+      "id": "DJ-001",
+      "next_review": "refresh local assumptions before external discussion",
+      "rationale": "Modeled range carries a near modeled value label at -8.6%.",
+      "scenario": "Base reinvestment case"
+    },
+    {
+      "decision": "recorded for research review",
+      "evidence": [
+        "valuation-packet.json",
+        "review-ledger.json"
+      ],
+      "id": "DJ-002",
+      "next_review": "refresh local assumptions before external discussion",
+      "rationale": "Modeled range carries a large negative gap label at -56.8%.",
+      "scenario": "Margin pressure case"
+    },
+    {
+      "decision": "recorded for research review",
+      "evidence": [
+        "valuation-packet.json",
+        "review-ledger.json"
+      ],
+      "id": "DJ-003",
+      "next_review": "refresh local assumptions before external discussion",
+      "rationale": "Modeled range carries a large positive gap label at 51.6%.",
+      "scenario": "Upside adoption case"
+    }
+  ],
+  "open_questions": [
+    "Which assumption would most change the Base reinvestment case valuation range?",
+    "Which assumption would most change the Margin pressure case valuation range?",
+    "Which assumption would most change the Upside adoption case valuation range?"
+  ],
+  "schema_version": "valuation-scenario-lab.decision-journal.v0.3",
+  "summary_decision": "research packet logged; no action recommendation",
+  "ticker": "EXCO",
+  "weighted_fair_value_per_share": 37.38,
+  "weighted_margin_of_safety_pct": -11.0
+}

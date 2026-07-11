@@ -1,0 +1,76 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "commands": [
+    "valuation-scenario-lab demo",
+    "valuation-scenario-lab selfcheck --root .",
+    "valuation-scenario-lab quickstart-check --root . --output demo",
+    "valuation-scenario-lab visual-receipt --root . --output demo",
+    "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
+    "valuation-scenario-lab public-readiness-landing --root . --output demo"
+  ],
+  "files": [
+    {
+      "exists": true,
+      "path": "demo/valuation-packet.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/valuation-packet.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/valuation-packet.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/compare-history.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/compare-history.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/review-ledger.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/review-ledger.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/sensitivity-matrix.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/sensitivity-matrix.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/decision-journal.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/decision-journal.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/public-readiness-landing.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/public-readiness-landing.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/public-readiness-landing.html"
+    }
+  ],
+  "fixture_source": "local-or-packaged-fixtures",
+  "schema_version": "valuation-scenario-lab.quickstart-check.v0.3",
+  "status": "pass"
+}

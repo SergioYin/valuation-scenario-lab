@@ -1,0 +1,50 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "changes": [
+    {
+      "current": 37.38,
+      "field": "weighted_fair_value_per_share",
+      "prior": 37.2
+    },
+    {
+      "current": -11.0,
+      "field": "weighted_margin_of_safety_pct",
+      "prior": -7.0
+    },
+    {
+      "current": "moderate negative gap",
+      "field": "margin_of_safety_label",
+      "prior": "near modeled value"
+    }
+  ],
+  "company": "Example Components Inc.",
+  "generated_on": "static-local",
+  "scenario_changes": [
+    {
+      "current_base": 38.4,
+      "delta": 0.6,
+      "prior_base": 37.8,
+      "scenario": "Base reinvestment case"
+    },
+    {
+      "current_base": 18.16,
+      "delta": -4.94,
+      "prior_base": 23.1,
+      "scenario": "Margin pressure case"
+    },
+    {
+      "current_base": 63.65,
+      "delta": 3.25,
+      "prior_base": 60.4,
+      "scenario": "Upside adoption case"
+    }
+  ],
+  "schema_version": "valuation-scenario-lab.compare.v0.3"
+}

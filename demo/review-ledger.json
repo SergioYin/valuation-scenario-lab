@@ -1,0 +1,45 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "company": "Example Components Inc.",
+  "entries": [
+    {
+      "evidence": [
+        "valuation-packet.json"
+      ],
+      "margin_label": "near modeled value",
+      "owner": "research reviewer",
+      "priority": "normal",
+      "review_question": "Which assumption would most change the Base reinvestment case valuation range?",
+      "scenario": "Base reinvestment case"
+    },
+    {
+      "evidence": [
+        "valuation-packet.json"
+      ],
+      "margin_label": "large negative gap",
+      "owner": "research reviewer",
+      "priority": "high",
+      "review_question": "Which assumption would most change the Margin pressure case valuation range?",
+      "scenario": "Margin pressure case"
+    },
+    {
+      "evidence": [
+        "valuation-packet.json"
+      ],
+      "margin_label": "large positive gap",
+      "owner": "research reviewer",
+      "priority": "high",
+      "review_question": "Which assumption would most change the Upside adoption case valuation range?",
+      "scenario": "Upside adoption case"
+    }
+  ],
+  "generated_on": "static-local",
+  "schema_version": "valuation-scenario-lab.ledger.v0.3"
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "valuation-scenario-lab.v0.3",
+  "generated_on": "static-local",
+  "company": "Example Components Inc.",
+  "ticker": "EXCO",
+  "currency": "USD",
+  "current_price": 40.0,
+  "weighted_fair_value_per_share": 37.2,
+  "weighted_range_per_share": [33.5, 40.9],
+  "weighted_margin_of_safety_pct": -7.0,
+  "margin_of_safety_label": "near modeled value",
+  "valuation_ranges": [
+    {"scenario": "Base reinvestment case", "weight": 0.5, "low": 34.0, "base": 37.8, "high": 41.6, "margin_of_safety_pct": -5.5, "margin_label": "near modeled value", "score": -7.5},
+    {"scenario": "Margin pressure case", "weight": 0.3, "low": 20.8, "base": 23.1, "high": 25.4, "margin_of_safety_pct": -42.3, "margin_label": "large negative gap", "score": -46.5},
+    {"scenario": "Upside adoption case", "weight": 0.2, "low": 54.4, "base": 60.4, "high": 66.4, "margin_of_safety_pct": 51.0, "margin_label": "large positive gap", "score": 49.4}
+  ],
+  "catalysts": ["new product cycle"],
+  "risks": ["component shortages"],
+  "source_freshness": [],
+  "review_prompts": ["Refresh local assumptions."],
+  "boundaries": ["Research-only output.", "No live data.", "No broker connections.", "No orders.", "No predictions.", "No buy/sell/hold advice."]
+}

@@ -1,0 +1,70 @@
+{
+  "base_weighted_fair_value_per_share": 37.38,
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "company": "Example Components Inc.",
+  "generated_on": "static-local",
+  "rows": [
+    {
+      "discount_delta_pct": -1.0,
+      "fcf_margin_delta_pct": -2.0,
+      "weighted_fair_value_per_share": 36.3,
+      "weighted_margin_of_safety_pct": -13.6
+    },
+    {
+      "discount_delta_pct": -1.0,
+      "fcf_margin_delta_pct": 0.0,
+      "weighted_fair_value_per_share": 39.2,
+      "weighted_margin_of_safety_pct": -6.7
+    },
+    {
+      "discount_delta_pct": -1.0,
+      "fcf_margin_delta_pct": 2.0,
+      "weighted_fair_value_per_share": 42.1,
+      "weighted_margin_of_safety_pct": 0.2
+    },
+    {
+      "discount_delta_pct": 0.0,
+      "fcf_margin_delta_pct": -2.0,
+      "weighted_fair_value_per_share": 34.74,
+      "weighted_margin_of_safety_pct": -17.3
+    },
+    {
+      "discount_delta_pct": 0.0,
+      "fcf_margin_delta_pct": 0.0,
+      "weighted_fair_value_per_share": 37.38,
+      "weighted_margin_of_safety_pct": -11.0
+    },
+    {
+      "discount_delta_pct": 0.0,
+      "fcf_margin_delta_pct": 2.0,
+      "weighted_fair_value_per_share": 40.02,
+      "weighted_margin_of_safety_pct": -4.7
+    },
+    {
+      "discount_delta_pct": 1.0,
+      "fcf_margin_delta_pct": -2.0,
+      "weighted_fair_value_per_share": 33.56,
+      "weighted_margin_of_safety_pct": -20.1
+    },
+    {
+      "discount_delta_pct": 1.0,
+      "fcf_margin_delta_pct": 0.0,
+      "weighted_fair_value_per_share": 36.0,
+      "weighted_margin_of_safety_pct": -14.3
+    },
+    {
+      "discount_delta_pct": 1.0,
+      "fcf_margin_delta_pct": 2.0,
+      "weighted_fair_value_per_share": 38.44,
+      "weighted_margin_of_safety_pct": -8.5
+    }
+  ],
+  "schema_version": "valuation-scenario-lab.sensitivity.v0.3"
+}

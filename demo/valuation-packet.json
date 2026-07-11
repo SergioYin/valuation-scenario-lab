@@ -1,0 +1,83 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "catalysts": [
+    "channel expansion",
+    "new product cycle",
+    "operating leverage",
+    "pricing discipline",
+    "software attach"
+  ],
+  "company": "Example Components Inc.",
+  "currency": "USD",
+  "current_price": 42.0,
+  "generated_on": "static-local",
+  "margin_of_safety_label": "moderate negative gap",
+  "review_prompts": [
+    "Confirm that all assumptions are sourced from local research notes.",
+    "Review whether scenario weights still reflect the written thesis.",
+    "Refresh any source with an age_days value above the local review policy."
+  ],
+  "risks": [
+    "component shortages",
+    "customer concentration",
+    "execution delay",
+    "input inflation"
+  ],
+  "schema_version": "valuation-scenario-lab.v0.3",
+  "source_freshness": [
+    {
+      "age_days": 35,
+      "name": "annual report notes"
+    },
+    {
+      "age_days": 18,
+      "name": "industry margin memo"
+    }
+  ],
+  "ticker": "EXCO",
+  "valuation_ranges": [
+    {
+      "base": 38.4,
+      "high": 42.24,
+      "low": 34.56,
+      "margin_label": "near modeled value",
+      "margin_of_safety_pct": -8.6,
+      "scenario": "Base reinvestment case",
+      "score": -10.56,
+      "weight": 0.5
+    },
+    {
+      "base": 18.16,
+      "high": 19.97,
+      "low": 16.34,
+      "margin_label": "large negative gap",
+      "margin_of_safety_pct": -56.8,
+      "scenario": "Margin pressure case",
+      "score": -60.97,
+      "weight": 0.3
+    },
+    {
+      "base": 63.65,
+      "high": 70.02,
+      "low": 57.29,
+      "margin_label": "large positive gap",
+      "margin_of_safety_pct": 51.6,
+      "scenario": "Upside adoption case",
+      "score": 49.96,
+      "weight": 0.2
+    }
+  ],
+  "weighted_fair_value_per_share": 37.38,
+  "weighted_margin_of_safety_pct": -11.0,
+  "weighted_range_per_share": [
+    33.64,
+    41.12
+  ]
+}

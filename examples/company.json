@@ -1,0 +1,53 @@
+{
+  "company": "Example Components Inc.",
+  "ticker": "EXCO",
+  "currency": "USD",
+  "current_price": 42.0,
+  "shares_outstanding_m": 125.0,
+  "net_cash_m": 180.0,
+  "source_freshness": [
+    {"name": "annual report notes", "age_days": 35},
+    {"name": "industry margin memo", "age_days": 18}
+  ],
+  "scenarios": [
+    {
+      "name": "Base reinvestment case",
+      "weight": 0.5,
+      "starting_revenue_m": 1280.0,
+      "revenue_growth_pct": 7.0,
+      "fcf_margin_pct": 14.0,
+      "discount_rate_pct": 10.0,
+      "terminal_growth_pct": 3.0,
+      "terminal_multiple": 16.0,
+      "catalysts": ["new product cycle", "operating leverage"],
+      "risks": ["component shortages"],
+      "source_freshness": [{"name": "base model memo", "age_days": 20}]
+    },
+    {
+      "name": "Margin pressure case",
+      "weight": 0.3,
+      "starting_revenue_m": 1240.0,
+      "revenue_growth_pct": 3.0,
+      "fcf_margin_pct": 10.0,
+      "discount_rate_pct": 11.5,
+      "terminal_growth_pct": 2.0,
+      "terminal_multiple": 12.0,
+      "catalysts": ["pricing discipline"],
+      "risks": ["input inflation", "customer concentration"],
+      "source_freshness": [{"name": "risk review memo", "age_days": 42}]
+    },
+    {
+      "name": "Upside adoption case",
+      "weight": 0.2,
+      "starting_revenue_m": 1320.0,
+      "revenue_growth_pct": 11.0,
+      "fcf_margin_pct": 17.0,
+      "discount_rate_pct": 9.5,
+      "terminal_growth_pct": 3.5,
+      "terminal_multiple": 18.0,
+      "catalysts": ["channel expansion", "software attach"],
+      "risks": ["execution delay"],
+      "source_freshness": [{"name": "upside scenario memo", "age_days": 16}]
+    }
+  ]
+}
