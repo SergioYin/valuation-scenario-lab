@@ -10,6 +10,11 @@ python -m valuation_scenario_lab.cli visual-receipt --root . --output demo
 python -m valuation_scenario_lab.cli showcase-dashboard --root . --output demo
 python -m valuation_scenario_lab.cli thesis-brief --root . --output demo
 python -m valuation_scenario_lab.cli scenario-library --fixtures examples --output demo
+python -m valuation_scenario_lab.cli sample-workflow --root . --output demo
+python -m valuation_scenario_lab.cli release-manifest --root . --output release
+python -m valuation_scenario_lab.cli reproducibility-audit --root . --output demo
+python -m valuation_scenario_lab.cli release-manifest --root . --output release
+python -m valuation_scenario_lab.cli reproducibility-audit --root . --output demo
 python -m valuation_scenario_lab.cli fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo
 python -m valuation_scenario_lab.cli assumption-change-walkthrough --fixtures examples --output demo
 python -m valuation_scenario_lab.cli demo-gallery --fixtures examples --output demo
@@ -20,6 +25,6 @@ valuation-scenario-lab validate-release --format markdown
 valuation-scenario-lab maturity-report --format markdown
 ```
 
-Required demo release artifacts include packet JSON/Markdown/HTML, history comparison JSON/Markdown, review ledger JSON/Markdown, sensitivity matrix JSON/Markdown, assumption-change walkthrough JSON/Markdown/HTML, multi-company demo gallery JSON/Markdown/HTML, decision journal JSON/Markdown, fixture doctor JSON/Markdown, quickstart check JSON/Markdown, visual receipt JSON/Markdown/HTML, showcase dashboard JSON/SVG/Markdown/HTML, thesis brief JSON/Markdown/HTML, scenario library JSON/Markdown/HTML, and public readiness landing JSON/Markdown/HTML.
+Required demo release artifacts include packet JSON/Markdown/HTML, history comparison JSON/Markdown, review ledger JSON/Markdown, sensitivity matrix JSON/Markdown, assumption-change walkthrough JSON/Markdown/HTML, multi-company demo gallery JSON/Markdown/HTML, decision journal JSON/Markdown, fixture doctor JSON/Markdown, quickstart check JSON/Markdown, visual receipt JSON/Markdown/HTML, showcase dashboard JSON/SVG/Markdown/HTML, thesis brief JSON/Markdown/HTML, scenario library JSON/Markdown/HTML, reproducibility audit JSON/Markdown/HTML, sample workflow JSON/Markdown/HTML, and public readiness landing JSON/Markdown/HTML.
 
-The release checks verify required files, demo artifacts, fixture schema, scenario weights, numeric fields, source staleness warnings, public hygiene, safety boundary text, package metadata, installed data-file coverage, and absence of workflow automation in this repository.
+The release checks verify required files, demo artifacts, schema versions, hash manifest coverage, fixture schema, scenario weights, numeric fields, source staleness warnings, public hygiene, safety boundary text, zero dependency package metadata, installed data-file coverage, and absence of workflow automation in this repository.

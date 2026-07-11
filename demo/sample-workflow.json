@@ -1,0 +1,245 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "generated_on": "static-local",
+  "primary_commands": [
+    "valuation-scenario-lab demo --root .",
+    "valuation-scenario-lab compare-history --current demo/valuation-packet.json --prior examples/prior-packet.json --output demo",
+    "valuation-scenario-lab review-ledger --packet demo/valuation-packet.json --policy examples/review-policy.json --output demo",
+    "valuation-scenario-lab sensitivity-matrix --fixtures examples --output demo",
+    "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
+    "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
+    "valuation-scenario-lab thesis-brief --root . --output demo",
+    "valuation-scenario-lab public-readiness-landing --root . --output demo",
+    "valuation-scenario-lab reproducibility-audit --root . --output demo"
+  ],
+  "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
+  "status": "pass",
+  "steps": [
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/valuation-packet.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/valuation-packet.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/valuation-packet.html"
+        }
+      ],
+      "artifacts": [
+        "demo/valuation-packet.json",
+        "demo/valuation-packet.md",
+        "demo/valuation-packet.html"
+      ],
+      "command": "valuation-scenario-lab demo --root .",
+      "name": "Generate the full demo tree",
+      "step": 1
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/compare-history.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/compare-history.md"
+        }
+      ],
+      "artifacts": [
+        "demo/compare-history.json",
+        "demo/compare-history.md"
+      ],
+      "command": "valuation-scenario-lab compare-history --current demo/valuation-packet.json --prior examples/prior-packet.json --output demo",
+      "name": "Compare against prior assumptions",
+      "step": 2
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/review-ledger.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/review-ledger.md"
+        }
+      ],
+      "artifacts": [
+        "demo/review-ledger.json",
+        "demo/review-ledger.md"
+      ],
+      "command": "valuation-scenario-lab review-ledger --packet demo/valuation-packet.json --policy examples/review-policy.json --output demo",
+      "name": "Create review evidence",
+      "step": 3
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/sensitivity-matrix.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/sensitivity-matrix.md"
+        }
+      ],
+      "artifacts": [
+        "demo/sensitivity-matrix.json",
+        "demo/sensitivity-matrix.md"
+      ],
+      "command": "valuation-scenario-lab sensitivity-matrix --fixtures examples --output demo",
+      "name": "Stress local assumptions",
+      "step": 4
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/assumption-change-walkthrough.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/assumption-change-walkthrough.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/assumption-change-walkthrough.html"
+        }
+      ],
+      "artifacts": [
+        "demo/assumption-change-walkthrough.json",
+        "demo/assumption-change-walkthrough.md",
+        "demo/assumption-change-walkthrough.html"
+      ],
+      "command": "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
+      "name": "Explain one assumption change",
+      "step": 5
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/fixture-doctor.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/fixture-doctor.md"
+        }
+      ],
+      "artifacts": [
+        "demo/fixture-doctor.json",
+        "demo/fixture-doctor.md"
+      ],
+      "command": "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
+      "name": "Review fixture quality",
+      "step": 6
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/thesis-brief.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/thesis-brief.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/thesis-brief.html"
+        }
+      ],
+      "artifacts": [
+        "demo/thesis-brief.json",
+        "demo/thesis-brief.md",
+        "demo/thesis-brief.html"
+      ],
+      "command": "valuation-scenario-lab thesis-brief --root . --output demo",
+      "name": "Summarize analyst outputs",
+      "step": 7
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/public-readiness-landing.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/public-readiness-landing.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/public-readiness-landing.html"
+        },
+        {
+          "exists": true,
+          "path": "demo/showcase-dashboard.svg"
+        },
+        {
+          "exists": true,
+          "path": "demo/showcase-dashboard.html"
+        },
+        {
+          "exists": true,
+          "path": "demo/scenario-library.html"
+        }
+      ],
+      "artifacts": [
+        "demo/public-readiness-landing.json",
+        "demo/public-readiness-landing.md",
+        "demo/public-readiness-landing.html",
+        "demo/showcase-dashboard.svg",
+        "demo/showcase-dashboard.html",
+        "demo/scenario-library.html"
+      ],
+      "command": "valuation-scenario-lab public-readiness-landing --root . --output demo",
+      "name": "Publish static demo views",
+      "step": 8
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/reproducibility-audit.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/reproducibility-audit.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/reproducibility-audit.html"
+        },
+        {
+          "exists": true,
+          "path": "release/release-manifest.json"
+        },
+        {
+          "exists": true,
+          "path": "release/release-manifest.md"
+        }
+      ],
+      "artifacts": [
+        "demo/reproducibility-audit.json",
+        "demo/reproducibility-audit.md",
+        "demo/reproducibility-audit.html",
+        "release/release-manifest.json",
+        "release/release-manifest.md"
+      ],
+      "command": "valuation-scenario-lab reproducibility-audit --root . --output demo",
+      "name": "Record release reproducibility",
+      "step": 9
+    }
+  ],
+  "title": "Sample Analyst Workflow Receipt"
+}

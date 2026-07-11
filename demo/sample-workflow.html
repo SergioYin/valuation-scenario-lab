@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sample Analyst Workflow Receipt</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }
+section { border-top: 1px solid #d6dde4; padding: 1rem 0; }
+code { background: #eef3f8; padding: 0.1rem 0.25rem; }
+</style>
+</head>
+<body>
+<h1>Sample Analyst Workflow Receipt</h1>
+<p>Status: pass</p>
+<section><h2>1. Generate the full demo tree</h2><p><code>valuation-scenario-lab demo --root .</code></p><ul><li><code>demo/valuation-packet.json</code>: ok</li><li><code>demo/valuation-packet.md</code>: ok</li><li><code>demo/valuation-packet.html</code>: ok</li></ul></section><section><h2>2. Compare against prior assumptions</h2><p><code>valuation-scenario-lab compare-history --current demo/valuation-packet.json --prior examples/prior-packet.json --output demo</code></p><ul><li><code>demo/compare-history.json</code>: ok</li><li><code>demo/compare-history.md</code>: ok</li></ul></section><section><h2>3. Create review evidence</h2><p><code>valuation-scenario-lab review-ledger --packet demo/valuation-packet.json --policy examples/review-policy.json --output demo</code></p><ul><li><code>demo/review-ledger.json</code>: ok</li><li><code>demo/review-ledger.md</code>: ok</li></ul></section><section><h2>4. Stress local assumptions</h2><p><code>valuation-scenario-lab sensitivity-matrix --fixtures examples --output demo</code></p><ul><li><code>demo/sensitivity-matrix.json</code>: ok</li><li><code>demo/sensitivity-matrix.md</code>: ok</li></ul></section><section><h2>5. Explain one assumption change</h2><p><code>valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo</code></p><ul><li><code>demo/assumption-change-walkthrough.json</code>: ok</li><li><code>demo/assumption-change-walkthrough.md</code>: ok</li><li><code>demo/assumption-change-walkthrough.html</code>: ok</li></ul></section><section><h2>6. Review fixture quality</h2><p><code>valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo</code></p><ul><li><code>demo/fixture-doctor.json</code>: ok</li><li><code>demo/fixture-doctor.md</code>: ok</li></ul></section><section><h2>7. Summarize analyst outputs</h2><p><code>valuation-scenario-lab thesis-brief --root . --output demo</code></p><ul><li><code>demo/thesis-brief.json</code>: ok</li><li><code>demo/thesis-brief.md</code>: ok</li><li><code>demo/thesis-brief.html</code>: ok</li></ul></section><section><h2>8. Publish static demo views</h2><p><code>valuation-scenario-lab public-readiness-landing --root . --output demo</code></p><ul><li><code>demo/public-readiness-landing.json</code>: ok</li><li><code>demo/public-readiness-landing.md</code>: ok</li><li><code>demo/public-readiness-landing.html</code>: ok</li><li><code>demo/showcase-dashboard.svg</code>: ok</li><li><code>demo/showcase-dashboard.html</code>: ok</li><li><code>demo/scenario-library.html</code>: ok</li></ul></section><section><h2>9. Record release reproducibility</h2><p><code>valuation-scenario-lab reproducibility-audit --root . --output demo</code></p><ul><li><code>demo/reproducibility-audit.json</code>: ok</li><li><code>demo/reproducibility-audit.md</code>: ok</li><li><code>demo/reproducibility-audit.html</code>: ok</li><li><code>release/release-manifest.json</code>: ok</li><li><code>release/release-manifest.md</code>: ok</li></ul></section>
+<h2>Boundaries</h2><ul><li>No live data.</li><li>No broker connections.</li><li>No buy/sell/hold advice.</li></ul>
+</body>
+</html>

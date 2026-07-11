@@ -25,6 +25,7 @@ from .engine import (
 )
 from .io import ensure_dir, read_json, write_json, write_text
 from .release import maturity_report as maturity_payload
+from .release import reproducibility_audit as reproducibility_audit_payload
 from .release import release_manifest as manifest_payload
 from .release import validate_release as validate_release_payload
 from .render import packet_html, packet_markdown, simple_markdown
@@ -114,6 +115,14 @@ def main(argv: list[str] | None = None) -> int:
     manifest.add_argument("--root", default=".")
     manifest.add_argument("--output", default="release")
 
+    audit = sub.add_parser("reproducibility-audit")
+    audit.add_argument("--root", default=".")
+    audit.add_argument("--output", default="demo")
+
+    workflow = sub.add_parser("sample-workflow")
+    workflow.add_argument("--root", default=".")
+    workflow.add_argument("--output", default="demo")
+
     demo = sub.add_parser("demo")
     demo.add_argument("--root", default=".")
 
@@ -160,6 +169,10 @@ def main(argv: list[str] | None = None) -> int:
             return emit_validation(maturity_payload(Path(args.root)), args.format)
         if args.command == "release-manifest":
             return command_manifest(Path(args.root), Path(args.output))
+        if args.command == "reproducibility-audit":
+            return command_reproducibility_audit(Path(args.root), Path(args.output))
+        if args.command == "sample-workflow":
+            return command_sample_workflow(Path(args.root), Path(args.output))
         if args.command == "demo":
             root = Path(args.root)
             command_build_packet(root / "examples", root / "demo")
@@ -176,6 +189,8 @@ def main(argv: list[str] | None = None) -> int:
             command_showcase_dashboard(root, root / "demo")
             command_thesis_brief(root, root / "demo")
             command_scenario_library(root / "examples", root / "demo")
+            command_sample_workflow(root, root / "demo")
+            command_reproducibility_audit(root, root / "demo")
             return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -286,6 +301,8 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_showcase_dashboard(root, out)
         command_thesis_brief(root, out)
         command_scenario_library(root / "examples", out)
+        command_sample_workflow(root, out)
+        command_reproducibility_audit(root, out)
     validation = validate_release_payload(root)
     if validation["status"] != "pass":
         print("FAIL release validation")
@@ -304,6 +321,7 @@ def command_quickstart_check(root: Path, output: Path) -> int:
     command_showcase_dashboard(root, output)
     command_thesis_brief(root, output)
     command_scenario_library(root / "examples", output)
+    command_sample_workflow(root, output)
     expected = [
         "valuation-packet.json",
         "valuation-packet.md",
@@ -337,6 +355,12 @@ def command_quickstart_check(root: Path, output: Path) -> int:
         "scenario-library.json",
         "scenario-library.md",
         "scenario-library.html",
+        "reproducibility-audit.json",
+        "reproducibility-audit.md",
+        "reproducibility-audit.html",
+        "sample-workflow.json",
+        "sample-workflow.md",
+        "sample-workflow.html",
     ]
     files = [{"path": f"demo/{name}", "exists": (output / name).exists()} for name in expected]
     payload = {
@@ -351,6 +375,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab showcase-dashboard --root . --output demo",
             "valuation-scenario-lab thesis-brief --root . --output demo",
             "valuation-scenario-lab scenario-library --fixtures examples --output demo",
+            "valuation-scenario-lab sample-workflow --root . --output demo",
+            "valuation-scenario-lab reproducibility-audit --root . --output demo",
             "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
             "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
             "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -364,6 +390,12 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "No buy/sell/hold advice.",
         ],
     }
+    write_json(output / "quickstart-check.json", payload)
+    write_text(output / "quickstart-check.md", quickstart_markdown(payload))
+    command_reproducibility_audit(root, output)
+    files = [{"path": f"demo/{name}", "exists": (output / name).exists()} for name in expected]
+    payload["status"] = "pass" if all(item["exists"] for item in files) else "fail"
+    payload["files"] = files
     write_json(output / "quickstart-check.json", payload)
     write_text(output / "quickstart-check.md", quickstart_markdown(payload))
     print(f"wrote {output / 'quickstart-check.json'}")
@@ -382,7 +414,7 @@ def command_visual_receipt(root: Path, output: Path) -> int:
         "weighted_range_per_share": packet["weighted_range_per_share"],
         "margin_of_safety_label": packet["margin_of_safety_label"],
         "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
-        "artifact_count": 32,
+        "artifact_count": 38,
         "boundaries": packet["boundaries"],
     }
     write_json(output / "visual-receipt.json", payload)
@@ -436,6 +468,33 @@ def command_scenario_library(fixtures: Path, output: Path) -> int:
     write_text(output / "scenario-library.html", scenario_library_html(payload))
     print(f"wrote {output / 'scenario-library.json'}")
     return 0
+
+
+def command_reproducibility_audit(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    generated = [
+        relative_output(root, output / "reproducibility-audit.json"),
+        relative_output(root, output / "reproducibility-audit.md"),
+        relative_output(root, output / "reproducibility-audit.html"),
+    ]
+    payload = reproducibility_audit_payload(root, generated)
+    write_json(output / "reproducibility-audit.json", payload)
+    write_text(output / "reproducibility-audit.md", reproducibility_audit_markdown(payload))
+    write_text(output / "reproducibility-audit.html", reproducibility_audit_html(payload))
+    print(f"wrote {output / 'reproducibility-audit.json'}")
+    return 0 if payload["status"] == "pass" else 1
+
+
+def command_sample_workflow(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    payload = sample_workflow_payload(root)
+    write_json(output / "sample-workflow.json", payload)
+    write_text(output / "sample-workflow.md", sample_workflow_markdown(payload))
+    write_text(output / "sample-workflow.html", sample_workflow_html(payload))
+    print(f"wrote {output / 'sample-workflow.json'}")
+    return 0 if payload["status"] == "pass" else 1
 
 
 def ensure_demo_artifacts(root: Path, output: Path) -> None:
@@ -1106,6 +1165,221 @@ code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
 <h1>Scenario Library</h1>
 <p>{payload['card_count']} reusable assumption cards from bundled fictional fixtures.</p>
 <table><thead><tr><th>ID</th><th>Company</th><th>Scenario</th><th>Growth</th><th>FCF Margin</th><th>Discount</th><th>Base</th><th>Label</th></tr></thead><tbody>{rows}</tbody></table>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def relative_output(root: Path, path: Path) -> str:
+    try:
+        return path.resolve().relative_to(root.resolve()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def sample_workflow_payload(root: Path) -> dict[str, Any]:
+    steps = [
+        {
+            "step": 1,
+            "name": "Generate the full demo tree",
+            "command": "valuation-scenario-lab demo --root .",
+            "artifacts": ["demo/valuation-packet.json", "demo/valuation-packet.md", "demo/valuation-packet.html"],
+        },
+        {
+            "step": 2,
+            "name": "Compare against prior assumptions",
+            "command": "valuation-scenario-lab compare-history --current demo/valuation-packet.json --prior examples/prior-packet.json --output demo",
+            "artifacts": ["demo/compare-history.json", "demo/compare-history.md"],
+        },
+        {
+            "step": 3,
+            "name": "Create review evidence",
+            "command": "valuation-scenario-lab review-ledger --packet demo/valuation-packet.json --policy examples/review-policy.json --output demo",
+            "artifacts": ["demo/review-ledger.json", "demo/review-ledger.md"],
+        },
+        {
+            "step": 4,
+            "name": "Stress local assumptions",
+            "command": "valuation-scenario-lab sensitivity-matrix --fixtures examples --output demo",
+            "artifacts": ["demo/sensitivity-matrix.json", "demo/sensitivity-matrix.md"],
+        },
+        {
+            "step": 5,
+            "name": "Explain one assumption change",
+            "command": "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
+            "artifacts": [
+                "demo/assumption-change-walkthrough.json",
+                "demo/assumption-change-walkthrough.md",
+                "demo/assumption-change-walkthrough.html",
+            ],
+        },
+        {
+            "step": 6,
+            "name": "Review fixture quality",
+            "command": "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
+            "artifacts": ["demo/fixture-doctor.json", "demo/fixture-doctor.md"],
+        },
+        {
+            "step": 7,
+            "name": "Summarize analyst outputs",
+            "command": "valuation-scenario-lab thesis-brief --root . --output demo",
+            "artifacts": ["demo/thesis-brief.json", "demo/thesis-brief.md", "demo/thesis-brief.html"],
+        },
+        {
+            "step": 8,
+            "name": "Publish static demo views",
+            "command": "valuation-scenario-lab public-readiness-landing --root . --output demo",
+            "artifacts": [
+                "demo/public-readiness-landing.json",
+                "demo/public-readiness-landing.md",
+                "demo/public-readiness-landing.html",
+                "demo/showcase-dashboard.svg",
+                "demo/showcase-dashboard.html",
+                "demo/scenario-library.html",
+            ],
+        },
+        {
+            "step": 9,
+            "name": "Record release reproducibility",
+            "command": "valuation-scenario-lab reproducibility-audit --root . --output demo",
+            "artifacts": [
+                "demo/reproducibility-audit.json",
+                "demo/reproducibility-audit.md",
+                "demo/reproducibility-audit.html",
+                "release/release-manifest.json",
+                "release/release-manifest.md",
+            ],
+        },
+    ]
+    for step in steps:
+        step["artifact_status"] = [{"path": item, "exists": (root / item).exists()} for item in step["artifacts"]]
+    required_artifacts = [
+        item
+        for step in steps
+        for item in step["artifact_status"]
+        if not item["path"].startswith("demo/reproducibility-audit")
+    ]
+    return {
+        "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
+        "status": "pass" if all(item["exists"] for item in required_artifacts) else "fail",
+        "generated_on": "static-local",
+        "title": "Sample Analyst Workflow Receipt",
+        "steps": steps,
+        "primary_commands": [step["command"] for step in steps],
+        "boundaries": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice.",
+        ],
+    }
+
+
+def sample_workflow_markdown(payload: dict[str, Any]) -> str:
+    lines = ["# Sample Analyst Workflow Receipt", "", f"Status: {payload['status']}", "", "## Steps", ""]
+    for step in payload["steps"]:
+        lines.append(f"### {step['step']}. {step['name']}")
+        lines.append("")
+        lines.append(f"Command: `{step['command']}`")
+        lines.append("")
+        lines.extend(f"- `{item['path']}`: {'ok' if item['exists'] else 'missing'}" for item in step["artifact_status"])
+        lines.append("")
+    lines.extend(["## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def sample_workflow_html(payload: dict[str, Any]) -> str:
+    steps = []
+    for step in payload["steps"]:
+        artifacts = "".join(
+            f"<li><code>{html.escape(item['path'])}</code>: {'ok' if item['exists'] else 'missing'}</li>"
+            for item in step["artifact_status"]
+        )
+        steps.append(
+            "<section>"
+            f"<h2>{step['step']}. {html.escape(step['name'])}</h2>"
+            f"<p><code>{html.escape(step['command'])}</code></p>"
+            f"<ul>{artifacts}</ul>"
+            "</section>"
+        )
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sample Analyst Workflow Receipt</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+section {{ border-top: 1px solid #d6dde4; padding: 1rem 0; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Sample Analyst Workflow Receipt</h1>
+<p>Status: {html.escape(payload['status'])}</p>
+{''.join(steps)}
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def reproducibility_audit_markdown(payload: dict[str, Any]) -> str:
+    lines = ["# Reproducibility Audit", "", f"Status: {payload['status']}", "", "## Checks", ""]
+    for name, section in payload["checks"].items():
+        lines.append(f"- {name.replace('_', ' ')}: {section['status']}")
+    manifest = payload["checks"]["hash_manifest_coverage"]
+    lines.extend(
+        [
+            "",
+            "## Hash Manifest Coverage",
+            "",
+            f"- Expected files: {manifest['expected_file_count']}",
+            f"- Manifest files: {manifest['manifest_file_count']}",
+            f"- Missing: {len(manifest['missing'])}",
+            f"- Extra: {len(manifest['extra'])}",
+            f"- Hash mismatches: {len(manifest['hash_mismatches'])}",
+            "",
+            "## Boundaries",
+            "",
+        ]
+    )
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def reproducibility_audit_html(payload: dict[str, Any]) -> str:
+    rows = "".join(
+        f"<tr><td>{html.escape(name.replace('_', ' '))}</td><td>{html.escape(section['status'])}</td></tr>"
+        for name, section in payload["checks"].items()
+    )
+    manifest = payload["checks"]["hash_manifest_coverage"]
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reproducibility Audit</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; max-width: 760px; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Reproducibility Audit</h1>
+<p>Status: {html.escape(payload['status'])}</p>
+<table><thead><tr><th>Check</th><th>Status</th></tr></thead><tbody>{rows}</tbody></table>
+<h2>Hash Manifest Coverage</h2>
+<ul>
+<li>Expected files: {manifest['expected_file_count']}</li>
+<li>Manifest files: {manifest['manifest_file_count']}</li>
+<li>Missing: {len(manifest['missing'])}</li>
+<li>Extra: {len(manifest['extra'])}</li>
+<li>Hash mismatches: {len(manifest['hash_mismatches'])}</li>
+</ul>
 <h2>Boundaries</h2><ul>{boundaries}</ul>
 </body>
 </html>

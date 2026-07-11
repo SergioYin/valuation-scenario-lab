@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.0
+
+- Added `reproducibility-audit` JSON, Markdown, and static HTML receipts for artifact presence, schema versions, hash manifest coverage, zero dependency metadata, and safety boundary coverage.
+- Added `sample-workflow` JSON, Markdown, and static HTML receipts linking primary analyst commands to generated artifacts.
+- Included both hardening receipts in `demo`, `quickstart-check`, `selfcheck`, `validate-release`, package data, release docs, README examples, and the agent skill protocol.
+- Tightened release validation around manifest coverage, zero dependency metadata, and exact safety boundary coverage while preserving static local data only.
+
 ## 0.7.0
 
 - Added `thesis-brief` JSON, Markdown, and static HTML artifacts composed from packet, compare-history, decision-journal, fixture-doctor, and showcase-dashboard inputs.

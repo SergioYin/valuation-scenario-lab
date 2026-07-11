@@ -1,0 +1,606 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "checks": {
+    "artifact_presence": {
+      "files": [
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "README.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "pyproject.toml"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "LICENSE"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "CHANGELOG.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "RELEASE_NOTES.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "examples/company.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "examples/software-compounder.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/valuation-packet.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/valuation-packet.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/valuation-packet.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/compare-history.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/compare-history.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/review-ledger.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/review-ledger.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/sensitivity-matrix.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/sensitivity-matrix.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/assumption-change-walkthrough.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/assumption-change-walkthrough.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/assumption-change-walkthrough.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/multi-company-demo-gallery.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/multi-company-demo-gallery.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/multi-company-demo-gallery.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/decision-journal.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/decision-journal.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/quickstart-check.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/quickstart-check.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/visual-receipt.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/visual-receipt.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/visual-receipt.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/public-readiness-landing.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/public-readiness-landing.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/public-readiness-landing.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/fixture-doctor.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/fixture-doctor.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/showcase-dashboard.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/showcase-dashboard.svg"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/showcase-dashboard.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/showcase-dashboard.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/thesis-brief.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/thesis-brief.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/thesis-brief.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/scenario-library.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/scenario-library.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/scenario-library.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/reproducibility-audit.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/reproducibility-audit.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/reproducibility-audit.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/sample-workflow.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/sample-workflow.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/sample-workflow.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "docs/release-checks.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/release-manifest.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/release-manifest.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "skills/agent/valuation-scenario-lab/SKILL.md"
+        }
+      ],
+      "missing": [],
+      "status": "pass"
+    },
+    "hash_manifest_coverage": {
+      "expected_file_count": 67,
+      "extra": [],
+      "hash_mismatches": [],
+      "manifest_file_count": 67,
+      "manifest_schema_version": "valuation-scenario-lab.release-manifest.v0.8",
+      "missing": [],
+      "status": "pass"
+    },
+    "safety_boundary_coverage": {
+      "files": [
+        {
+          "exists": true,
+          "missing": [],
+          "path": "README.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/valuation-packet.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/valuation-packet.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/public-readiness-landing.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/public-readiness-landing.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/quickstart-check.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/visual-receipt.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/visual-receipt.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/showcase-dashboard.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/showcase-dashboard.svg",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/showcase-dashboard.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/thesis-brief.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/thesis-brief.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/scenario-library.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/scenario-library.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "skills/agent/valuation-scenario-lab/SKILL.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        }
+      ],
+      "files_missing_boundaries": [],
+      "status": "pass"
+    },
+    "schema_versions": {
+      "files": [
+        {
+          "actual": "valuation-scenario-lab.v0.5",
+          "expected": "valuation-scenario-lab.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/valuation-packet.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.compare.v0.5",
+          "expected": "valuation-scenario-lab.compare.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/compare-history.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.ledger.v0.5",
+          "expected": "valuation-scenario-lab.ledger.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/review-ledger.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.sensitivity.v0.5",
+          "expected": "valuation-scenario-lab.sensitivity.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/sensitivity-matrix.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.assumption-change.v0.5",
+          "expected": "valuation-scenario-lab.assumption-change.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/assumption-change-walkthrough.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.demo-gallery.v0.5",
+          "expected": "valuation-scenario-lab.demo-gallery.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/multi-company-demo-gallery.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.decision-journal.v0.5",
+          "expected": "valuation-scenario-lab.decision-journal.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/decision-journal.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.quickstart-check.v0.5",
+          "expected": "valuation-scenario-lab.quickstart-check.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/quickstart-check.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.visual-receipt.v0.5",
+          "expected": "valuation-scenario-lab.visual-receipt.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/visual-receipt.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.fixture-doctor.v0.5",
+          "expected": "valuation-scenario-lab.fixture-doctor.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/fixture-doctor.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.public-readiness.v0.5",
+          "expected": "valuation-scenario-lab.public-readiness.v0.5",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/public-readiness-landing.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.showcase-dashboard.v0.6",
+          "expected": "valuation-scenario-lab.showcase-dashboard.v0.6",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/showcase-dashboard.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.thesis-brief.v0.7",
+          "expected": "valuation-scenario-lab.thesis-brief.v0.7",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/thesis-brief.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.scenario-library.v0.7",
+          "expected": "valuation-scenario-lab.scenario-library.v0.7",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/scenario-library.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.reproducibility-audit.v0.8",
+          "expected": "valuation-scenario-lab.reproducibility-audit.v0.8",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/reproducibility-audit.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.sample-workflow.v0.8",
+          "expected": "valuation-scenario-lab.sample-workflow.v0.8",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/sample-workflow.json"
+        }
+      ],
+      "mismatches": [],
+      "status": "pass"
+    },
+    "zero_dependency_metadata": {
+      "checks": [
+        {
+          "name": "pyproject_exists",
+          "ok": true
+        },
+        {
+          "name": "dependencies_empty",
+          "ok": true
+        },
+        {
+          "name": "no_install_requires",
+          "ok": true
+        },
+        {
+          "name": "no_requirements_txt",
+          "ok": true
+        },
+        {
+          "name": "no_runtime_dependency_group",
+          "ok": true
+        }
+      ],
+      "status": "pass"
+    }
+  },
+  "generated_on": "static-local",
+  "schema_version": "valuation-scenario-lab.reproducibility-audit.v0.8",
+  "status": "pass"
+}

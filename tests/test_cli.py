@@ -134,6 +134,27 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert "No broker connections." in library_payload["boundaries"]
     assert "<script" not in (out / "scenario-library.html").read_text(encoding="utf-8").lower()
 
+    workflow = run_cli("sample-workflow", "--root", str(ROOT), "--output", str(out))
+    assert workflow.returncode == 0, workflow.stdout + workflow.stderr
+    workflow_payload = json.loads((out / "sample-workflow.json").read_text(encoding="utf-8"))
+    assert workflow_payload["schema_version"] == "valuation-scenario-lab.sample-workflow.v0.8"
+    assert workflow_payload["steps"][0]["command"] == "valuation-scenario-lab demo --root ."
+    assert "demo/reproducibility-audit.html" in workflow_payload["steps"][-1]["artifacts"]
+    assert "No buy/sell/hold advice." in (out / "sample-workflow.html").read_text(encoding="utf-8")
+    assert "<script" not in (out / "sample-workflow.html").read_text(encoding="utf-8").lower()
+
+    audit = run_cli("reproducibility-audit", "--root", str(ROOT), "--output", str(out))
+    assert audit.returncode == 0, audit.stdout + audit.stderr
+    audit_payload = json.loads((out / "reproducibility-audit.json").read_text(encoding="utf-8"))
+    assert audit_payload["schema_version"] == "valuation-scenario-lab.reproducibility-audit.v0.8"
+    assert audit_payload["status"] == "pass"
+    assert audit_payload["checks"]["artifact_presence"]["status"] == "pass"
+    assert audit_payload["checks"]["schema_versions"]["status"] == "pass"
+    assert audit_payload["checks"]["zero_dependency_metadata"]["status"] == "pass"
+    assert audit_payload["checks"]["safety_boundary_coverage"]["status"] == "pass"
+    assert "No live data." in (out / "reproducibility-audit.html").read_text(encoding="utf-8")
+    assert "<script" not in (out / "reproducibility-audit.html").read_text(encoding="utf-8").lower()
+
 
 def test_release_validation_and_maturity() -> None:
     validation = run_cli("validate-release", "--root", str(ROOT))
@@ -258,12 +279,16 @@ def test_quickstart_check_and_visual_receipt(tmp_path: Path) -> None:
     assert (out / "thesis-brief.html").exists()
     assert (out / "scenario-library.md").exists()
     assert (out / "scenario-library.html").exists()
+    assert (out / "sample-workflow.md").exists()
+    assert (out / "sample-workflow.html").exists()
+    assert (out / "reproducibility-audit.md").exists()
+    assert (out / "reproducibility-audit.html").exists()
 
     receipt = run_cli("visual-receipt", "--root", str(ROOT), "--output", str(out))
     assert receipt.returncode == 0, receipt.stdout + receipt.stderr
     receipt_payload = json.loads((out / "visual-receipt.json").read_text(encoding="utf-8"))
     assert receipt_payload["schema_version"] == "valuation-scenario-lab.visual-receipt.v0.5"
-    assert receipt_payload["artifact_count"] == 32
+    assert receipt_payload["artifact_count"] == 38
     assert "No buy/sell/hold advice." in (out / "visual-receipt.html").read_text(encoding="utf-8")
 
 

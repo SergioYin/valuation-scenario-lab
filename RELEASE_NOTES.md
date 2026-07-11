@@ -1,5 +1,15 @@
 # Release Notes
 
+## v0.8.0
+
+Release-grade reproducibility hardening increment.
+
+This release adds `reproducibility-audit`, a zero-runtime-dependency command that writes deterministic JSON, Markdown, and static no-JavaScript HTML receipts for artifact presence, schema versions, hash manifest coverage, zero dependency metadata, and safety boundary coverage.
+
+It also adds `sample-workflow`, a deterministic analyst workflow receipt that links the primary commands to the demo and release artifacts they produce. `demo`, `quickstart-check`, `selfcheck`, release validation, package data, README docs, release checks, and the agent skill now include both hardening artifacts.
+
+Boundaries: no live data, no broker connections, no orders, no predictions, and no buy/sell/hold advice.
+
 ## v0.7.0
 
 Analyst workflow increment.

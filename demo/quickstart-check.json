@@ -12,6 +12,8 @@
     "valuation-scenario-lab showcase-dashboard --root . --output demo",
     "valuation-scenario-lab thesis-brief --root . --output demo",
     "valuation-scenario-lab scenario-library --fixtures examples --output demo",
+    "valuation-scenario-lab sample-workflow --root . --output demo",
+    "valuation-scenario-lab reproducibility-audit --root . --output demo",
     "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
     "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
     "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -146,6 +148,30 @@
     {
       "exists": true,
       "path": "demo/scenario-library.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/reproducibility-audit.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/reproducibility-audit.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/reproducibility-audit.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/sample-workflow.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/sample-workflow.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/sample-workflow.html"
     }
   ],
   "fixture_source": "local-or-packaged-fixtures",

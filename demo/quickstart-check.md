@@ -11,6 +11,8 @@ Status: pass
 - `valuation-scenario-lab showcase-dashboard --root . --output demo`
 - `valuation-scenario-lab thesis-brief --root . --output demo`
 - `valuation-scenario-lab scenario-library --fixtures examples --output demo`
+- `valuation-scenario-lab sample-workflow --root . --output demo`
+- `valuation-scenario-lab reproducibility-audit --root . --output demo`
 - `valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo`
 - `valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo`
 - `valuation-scenario-lab demo-gallery --fixtures examples --output demo`
@@ -51,6 +53,12 @@ Status: pass
 - `demo/scenario-library.json`: ok
 - `demo/scenario-library.md`: ok
 - `demo/scenario-library.html`: ok
+- `demo/reproducibility-audit.json`: ok
+- `demo/reproducibility-audit.md`: ok
+- `demo/reproducibility-audit.html`: ok
+- `demo/sample-workflow.json`: ok
+- `demo/sample-workflow.md`: ok
+- `demo/sample-workflow.html`: ok
 
 ## Boundaries
 
