@@ -1,5 +1,15 @@
 # Release Notes
 
+## v0.6.0
+
+Showcase dashboard release.
+
+This release adds `showcase-dashboard`, a zero-runtime-dependency command that writes deterministic JSON, SVG, Markdown, and static no-JavaScript HTML from the current demo packet, multi-company gallery, fixture doctor report, and sensitivity matrix. The SVG is shareable as a standalone public visual while keeping the same local-fixture research boundaries as the rest of the project.
+
+`demo`, `quickstart-check`, `selfcheck`, release validation, package data, README CTAs, release docs, and tests now include the showcase dashboard artifacts. Runtime dependencies remain zero.
+
+Boundaries: no live data, no broker connections, no orders, no predictions, and no buy/sell/hold advice.
+
 ## v0.5.0
 
 Fixture depth and release validation hardening release.

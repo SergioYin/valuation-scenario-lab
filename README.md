@@ -9,6 +9,7 @@ Target user: research-oriented individual investors, analysts, and agent builder
 First actions:
 
 - Run the complete deterministic demo: `valuation-scenario-lab demo`
+- Share the static visual dashboard: `demo/showcase-dashboard.svg` or `demo/showcase-dashboard.html`
 - Open the first public artifact: `demo/public-readiness-landing.html`
 - Validate release readiness: `valuation-scenario-lab validate-release --format markdown`
 - Review boundaries before reuse: no live data, no broker connections, no buy/sell/hold advice.
@@ -21,6 +22,7 @@ valuation-scenario-lab demo
 valuation-scenario-lab selfcheck --root .
 valuation-scenario-lab quickstart-check --root . --output demo
 valuation-scenario-lab visual-receipt --root . --output demo
+valuation-scenario-lab showcase-dashboard --root . --output demo
 valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo
 valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo
 valuation-scenario-lab demo-gallery --fixtures examples --output demo
@@ -43,7 +45,7 @@ Weighted range per share: USD 33.64 to USD 41.12
 Margin-of-safety label: moderate negative gap (-11.0%)
 ```
 
-Open `demo/public-readiness-landing.html`, `demo/valuation-packet.md`, `demo/valuation-packet.json`, or `demo/valuation-packet.html` to inspect the checked-in packet. The demo also includes `compare-history`, `review-ledger`, `sensitivity-matrix`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `fixture-doctor`, `quickstart-check`, and `visual-receipt` artifacts.
+Open `demo/showcase-dashboard.svg`, `demo/showcase-dashboard.html`, `demo/public-readiness-landing.html`, `demo/valuation-packet.md`, `demo/valuation-packet.json`, or `demo/valuation-packet.html` to inspect the checked-in packet. The demo also includes `compare-history`, `review-ledger`, `sensitivity-matrix`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `fixture-doctor`, `quickstart-check`, and `visual-receipt` artifacts.
 
 Wheel-installed users can run `valuation-scenario-lab selfcheck` from an empty current directory. The command falls back to the packaged fixtures installed under `share/valuation-scenario-lab`. Use `--root <repo-or-share-root>` to point selfcheck at a specific unpacked release tree.
 
@@ -72,6 +74,7 @@ This package does not fetch market prices, connect to accounts, place orders, ra
 - `selfcheck`: regenerate artifacts in a temporary directory and run release hygiene checks; accepts `--root`.
 - `quickstart-check`: regenerate demo files and write deterministic quickstart JSON and Markdown receipts.
 - `visual-receipt`: write deterministic JSON, Markdown, and static HTML receipts for a demo packet.
+- `showcase-dashboard`: write deterministic JSON, SVG, Markdown, and static HTML dashboard artifacts from the demo packet, gallery, fixture doctor, and sensitivity matrix.
 - `validate-release`: verify required public files, generated demos, safety strings, and private-reference hygiene.
 - `maturity-report`: score release readiness from validation findings.
 - `release-manifest`: emit file hashes for public release review.

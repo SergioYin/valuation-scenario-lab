@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.0
+
+- Added `showcase-dashboard` JSON, SVG, Markdown, and static HTML artifacts from the current demo packet, gallery, fixture doctor, and sensitivity matrix.
+- Included showcase output in `demo`, `quickstart-check`, `selfcheck`, `validate-release`, package data, release docs, and README first-screen CTAs.
+- Added SVG content assertions for the no-dependency visual dashboard.
+- Regenerated v0.6 demo artifacts and preserved zero runtime dependencies and finance safety boundaries.
+
 ## 0.5.0
 
 - Added `fixture-doctor` JSON and Markdown reporting for fixture schema, scenario weight, numeric-field, and source staleness issues.

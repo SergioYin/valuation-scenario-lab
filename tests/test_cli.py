@@ -100,6 +100,20 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert "zero runtime dependencies" in landing_payload["readiness_checks"]
     assert "demo/multi-company-demo-gallery.html" in landing_payload["demo_outputs"]
 
+    showcase = run_cli("showcase-dashboard", "--root", str(ROOT), "--output", str(out))
+    assert showcase.returncode == 0, showcase.stdout + showcase.stderr
+    showcase_payload = json.loads((out / "showcase-dashboard.json").read_text(encoding="utf-8"))
+    assert showcase_payload["schema_version"] == "valuation-scenario-lab.showcase-dashboard.v0.6"
+    assert showcase_payload["fixture_doctor_status"] == "pass"
+    assert showcase_payload["sensitivity_case_count"] == 9
+    svg = (out / "showcase-dashboard.svg").read_text(encoding="utf-8")
+    assert svg.startswith('<svg xmlns="http://www.w3.org/2000/svg"')
+    assert "<script" not in svg.lower()
+    assert "Valuation Scenario Lab Showcase Dashboard" in svg
+    assert "Fixture doctor" in svg
+    assert "Sensitivity matrix" in svg
+    assert "No buy/sell/hold advice." in svg
+
 
 def test_release_validation_and_maturity() -> None:
     validation = run_cli("validate-release", "--root", str(ROOT))
@@ -218,12 +232,14 @@ def test_quickstart_check_and_visual_receipt(tmp_path: Path) -> None:
     assert (out / "assumption-change-walkthrough.md").exists()
     assert (out / "multi-company-demo-gallery.html").exists()
     assert (out / "public-readiness-landing.html").exists()
+    assert (out / "showcase-dashboard.svg").exists()
+    assert (out / "showcase-dashboard.html").exists()
 
     receipt = run_cli("visual-receipt", "--root", str(ROOT), "--output", str(out))
     assert receipt.returncode == 0, receipt.stdout + receipt.stderr
     receipt_payload = json.loads((out / "visual-receipt.json").read_text(encoding="utf-8"))
     assert receipt_payload["schema_version"] == "valuation-scenario-lab.visual-receipt.v0.5"
-    assert receipt_payload["artifact_count"] == 22
+    assert receipt_payload["artifact_count"] == 26
     assert "No buy/sell/hold advice." in (out / "visual-receipt.html").read_text(encoding="utf-8")
 
 

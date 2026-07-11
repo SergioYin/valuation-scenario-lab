@@ -7,6 +7,7 @@ import sys
 import sysconfig
 import tempfile
 from pathlib import Path
+from typing import Any
 
 from . import __version__
 from .doctor import fixture_doctor, fixture_doctor_markdown
@@ -87,6 +88,10 @@ def main(argv: list[str] | None = None) -> int:
     receipt.add_argument("--root", default=".")
     receipt.add_argument("--output", default="demo")
 
+    showcase = sub.add_parser("showcase-dashboard")
+    showcase.add_argument("--root", default=".")
+    showcase.add_argument("--output", default="demo")
+
     validate = sub.add_parser("validate-release")
     validate.add_argument("--root", default=".")
     validate.add_argument("--format", choices=["json", "markdown"], default="json")
@@ -133,6 +138,8 @@ def main(argv: list[str] | None = None) -> int:
             )
         if args.command == "visual-receipt":
             return command_visual_receipt(Path(args.root), Path(args.output))
+        if args.command == "showcase-dashboard":
+            return command_showcase_dashboard(Path(args.root), Path(args.output))
         if args.command == "validate-release":
             return emit_validation(validate_release_payload(Path(args.root)), args.format)
         if args.command == "maturity-report":
@@ -152,6 +159,7 @@ def main(argv: list[str] | None = None) -> int:
             command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", root / "demo")
             command_quickstart_check(root, root / "demo")
             command_visual_receipt(root, root / "demo")
+            command_showcase_dashboard(root, root / "demo")
             return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -257,6 +265,7 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_decision_journal(out / "valuation-packet.json", out / "review-ledger.json", out)
         command_public_readiness_landing(root, out)
         command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", out)
+        command_showcase_dashboard(root, out)
     validation = validate_release_payload(root)
     if validation["status"] != "pass":
         print("FAIL release validation")
@@ -272,6 +281,7 @@ def command_quickstart_check(root: Path, output: Path) -> int:
     ensure_demo_artifacts(root, output)
     command_public_readiness_landing(root, output)
     command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", output)
+    command_showcase_dashboard(root, output)
     expected = [
         "valuation-packet.json",
         "valuation-packet.md",
@@ -295,6 +305,10 @@ def command_quickstart_check(root: Path, output: Path) -> int:
         "public-readiness-landing.html",
         "fixture-doctor.json",
         "fixture-doctor.md",
+        "showcase-dashboard.json",
+        "showcase-dashboard.svg",
+        "showcase-dashboard.md",
+        "showcase-dashboard.html",
     ]
     files = [{"path": f"demo/{name}", "exists": (output / name).exists()} for name in expected]
     payload = {
@@ -306,6 +320,7 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab selfcheck --root .",
             "valuation-scenario-lab quickstart-check --root . --output demo",
             "valuation-scenario-lab visual-receipt --root . --output demo",
+            "valuation-scenario-lab showcase-dashboard --root . --output demo",
             "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
             "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
             "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -337,13 +352,30 @@ def command_visual_receipt(root: Path, output: Path) -> int:
         "weighted_range_per_share": packet["weighted_range_per_share"],
         "margin_of_safety_label": packet["margin_of_safety_label"],
         "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
-        "artifact_count": 22,
+        "artifact_count": 26,
         "boundaries": packet["boundaries"],
     }
     write_json(output / "visual-receipt.json", payload)
     write_text(output / "visual-receipt.md", visual_receipt_markdown(payload))
     write_text(output / "visual-receipt.html", visual_receipt_html(payload))
     print(f"wrote {output / 'visual-receipt.html'}")
+    return 0
+
+
+def command_showcase_dashboard(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_demo_artifacts(root, output)
+    command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", output)
+    packet = read_json(output / "valuation-packet.json")
+    gallery = read_json(output / "multi-company-demo-gallery.json")
+    doctor = read_json(output / "fixture-doctor.json")
+    matrix = read_json(output / "sensitivity-matrix.json")
+    payload = showcase_payload(packet, gallery, doctor, matrix)
+    write_json(output / "showcase-dashboard.json", payload)
+    write_text(output / "showcase-dashboard.svg", showcase_svg(payload))
+    write_text(output / "showcase-dashboard.md", showcase_markdown(payload))
+    write_text(output / "showcase-dashboard.html", showcase_html(payload))
+    print(f"wrote {output / 'showcase-dashboard.svg'}")
     return 0
 
 
@@ -631,6 +663,8 @@ def public_readiness_payload(packet: dict) -> dict:
             "demo/valuation-packet.html",
             "demo/quickstart-check.md",
             "demo/visual-receipt.html",
+            "demo/showcase-dashboard.svg",
+            "demo/showcase-dashboard.html",
             "demo/decision-journal.md",
             "demo/assumption-change-walkthrough.html",
             "demo/multi-company-demo-gallery.html",
@@ -703,6 +737,160 @@ code {{ display: inline-block; margin: 0 0.5rem; padding: 0.15rem 0.35rem; backg
 </main>
 </body>
 </html>
+"""
+
+
+def showcase_payload(packet: dict[str, Any], gallery: dict[str, Any], doctor: dict[str, Any], matrix: dict[str, Any]) -> dict[str, Any]:
+    matrix_rows = matrix.get("rows", [])
+    lowest = min(matrix_rows, key=lambda item: float(item["weighted_fair_value_per_share"]))
+    highest = max(matrix_rows, key=lambda item: float(item["weighted_fair_value_per_share"]))
+    return {
+        "schema_version": "valuation-scenario-lab.showcase-dashboard.v0.6",
+        "generated_on": "static-local",
+        "title": "Valuation Scenario Lab Showcase Dashboard",
+        "company": packet["company"],
+        "ticker": packet["ticker"],
+        "weighted_fair_value_per_share": packet["weighted_fair_value_per_share"],
+        "weighted_range_per_share": packet["weighted_range_per_share"],
+        "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
+        "margin_of_safety_label": packet["margin_of_safety_label"],
+        "scenario_count": len(packet.get("valuation_ranges", [])),
+        "gallery_company_count": gallery["company_count"],
+        "gallery_tickers": [item["ticker"] for item in gallery.get("cards", [])],
+        "fixture_doctor_status": doctor["status"],
+        "fixture_issue_count": doctor["issue_count"],
+        "sensitivity_case_count": len(matrix_rows),
+        "sensitivity_low_fair_value": lowest["weighted_fair_value_per_share"],
+        "sensitivity_high_fair_value": highest["weighted_fair_value_per_share"],
+        "source_artifacts": [
+            "demo/valuation-packet.json",
+            "demo/multi-company-demo-gallery.json",
+            "demo/fixture-doctor.json",
+            "demo/sensitivity-matrix.json",
+        ],
+        "boundaries": packet.get("boundaries", []),
+    }
+
+
+def showcase_markdown(payload: dict[str, Any]) -> str:
+    return f"""# {payload['title']}
+
+Company: {payload['company']} ({payload['ticker']})
+
+Weighted fair value per share: {payload['weighted_fair_value_per_share']:.2f}
+Weighted range per share: {payload['weighted_range_per_share'][0]:.2f} to {payload['weighted_range_per_share'][1]:.2f}
+Margin-of-safety label: {payload['margin_of_safety_label']} ({payload['weighted_margin_of_safety_pct']:.1f}%)
+
+## Showcase Inputs
+
+- Demo packet scenarios: {payload['scenario_count']}
+- Gallery companies: {payload['gallery_company_count']} ({", ".join(payload['gallery_tickers'])})
+- Fixture doctor: {payload['fixture_doctor_status']} with {payload['fixture_issue_count']} issues
+- Sensitivity cases: {payload['sensitivity_case_count']} from {payload['sensitivity_low_fair_value']:.2f} to {payload['sensitivity_high_fair_value']:.2f}
+
+## Shareable Visual
+
+Open `demo/showcase-dashboard.svg` or `demo/showcase-dashboard.html`.
+
+## Boundaries
+
+{chr(10).join(f"- {item}" for item in payload["boundaries"])}
+"""
+
+
+def showcase_html(payload: dict[str, Any]) -> str:
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    sources = "".join(f"<li><code>{html.escape(item)}</code></li>" for item in payload["source_artifacts"])
+    svg = showcase_svg(payload)
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{html.escape(payload['title'])}</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 0; color: #17202a; background: #f6f8fa; }}
+main {{ max-width: 1040px; margin: 0 auto; padding: 2rem 1rem; }}
+.visual {{ overflow-x: auto; background: #ffffff; border: 1px solid #d6dde4; padding: 1rem; }}
+svg {{ max-width: 100%; height: auto; display: block; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<main>
+<h1>{html.escape(payload['title'])}</h1>
+<p>{html.escape(payload['company'])} ({html.escape(payload['ticker'])}) static showcase from local demo artifacts.</p>
+<div class="visual">{svg}</div>
+<h2>Source Artifacts</h2>
+<ul>{sources}</ul>
+<h2>Boundaries</h2>
+<ul>{boundaries}</ul>
+</main>
+</body>
+</html>
+"""
+
+
+def showcase_svg(payload: dict[str, Any]) -> str:
+    title = html.escape(payload["title"])
+    company = html.escape(payload["company"])
+    ticker = html.escape(payload["ticker"])
+    label = html.escape(payload["margin_of_safety_label"])
+    doctor = html.escape(payload["fixture_doctor_status"])
+    tickers = html.escape(", ".join(payload["gallery_tickers"]))
+    boundaries = [html.escape(item) for item in payload["boundaries"]]
+    mos = float(payload["weighted_margin_of_safety_pct"])
+    mos_width = max(0, min(240, int(round((mos + 40.0) / 80.0 * 240.0))))
+    low = float(payload["sensitivity_low_fair_value"])
+    high = float(payload["sensitivity_high_fair_value"])
+    fair = float(payload["weighted_fair_value_per_share"])
+    sensitivity_width = max(10, min(240, int(round((fair - low) / max(high - low, 0.01) * 240.0))))
+    boundary_text = "".join(f'<text x="72" y="{552 + index * 22}" class="small">- {item}</text>' for index, item in enumerate(boundaries))
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="960" height="700" viewBox="0 0 960 700" role="img" aria-labelledby="title desc">
+<title id="title">{title}</title>
+<desc id="desc">Static no-dependency dashboard summarizing the current demo packet, gallery, fixture doctor, and sensitivity matrix.</desc>
+<style>
+.bg {{ fill: #f6f8fa; }}
+.panel {{ fill: #ffffff; stroke: #ccd6df; stroke-width: 1.5; }}
+.ink {{ fill: #17202a; font-family: Arial, sans-serif; }}
+.muted {{ fill: #5d6d7e; font-family: Arial, sans-serif; }}
+.small {{ fill: #34495e; font-family: Arial, sans-serif; font-size: 15px; }}
+.label {{ fill: #5d6d7e; font-family: Arial, sans-serif; font-size: 13px; text-transform: uppercase; }}
+.metric {{ fill: #17202a; font-family: Arial, sans-serif; font-size: 30px; font-weight: 700; }}
+.accent {{ fill: #2e7d6b; }}
+.warn {{ fill: #b65d22; }}
+.bar-bg {{ fill: #e8edf2; }}
+</style>
+<rect class="bg" width="960" height="660"/>
+<text x="48" y="58" class="ink" font-size="32" font-weight="700">{title}</text>
+<text x="48" y="88" class="muted" font-size="17">{company} ({ticker}) - generated_on static-local</text>
+<rect x="48" y="124" width="264" height="150" rx="6" class="panel"/>
+<text x="72" y="160" class="label">Weighted fair value</text>
+<text x="72" y="204" class="metric">{fair:.2f}</text>
+<text x="72" y="238" class="small">Range {payload['weighted_range_per_share'][0]:.2f} to {payload['weighted_range_per_share'][1]:.2f}</text>
+<rect x="348" y="124" width="264" height="150" rx="6" class="panel"/>
+<text x="372" y="160" class="label">Margin of safety</text>
+<text x="372" y="204" class="metric">{mos:.1f}%</text>
+<rect x="372" y="224" width="240" height="14" class="bar-bg"/>
+<rect x="372" y="224" width="{mos_width}" height="14" class="warn"/>
+<text x="372" y="258" class="small">{label}</text>
+<rect x="648" y="124" width="264" height="150" rx="6" class="panel"/>
+<text x="672" y="160" class="label">Fixture doctor</text>
+<text x="672" y="204" class="metric">{doctor}</text>
+<text x="672" y="238" class="small">{payload['fixture_issue_count']} issues across bundled fixtures</text>
+<rect x="48" y="306" width="414" height="178" rx="6" class="panel"/>
+<text x="72" y="342" class="label">Gallery</text>
+<text x="72" y="386" class="metric">{payload['gallery_company_count']} companies</text>
+<text x="72" y="422" class="small">{tickers}</text>
+<text x="72" y="456" class="small">{payload['scenario_count']} packet scenarios in the primary demo</text>
+<rect x="498" y="306" width="414" height="178" rx="6" class="panel"/>
+<text x="522" y="342" class="label">Sensitivity matrix</text>
+<text x="522" y="386" class="metric">{payload['sensitivity_case_count']} cases</text>
+<rect x="522" y="410" width="240" height="16" class="bar-bg"/>
+<rect x="522" y="410" width="{sensitivity_width}" height="16" class="accent"/>
+<text x="522" y="456" class="small">Fair value span {low:.2f} to {high:.2f}</text>
+<text x="48" y="526" class="label">Finance boundaries</text>
+{boundary_text}
+</svg>
 """
 
 

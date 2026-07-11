@@ -1,0 +1,39 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "company": "Example Components Inc.",
+  "fixture_doctor_status": "pass",
+  "fixture_issue_count": 0,
+  "gallery_company_count": 2,
+  "gallery_tickers": [
+    "EXCO",
+    "NIMB"
+  ],
+  "generated_on": "static-local",
+  "margin_of_safety_label": "moderate negative gap",
+  "scenario_count": 3,
+  "schema_version": "valuation-scenario-lab.showcase-dashboard.v0.6",
+  "sensitivity_case_count": 9,
+  "sensitivity_high_fair_value": 42.1,
+  "sensitivity_low_fair_value": 33.56,
+  "source_artifacts": [
+    "demo/valuation-packet.json",
+    "demo/multi-company-demo-gallery.json",
+    "demo/fixture-doctor.json",
+    "demo/sensitivity-matrix.json"
+  ],
+  "ticker": "EXCO",
+  "title": "Valuation Scenario Lab Showcase Dashboard",
+  "weighted_fair_value_per_share": 37.38,
+  "weighted_margin_of_safety_pct": -11.0,
+  "weighted_range_per_share": [
+    33.64,
+    41.12
+  ]
+}
