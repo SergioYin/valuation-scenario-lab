@@ -1,5 +1,17 @@
 # Release Notes
 
+## v1.1.0
+
+Reviewer-operability increment.
+
+This release adds `reviewer-scorecard`, a deterministic JSON, Markdown, and static no-JavaScript HTML scorecard with four reviewer lenses: product, engineering, cold-user, and risk. The 100-point rubric is computed from local artifacts, release validation, schema checks, package metadata, fixture diagnostics, and boundary coverage.
+
+It also adds `troubleshoot`, a deterministic problem/diagnostic guide mapping common failure modes to local commands and artifacts.
+
+Release validation, package data, README docs, release checks, sample workflow, and the agent skill now include both reviewer-operability artifacts.
+
+Boundaries: no live data, no broker connections, no orders, no predictions, and no buy/sell/hold advice.
+
 ## v1.0.0
 
 Public-stability increment.

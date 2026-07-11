@@ -12,8 +12,8 @@ Status: fail
 
 ## Hash Manifest Coverage
 
-- Expected files: 77
-- Manifest files: 77
+- Expected files: 83
+- Manifest files: 83
 - Missing: 0
 - Extra: 0
 - Hash mismatches: 3

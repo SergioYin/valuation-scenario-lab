@@ -68,6 +68,12 @@ REQUIRED_FILES = [
     "demo/casebook.json",
     "demo/casebook.md",
     "demo/casebook.html",
+    "demo/reviewer-scorecard.json",
+    "demo/reviewer-scorecard.md",
+    "demo/reviewer-scorecard.html",
+    "demo/troubleshoot.json",
+    "demo/troubleshoot.md",
+    "demo/troubleshoot.html",
     "demo/onboarding-template/README.md",
     "demo/onboarding-template/company.json",
     "demo/onboarding-template/review-policy.json",
@@ -102,6 +108,8 @@ EXPECTED_SCHEMA_VERSIONS = {
     "demo/reproducibility-audit.json": "valuation-scenario-lab.reproducibility-audit.v0.8",
     "demo/sample-workflow.json": "valuation-scenario-lab.sample-workflow.v0.8",
     "demo/casebook.json": "valuation-scenario-lab.casebook.v0.9",
+    "demo/reviewer-scorecard.json": "valuation-scenario-lab.reviewer-scorecard.v1.1",
+    "demo/troubleshoot.json": "valuation-scenario-lab.troubleshoot.v1.1",
     "release/install-smoke-receipt.json": "valuation-scenario-lab.install-smoke-receipt.v1.0",
     "release/public-bundle.json": "valuation-scenario-lab.public-bundle.v1.0",
 }
@@ -236,11 +244,11 @@ def export_bundle_manifest(root: Path) -> dict[str, Any]:
 
 
 def install_smoke_receipt(root: Path) -> dict[str, Any]:
-    wheel_name = f"valuation_scenario_lab-1.0.0-py3-none-any.whl"
+    wheel_name = f"valuation_scenario_lab-1.1.0-py3-none-any.whl"
     smoke_commands = [
         {
             "command": "valuation-scenario-lab --version",
-            "expected_output_contains": "1.0.0",
+            "expected_output_contains": "1.1.0",
             "network_required": False,
         },
         {
@@ -266,7 +274,7 @@ def install_smoke_receipt(root: Path) -> dict[str, Any]:
     ]
     required = [
         "dist/" + wheel_name,
-        "dist/valuation_scenario_lab-1.0.0.tar.gz",
+        "dist/valuation_scenario_lab-1.1.0.tar.gz",
         "release/public-bundle.json",
         "release/public-bundle.md",
         "release/public-bundle.html",
@@ -280,13 +288,13 @@ def install_smoke_receipt(root: Path) -> dict[str, Any]:
             {
                 "name": "local wheel",
                 "command": f"python -m pip install --no-index --find-links dist {wheel_name}",
-                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.0.0",
+                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.1.0",
                 "network_required": False,
             },
             {
                 "name": "editable local checkout",
                 "command": "python -m pip install -e .",
-                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.0.0",
+                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.1.0",
                 "network_required": False,
             },
         ],
@@ -420,6 +428,10 @@ def safety_boundary_checks(root: Path) -> dict[str, Any]:
         "demo/scenario-library.html",
         "demo/casebook.md",
         "demo/casebook.html",
+        "demo/reviewer-scorecard.md",
+        "demo/reviewer-scorecard.html",
+        "demo/troubleshoot.md",
+        "demo/troubleshoot.html",
         "demo/onboarding-template/README.md",
         "release/install-smoke-receipt.md",
         "release/install-smoke-receipt.html",

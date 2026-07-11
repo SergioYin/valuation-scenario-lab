@@ -1,0 +1,108 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "generated_on": "static-local",
+  "guide": [
+    {
+      "artifacts": [
+        "demo/quickstart-check.json",
+        "demo/reproducibility-audit.json"
+      ],
+      "commands": [
+        "valuation-scenario-lab demo --root .",
+        "valuation-scenario-lab quickstart-check --root . --output demo"
+      ],
+      "diagnostic": "Run the full deterministic demo and then quickstart validation.",
+      "id": "missing-demo-artifact",
+      "symptom": "A demo file is missing after checkout or regeneration."
+    },
+    {
+      "artifacts": [
+        "examples/company.json",
+        "examples/review-policy.json",
+        "demo/fixture-doctor.md"
+      ],
+      "commands": [
+        "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown"
+      ],
+      "diagnostic": "Run fixture diagnostics and inspect issue paths before rebuilding packets.",
+      "id": "fixture-doctor-fails",
+      "symptom": "Fixture schema, weights, numeric fields, or source freshness need review."
+    },
+    {
+      "artifacts": [
+        "release/install-smoke-receipt.json",
+        "release/public-bundle.json",
+        "release/release-manifest.json"
+      ],
+      "commands": [
+        "valuation-scenario-lab install-smoke-receipt --root . --output release",
+        "valuation-scenario-lab export-bundle --root . --output release",
+        "valuation-scenario-lab release-manifest --root . --output release",
+        "valuation-scenario-lab validate-release --root . --format markdown"
+      ],
+      "diagnostic": "Generate release receipts, refresh manifests, and rerun validation.",
+      "id": "release-validation-fails",
+      "symptom": "Release validation reports missing files, private terms, metadata issues, or boundary gaps."
+    },
+    {
+      "artifacts": [
+        "demo/reproducibility-audit.json",
+        "src/valuation_scenario_lab/release.py"
+      ],
+      "commands": [
+        "valuation-scenario-lab demo --root .",
+        "valuation-scenario-lab reproducibility-audit --root . --output demo"
+      ],
+      "diagnostic": "Regenerate demo and release artifacts with the current package version.",
+      "id": "schema-mismatch",
+      "symptom": "A generated JSON artifact carries an unexpected schema version."
+    },
+    {
+      "artifacts": [
+        "demo/reviewer-scorecard.json",
+        "demo/troubleshoot.md"
+      ],
+      "commands": [
+        "valuation-scenario-lab reviewer-scorecard --root . --output demo",
+        "valuation-scenario-lab troubleshoot --root . --output demo"
+      ],
+      "diagnostic": "Open each failed criterion and regenerate the command named in its artifacts list.",
+      "id": "scorecard-below-90",
+      "symptom": "Reviewer scorecard is below the strong threshold."
+    },
+    {
+      "artifacts": [
+        "pyproject.toml",
+        "release/install-smoke-receipt.md"
+      ],
+      "commands": [
+        "valuation-scenario-lab selfcheck",
+        "valuation-scenario-lab selfcheck --root <repo-or-share-root>"
+      ],
+      "diagnostic": "Use selfcheck, which falls back to packaged data roots, or pass an explicit unpacked root.",
+      "id": "empty-directory-wheel-smoke",
+      "symptom": "A wheel-installed user runs commands outside the repository."
+    },
+    {
+      "artifacts": [
+        "README.md",
+        "demo/reproducibility-audit.html",
+        "skills/agent/valuation-scenario-lab/SKILL.md"
+      ],
+      "commands": [
+        "valuation-scenario-lab reproducibility-audit --root . --output demo",
+        "valuation-scenario-lab validate-release --root . --format markdown"
+      ],
+      "diagnostic": "Inspect safety text and regenerate public artifacts that carry the boundaries.",
+      "id": "finance-boundary-concern",
+      "symptom": "A reviewer is concerned the output could be read as advice or live-data backed."
+    }
+  ],
+  "release_validation_status": "pass",
+  "schema_version": "valuation-scenario-lab.troubleshoot.v1.1",
+  "status": "ready"
+}

@@ -15,6 +15,8 @@
     "valuation-scenario-lab thesis-brief --root . --output demo",
     "valuation-scenario-lab public-readiness-landing --root . --output demo",
     "valuation-scenario-lab reproducibility-audit --root . --output demo",
+    "valuation-scenario-lab reviewer-scorecard --root . --output demo",
+    "valuation-scenario-lab troubleshoot --root . --output demo",
     "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release"
   ],
   "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
@@ -245,6 +247,54 @@
       "artifact_status": [
         {
           "exists": true,
+          "path": "demo/reviewer-scorecard.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/reviewer-scorecard.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/reviewer-scorecard.html"
+        }
+      ],
+      "artifacts": [
+        "demo/reviewer-scorecard.json",
+        "demo/reviewer-scorecard.md",
+        "demo/reviewer-scorecard.html"
+      ],
+      "command": "valuation-scenario-lab reviewer-scorecard --root . --output demo",
+      "name": "Score reviewer operability",
+      "step": 10
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "demo/troubleshoot.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/troubleshoot.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/troubleshoot.html"
+        }
+      ],
+      "artifacts": [
+        "demo/troubleshoot.json",
+        "demo/troubleshoot.md",
+        "demo/troubleshoot.html"
+      ],
+      "command": "valuation-scenario-lab troubleshoot --root . --output demo",
+      "name": "Map common diagnostics",
+      "step": 11
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
           "path": "release/install-smoke-receipt.json"
         },
         {
@@ -278,7 +328,7 @@
       ],
       "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
       "name": "Document install and bundle stability",
-      "step": 10
+      "step": 12
     }
   ],
   "title": "Sample Analyst Workflow Receipt"

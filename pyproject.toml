@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "valuation-scenario-lab"
-version = "1.0.0"
+version = "1.1.0"
 description = "Zero-dependency offline valuation scenario packet generator."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -91,6 +91,12 @@ where = ["src"]
   "demo/casebook.json",
   "demo/casebook.md",
   "demo/casebook.html",
+  "demo/reviewer-scorecard.json",
+  "demo/reviewer-scorecard.md",
+  "demo/reviewer-scorecard.html",
+  "demo/troubleshoot.json",
+  "demo/troubleshoot.md",
+  "demo/troubleshoot.html",
 ]
 "share/valuation-scenario-lab/demo/onboarding-template" = [
   "demo/onboarding-template/README.md",

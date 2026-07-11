@@ -275,6 +275,36 @@
         {
           "exists": true,
           "generated_by_command": false,
+          "path": "demo/reviewer-scorecard.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/reviewer-scorecard.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/reviewer-scorecard.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/troubleshoot.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/troubleshoot.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/troubleshoot.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
           "path": "demo/onboarding-template/README.md"
         },
         {
@@ -347,14 +377,14 @@
       "status": "pass"
     },
     "hash_manifest_coverage": {
-      "expected_file_count": 77,
+      "expected_file_count": 83,
       "extra": [],
       "hash_mismatches": [
         "demo/reproducibility-audit.html",
         "demo/reproducibility-audit.json",
         "demo/reproducibility-audit.md"
       ],
-      "manifest_file_count": 77,
+      "manifest_file_count": 83,
       "manifest_schema_version": "valuation-scenario-lab.release-manifest.v1.0",
       "missing": [],
       "status": "fail"
@@ -525,6 +555,46 @@
           "exists": true,
           "missing": [],
           "path": "demo/casebook.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/reviewer-scorecard.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/reviewer-scorecard.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/troubleshoot.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/troubleshoot.html",
           "present": [
             "No live data.",
             "No broker connections.",
@@ -715,6 +785,20 @@
           "generated_by_command": false,
           "ok": true,
           "path": "demo/casebook.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.reviewer-scorecard.v1.1",
+          "expected": "valuation-scenario-lab.reviewer-scorecard.v1.1",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/reviewer-scorecard.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.troubleshoot.v1.1",
+          "expected": "valuation-scenario-lab.troubleshoot.v1.1",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/troubleshoot.json"
         },
         {
           "actual": "valuation-scenario-lab.install-smoke-receipt.v1.0",

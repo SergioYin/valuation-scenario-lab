@@ -2,6 +2,6 @@ include README.md LICENSE CHANGELOG.md RELEASE_NOTES.md
 recursive-include examples *.json
 recursive-include demo *.json *.md *.html *.svg
 recursive-include docs *.md
-recursive-include release *.json *.md
+recursive-include release *.json *.md *.html
 recursive-include skills *.md
 recursive-include tests/golden *.json

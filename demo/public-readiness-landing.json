@@ -16,6 +16,8 @@
     "demo/showcase-dashboard.html",
     "demo/thesis-brief.html",
     "demo/scenario-library.html",
+    "demo/reviewer-scorecard.html",
+    "demo/troubleshoot.html",
     "demo/decision-journal.md",
     "demo/assumption-change-walkthrough.html",
     "demo/multi-company-demo-gallery.html",
@@ -45,6 +47,16 @@
       "artifact": "demo/thesis-brief.md",
       "command": "valuation-scenario-lab thesis-brief --root . --output demo",
       "label": "Read the thesis brief"
+    },
+    {
+      "artifact": "demo/reviewer-scorecard.html",
+      "command": "valuation-scenario-lab reviewer-scorecard --root . --output demo",
+      "label": "Read the reviewer scorecard"
+    },
+    {
+      "artifact": "demo/troubleshoot.html",
+      "command": "valuation-scenario-lab troubleshoot --root . --output demo",
+      "label": "Open troubleshooting"
     },
     {
       "artifact": "demo/scenario-library.html",

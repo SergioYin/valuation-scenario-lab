@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0
+
+- Added `reviewer-scorecard` JSON, Markdown, and static HTML outputs with deterministic product, engineering, cold-user, and risk lenses scored from local artifacts.
+- Added `troubleshoot` JSON, Markdown, and static HTML outputs mapping common failure modes to local commands and artifacts.
+- Included reviewer-operability artifacts in `demo`, `quickstart-check`, `selfcheck`, release validation, package data, release docs, README examples, sample workflow, and the agent skill protocol.
+- Preserved zero runtime dependencies, static local fixtures, no live data, no broker connections, and no buy/sell/hold advice.
+
 ## 1.0.0
 
 - Added `export-bundle` JSON, Markdown, and static HTML manifests listing public demo artifacts, release assets, package data, docs, tests, source files, and skill files with SHA-256 hashes and usage notes.

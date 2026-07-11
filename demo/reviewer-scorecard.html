@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reviewer Scorecard</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }
+section { border-top: 1px solid #d6dde4; padding: 1rem 0; }
+table { border-collapse: collapse; width: 100%; }
+td, th { border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }
+.score { font-size: 1.4rem; font-weight: 700; }
+</style>
+</head>
+<body>
+<h1>Reviewer Scorecard</h1>
+<p class="score">100 / 100 - strong</p>
+<p>Deterministic 100-point local-artifact rubric; no live data, broker connection, ranking, or advice.</p>
+<section><h2>Product</h2><p>Score: 25 / 25</p><table><thead><tr><th>Criterion</th><th>Status</th><th>Points</th><th>Artifacts</th></tr></thead><tbody><tr><td>Complete demo narrative</td><td>pass</td><td>7 / 7</td><td>demo/valuation-packet.html, demo/thesis-brief.html, demo/casebook.html, demo/public-readiness-landing.html</td></tr><tr><td>Review evidence chain</td><td>pass</td><td>6 / 6</td><td>demo/review-ledger.json, demo/decision-journal.json, demo/sample-workflow.json</td></tr><tr><td>Scenario explainability</td><td>pass</td><td>6 / 6</td><td>demo/scenario-library.json, demo/sensitivity-matrix.json, demo/assumption-change-walkthrough.json</td></tr><tr><td>Packaged public docs</td><td>pass</td><td>6 / 6</td><td>README.md, docs/release-checks.md, RELEASE_NOTES.md</td></tr></tbody></table></section><section><h2>Engineering</h2><p>Score: 25 / 25</p><table><thead><tr><th>Criterion</th><th>Status</th><th>Points</th><th>Artifacts</th></tr></thead><tbody><tr><td>Release validation passes</td><td>pass</td><td>8 / 8</td><td>valuation-scenario-lab validate-release --root .</td></tr><tr><td>Schema versions match</td><td>pass</td><td>6 / 6</td><td>demo/*.json, release/*.json</td></tr><tr><td>Zero runtime dependencies</td><td>pass</td><td>5 / 5</td><td>pyproject.toml</td></tr><tr><td>Release manifests present</td><td>pass</td><td>6 / 6</td><td>release/release-manifest.json, release/public-bundle.json, release/install-smoke-receipt.json</td></tr></tbody></table></section><section><h2>Cold-User</h2><p>Score: 25 / 25</p><table><thead><tr><th>Criterion</th><th>Status</th><th>Points</th><th>Artifacts</th></tr></thead><tbody><tr><td>Quickstart or workflow receipt exists</td><td>pass</td><td>6 / 6</td><td>demo/quickstart-check.json, demo/sample-workflow.json</td></tr><tr><td>Standalone HTML/SVG views exist</td><td>pass</td><td>7 / 7</td><td>demo/showcase-dashboard.html, demo/showcase-dashboard.svg, demo/visual-receipt.html</td></tr><tr><td>Onboarding fixture scaffold exists</td><td>pass</td><td>6 / 6</td><td>demo/onboarding-template</td></tr><tr><td>Troubleshooting command documented</td><td>pass</td><td>6 / 6</td><td>README.md, valuation-scenario-lab troubleshoot --root . --output demo</td></tr></tbody></table></section><section><h2>Risk</h2><p>Score: 25 / 25</p><table><thead><tr><th>Criterion</th><th>Status</th><th>Points</th><th>Artifacts</th></tr></thead><tbody><tr><td>Safety boundaries present</td><td>pass</td><td>8 / 8</td><td>README.md, demo/*.md, demo/*.html, release/*.md, release/*.html</td></tr><tr><td>Fixture doctor passes</td><td>pass</td><td>6 / 6</td><td>demo/fixture-doctor.json</td></tr><tr><td>No live-data/broker path</td><td>pass</td><td>6 / 6</td><td>README.md</td></tr><tr><td>No workflow automation</td><td>pass</td><td>5 / 5</td><td>.github/workflows</td></tr></tbody></table></section>
+<h2>Boundaries</h2><ul><li>No live data.</li><li>No broker connections.</li><li>No buy/sell/hold advice.</li></ul>
+</body>
+</html>

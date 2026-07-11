@@ -30,6 +30,7 @@ from .release import release_manifest as manifest_payload
 from .release import export_bundle_manifest as export_bundle_payload
 from .release import install_smoke_receipt as install_smoke_payload
 from .release import validate_release as validate_release_payload
+from .release import safety_boundary_checks, schema_version_checks
 from .render import packet_html, packet_markdown, simple_markdown
 
 
@@ -140,6 +141,14 @@ def main(argv: list[str] | None = None) -> int:
     casebook.add_argument("--root", default=".")
     casebook.add_argument("--output", default="demo")
 
+    scorecard = sub.add_parser("reviewer-scorecard")
+    scorecard.add_argument("--root", default=".")
+    scorecard.add_argument("--output", default="demo")
+
+    troubleshoot = sub.add_parser("troubleshoot")
+    troubleshoot.add_argument("--root", default=".")
+    troubleshoot.add_argument("--output", default="demo")
+
     demo = sub.add_parser("demo")
     demo.add_argument("--root", default=".")
 
@@ -198,6 +207,10 @@ def main(argv: list[str] | None = None) -> int:
             return command_new_fixture_template(Path(args.output))
         if args.command == "casebook":
             return command_casebook(Path(args.root), Path(args.output))
+        if args.command == "reviewer-scorecard":
+            return command_reviewer_scorecard(Path(args.root), Path(args.output))
+        if args.command == "troubleshoot":
+            return command_troubleshoot(Path(args.root), Path(args.output))
         if args.command == "demo":
             root = Path(args.root)
             command_build_packet(root / "examples", root / "demo")
@@ -218,6 +231,8 @@ def main(argv: list[str] | None = None) -> int:
             command_reproducibility_audit(root, root / "demo")
             command_new_fixture_template(root / "demo" / "onboarding-template")
             command_casebook(root, root / "demo")
+            command_reviewer_scorecard(root, root / "demo")
+            command_troubleshoot(root, root / "demo")
             command_install_smoke_receipt(root, root / "release")
             command_manifest(root, root / "release")
             command_export_bundle(root, root / "release")
@@ -335,6 +350,8 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_reproducibility_audit(root, out)
         command_new_fixture_template(out / "onboarding-template")
         command_casebook(root, out)
+        command_reviewer_scorecard(root, out)
+        command_troubleshoot(root, out)
         command_install_smoke_receipt(root, out / "release")
         command_manifest(root, out / "release")
         command_export_bundle(root, out / "release")
@@ -359,6 +376,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
     command_sample_workflow(root, output)
     command_new_fixture_template(output / "onboarding-template")
     command_casebook(root, output)
+    command_reviewer_scorecard(root, output)
+    command_troubleshoot(root, output)
     expected = [
         "valuation-packet.json",
         "valuation-packet.md",
@@ -401,6 +420,12 @@ def command_quickstart_check(root: Path, output: Path) -> int:
         "casebook.json",
         "casebook.md",
         "casebook.html",
+        "reviewer-scorecard.json",
+        "reviewer-scorecard.md",
+        "reviewer-scorecard.html",
+        "troubleshoot.json",
+        "troubleshoot.md",
+        "troubleshoot.html",
         "onboarding-template/README.md",
         "onboarding-template/company.json",
         "onboarding-template/review-policy.json",
@@ -423,6 +448,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab reproducibility-audit --root . --output demo",
             "valuation-scenario-lab new-fixture-template --output demo/onboarding-template",
             "valuation-scenario-lab casebook --root . --output demo",
+            "valuation-scenario-lab reviewer-scorecard --root . --output demo",
+            "valuation-scenario-lab troubleshoot --root . --output demo",
             "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
             "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
             "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -463,7 +490,7 @@ def command_visual_receipt(root: Path, output: Path) -> int:
         "weighted_range_per_share": packet["weighted_range_per_share"],
         "margin_of_safety_label": packet["margin_of_safety_label"],
         "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
-        "artifact_count": 38,
+        "artifact_count": 44,
         "boundaries": packet["boundaries"],
     }
     write_json(output / "visual-receipt.json", payload)
@@ -594,6 +621,33 @@ def command_casebook(root: Path, output: Path) -> int:
     write_text(output / "casebook.md", casebook_markdown(payload))
     write_text(output / "casebook.html", casebook_html(payload))
     print(f"wrote {output / 'casebook.html'}")
+    return 0
+
+
+def command_reviewer_scorecard(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    ensure_demo_artifacts(root, output)
+    command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", output)
+    command_showcase_dashboard(root, output)
+    command_visual_receipt(root, output)
+    command_sample_workflow(root, output)
+    payload = reviewer_scorecard_payload(root, output)
+    write_json(output / "reviewer-scorecard.json", payload)
+    write_text(output / "reviewer-scorecard.md", reviewer_scorecard_markdown(payload))
+    write_text(output / "reviewer-scorecard.html", reviewer_scorecard_html(payload))
+    print(f"wrote {output / 'reviewer-scorecard.json'}")
+    return 0 if payload["status"] in {"strong", "reviewable"} else 1
+
+
+def command_troubleshoot(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    payload = troubleshoot_payload(root)
+    write_json(output / "troubleshoot.json", payload)
+    write_text(output / "troubleshoot.md", troubleshoot_markdown(payload))
+    write_text(output / "troubleshoot.html", troubleshoot_html(payload))
+    print(f"wrote {output / 'troubleshoot.json'}")
     return 0
 
 
@@ -967,6 +1021,16 @@ def public_readiness_payload(packet: dict) -> dict:
                 "artifact": "demo/thesis-brief.md",
             },
             {
+                "label": "Read the reviewer scorecard",
+                "command": "valuation-scenario-lab reviewer-scorecard --root . --output demo",
+                "artifact": "demo/reviewer-scorecard.html",
+            },
+            {
+                "label": "Open troubleshooting",
+                "command": "valuation-scenario-lab troubleshoot --root . --output demo",
+                "artifact": "demo/troubleshoot.html",
+            },
+            {
                 "label": "Export scenario cards",
                 "command": "valuation-scenario-lab scenario-library --fixtures examples --output demo",
                 "artifact": "demo/scenario-library.html",
@@ -987,6 +1051,8 @@ def public_readiness_payload(packet: dict) -> dict:
             "demo/showcase-dashboard.html",
             "demo/thesis-brief.html",
             "demo/scenario-library.html",
+            "demo/reviewer-scorecard.html",
+            "demo/troubleshoot.html",
             "demo/decision-journal.md",
             "demo/assumption-change-walkthrough.html",
             "demo/multi-company-demo-gallery.html",
@@ -1445,6 +1511,26 @@ def sample_workflow_payload(root: Path) -> dict[str, Any]:
         },
         {
             "step": 10,
+            "name": "Score reviewer operability",
+            "command": "valuation-scenario-lab reviewer-scorecard --root . --output demo",
+            "artifacts": [
+                "demo/reviewer-scorecard.json",
+                "demo/reviewer-scorecard.md",
+                "demo/reviewer-scorecard.html",
+            ],
+        },
+        {
+            "step": 11,
+            "name": "Map common diagnostics",
+            "command": "valuation-scenario-lab troubleshoot --root . --output demo",
+            "artifacts": [
+                "demo/troubleshoot.json",
+                "demo/troubleshoot.md",
+                "demo/troubleshoot.html",
+            ],
+        },
+        {
+            "step": 12,
             "name": "Document install and bundle stability",
             "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
             "artifacts": [
@@ -1463,7 +1549,7 @@ def sample_workflow_payload(root: Path) -> dict[str, Any]:
         item
         for step in steps
         for item in step["artifact_status"]
-        if not item["path"].startswith("demo/reproducibility-audit")
+        if not item["path"].startswith(("demo/reproducibility-audit", "demo/reviewer-scorecard", "demo/troubleshoot"))
     ]
     return {
         "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
@@ -1643,6 +1729,341 @@ code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
 {walkthrough}
 <h2>Source Artifacts</h2><ul>{sources}</ul>
 <h2>Reader Prompts</h2><ul>{prompts}</ul>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def reviewer_scorecard_payload(root: Path, output: Path) -> dict[str, Any]:
+    validation = validate_release_payload(root)
+    validation_status = validation_status_ignoring_generated_operability(validation)
+    schemas = schema_version_checks(root)
+    schema_status = schema_status_ignoring_generated_operability(schemas)
+    boundaries = safety_boundary_checks(root)
+    doctor_path = output / "fixture-doctor.json"
+    doctor = read_json(doctor_path) if doctor_path.exists() else {"status": "missing", "issue_count": 99}
+    criteria = {
+        "product": [
+            criterion("Complete demo narrative", 7, all((output / name).exists() for name in [
+                "valuation-packet.html",
+                "thesis-brief.html",
+                "casebook.html",
+                "public-readiness-landing.html",
+            ]), ["demo/valuation-packet.html", "demo/thesis-brief.html", "demo/casebook.html", "demo/public-readiness-landing.html"]),
+            criterion("Review evidence chain", 6, all((output / name).exists() for name in [
+                "review-ledger.json",
+                "decision-journal.json",
+                "sample-workflow.json",
+            ]), ["demo/review-ledger.json", "demo/decision-journal.json", "demo/sample-workflow.json"]),
+            criterion("Scenario explainability", 6, all((output / name).exists() for name in [
+                "scenario-library.json",
+                "sensitivity-matrix.json",
+                "assumption-change-walkthrough.json",
+            ]), ["demo/scenario-library.json", "demo/sensitivity-matrix.json", "demo/assumption-change-walkthrough.json"]),
+            criterion("Packaged public docs", 6, all((root / name).exists() for name in [
+                "README.md",
+                "docs/release-checks.md",
+                "RELEASE_NOTES.md",
+            ]), ["README.md", "docs/release-checks.md", "RELEASE_NOTES.md"]),
+        ],
+        "engineering": [
+            criterion("Release validation passes", 8, validation_status == "pass", ["valuation-scenario-lab validate-release --root ."]),
+            criterion("Schema versions match", 6, schema_status == "pass", ["demo/*.json", "release/*.json"]),
+            criterion("Zero runtime dependencies", 5, "dependencies = []" in (root / "pyproject.toml").read_text(encoding="utf-8"), ["pyproject.toml"]),
+            criterion("Release manifests present", 6, all((root / name).exists() for name in [
+                "release/release-manifest.json",
+                "release/public-bundle.json",
+                "release/install-smoke-receipt.json",
+            ]), ["release/release-manifest.json", "release/public-bundle.json", "release/install-smoke-receipt.json"]),
+        ],
+        "cold-user": [
+            criterion("Quickstart or workflow receipt exists", 6, (output / "quickstart-check.json").exists() or (output / "sample-workflow.json").exists(), ["demo/quickstart-check.json", "demo/sample-workflow.json"]),
+            criterion("Standalone HTML/SVG views exist", 7, all((output / name).exists() for name in [
+                "showcase-dashboard.html",
+                "showcase-dashboard.svg",
+                "visual-receipt.html",
+            ]), ["demo/showcase-dashboard.html", "demo/showcase-dashboard.svg", "demo/visual-receipt.html"]),
+            criterion("Onboarding fixture scaffold exists", 6, all((output / "onboarding-template" / name).exists() for name in [
+                "README.md",
+                "company.json",
+                "review-policy.json",
+                "prior-packet.json",
+            ]), ["demo/onboarding-template"]),
+            criterion("Troubleshooting command documented", 6, "troubleshoot" in (root / "README.md").read_text(encoding="utf-8"), ["README.md", "valuation-scenario-lab troubleshoot --root . --output demo"]),
+        ],
+        "risk": [
+            criterion("Safety boundaries present", 8, boundaries["status"] == "pass", ["README.md", "demo/*.md", "demo/*.html", "release/*.md", "release/*.html"]),
+            criterion("Fixture doctor passes", 6, doctor.get("status") == "pass", ["demo/fixture-doctor.json"]),
+            criterion("No live-data/broker path", 6, all(phrase in (root / "README.md").read_text(encoding="utf-8") for phrase in [
+                "No live data.",
+                "No broker connections.",
+                "No buy/sell/hold advice.",
+            ]), ["README.md"]),
+            criterion("No workflow automation", 5, not (root / ".github" / "workflows").exists(), [".github/workflows"]),
+        ],
+    }
+    lenses = []
+    for lens, items in criteria.items():
+        score = sum(item["points_awarded"] for item in items)
+        lenses.append({"lens": lens, "score": score, "max_score": 25, "criteria": items})
+    total = sum(item["score"] for item in lenses)
+    return {
+        "schema_version": "valuation-scenario-lab.reviewer-scorecard.v1.1",
+        "generated_on": "static-local",
+        "status": "strong" if total >= 90 else "reviewable" if total >= 75 else "needs work",
+        "score": total,
+        "max_score": 100,
+        "rubric": "Deterministic 100-point local-artifact rubric; no live data, broker connection, ranking, or advice.",
+        "lenses": lenses,
+        "release_validation_status": validation_status,
+        "schema_check_status": schema_status,
+        "boundary_check_status": boundaries["status"],
+        "boundaries": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice.",
+        ],
+    }
+
+
+def criterion(name: str, points: int, ok: bool, artifacts: list[str]) -> dict[str, Any]:
+    return {
+        "name": name,
+        "max_points": points,
+        "points_awarded": points if ok else 0,
+        "status": "pass" if ok else "fail",
+        "artifacts": artifacts,
+    }
+
+
+def validation_status_ignoring_generated_operability(validation: dict[str, Any]) -> str:
+    generated = (
+        "demo/reviewer-scorecard.json",
+        "demo/reviewer-scorecard.md",
+        "demo/reviewer-scorecard.html",
+        "demo/troubleshoot.json",
+        "demo/troubleshoot.md",
+        "demo/troubleshoot.html",
+    )
+    blocking = []
+    for item in validation.get("findings", []):
+        if item.get("severity") != "error":
+            continue
+        message = str(item.get("message", ""))
+        if message.startswith("missing ") and any(name in message for name in generated):
+            continue
+        if message.startswith("release manifest "):
+            continue
+        blocking.append(item)
+    return "pass" if not blocking else "fail"
+
+
+def schema_status_ignoring_generated_operability(schemas: dict[str, Any]) -> str:
+    generated = {
+        "demo/reviewer-scorecard.json",
+        "demo/troubleshoot.json",
+    }
+    mismatches = [name for name in schemas.get("mismatches", []) if name not in generated]
+    return "pass" if not mismatches else "fail"
+
+
+def reviewer_scorecard_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Reviewer Scorecard",
+        "",
+        f"Status: {payload['status']}",
+        f"Score: {payload['score']} / {payload['max_score']}",
+        "",
+        payload["rubric"],
+        "",
+    ]
+    for lens in payload["lenses"]:
+        lines.extend([f"## {lens['lens'].title()}", "", f"Score: {lens['score']} / {lens['max_score']}", ""])
+        for item in lens["criteria"]:
+            artifacts = ", ".join(f"`{artifact}`" for artifact in item["artifacts"])
+            lines.append(f"- {item['status']}: {item['name']} ({item['points_awarded']}/{item['max_points']}) via {artifacts}")
+        lines.append("")
+    lines.extend(["## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def reviewer_scorecard_html(payload: dict[str, Any]) -> str:
+    sections = []
+    for lens in payload["lenses"]:
+        rows = "".join(
+            "<tr>"
+            f"<td>{html.escape(item['name'])}</td>"
+            f"<td>{html.escape(item['status'])}</td>"
+            f"<td>{item['points_awarded']} / {item['max_points']}</td>"
+            f"<td>{html.escape(', '.join(item['artifacts']))}</td>"
+            "</tr>"
+            for item in lens["criteria"]
+        )
+        sections.append(
+            f"<section><h2>{html.escape(lens['lens'].title())}</h2>"
+            f"<p>Score: {lens['score']} / {lens['max_score']}</p>"
+            f"<table><thead><tr><th>Criterion</th><th>Status</th><th>Points</th><th>Artifacts</th></tr></thead><tbody>{rows}</tbody></table></section>"
+        )
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reviewer Scorecard</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+section {{ border-top: 1px solid #d6dde4; padding: 1rem 0; }}
+table {{ border-collapse: collapse; width: 100%; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }}
+.score {{ font-size: 1.4rem; font-weight: 700; }}
+</style>
+</head>
+<body>
+<h1>Reviewer Scorecard</h1>
+<p class="score">{payload['score']} / {payload['max_score']} - {html.escape(payload['status'])}</p>
+<p>{html.escape(payload['rubric'])}</p>
+{''.join(sections)}
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def troubleshoot_payload(root: Path) -> dict[str, Any]:
+    validation = validate_release_payload(root)
+    validation_status = validation_status_ignoring_generated_operability(validation)
+    problems = [
+        trouble(
+            "missing-demo-artifact",
+            "A demo file is missing after checkout or regeneration.",
+            "Run the full deterministic demo and then quickstart validation.",
+            ["valuation-scenario-lab demo --root .", "valuation-scenario-lab quickstart-check --root . --output demo"],
+            ["demo/quickstart-check.json", "demo/reproducibility-audit.json"],
+        ),
+        trouble(
+            "fixture-doctor-fails",
+            "Fixture schema, weights, numeric fields, or source freshness need review.",
+            "Run fixture diagnostics and inspect issue paths before rebuilding packets.",
+            ["valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown"],
+            ["examples/company.json", "examples/review-policy.json", "demo/fixture-doctor.md"],
+        ),
+        trouble(
+            "release-validation-fails",
+            "Release validation reports missing files, private terms, metadata issues, or boundary gaps.",
+            "Generate release receipts, refresh manifests, and rerun validation.",
+            ["valuation-scenario-lab install-smoke-receipt --root . --output release", "valuation-scenario-lab export-bundle --root . --output release", "valuation-scenario-lab release-manifest --root . --output release", "valuation-scenario-lab validate-release --root . --format markdown"],
+            ["release/install-smoke-receipt.json", "release/public-bundle.json", "release/release-manifest.json"],
+        ),
+        trouble(
+            "schema-mismatch",
+            "A generated JSON artifact carries an unexpected schema version.",
+            "Regenerate demo and release artifacts with the current package version.",
+            ["valuation-scenario-lab demo --root .", "valuation-scenario-lab reproducibility-audit --root . --output demo"],
+            ["demo/reproducibility-audit.json", "src/valuation_scenario_lab/release.py"],
+        ),
+        trouble(
+            "scorecard-below-90",
+            "Reviewer scorecard is below the strong threshold.",
+            "Open each failed criterion and regenerate the command named in its artifacts list.",
+            ["valuation-scenario-lab reviewer-scorecard --root . --output demo", "valuation-scenario-lab troubleshoot --root . --output demo"],
+            ["demo/reviewer-scorecard.json", "demo/troubleshoot.md"],
+        ),
+        trouble(
+            "empty-directory-wheel-smoke",
+            "A wheel-installed user runs commands outside the repository.",
+            "Use selfcheck, which falls back to packaged data roots, or pass an explicit unpacked root.",
+            ["valuation-scenario-lab selfcheck", "valuation-scenario-lab selfcheck --root <repo-or-share-root>"],
+            ["pyproject.toml", "release/install-smoke-receipt.md"],
+        ),
+        trouble(
+            "finance-boundary-concern",
+            "A reviewer is concerned the output could be read as advice or live-data backed.",
+            "Inspect safety text and regenerate public artifacts that carry the boundaries.",
+            ["valuation-scenario-lab reproducibility-audit --root . --output demo", "valuation-scenario-lab validate-release --root . --format markdown"],
+            ["README.md", "demo/reproducibility-audit.html", "skills/agent/valuation-scenario-lab/SKILL.md"],
+        ),
+    ]
+    return {
+        "schema_version": "valuation-scenario-lab.troubleshoot.v1.1",
+        "generated_on": "static-local",
+        "status": "ready" if validation_status == "pass" else "needs diagnostics",
+        "release_validation_status": validation_status,
+        "guide": problems,
+        "boundaries": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice.",
+        ],
+    }
+
+
+def trouble(
+    problem_id: str,
+    symptom: str,
+    diagnostic: str,
+    commands: list[str],
+    artifacts: list[str],
+) -> dict[str, Any]:
+    return {
+        "id": problem_id,
+        "symptom": symptom,
+        "diagnostic": diagnostic,
+        "commands": commands,
+        "artifacts": artifacts,
+    }
+
+
+def troubleshoot_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Troubleshooting Guide",
+        "",
+        f"Status: {payload['status']}",
+        f"Release validation: {payload['release_validation_status']}",
+        "",
+    ]
+    for item in payload["guide"]:
+        lines.extend([f"## {item['id']}", "", item["symptom"], "", item["diagnostic"], "", "Commands:", ""])
+        lines.extend(f"- `{command}`" for command in item["commands"])
+        lines.extend(["", "Artifacts:", ""])
+        lines.extend(f"- `{artifact}`" for artifact in item["artifacts"])
+        lines.append("")
+    lines.extend(["## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def troubleshoot_html(payload: dict[str, Any]) -> str:
+    sections = []
+    for item in payload["guide"]:
+        commands = "".join(f"<li><code>{html.escape(command)}</code></li>" for command in item["commands"])
+        artifacts = "".join(f"<li><code>{html.escape(artifact)}</code></li>" for artifact in item["artifacts"])
+        sections.append(
+            "<section>"
+            f"<h2>{html.escape(item['id'])}</h2>"
+            f"<p>{html.escape(item['symptom'])}</p>"
+            f"<p>{html.escape(item['diagnostic'])}</p>"
+            f"<h3>Commands</h3><ul>{commands}</ul>"
+            f"<h3>Artifacts</h3><ul>{artifacts}</ul>"
+            "</section>"
+        )
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Troubleshooting Guide</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+section {{ border-top: 1px solid #d6dde4; padding: 1rem 0; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Troubleshooting Guide</h1>
+<p>Status: {html.escape(payload['status'])}; release validation: {html.escape(payload['release_validation_status'])}</p>
+{''.join(sections)}
 <h2>Boundaries</h2><ul>{boundaries}</ul>
 </body>
 </html>

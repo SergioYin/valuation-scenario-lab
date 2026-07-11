@@ -139,7 +139,9 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     workflow_payload = json.loads((out / "sample-workflow.json").read_text(encoding="utf-8"))
     assert workflow_payload["schema_version"] == "valuation-scenario-lab.sample-workflow.v0.8"
     assert workflow_payload["steps"][0]["command"] == "valuation-scenario-lab demo --root ."
-    assert "demo/reproducibility-audit.html" in workflow_payload["steps"][-2]["artifacts"]
+    assert "demo/reproducibility-audit.html" in workflow_payload["steps"][8]["artifacts"]
+    assert "demo/reviewer-scorecard.html" in workflow_payload["steps"][9]["artifacts"]
+    assert "demo/troubleshoot.html" in workflow_payload["steps"][10]["artifacts"]
     assert "release/public-bundle.html" in workflow_payload["steps"][-1]["artifacts"]
     assert "No buy/sell/hold advice." in (out / "sample-workflow.html").read_text(encoding="utf-8")
     assert "<script" not in (out / "sample-workflow.html").read_text(encoding="utf-8").lower()
@@ -183,6 +185,32 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert "No buy/sell/hold advice." in (out / "casebook.html").read_text(encoding="utf-8")
     assert "<script" not in (out / "casebook.html").read_text(encoding="utf-8").lower()
 
+    scorecard = run_cli("reviewer-scorecard", "--root", str(ROOT), "--output", str(out))
+    assert scorecard.returncode == 0, scorecard.stdout + scorecard.stderr
+    scorecard_payload = json.loads((out / "reviewer-scorecard.json").read_text(encoding="utf-8"))
+    assert scorecard_payload["schema_version"] == "valuation-scenario-lab.reviewer-scorecard.v1.1"
+    assert scorecard_payload["score"] >= 90
+    assert [item["lens"] for item in scorecard_payload["lenses"]] == ["product", "engineering", "cold-user", "risk"]
+    assert sum(item["score"] for item in scorecard_payload["lenses"]) == scorecard_payload["score"]
+    assert "No buy/sell/hold advice." in (out / "reviewer-scorecard.html").read_text(encoding="utf-8")
+    assert "<script" not in (out / "reviewer-scorecard.html").read_text(encoding="utf-8").lower()
+
+    troubleshoot = run_cli("troubleshoot", "--root", str(ROOT), "--output", str(out))
+    assert troubleshoot.returncode == 0, troubleshoot.stdout + troubleshoot.stderr
+    troubleshoot_payload = json.loads((out / "troubleshoot.json").read_text(encoding="utf-8"))
+    assert troubleshoot_payload["schema_version"] == "valuation-scenario-lab.troubleshoot.v1.1"
+    assert {item["id"] for item in troubleshoot_payload["guide"]} >= {
+        "missing-demo-artifact",
+        "fixture-doctor-fails",
+        "release-validation-fails",
+        "scorecard-below-90",
+    }
+    assert "valuation-scenario-lab reviewer-scorecard --root . --output demo" in [
+        command for item in troubleshoot_payload["guide"] for command in item["commands"]
+    ]
+    assert "No live data." in (out / "troubleshoot.html").read_text(encoding="utf-8")
+    assert "<script" not in (out / "troubleshoot.html").read_text(encoding="utf-8").lower()
+
     release_out = tmp_path / "release"
     smoke = run_cli("install-smoke-receipt", "--root", str(ROOT), "--output", str(release_out))
     assert smoke.returncode == 0, smoke.stdout + smoke.stderr
@@ -191,6 +219,7 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert smoke_payload["status"] == "documented"
     assert all(not item["network_required"] for item in smoke_payload["entry_point_smoke_commands"])
     assert "valuation-scenario-lab selfcheck" in [item["command"] for item in smoke_payload["entry_point_smoke_commands"]]
+    assert smoke_payload["install_commands"][0]["expected_output_contains"].endswith("1.1.0")
     assert "No live data." in (release_out / "install-smoke-receipt.html").read_text(encoding="utf-8")
     assert "<script" not in (release_out / "install-smoke-receipt.html").read_text(encoding="utf-8").lower()
 
@@ -202,6 +231,8 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     bundle_files = {item["path"]: item for item in bundle_payload["files"]}
     assert bundle_files["demo/valuation-packet.html"]["category"] == "public-demo-artifact"
     assert bundle_files["release/install-smoke-receipt.json"]["category"] == "release-asset"
+    assert bundle_files["demo/reviewer-scorecard.json"]["category"] == "public-demo-artifact"
+    assert bundle_files["demo/troubleshoot.json"]["category"] == "public-demo-artifact"
     assert bundle_files["skills/agent/valuation-scenario-lab/SKILL.md"]["category"] == "skill-file"
     assert bundle_files["README.md"]["packaged_data_file"] is True
     assert len(bundle_files["README.md"]["sha256"]) == 64
@@ -342,7 +373,7 @@ def test_quickstart_check_and_visual_receipt(tmp_path: Path) -> None:
     assert receipt.returncode == 0, receipt.stdout + receipt.stderr
     receipt_payload = json.loads((out / "visual-receipt.json").read_text(encoding="utf-8"))
     assert receipt_payload["schema_version"] == "valuation-scenario-lab.visual-receipt.v0.5"
-    assert receipt_payload["artifact_count"] == 38
+    assert receipt_payload["artifact_count"] == 44
     assert "No buy/sell/hold advice." in (out / "visual-receipt.html").read_text(encoding="utf-8")
 
 

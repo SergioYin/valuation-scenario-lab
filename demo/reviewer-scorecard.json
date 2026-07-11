@@ -1,0 +1,210 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "boundary_check_status": "pass",
+  "generated_on": "static-local",
+  "lenses": [
+    {
+      "criteria": [
+        {
+          "artifacts": [
+            "demo/valuation-packet.html",
+            "demo/thesis-brief.html",
+            "demo/casebook.html",
+            "demo/public-readiness-landing.html"
+          ],
+          "max_points": 7,
+          "name": "Complete demo narrative",
+          "points_awarded": 7,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "demo/review-ledger.json",
+            "demo/decision-journal.json",
+            "demo/sample-workflow.json"
+          ],
+          "max_points": 6,
+          "name": "Review evidence chain",
+          "points_awarded": 6,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "demo/scenario-library.json",
+            "demo/sensitivity-matrix.json",
+            "demo/assumption-change-walkthrough.json"
+          ],
+          "max_points": 6,
+          "name": "Scenario explainability",
+          "points_awarded": 6,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "README.md",
+            "docs/release-checks.md",
+            "RELEASE_NOTES.md"
+          ],
+          "max_points": 6,
+          "name": "Packaged public docs",
+          "points_awarded": 6,
+          "status": "pass"
+        }
+      ],
+      "lens": "product",
+      "max_score": 25,
+      "score": 25
+    },
+    {
+      "criteria": [
+        {
+          "artifacts": [
+            "valuation-scenario-lab validate-release --root ."
+          ],
+          "max_points": 8,
+          "name": "Release validation passes",
+          "points_awarded": 8,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "demo/*.json",
+            "release/*.json"
+          ],
+          "max_points": 6,
+          "name": "Schema versions match",
+          "points_awarded": 6,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "pyproject.toml"
+          ],
+          "max_points": 5,
+          "name": "Zero runtime dependencies",
+          "points_awarded": 5,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "release/release-manifest.json",
+            "release/public-bundle.json",
+            "release/install-smoke-receipt.json"
+          ],
+          "max_points": 6,
+          "name": "Release manifests present",
+          "points_awarded": 6,
+          "status": "pass"
+        }
+      ],
+      "lens": "engineering",
+      "max_score": 25,
+      "score": 25
+    },
+    {
+      "criteria": [
+        {
+          "artifacts": [
+            "demo/quickstart-check.json",
+            "demo/sample-workflow.json"
+          ],
+          "max_points": 6,
+          "name": "Quickstart or workflow receipt exists",
+          "points_awarded": 6,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "demo/showcase-dashboard.html",
+            "demo/showcase-dashboard.svg",
+            "demo/visual-receipt.html"
+          ],
+          "max_points": 7,
+          "name": "Standalone HTML/SVG views exist",
+          "points_awarded": 7,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "demo/onboarding-template"
+          ],
+          "max_points": 6,
+          "name": "Onboarding fixture scaffold exists",
+          "points_awarded": 6,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "README.md",
+            "valuation-scenario-lab troubleshoot --root . --output demo"
+          ],
+          "max_points": 6,
+          "name": "Troubleshooting command documented",
+          "points_awarded": 6,
+          "status": "pass"
+        }
+      ],
+      "lens": "cold-user",
+      "max_score": 25,
+      "score": 25
+    },
+    {
+      "criteria": [
+        {
+          "artifacts": [
+            "README.md",
+            "demo/*.md",
+            "demo/*.html",
+            "release/*.md",
+            "release/*.html"
+          ],
+          "max_points": 8,
+          "name": "Safety boundaries present",
+          "points_awarded": 8,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "demo/fixture-doctor.json"
+          ],
+          "max_points": 6,
+          "name": "Fixture doctor passes",
+          "points_awarded": 6,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            "README.md"
+          ],
+          "max_points": 6,
+          "name": "No live-data/broker path",
+          "points_awarded": 6,
+          "status": "pass"
+        },
+        {
+          "artifacts": [
+            ".github/workflows"
+          ],
+          "max_points": 5,
+          "name": "No workflow automation",
+          "points_awarded": 5,
+          "status": "pass"
+        }
+      ],
+      "lens": "risk",
+      "max_score": 25,
+      "score": 25
+    }
+  ],
+  "max_score": 100,
+  "release_validation_status": "pass",
+  "rubric": "Deterministic 100-point local-artifact rubric; no live data, broker connection, ranking, or advice.",
+  "schema_check_status": "pass",
+  "schema_version": "valuation-scenario-lab.reviewer-scorecard.v1.1",
+  "score": 100,
+  "status": "strong"
+}

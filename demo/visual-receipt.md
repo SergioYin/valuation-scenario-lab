@@ -5,7 +5,7 @@ Company: Example Components Inc. (EXCO)
 Weighted fair value per share: 37.38
 Weighted range per share: 33.64 to 41.12
 Margin-of-safety label: moderate negative gap (-11.0%)
-Artifact count: 38
+Artifact count: 44
 
 ## Boundaries
 

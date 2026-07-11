@@ -16,6 +16,8 @@
     "valuation-scenario-lab reproducibility-audit --root . --output demo",
     "valuation-scenario-lab new-fixture-template --output demo/onboarding-template",
     "valuation-scenario-lab casebook --root . --output demo",
+    "valuation-scenario-lab reviewer-scorecard --root . --output demo",
+    "valuation-scenario-lab troubleshoot --root . --output demo",
     "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
     "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
     "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -189,6 +191,30 @@
     {
       "exists": true,
       "path": "demo/casebook.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/reviewer-scorecard.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/reviewer-scorecard.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/reviewer-scorecard.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/troubleshoot.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/troubleshoot.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/troubleshoot.html"
     },
     {
       "exists": true,
