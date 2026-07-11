@@ -14,6 +14,8 @@ Deterministic Markdown, JSON, and static HTML artifacts from local assumptions.
 - Open troubleshooting: `valuation-scenario-lab troubleshoot --root . --output demo` -> `demo/troubleshoot.html`
 - Copy README snippet: `valuation-scenario-lab readme-snippet --root . --output demo` -> `demo/readme-snippet.md`
 - Open release deck: `valuation-scenario-lab release-deck --root . --output demo` -> `demo/release-deck.html`
+- Open artifact catalog: `valuation-scenario-lab artifact-catalog --root . --output demo` -> `demo/artifact-catalog.html`
+- Review fixture linter report: `valuation-scenario-lab fixture-linter-report --root . --output demo` -> `demo/fixture-linter-report.html`
 - Export scenario cards: `valuation-scenario-lab scenario-library --fixtures examples --output demo` -> `demo/scenario-library.html`
 - Doctor fixtures: `valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown` -> `demo/fixture-doctor.md`
 
@@ -30,6 +32,8 @@ Deterministic Markdown, JSON, and static HTML artifacts from local assumptions.
 - `demo/troubleshoot.html`
 - `demo/readme-snippet.html`
 - `demo/release-deck.html`
+- `demo/artifact-catalog.html`
+- `demo/fixture-linter-report.html`
 - `demo/decision-journal.md`
 - `demo/assumption-change-walkthrough.html`
 - `demo/multi-company-demo-gallery.html`

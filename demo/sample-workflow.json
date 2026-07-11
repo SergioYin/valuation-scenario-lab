@@ -17,7 +17,7 @@
     "valuation-scenario-lab reproducibility-audit --root . --output demo",
     "valuation-scenario-lab reviewer-scorecard --root . --output demo",
     "valuation-scenario-lab troubleshoot --root . --output demo",
-    "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo",
+    "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo && valuation-scenario-lab fixture-linter-report --root . --output demo && valuation-scenario-lab artifact-catalog --root . --output demo",
     "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release"
   ],
   "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
@@ -317,6 +317,30 @@
         {
           "exists": true,
           "path": "demo/release-deck.html"
+        },
+        {
+          "exists": true,
+          "path": "demo/fixture-linter-report.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/fixture-linter-report.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/fixture-linter-report.html"
+        },
+        {
+          "exists": true,
+          "path": "demo/artifact-catalog.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/artifact-catalog.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/artifact-catalog.html"
         }
       ],
       "artifacts": [
@@ -325,10 +349,16 @@
         "demo/readme-snippet.html",
         "demo/release-deck.json",
         "demo/release-deck.md",
-        "demo/release-deck.html"
+        "demo/release-deck.html",
+        "demo/fixture-linter-report.json",
+        "demo/fixture-linter-report.md",
+        "demo/fixture-linter-report.html",
+        "demo/artifact-catalog.json",
+        "demo/artifact-catalog.md",
+        "demo/artifact-catalog.html"
       ],
-      "command": "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo",
-      "name": "Prepare public promotion snippets",
+      "command": "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo && valuation-scenario-lab fixture-linter-report --root . --output demo && valuation-scenario-lab artifact-catalog --root . --output demo",
+      "name": "Prepare public promotion and reuse receipts",
       "step": 12
     },
     {

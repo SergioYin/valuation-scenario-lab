@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fixture Linter Report</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }
+table { border-collapse: collapse; width: 100%; }
+td, th { border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }
+code { background: #eef3f8; padding: 0.1rem 0.25rem; }
+</style>
+</head>
+<body>
+<h1>Fixture Linter Report</h1>
+<p>Status: pass; issues: 0; errors: 0; warnings: 0; info: 0</p>
+<p>Fixture source: <code>examples</code></p>
+<h2>Files</h2><ul><li><code>examples/company.json</code>: pass</li><li><code>examples/software-compounder.json</code>: pass</li></ul>
+<h2>Diagnostics</h2>
+<table><thead><tr><th>Severity</th><th>Category</th><th>File</th><th>Path</th><th>Message</th><th>Remediation Commands</th></tr></thead><tbody><tr><td colspan="6">none</td></tr></tbody></table>
+<h2>Remediation Commands</h2><ul><li><code>valuation-scenario-lab fixture-doctor --fixtures examples --format markdown</code></li><li><code>valuation-scenario-lab build-packet --fixtures examples --output demo</code></li><li><code>valuation-scenario-lab quickstart-check --root . --output demo</code></li><li><code>valuation-scenario-lab validate-release --root . --format markdown</code></li></ul>
+<h2>Release Checks</h2>
+<ul>
+<li>Required files: pass</li>
+<li>Schema versions: pass</li>
+<li>Release validation: fail</li>
+</ul>
+<h2>Safety Summary</h2>
+<ul>
+<li>Status: pass</li>
+<li>Files checked: 35</li>
+<li>Files missing boundaries: 0</li>
+</ul>
+<h2>Boundaries</h2><ul><li>No live data.</li><li>No broker connections.</li><li>No buy/sell/hold advice.</li></ul>
+</body>
+</html>

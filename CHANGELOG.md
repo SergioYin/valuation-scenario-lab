@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0
+
+- Added `artifact-catalog` JSON, Markdown, and static HTML outputs grouping demo, release, docs, skill, package data, release note, changelog, and test artifacts by audience and reuse purpose with SHA-256 hashes.
+- Added `fixture-linter-report` JSON, Markdown, and static HTML outputs with expanded fixture diagnostics, severity counts, paths, remediation commands, release-check context, and safety summary.
+- Included both reuse artifacts in `demo`, `quickstart-check`, `selfcheck`, release validation, package data, release docs, README examples, tests, changelog, release notes, and the agent skill protocol.
+- Preserved zero runtime dependencies, offline fictional fixtures, no live data, no broker connections, and no buy/sell/hold advice.
+
 ## 1.2.0
 
 - Added `readme-snippet` JSON, Markdown, and static HTML outputs with a stranger-readable quickstart, boundaries, and artifact map for public promotion.

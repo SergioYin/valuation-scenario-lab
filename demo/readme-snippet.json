@@ -37,6 +37,16 @@
     },
     {
       "exists": true,
+      "path": "demo/fixture-linter-report.html",
+      "role": "expanded fixture diagnostics"
+    },
+    {
+      "exists": true,
+      "path": "demo/artifact-catalog.html",
+      "role": "artifact reuse catalog"
+    },
+    {
+      "exists": true,
       "path": "demo/reproducibility-audit.html",
       "role": "repeatability receipt"
     },

@@ -4,8 +4,25 @@
     "No broker connections.",
     "No buy/sell/hold advice."
   ],
-  "checks": {
-    "artifact_presence": {
+  "diagnostics": [],
+  "files": [
+    {
+      "path": "examples/company.json",
+      "status": "pass"
+    },
+    {
+      "path": "examples/software-compounder.json",
+      "status": "pass"
+    }
+  ],
+  "fixture_count": 2,
+  "fixture_source": "examples",
+  "generated_on": "static-local",
+  "issue_count": 0,
+  "release_checks": {
+    "release_validation_findings": 1,
+    "release_validation_status": "fail",
+    "required_files": {
       "files": [
         {
           "exists": true,
@@ -436,378 +453,6 @@
       "missing": [],
       "status": "pass"
     },
-    "hash_manifest_coverage": {
-      "expected_file_count": 95,
-      "extra": [],
-      "hash_mismatches": [
-        "demo/artifact-catalog.html",
-        "demo/artifact-catalog.json",
-        "demo/artifact-catalog.md",
-        "demo/reproducibility-audit.html",
-        "demo/reproducibility-audit.json",
-        "demo/reproducibility-audit.md"
-      ],
-      "manifest_file_count": 95,
-      "manifest_schema_version": "valuation-scenario-lab.release-manifest.v1.0",
-      "missing": [],
-      "status": "fail"
-    },
-    "safety_boundary_coverage": {
-      "files": [
-        {
-          "exists": true,
-          "missing": [],
-          "path": "README.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/valuation-packet.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/valuation-packet.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/public-readiness-landing.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/public-readiness-landing.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/quickstart-check.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/visual-receipt.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/visual-receipt.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/showcase-dashboard.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/showcase-dashboard.svg",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/showcase-dashboard.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/thesis-brief.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/thesis-brief.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/scenario-library.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/scenario-library.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/casebook.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/casebook.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/reviewer-scorecard.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/reviewer-scorecard.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/troubleshoot.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/troubleshoot.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/readme-snippet.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/readme-snippet.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/release-deck.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/release-deck.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/artifact-catalog.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/artifact-catalog.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/fixture-linter-report.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/fixture-linter-report.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "demo/onboarding-template/README.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "release/install-smoke-receipt.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "release/install-smoke-receipt.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "release/public-bundle.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "release/public-bundle.html",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        },
-        {
-          "exists": true,
-          "missing": [],
-          "path": "skills/agent/valuation-scenario-lab/SKILL.md",
-          "present": [
-            "No live data.",
-            "No broker connections.",
-            "No buy/sell/hold advice."
-          ]
-        }
-      ],
-      "files_missing_boundaries": [],
-      "status": "pass"
-    },
     "schema_versions": {
       "files": [
         {
@@ -988,34 +633,53 @@
       ],
       "mismatches": [],
       "status": "pass"
-    },
-    "zero_dependency_metadata": {
-      "checks": [
-        {
-          "name": "pyproject_exists",
-          "ok": true
-        },
-        {
-          "name": "dependencies_empty",
-          "ok": true
-        },
-        {
-          "name": "no_install_requires",
-          "ok": true
-        },
-        {
-          "name": "no_requirements_txt",
-          "ok": true
-        },
-        {
-          "name": "no_runtime_dependency_group",
-          "ok": true
-        }
-      ],
-      "status": "pass"
     }
   },
-  "generated_on": "static-local",
-  "schema_version": "valuation-scenario-lab.reproducibility-audit.v0.8",
-  "status": "fail"
+  "remediation_commands": [
+    "valuation-scenario-lab fixture-doctor --fixtures examples --format markdown",
+    "valuation-scenario-lab build-packet --fixtures examples --output demo",
+    "valuation-scenario-lab quickstart-check --root . --output demo",
+    "valuation-scenario-lab validate-release --root . --format markdown"
+  ],
+  "safety_summary": {
+    "boundaries": [
+      "No live data.",
+      "No broker connections.",
+      "No buy/sell/hold advice."
+    ],
+    "files_checked": 35,
+    "files_missing_boundaries": [],
+    "status": "pass"
+  },
+  "schema_version": "valuation-scenario-lab.fixture-linter-report.v1.3",
+  "severity_counts": {
+    "error": 0,
+    "info": 0,
+    "warning": 0
+  },
+  "source_doctor": {
+    "boundaries": [
+      "No live data.",
+      "No broker connections.",
+      "No buy/sell/hold advice."
+    ],
+    "files": [
+      {
+        "path": "examples/company.json",
+        "status": "pass"
+      },
+      {
+        "path": "examples/software-compounder.json",
+        "status": "pass"
+      }
+    ],
+    "fixture_count": 2,
+    "freshness_limit_days": 45,
+    "generated_on": "static-local",
+    "issue_count": 0,
+    "issues": [],
+    "schema_version": "valuation-scenario-lab.fixture-doctor.v0.5",
+    "status": "pass"
+  },
+  "status": "pass"
 }

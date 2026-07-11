@@ -20,6 +20,8 @@
     "valuation-scenario-lab troubleshoot --root . --output demo",
     "valuation-scenario-lab readme-snippet --root . --output demo",
     "valuation-scenario-lab release-deck --root . --output demo",
+    "valuation-scenario-lab fixture-linter-report --root . --output demo",
+    "valuation-scenario-lab artifact-catalog --root . --output demo",
     "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
     "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
     "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -241,6 +243,30 @@
     {
       "exists": true,
       "path": "demo/release-deck.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/artifact-catalog.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/artifact-catalog.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/artifact-catalog.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-linter-report.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-linter-report.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-linter-report.html"
     },
     {
       "exists": true,

@@ -243,6 +243,36 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert "No live data." in (out / "release-deck.html").read_text(encoding="utf-8")
     assert "<script" not in (out / "release-deck.html").read_text(encoding="utf-8").lower()
 
+    linter = run_cli("fixture-linter-report", "--root", str(ROOT), "--output", str(out))
+    assert linter.returncode == 0, linter.stdout + linter.stderr
+    linter_payload = json.loads((out / "fixture-linter-report.json").read_text(encoding="utf-8"))
+    assert linter_payload["schema_version"] == "valuation-scenario-lab.fixture-linter-report.v1.3"
+    assert linter_payload["status"] == "pass"
+    assert linter_payload["severity_counts"] == {"error": 0, "warning": 0, "info": 0}
+    assert "valuation-scenario-lab validate-release --root . --format markdown" in linter_payload["remediation_commands"]
+    assert linter_payload["safety_summary"]["status"] in {"pass", "fail"}
+    assert "No broker connections." in (out / "fixture-linter-report.html").read_text(encoding="utf-8")
+    assert "<script" not in (out / "fixture-linter-report.html").read_text(encoding="utf-8").lower()
+
+    catalog = run_cli("artifact-catalog", "--root", str(ROOT), "--output", str(out))
+    assert catalog.returncode == 0, catalog.stdout + catalog.stderr
+    catalog_payload = json.loads((out / "artifact-catalog.json").read_text(encoding="utf-8"))
+    assert catalog_payload["schema_version"] == "valuation-scenario-lab.artifact-catalog.v1.3"
+    assert catalog_payload["status"] == "pass"
+    audiences = {item["audience"] for item in catalog_payload["groups"]}
+    assert {"researcher", "reviewer", "agent-builder", "release-operator", "maintainer"} <= audiences
+    catalog_artifacts = {
+        artifact["path"]: artifact
+        for group in catalog_payload["groups"]
+        for purpose in group["purposes"]
+        for artifact in purpose["artifacts"]
+    }
+    assert catalog_artifacts["demo/fixture-linter-report.json"]["reuse_purpose"] == "fixture diagnostics and remediation"
+    assert catalog_artifacts["README.md"]["packaged_data_file"] is True
+    assert len(catalog_artifacts["README.md"]["sha256"]) == 64
+    assert "No buy/sell/hold advice." in (out / "artifact-catalog.html").read_text(encoding="utf-8")
+    assert "<script" not in (out / "artifact-catalog.html").read_text(encoding="utf-8").lower()
+
     release_out = tmp_path / "release"
     smoke = run_cli("install-smoke-receipt", "--root", str(ROOT), "--output", str(release_out))
     assert smoke.returncode == 0, smoke.stdout + smoke.stderr
@@ -251,7 +281,7 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert smoke_payload["status"] == "documented"
     assert all(not item["network_required"] for item in smoke_payload["entry_point_smoke_commands"])
     assert "valuation-scenario-lab selfcheck" in [item["command"] for item in smoke_payload["entry_point_smoke_commands"]]
-    assert smoke_payload["install_commands"][0]["expected_output_contains"].endswith("1.2.0")
+    assert smoke_payload["install_commands"][0]["expected_output_contains"].endswith("1.3.0")
     assert "No live data." in (release_out / "install-smoke-receipt.html").read_text(encoding="utf-8")
     assert "<script" not in (release_out / "install-smoke-receipt.html").read_text(encoding="utf-8").lower()
 
@@ -267,6 +297,8 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert bundle_files["demo/troubleshoot.json"]["category"] == "public-demo-artifact"
     assert bundle_files["demo/readme-snippet.json"]["category"] == "public-demo-artifact"
     assert bundle_files["demo/release-deck.json"]["category"] == "public-demo-artifact"
+    assert bundle_files["demo/artifact-catalog.json"]["category"] == "public-demo-artifact"
+    assert bundle_files["demo/fixture-linter-report.json"]["category"] == "public-demo-artifact"
     assert bundle_files["skills/agent/valuation-scenario-lab/SKILL.md"]["category"] == "skill-file"
     assert bundle_files["README.md"]["packaged_data_file"] is True
     assert len(bundle_files["README.md"]["sha256"]) == 64
@@ -406,6 +438,10 @@ def test_quickstart_check_and_visual_receipt(tmp_path: Path) -> None:
     assert (out / "readme-snippet.html").exists()
     assert (out / "release-deck.md").exists()
     assert (out / "release-deck.html").exists()
+    assert (out / "artifact-catalog.md").exists()
+    assert (out / "artifact-catalog.html").exists()
+    assert (out / "fixture-linter-report.md").exists()
+    assert (out / "fixture-linter-report.html").exists()
 
     receipt = run_cli("visual-receipt", "--root", str(ROOT), "--output", str(out))
     assert receipt.returncode == 0, receipt.stdout + receipt.stderr

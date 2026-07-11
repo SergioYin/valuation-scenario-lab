@@ -20,6 +20,8 @@
     "demo/troubleshoot.html",
     "demo/readme-snippet.html",
     "demo/release-deck.html",
+    "demo/artifact-catalog.html",
+    "demo/fixture-linter-report.html",
     "demo/decision-journal.md",
     "demo/assumption-change-walkthrough.html",
     "demo/multi-company-demo-gallery.html",
@@ -69,6 +71,16 @@
       "artifact": "demo/release-deck.html",
       "command": "valuation-scenario-lab release-deck --root . --output demo",
       "label": "Open release deck"
+    },
+    {
+      "artifact": "demo/artifact-catalog.html",
+      "command": "valuation-scenario-lab artifact-catalog --root . --output demo",
+      "label": "Open artifact catalog"
+    },
+    {
+      "artifact": "demo/fixture-linter-report.html",
+      "command": "valuation-scenario-lab fixture-linter-report --root . --output demo",
+      "label": "Review fixture linter report"
     },
     {
       "artifact": "demo/scenario-library.html",

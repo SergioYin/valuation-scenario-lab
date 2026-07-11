@@ -93,9 +93,9 @@ Command: `valuation-scenario-lab troubleshoot --root . --output demo`
 - `demo/troubleshoot.md`: ok
 - `demo/troubleshoot.html`: ok
 
-### 12. Prepare public promotion snippets
+### 12. Prepare public promotion and reuse receipts
 
-Command: `valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo`
+Command: `valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo && valuation-scenario-lab fixture-linter-report --root . --output demo && valuation-scenario-lab artifact-catalog --root . --output demo`
 
 - `demo/readme-snippet.json`: ok
 - `demo/readme-snippet.md`: ok
@@ -103,6 +103,12 @@ Command: `valuation-scenario-lab readme-snippet --root . --output demo && valuat
 - `demo/release-deck.json`: ok
 - `demo/release-deck.md`: ok
 - `demo/release-deck.html`: ok
+- `demo/fixture-linter-report.json`: ok
+- `demo/fixture-linter-report.md`: ok
+- `demo/fixture-linter-report.html`: ok
+- `demo/artifact-catalog.json`: ok
+- `demo/artifact-catalog.md`: ok
+- `demo/artifact-catalog.html`: ok
 
 ### 13. Document install and bundle stability
 

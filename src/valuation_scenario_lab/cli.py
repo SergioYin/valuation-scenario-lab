@@ -29,6 +29,8 @@ from .release import reproducibility_audit as reproducibility_audit_payload
 from .release import release_manifest as manifest_payload
 from .release import export_bundle_manifest as export_bundle_payload
 from .release import install_smoke_receipt as install_smoke_payload
+from .release import artifact_catalog as artifact_catalog_payload
+from .release import fixture_linter_report as fixture_linter_report_payload
 from .release import validate_release as validate_release_payload
 from .release import safety_boundary_checks, schema_version_checks
 from .render import packet_html, packet_markdown, simple_markdown
@@ -157,6 +159,16 @@ def main(argv: list[str] | None = None) -> int:
     deck.add_argument("--root", default=".")
     deck.add_argument("--output", default="demo")
 
+    catalog = sub.add_parser("artifact-catalog")
+    catalog.add_argument("--root", default=".")
+    catalog.add_argument("--output", default="demo")
+
+    linter = sub.add_parser("fixture-linter-report")
+    linter.add_argument("--root", default=".")
+    linter.add_argument("--fixtures", default=None)
+    linter.add_argument("--policy", default=None)
+    linter.add_argument("--output", default="demo")
+
     demo = sub.add_parser("demo")
     demo.add_argument("--root", default=".")
 
@@ -223,6 +235,16 @@ def main(argv: list[str] | None = None) -> int:
             return command_readme_snippet(Path(args.root), Path(args.output))
         if args.command == "release-deck":
             return command_release_deck(Path(args.root), Path(args.output))
+        if args.command == "artifact-catalog":
+            return command_artifact_catalog(Path(args.root), Path(args.output))
+        if args.command == "fixture-linter-report":
+            root = Path(args.root)
+            return command_fixture_linter_report(
+                root,
+                Path(args.fixtures) if args.fixtures else None,
+                Path(args.policy) if args.policy else None,
+                Path(args.output),
+            )
         if args.command == "demo":
             root = Path(args.root)
             command_build_packet(root / "examples", root / "demo")
@@ -247,6 +269,8 @@ def main(argv: list[str] | None = None) -> int:
             command_troubleshoot(root, root / "demo")
             command_readme_snippet(root, root / "demo")
             command_release_deck(root, root / "demo")
+            command_fixture_linter_report(root, None, None, root / "demo")
+            command_artifact_catalog(root, root / "demo")
             command_install_smoke_receipt(root, root / "release")
             command_manifest(root, root / "release")
             command_export_bundle(root, root / "release")
@@ -368,6 +392,8 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_troubleshoot(root, out)
         command_readme_snippet(root, out)
         command_release_deck(root, out)
+        command_fixture_linter_report(root, None, None, out)
+        command_artifact_catalog(root, out)
         command_install_smoke_receipt(root, out / "release")
         command_manifest(root, out / "release")
         command_export_bundle(root, out / "release")
@@ -396,6 +422,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
     command_troubleshoot(root, output)
     command_readme_snippet(root, output)
     command_release_deck(root, output)
+    command_fixture_linter_report(root, None, None, output)
+    command_artifact_catalog(root, output)
     expected = [
         "valuation-packet.json",
         "valuation-packet.md",
@@ -450,6 +478,12 @@ def command_quickstart_check(root: Path, output: Path) -> int:
         "release-deck.json",
         "release-deck.md",
         "release-deck.html",
+        "artifact-catalog.json",
+        "artifact-catalog.md",
+        "artifact-catalog.html",
+        "fixture-linter-report.json",
+        "fixture-linter-report.md",
+        "fixture-linter-report.html",
         "onboarding-template/README.md",
         "onboarding-template/company.json",
         "onboarding-template/review-policy.json",
@@ -476,6 +510,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab troubleshoot --root . --output demo",
             "valuation-scenario-lab readme-snippet --root . --output demo",
             "valuation-scenario-lab release-deck --root . --output demo",
+            "valuation-scenario-lab fixture-linter-report --root . --output demo",
+            "valuation-scenario-lab artifact-catalog --root . --output demo",
             "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
             "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
             "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -701,6 +737,36 @@ def command_release_deck(root: Path, output: Path) -> int:
     write_text(output / "release-deck.html", release_deck_html(payload))
     print(f"wrote {output / 'release-deck.json'}")
     return 0
+
+
+def command_artifact_catalog(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    generated = [
+        relative_output(root, output / "artifact-catalog.json"),
+        relative_output(root, output / "artifact-catalog.md"),
+        relative_output(root, output / "artifact-catalog.html"),
+    ]
+    payload = artifact_catalog_payload(root, generated)
+    write_json(output / "artifact-catalog.json", payload)
+    write_text(output / "artifact-catalog.md", artifact_catalog_markdown(payload))
+    write_text(output / "artifact-catalog.html", artifact_catalog_html(payload))
+    print(f"wrote {output / 'artifact-catalog.json'}")
+    return 0 if payload["status"] == "pass" else 1
+
+
+def command_fixture_linter_report(root: Path, fixtures: Path | None, policy: Path | None, output: Path) -> int:
+    root = resolve_root(root)
+    fixtures_path = fixtures or (root / "examples")
+    policy_path = policy or (root / "examples" / "review-policy.json")
+    policy_payload = read_json(policy_path) if policy_path.exists() else None
+    ensure_dir(output)
+    payload = fixture_linter_report_payload(root, fixtures_path, policy_payload)
+    write_json(output / "fixture-linter-report.json", payload)
+    write_text(output / "fixture-linter-report.md", fixture_linter_report_markdown(payload))
+    write_text(output / "fixture-linter-report.html", fixture_linter_report_html(payload))
+    print(f"wrote {output / 'fixture-linter-report.json'}")
+    return 0 if payload["status"] == "pass" else 1
 
 
 def ensure_demo_artifacts(root: Path, output: Path) -> None:
@@ -1093,6 +1159,16 @@ def public_readiness_payload(packet: dict) -> dict:
                 "artifact": "demo/release-deck.html",
             },
             {
+                "label": "Open artifact catalog",
+                "command": "valuation-scenario-lab artifact-catalog --root . --output demo",
+                "artifact": "demo/artifact-catalog.html",
+            },
+            {
+                "label": "Review fixture linter report",
+                "command": "valuation-scenario-lab fixture-linter-report --root . --output demo",
+                "artifact": "demo/fixture-linter-report.html",
+            },
+            {
                 "label": "Export scenario cards",
                 "command": "valuation-scenario-lab scenario-library --fixtures examples --output demo",
                 "artifact": "demo/scenario-library.html",
@@ -1117,6 +1193,8 @@ def public_readiness_payload(packet: dict) -> dict:
             "demo/troubleshoot.html",
             "demo/readme-snippet.html",
             "demo/release-deck.html",
+            "demo/artifact-catalog.html",
+            "demo/fixture-linter-report.html",
             "demo/decision-journal.md",
             "demo/assumption-change-walkthrough.html",
             "demo/multi-company-demo-gallery.html",
@@ -1595,8 +1673,8 @@ def sample_workflow_payload(root: Path) -> dict[str, Any]:
         },
         {
             "step": 12,
-            "name": "Prepare public promotion snippets",
-            "command": "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo",
+            "name": "Prepare public promotion and reuse receipts",
+            "command": "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo && valuation-scenario-lab fixture-linter-report --root . --output demo && valuation-scenario-lab artifact-catalog --root . --output demo",
             "artifacts": [
                 "demo/readme-snippet.json",
                 "demo/readme-snippet.md",
@@ -1604,6 +1682,12 @@ def sample_workflow_payload(root: Path) -> dict[str, Any]:
                 "demo/release-deck.json",
                 "demo/release-deck.md",
                 "demo/release-deck.html",
+                "demo/fixture-linter-report.json",
+                "demo/fixture-linter-report.md",
+                "demo/fixture-linter-report.html",
+                "demo/artifact-catalog.json",
+                "demo/artifact-catalog.md",
+                "demo/artifact-catalog.html",
             ],
         },
         {
@@ -1626,7 +1710,7 @@ def sample_workflow_payload(root: Path) -> dict[str, Any]:
         item
         for step in steps
         for item in step["artifact_status"]
-        if not item["path"].startswith(("demo/reproducibility-audit", "demo/reviewer-scorecard", "demo/troubleshoot", "demo/readme-snippet", "demo/release-deck"))
+        if not item["path"].startswith(("demo/reproducibility-audit", "demo/reviewer-scorecard", "demo/troubleshoot", "demo/readme-snippet", "demo/release-deck", "demo/fixture-linter-report", "demo/artifact-catalog"))
     ]
     return {
         "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
@@ -2165,6 +2249,8 @@ def readme_snippet_payload(root: Path, output: Path) -> dict[str, Any]:
         "demo/casebook.html",
         "demo/reviewer-scorecard.html",
         "demo/troubleshoot.html",
+        "demo/fixture-linter-report.html",
+        "demo/artifact-catalog.html",
         "demo/reproducibility-audit.html",
         "release/public-bundle.html",
     ]
@@ -2209,6 +2295,8 @@ def readme_artifact_role(path: str) -> str:
         "demo/casebook.html": "stranger-readable walkthrough",
         "demo/reviewer-scorecard.html": "reviewer operability",
         "demo/troubleshoot.html": "diagnostic map",
+        "demo/fixture-linter-report.html": "expanded fixture diagnostics",
+        "demo/artifact-catalog.html": "artifact reuse catalog",
         "demo/reproducibility-audit.html": "repeatability receipt",
         "release/public-bundle.html": "public bundle index",
     }
@@ -2400,6 +2488,198 @@ code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
 {''.join(sections)}
 <section><h2>Boundaries</h2><ul>{boundaries}</ul></section>
 </main>
+</body>
+</html>
+"""
+
+
+def artifact_catalog_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Artifact Catalog",
+        "",
+        f"Status: {payload['status']}",
+        f"Artifact count: {payload['artifact_count']}",
+        f"Package data files: {payload['package_data_count']}",
+        f"Required release files: {payload['required_release_file_count']}",
+        "",
+        "## Release Validation",
+        "",
+        f"- Status: {payload['release_validation']['status']}",
+        f"- Findings: {payload['release_validation']['finding_count']}",
+        f"- Schema checks: {payload['schema_checks']['status']}",
+        f"- Package data checks: {payload['package_data_checks']['status']}",
+        "",
+    ]
+    for group in payload["groups"]:
+        lines.extend([f"## {group['audience']}", ""])
+        for purpose in group["purposes"]:
+            lines.extend([f"### {purpose['reuse_purpose']}", ""])
+            lines.append("| Path | Format | Category | SHA-256 | Required | Package Data |")
+            lines.append("| --- | --- | --- | --- | --- | --- |")
+            for item in purpose["artifacts"]:
+                lines.append(
+                    f"| `{item['path']}` | {item['format']} | {item['category']} | `{item['sha256']}` | "
+                    f"{'yes' if item['required_for_release'] else 'no'} | {'yes' if item['packaged_data_file'] else 'no'} |"
+                )
+            lines.append("")
+    lines.extend(["## Self Outputs", ""])
+    lines.extend(f"- `{item['path']}`: {item['usage_note']}" for item in payload["self_outputs"])
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def artifact_catalog_html(payload: dict[str, Any]) -> str:
+    sections = []
+    for group in payload["groups"]:
+        purpose_blocks = []
+        for purpose in group["purposes"]:
+            rows = "".join(
+                "<tr>"
+                f"<td><code>{html.escape(item['path'])}</code></td>"
+                f"<td>{html.escape(item['format'])}</td>"
+                f"<td>{html.escape(item['category'])}</td>"
+                f"<td><code>{html.escape(item['sha256'])}</code></td>"
+                f"<td>{'yes' if item['required_for_release'] else 'no'}</td>"
+                f"<td>{'yes' if item['packaged_data_file'] else 'no'}</td>"
+                "</tr>"
+                for item in purpose["artifacts"]
+            )
+            purpose_blocks.append(
+                f"<h3>{html.escape(purpose['reuse_purpose'])}</h3>"
+                "<table><thead><tr><th>Path</th><th>Format</th><th>Category</th><th>SHA-256</th><th>Required</th><th>Package Data</th></tr></thead>"
+                f"<tbody>{rows}</tbody></table>"
+            )
+        sections.append(f"<section><h2>{html.escape(group['audience'])}</h2>{''.join(purpose_blocks)}</section>")
+    self_outputs = "".join(
+        f"<li><code>{html.escape(item['path'])}</code>: {html.escape(item['usage_note'])}</li>"
+        for item in payload["self_outputs"]
+    )
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Artifact Catalog</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; margin-bottom: 1rem; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+section {{ margin-top: 1.5rem; }}
+</style>
+</head>
+<body>
+<h1>Artifact Catalog</h1>
+<p>Status: {html.escape(payload['status'])}; artifacts: {payload['artifact_count']}; package data: {payload['package_data_count']}</p>
+<p>Release validation: {html.escape(payload['release_validation']['status'])}; schema checks: {html.escape(payload['schema_checks']['status'])}; package data checks: {html.escape(payload['package_data_checks']['status'])}</p>
+{''.join(sections)}
+<h2>Self Outputs</h2><ul>{self_outputs}</ul>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def fixture_linter_report_markdown(payload: dict[str, Any]) -> str:
+    counts = payload["severity_counts"]
+    lines = [
+        "# Fixture Linter Report",
+        "",
+        f"Status: {payload['status']}",
+        f"Fixture source: `{payload['fixture_source']}`",
+        f"Fixture count: {payload['fixture_count']}",
+        f"Issues: {payload['issue_count']} (errors {counts['error']}, warnings {counts['warning']}, info {counts['info']})",
+        "",
+        "## Files",
+        "",
+    ]
+    lines.extend(f"- `{item['path']}`: {item['status']}" for item in payload["files"])
+    lines.extend(["", "## Diagnostics", ""])
+    if payload["diagnostics"]:
+        for item in payload["diagnostics"]:
+            lines.append(f"- {item['severity']} {item['category']} `{item['file']}` `{item['path']}`: {item['message']}")
+            for command in item["remediation_commands"]:
+                lines.append(f"  - `{command}`")
+    else:
+        lines.append("- none")
+    lines.extend(["", "## Remediation Commands", ""])
+    lines.extend(f"- `{item}`" for item in payload["remediation_commands"])
+    lines.extend(
+        [
+            "",
+            "## Release Checks",
+            "",
+            f"- Required files: {payload['release_checks']['required_files']['status']}",
+            f"- Schema versions: {payload['release_checks']['schema_versions']['status']}",
+            f"- Release validation: {payload['release_checks']['release_validation_status']}",
+            "",
+            "## Safety Summary",
+            "",
+            f"- Status: {payload['safety_summary']['status']}",
+            f"- Files checked: {payload['safety_summary']['files_checked']}",
+            f"- Files missing boundaries: {len(payload['safety_summary']['files_missing_boundaries'])}",
+            "",
+            "## Boundaries",
+            "",
+        ]
+    )
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def fixture_linter_report_html(payload: dict[str, Any]) -> str:
+    counts = payload["severity_counts"]
+    files = "".join(f"<li><code>{html.escape(item['path'])}</code>: {html.escape(item['status'])}</li>" for item in payload["files"])
+    if payload["diagnostics"]:
+        diagnostics = "".join(
+            "<tr>"
+            f"<td>{html.escape(item['severity'])}</td>"
+            f"<td>{html.escape(item['category'])}</td>"
+            f"<td><code>{html.escape(item['file'])}</code></td>"
+            f"<td><code>{html.escape(item['path'])}</code></td>"
+            f"<td>{html.escape(item['message'])}</td>"
+            f"<td>{'<br>'.join(f'<code>{html.escape(command)}</code>' for command in item['remediation_commands'])}</td>"
+            "</tr>"
+            for item in payload["diagnostics"]
+        )
+    else:
+        diagnostics = "<tr><td colspan=\"6\">none</td></tr>"
+    commands = "".join(f"<li><code>{html.escape(item)}</code></li>" for item in payload["remediation_commands"])
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fixture Linter Report</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Fixture Linter Report</h1>
+<p>Status: {html.escape(payload['status'])}; issues: {payload['issue_count']}; errors: {counts['error']}; warnings: {counts['warning']}; info: {counts['info']}</p>
+<p>Fixture source: <code>{html.escape(payload['fixture_source'])}</code></p>
+<h2>Files</h2><ul>{files}</ul>
+<h2>Diagnostics</h2>
+<table><thead><tr><th>Severity</th><th>Category</th><th>File</th><th>Path</th><th>Message</th><th>Remediation Commands</th></tr></thead><tbody>{diagnostics}</tbody></table>
+<h2>Remediation Commands</h2><ul>{commands}</ul>
+<h2>Release Checks</h2>
+<ul>
+<li>Required files: {html.escape(payload['release_checks']['required_files']['status'])}</li>
+<li>Schema versions: {html.escape(payload['release_checks']['schema_versions']['status'])}</li>
+<li>Release validation: {html.escape(payload['release_checks']['release_validation_status'])}</li>
+</ul>
+<h2>Safety Summary</h2>
+<ul>
+<li>Status: {html.escape(payload['safety_summary']['status'])}</li>
+<li>Files checked: {payload['safety_summary']['files_checked']}</li>
+<li>Files missing boundaries: {len(payload['safety_summary']['files_missing_boundaries'])}</li>
+</ul>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
 </body>
 </html>
 """

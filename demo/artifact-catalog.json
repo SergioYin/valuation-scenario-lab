@@ -1,0 +1,2003 @@
+{
+  "artifact_count": 92,
+  "audience_count": 5,
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "generated_on": "static-local",
+  "groups": [
+    {
+      "artifact_count": 48,
+      "audience": "researcher",
+      "purposes": [
+        {
+          "artifact_count": 1,
+          "artifacts": [
+            {
+              "audience": "researcher",
+              "bytes": 9835,
+              "category": "package-data",
+              "format": "md",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "README.md",
+              "required_for_release": true,
+              "reuse_purpose": "documentation reuse",
+              "sha256": "6d47f5f9456e539bd3ec27d02cca4a3b5f4d1c4c513f931d81a87c5574cc7365",
+              "usage_note": "Primary user documentation, command list, quickstart, and safety boundaries."
+            }
+          ],
+          "reuse_purpose": "documentation reuse"
+        },
+        {
+          "artifact_count": 6,
+          "artifacts": [
+            {
+              "audience": "researcher",
+              "bytes": 573,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/onboarding-template/README.md",
+              "required_for_release": true,
+              "reuse_purpose": "fictional fixture reuse",
+              "sha256": "86d405e58381e5775597977e3775e0aa70f50ff87bdef48a2dacac940599e881",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 2143,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/onboarding-template/company.json",
+              "required_for_release": true,
+              "reuse_purpose": "fictional fixture reuse",
+              "sha256": "fe6391e5b8cb4cd888473cb5843e16a4aad87e7e7fd144cbaa13fd3657c7086c",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 2311,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/onboarding-template/prior-packet.json",
+              "required_for_release": true,
+              "reuse_purpose": "fictional fixture reuse",
+              "sha256": "f7b5af8e0cfdde9f0bdf778181db166629e0cc8b6f654dc1de4f5f32121f5d55",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1664,
+              "category": "package-data",
+              "format": "json",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "examples/company.json",
+              "required_for_release": true,
+              "reuse_purpose": "fictional fixture reuse",
+              "sha256": "1f41125d6afff5a7de0b085a9c1fb35080628c4dba34d3a7dc2422021bd8bc80",
+              "usage_note": "Static local fictional fixture data; not live market data."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1244,
+              "category": "package-data",
+              "format": "json",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "examples/prior-packet.json",
+              "required_for_release": false,
+              "reuse_purpose": "fictional fixture reuse",
+              "sha256": "3f287ac96cb3a5a7a477b0e2332e7c2cb046f9e5b72c6f2289838a9e9a48b880",
+              "usage_note": "Static local fictional fixture data; not live market data."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1748,
+              "category": "package-data",
+              "format": "json",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "examples/software-compounder.json",
+              "required_for_release": true,
+              "reuse_purpose": "fictional fixture reuse",
+              "sha256": "c6bef8b98a5570c82396bf77faab8959a9fc7a386da0b9c41f791445052ea144",
+              "usage_note": "Static local fictional fixture data; not live market data."
+            }
+          ],
+          "reuse_purpose": "fictional fixture reuse"
+        },
+        {
+          "artifact_count": 1,
+          "artifacts": [
+            {
+              "audience": "researcher",
+              "bytes": 1092,
+              "category": "package-data",
+              "format": "text",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "LICENSE",
+              "required_for_release": true,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "91cdf92bf0f3378b989793b256f81e7fb22d0222152411b79ab0634b3de90b4f",
+              "usage_note": "Public repository file included for release review."
+            }
+          ],
+          "reuse_purpose": "package maintenance reuse"
+        },
+        {
+          "artifact_count": 21,
+          "artifacts": [
+            {
+              "audience": "researcher",
+              "bytes": 60,
+              "category": "public-file",
+              "format": "text",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": ".gitignore",
+              "required_for_release": false,
+              "reuse_purpose": "public review reuse",
+              "sha256": "b12ee9cd8e1b4fb3b724f04d9750b2d2388b2120fef33ac0a168bff8f53252cc",
+              "usage_note": "Public repository file included for release review."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1657,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/assumption-change-walkthrough.html",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "4c155578b08adcdd6f07b916037df2ceebcd43365d741f42b6cbfc8aacb5a84e",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1269,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/assumption-change-walkthrough.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "2f42241e2749754f14ef4a266bd36a86d19d7b603dcdf20ada76a49d89644e8c",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 795,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/assumption-change-walkthrough.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "20dee5fe622feb6e4db3f306b7607457140adff552094a1aa585e4ffdb2ada59",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1091,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/compare-history.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "d24881ef0f777a5771dc9987a9b04ad4211a5dcdca26220930df55ece025c826",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 570,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/compare-history.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "d4a37ea7e1c182d8b67c35f276efb2862d8c1aef74c42cdaa86c94c61f34c4e9",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 4315,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/public-readiness-landing.html",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "95c62a58d564be1c8bf05189f1dd373ab6634f6e00a0b9d9da2bcdca4e38b505",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 3666,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/public-readiness-landing.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "8136e3be806e1acdb583bfb699ef2ef94005ca32325590c32cc2ab27132dccf3",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 2609,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/public-readiness-landing.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "db84899efbb0b0f3a03a095cc48af42ca93a1ae8c4e9ce2a743d832d7da2e719",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 7149,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/quickstart-check.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "3b16b69bf5480bdb95497518b35b7bc5f77c013a5ca543a8108edbd0c8a9e62d",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 4224,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/quickstart-check.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "731641c8e132b580a2d1aef182490753a709a6842af03e4a5ca7b3852001d33f",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 3813,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/release-deck.html",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "e9bcbc6b65d75fd7d72066400369483a813d5b760f443586f44cbb60eeacc9ad",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 3206,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/release-deck.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "037902e492cb4546040f5c412b6c3bf118fcc17ddc55727b9f987d87bcc4a066",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 2080,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/release-deck.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "2de3b9fcd3bb92076535176514cd7b4272d66ba251d4201cc67aeed655dcc42f",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 4299,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/showcase-dashboard.html",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "fa4492e6897ceeb0e1f38965c6937c3c857cc04c88cf47228e0b17bca399a875",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1043,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/showcase-dashboard.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "f1d639f37b80dcae6ac9bb15e8e14c20167a9523a28b84cdaf2d0c6004b95cbb",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 614,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/showcase-dashboard.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "a86dffd75f819650f43ea9fc670efcf9c3dc3869531658d0b8502b3d6e948c78",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 3170,
+              "category": "public-demo-artifact",
+              "format": "svg",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/showcase-dashboard.svg",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "0f3e6a01d1ad6317899deaf285f58465f6b367dd204d44b23137a2a43e5a65ca",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 733,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/visual-receipt.html",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "aa3a21ddb96c8d3ae8eee9de18957ed04b7dfbaf6ccbef45624efd03bc07d362",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 523,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/visual-receipt.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "ef7b1d344931a6c8af320a8a77a419719bf41ec69d8e61b0de161a6591277b54",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 350,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/visual-receipt.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "a2430684ba523d4759494e24382b147829042d73be4a278cd41bd68145080521",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            }
+          ],
+          "reuse_purpose": "public review reuse"
+        },
+        {
+          "artifact_count": 19,
+          "artifacts": [
+            {
+              "audience": "researcher",
+              "bytes": 2095,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/casebook.html",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "87ed3f5ec8772e8337fda29f2289db8476186684a983ec6febfce80d4c7680b7",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1854,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/casebook.json",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "d55f12bd7266f2d7ace2537251cd790ee9852a63ad66b3a164515a4ed3475221",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1385,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/casebook.md",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "07dd03bceab556aefb4448f6ba5d262e5fc1bf19d0bea6e51f333b463bb5de31",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1958,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/decision-journal.json",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "b563bcc104b3d0cc51c71b0030f3223d06d2dbe65f9f90ff86237bdabb9726e0",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 902,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/decision-journal.md",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "f5396dc6d7ea4b4b67d0118ebdd6260b1f829dfda4e150de5ec831fa019debae",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1154,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/multi-company-demo-gallery.html",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "22f93a2089e60f12ae1876eeb8e0f4829cefe37975ee791fbb1417b49a53bdd2",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1311,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/multi-company-demo-gallery.json",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "c27f07de56dc690215bc25a14f88822db9738ac9eed208f612dcbc8b914dde4d",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 556,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/multi-company-demo-gallery.md",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "f19cfddfec07ef908fdea82b2f4a47ae26d81680b58a7bd5c0409ce40f330c8e",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 2083,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/scenario-library.html",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "662e03f6c1d8ad9a9ae324ee4b2daba20021cc4c21bff9fc76043d9105be1480",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 6387,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/scenario-library.json",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "5592fa11c6dd305336973056512a2d0e86f6426ffc9715fb89ea773a69e88651",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1131,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/scenario-library.md",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "65f4dbda4cedb24b1fcfe9682a640d7fad5f15491f4be7a443c9bc189d663949",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1923,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/sensitivity-matrix.json",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "a121adccfbc75b98bdd97d28f8522314acaec80a1d36987fdebfaf5f48354454",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 596,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/sensitivity-matrix.md",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "95bb5e57d5e939dbd5465adeaa275d83ba391e4940e9034ada1f62e8c55ad43c",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 2253,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/thesis-brief.html",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "cb4b416ed28d3e8c32f585e4aadb482ab416b1f5a77bba28e60e119800ed9395",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 3283,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/thesis-brief.json",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "03cd9c1e8758e6a5b97485dcad527015fc085b354a9a809e4ba9709f491d4dad",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1429,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/thesis-brief.md",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "29bdf36bf36c4717b0801b92faed5734629a37c393d9d50a4eb34b64a57f6718",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 1370,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/valuation-packet.html",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "e7c9b0f2c2f69d563ddd11350c54f4c42166d9fdfd8130f41cccae124071b5b3",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 2004,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/valuation-packet.json",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "3d734f1c1c4a12f0e7fb658f3f698db757893bbc8c5401e693dca98f84dea4fd",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "researcher",
+              "bytes": 916,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/valuation-packet.md",
+              "required_for_release": true,
+              "reuse_purpose": "research artifact reuse",
+              "sha256": "7d583f202732d141b0ddfa50b9fb932fd61a2524219bc420562fe8f22ab91c36",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            }
+          ],
+          "reuse_purpose": "research artifact reuse"
+        }
+      ]
+    },
+    {
+      "artifact_count": 18,
+      "audience": "reviewer",
+      "purposes": [
+        {
+          "artifact_count": 2,
+          "artifacts": [
+            {
+              "audience": "reviewer",
+              "bytes": 331,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/onboarding-template/review-policy.json",
+              "required_for_release": true,
+              "reuse_purpose": "fictional fixture reuse",
+              "sha256": "56b95f5cb808f80ad2c2dc9dbdab0aef378241117e678868ddeadbe09b23eeff",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 112,
+              "category": "package-data",
+              "format": "json",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "examples/review-policy.json",
+              "required_for_release": false,
+              "reuse_purpose": "fictional fixture reuse",
+              "sha256": "6c6ce8bf0f676d75ebae1a93e62e8d18bf51952522fcbf6ce74d44c4ba03a5df",
+              "usage_note": "Static local fictional fixture data; not live market data."
+            }
+          ],
+          "reuse_purpose": "fictional fixture reuse"
+        },
+        {
+          "artifact_count": 5,
+          "artifacts": [
+            {
+              "audience": "reviewer",
+              "bytes": 495,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/fixture-doctor.json",
+              "required_for_release": true,
+              "reuse_purpose": "fixture diagnostics and remediation",
+              "sha256": "c5019694a5302b9e3a8e695ceb062df6618dc5202c0247401203751f03f61fa0",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 263,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/fixture-doctor.md",
+              "required_for_release": true,
+              "reuse_purpose": "fixture diagnostics and remediation",
+              "sha256": "36cbe266f397361bf6976a89bd794b6c08de2c806943997260382c68da602036",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 1677,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/fixture-linter-report.html",
+              "required_for_release": true,
+              "reuse_purpose": "fixture diagnostics and remediation",
+              "sha256": "b3de7b26002e28cd2d6d82c32d25b1847a1bf688f3145763f0cbc9158da86963",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 20156,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/fixture-linter-report.json",
+              "required_for_release": true,
+              "reuse_purpose": "fixture diagnostics and remediation",
+              "sha256": "13158d8b9549ee24358a4e3c9ecb499be5783870148abf3623450e63217f7f26",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 815,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/fixture-linter-report.md",
+              "required_for_release": true,
+              "reuse_purpose": "fixture diagnostics and remediation",
+              "sha256": "298ce2a50de392614e9facd30685781819a19596545982dd8f9dba37829660a9",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            }
+          ],
+          "reuse_purpose": "fixture diagnostics and remediation"
+        },
+        {
+          "artifact_count": 8,
+          "artifacts": [
+            {
+              "audience": "reviewer",
+              "bytes": 1313,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/review-ledger.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "9187eda32b060fedf9950b955a85ac7f6beb00b31384666547ddc076996e307c",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 561,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/review-ledger.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "0515577fe3939fc30e1dbbcbbc22da310517273f29378bf2cc7e01be2523fa7a",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 3602,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/reviewer-scorecard.html",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "e29fdfa57e321271e174e2f659f9b33d70f3ec8bcdd61ab2c41a71e3c8baec5e",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 5384,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/reviewer-scorecard.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "6adb12928e99846288322573b1fe8f1f2b078f45552ec628b0d6c3f14913b38d",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 2017,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/reviewer-scorecard.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "d3062c9115253e6b1a49d7b8a1303dd8528b57f1284c20aa73ec1fa97efc910f",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 4435,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/troubleshoot.html",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "5fc77cf5486ba611c28a6886c50ab7089d920930768d0345ad9e8d215022d585",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 4105,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/troubleshoot.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "3bd41366d75b151dcc084cb199ddd0d40abad4bedbe7563656ba820c49622ee5",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 3074,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/troubleshoot.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "3e89c3b5c24a3c6818520a8bc5d7b850f67b8236304a8ee89f1eb579cca8b036",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            }
+          ],
+          "reuse_purpose": "public review reuse"
+        },
+        {
+          "artifact_count": 3,
+          "artifacts": [
+            {
+              "audience": "reviewer",
+              "bytes": 1092,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/reproducibility-audit.html",
+              "required_for_release": true,
+              "reuse_purpose": "release validation evidence",
+              "sha256": "36f59c3ba9be725f94fe99d8665e5f5775c33ccdf3fb3bc49838907388745349",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 28875,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/reproducibility-audit.json",
+              "required_for_release": true,
+              "reuse_purpose": "release validation evidence",
+              "sha256": "45bdbd1b7b1073dedbf79db5b7dbc7346837767e2102d727d834155aee46d635",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "reviewer",
+              "bytes": 396,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/reproducibility-audit.md",
+              "required_for_release": true,
+              "reuse_purpose": "release validation evidence",
+              "sha256": "d49ad2aa6614fd56c84368e8223382a3695cd1e9f3c96f4a201e5c88a3b1ad13",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            }
+          ],
+          "reuse_purpose": "release validation evidence"
+        }
+      ]
+    },
+    {
+      "artifact_count": 9,
+      "audience": "agent-builder",
+      "purposes": [
+        {
+          "artifact_count": 1,
+          "artifacts": [
+            {
+              "audience": "agent-builder",
+              "bytes": 5273,
+              "category": "skill-file",
+              "format": "md",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "skills/agent/valuation-scenario-lab/SKILL.md",
+              "required_for_release": true,
+              "reuse_purpose": "agent workflow reuse",
+              "sha256": "8758b1d2d36dfd55fdb757adb72a3cf63d136a1b7385f78edf7824d4ceac5e50",
+              "usage_note": "Agent protocol file preserving finance safety boundaries and workflow order."
+            }
+          ],
+          "reuse_purpose": "agent workflow reuse"
+        },
+        {
+          "artifact_count": 2,
+          "artifacts": [
+            {
+              "audience": "agent-builder",
+              "bytes": 1096,
+              "category": "package-data",
+              "format": "md",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "docs/packet-format.md",
+              "required_for_release": false,
+              "reuse_purpose": "documentation reuse",
+              "sha256": "7a127855a424875508477bff35a9311c759880cc871d39bc0479ee04ac61aa22",
+              "usage_note": "Project documentation for packet format, release checks, and validation expectations."
+            },
+            {
+              "audience": "agent-builder",
+              "bytes": 3926,
+              "category": "package-data",
+              "format": "md",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "docs/release-checks.md",
+              "required_for_release": true,
+              "reuse_purpose": "documentation reuse",
+              "sha256": "9c94d2df9f2e0b7ced6d49cfec8eec180cbb2db949174ae990dc7a34cc4ef50b",
+              "usage_note": "Project documentation for packet format, release checks, and validation expectations."
+            }
+          ],
+          "reuse_purpose": "documentation reuse"
+        },
+        {
+          "artifact_count": 6,
+          "artifacts": [
+            {
+              "audience": "agent-builder",
+              "bytes": 2233,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/readme-snippet.html",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "45de48af5381330884022eac3e3354cfb311d18b9e6760e0425d1e664069ad38",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "agent-builder",
+              "bytes": 2103,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/readme-snippet.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "9e883d57c981185c20fa7ac4dc0ea5d7464dc08f5b94a4b0a762d51ca7f81fb4",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "agent-builder",
+              "bytes": 1022,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/readme-snippet.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "22830c367ada901234192c1d2840b0ffb65ee1746a2484444a8c9ec7e60fe127",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "agent-builder",
+              "bytes": 5738,
+              "category": "public-demo-artifact",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/sample-workflow.html",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "2d1272d1aa28ed204262d90d1fd47ace14485f0c0832207c0c7e7cec000a9300",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "agent-builder",
+              "bytes": 12029,
+              "category": "public-demo-artifact",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/sample-workflow.json",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "c69609ea05db1da05bc3edb63280280db2e4d6f29dcf9bd533f5d532c4d5acff",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            },
+            {
+              "audience": "agent-builder",
+              "bytes": 3958,
+              "category": "public-demo-artifact",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "demo/sample-workflow.md",
+              "required_for_release": true,
+              "reuse_purpose": "public review reuse",
+              "sha256": "4c6fb6d7b5564aabdb119f31814f6501824cb031fed81f61cc3d87944366173a",
+              "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+            }
+          ],
+          "reuse_purpose": "public review reuse"
+        }
+      ]
+    },
+    {
+      "artifact_count": 7,
+      "audience": "release-operator",
+      "purposes": [
+        {
+          "artifact_count": 2,
+          "artifacts": [
+            {
+              "audience": "release-operator",
+              "bytes": 6783,
+              "category": "package-data",
+              "format": "md",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "CHANGELOG.md",
+              "required_for_release": true,
+              "reuse_purpose": "documentation reuse",
+              "sha256": "7d44cdbc1d3ed45c7cbcb1ab37a82d6403f73a02d0c6842ee0a9289b5bfc56c0",
+              "usage_note": "Public repository file included for release review."
+            },
+            {
+              "audience": "release-operator",
+              "bytes": 7922,
+              "category": "package-data",
+              "format": "md",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "RELEASE_NOTES.md",
+              "required_for_release": true,
+              "reuse_purpose": "documentation reuse",
+              "sha256": "f9d0ce34742e7ad4ae5c5b7e635835889ea82b11211b56aa79da74f24c4039bd",
+              "usage_note": "Public repository file included for release review."
+            }
+          ],
+          "reuse_purpose": "documentation reuse"
+        },
+        {
+          "artifact_count": 2,
+          "artifacts": [
+            {
+              "audience": "release-operator",
+              "bytes": 279,
+              "category": "project-metadata",
+              "format": "in",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "MANIFEST.in",
+              "required_for_release": false,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "7279c813b7a44b360b15b0dfac6923da61cb2b50da472d45fc41e25350a06f5a",
+              "usage_note": "Public repository file included for release review."
+            },
+            {
+              "audience": "release-operator",
+              "bytes": 4247,
+              "category": "package-data",
+              "format": "toml",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "pyproject.toml",
+              "required_for_release": true,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "5673086abd4c79b367fe2c082ac94d1a17cf3b2fb795b21cad5fb25a55c11092",
+              "usage_note": "Package metadata, entry point, package data, and zero dependency declaration."
+            }
+          ],
+          "reuse_purpose": "package maintenance reuse"
+        },
+        {
+          "artifact_count": 3,
+          "artifacts": [
+            {
+              "audience": "release-operator",
+              "bytes": 2394,
+              "category": "release-asset",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "release/install-smoke-receipt.html",
+              "required_for_release": true,
+              "reuse_purpose": "release validation evidence",
+              "sha256": "3f3d5ab15087e841d5b82ee6724f01508b58c93da2952181ed8878574f1991fa",
+              "usage_note": "Release validation asset for reviewers and package publication checks."
+            },
+            {
+              "audience": "release-operator",
+              "bytes": 2284,
+              "category": "release-asset",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "release/install-smoke-receipt.json",
+              "required_for_release": true,
+              "reuse_purpose": "release validation evidence",
+              "sha256": "138327a924fcd45ed742fbab4c4a97ca04d7bf9d25182fefdd3cd0db999c6e54",
+              "usage_note": "Release validation asset for reviewers and package publication checks."
+            },
+            {
+              "audience": "release-operator",
+              "bytes": 1296,
+              "category": "release-asset",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "release/install-smoke-receipt.md",
+              "required_for_release": true,
+              "reuse_purpose": "release validation evidence",
+              "sha256": "030f092ec6838054f2a9cdc394ce4a567a76cc441101b88b52d5d54549508fda",
+              "usage_note": "Release validation asset for reviewers and package publication checks."
+            }
+          ],
+          "reuse_purpose": "release validation evidence"
+        }
+      ]
+    },
+    {
+      "artifact_count": 10,
+      "audience": "maintainer",
+      "purposes": [
+        {
+          "artifact_count": 8,
+          "artifacts": [
+            {
+              "audience": "maintainer",
+              "bytes": 74,
+              "category": "source",
+              "format": "py",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "src/valuation_scenario_lab/__init__.py",
+              "required_for_release": false,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "d0ea549aae3c2fa942687692adb1b313624265af7fa7dfe509768f5b6ded07e5",
+              "usage_note": "Zero-runtime-dependency package source."
+            },
+            {
+              "audience": "maintainer",
+              "bytes": 130632,
+              "category": "source",
+              "format": "py",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "src/valuation_scenario_lab/cli.py",
+              "required_for_release": false,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "2edee1052a0f6156351453a798addb4d24f5819238865a78d8b7697341c4e9d0",
+              "usage_note": "Zero-runtime-dependency package source."
+            },
+            {
+              "audience": "maintainer",
+              "bytes": 7756,
+              "category": "source",
+              "format": "py",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "src/valuation_scenario_lab/doctor.py",
+              "required_for_release": false,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "459c6eda0613cbe06fa979bda9913d26b1d2ed665ecd0b138242ff54fdf04b97",
+              "usage_note": "Zero-runtime-dependency package source."
+            },
+            {
+              "audience": "maintainer",
+              "bytes": 22474,
+              "category": "source",
+              "format": "py",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "src/valuation_scenario_lab/engine.py",
+              "required_for_release": false,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "eb51e3aecf602a85d2e9f40be1eda2a7861304d7b25f720d202bdeb12a8f5c1f",
+              "usage_note": "Zero-runtime-dependency package source."
+            },
+            {
+              "audience": "maintainer",
+              "bytes": 807,
+              "category": "source",
+              "format": "py",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "src/valuation_scenario_lab/io.py",
+              "required_for_release": false,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "509dac4767440e12060fc112a09638e6547db4186e65547579230adaa0896aab",
+              "usage_note": "Zero-runtime-dependency package source."
+            },
+            {
+              "audience": "maintainer",
+              "bytes": 784,
+              "category": "source",
+              "format": "py",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "src/valuation_scenario_lab/model.py",
+              "required_for_release": false,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "8164c3ff7339f16f5e316c66e4c578d4eba08da883ec12a410eec6b5bf27d8a8",
+              "usage_note": "Zero-runtime-dependency package source."
+            },
+            {
+              "audience": "maintainer",
+              "bytes": 32833,
+              "category": "source",
+              "format": "py",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "src/valuation_scenario_lab/release.py",
+              "required_for_release": false,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "f8ebcb8327d27459c4888ae2e9a9a0d3ce32c00dd8299abbd5ac3016184c494f",
+              "usage_note": "Zero-runtime-dependency package source."
+            },
+            {
+              "audience": "maintainer",
+              "bytes": 4037,
+              "category": "source",
+              "format": "py",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "src/valuation_scenario_lab/render.py",
+              "required_for_release": false,
+              "reuse_purpose": "package maintenance reuse",
+              "sha256": "b98499a2e33c9a7210cfc31406158ffbe0e7a0bf1f43f9b22b2d1e58e0c70387",
+              "usage_note": "Zero-runtime-dependency package source."
+            }
+          ],
+          "reuse_purpose": "package maintenance reuse"
+        },
+        {
+          "artifact_count": 2,
+          "artifacts": [
+            {
+              "audience": "maintainer",
+              "bytes": 1195,
+              "category": "test",
+              "format": "json",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "tests/golden/key-demo-snapshots.json",
+              "required_for_release": false,
+              "reuse_purpose": "regression test reuse",
+              "sha256": "2ccbb3dab5b0470a1afdd5e517776b7614764ad16bb3dddc73c188ff5821adc7",
+              "usage_note": "Regression coverage for deterministic CLI behavior and release stability."
+            },
+            {
+              "audience": "maintainer",
+              "bytes": 25852,
+              "category": "test",
+              "format": "py",
+              "generated_artifact": false,
+              "generated_by_current_command": false,
+              "packaged_data_file": false,
+              "path": "tests/test_cli.py",
+              "required_for_release": false,
+              "reuse_purpose": "regression test reuse",
+              "sha256": "668ca37d00c5f4b4e45782d0f163c07d8160b47e0243be184919d82a34081145",
+              "usage_note": "Regression coverage for deterministic CLI behavior and release stability."
+            }
+          ],
+          "reuse_purpose": "regression test reuse"
+        }
+      ]
+    }
+  ],
+  "package_data_checks": {
+    "checks": [
+      {
+        "name": "pyproject_exists",
+        "ok": true
+      },
+      {
+        "name": "dependencies_empty",
+        "ok": true
+      },
+      {
+        "name": "no_install_requires",
+        "ok": true
+      },
+      {
+        "name": "no_requirements_txt",
+        "ok": true
+      },
+      {
+        "name": "no_runtime_dependency_group",
+        "ok": true
+      }
+    ],
+    "status": "pass"
+  },
+  "package_data_count": 80,
+  "release_validation": {
+    "finding_count": 1,
+    "schema_version": "valuation-scenario-lab.release-validation.v0.8",
+    "status": "fail"
+  },
+  "required_file_checks": [
+    {
+      "exists": true,
+      "path": "README.md"
+    },
+    {
+      "exists": true,
+      "path": "pyproject.toml"
+    },
+    {
+      "exists": true,
+      "path": "LICENSE"
+    },
+    {
+      "exists": true,
+      "path": "CHANGELOG.md"
+    },
+    {
+      "exists": true,
+      "path": "RELEASE_NOTES.md"
+    },
+    {
+      "exists": true,
+      "path": "examples/company.json"
+    },
+    {
+      "exists": true,
+      "path": "examples/software-compounder.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/valuation-packet.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/valuation-packet.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/valuation-packet.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/compare-history.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/compare-history.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/review-ledger.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/review-ledger.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/sensitivity-matrix.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/sensitivity-matrix.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/assumption-change-walkthrough.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/assumption-change-walkthrough.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/assumption-change-walkthrough.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/multi-company-demo-gallery.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/multi-company-demo-gallery.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/multi-company-demo-gallery.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/decision-journal.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/decision-journal.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/quickstart-check.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/quickstart-check.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/visual-receipt.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/visual-receipt.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/visual-receipt.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/public-readiness-landing.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/public-readiness-landing.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/public-readiness-landing.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-doctor.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-doctor.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/showcase-dashboard.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/showcase-dashboard.svg"
+    },
+    {
+      "exists": true,
+      "path": "demo/showcase-dashboard.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/showcase-dashboard.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/thesis-brief.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/thesis-brief.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/thesis-brief.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/scenario-library.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/scenario-library.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/scenario-library.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/reproducibility-audit.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/reproducibility-audit.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/reproducibility-audit.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/sample-workflow.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/sample-workflow.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/sample-workflow.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/casebook.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/casebook.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/casebook.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/reviewer-scorecard.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/reviewer-scorecard.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/reviewer-scorecard.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/troubleshoot.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/troubleshoot.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/troubleshoot.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/readme-snippet.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/readme-snippet.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/readme-snippet.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/release-deck.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/release-deck.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/release-deck.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/artifact-catalog.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/artifact-catalog.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/artifact-catalog.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-linter-report.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-linter-report.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-linter-report.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/onboarding-template/README.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/onboarding-template/company.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/onboarding-template/review-policy.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/onboarding-template/prior-packet.json"
+    },
+    {
+      "exists": true,
+      "path": "docs/release-checks.md"
+    },
+    {
+      "exists": true,
+      "path": "release/release-manifest.json"
+    },
+    {
+      "exists": true,
+      "path": "release/release-manifest.md"
+    },
+    {
+      "exists": true,
+      "path": "release/install-smoke-receipt.json"
+    },
+    {
+      "exists": true,
+      "path": "release/install-smoke-receipt.md"
+    },
+    {
+      "exists": true,
+      "path": "release/install-smoke-receipt.html"
+    },
+    {
+      "exists": true,
+      "path": "release/public-bundle.json"
+    },
+    {
+      "exists": true,
+      "path": "release/public-bundle.md"
+    },
+    {
+      "exists": true,
+      "path": "release/public-bundle.html"
+    },
+    {
+      "exists": true,
+      "path": "skills/agent/valuation-scenario-lab/SKILL.md"
+    }
+  ],
+  "required_release_file_count": 77,
+  "schema_checks": {
+    "files": [
+      {
+        "actual": "valuation-scenario-lab.v0.5",
+        "expected": "valuation-scenario-lab.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/valuation-packet.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.compare.v0.5",
+        "expected": "valuation-scenario-lab.compare.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/compare-history.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.ledger.v0.5",
+        "expected": "valuation-scenario-lab.ledger.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/review-ledger.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.sensitivity.v0.5",
+        "expected": "valuation-scenario-lab.sensitivity.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/sensitivity-matrix.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.assumption-change.v0.5",
+        "expected": "valuation-scenario-lab.assumption-change.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/assumption-change-walkthrough.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.demo-gallery.v0.5",
+        "expected": "valuation-scenario-lab.demo-gallery.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/multi-company-demo-gallery.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.decision-journal.v0.5",
+        "expected": "valuation-scenario-lab.decision-journal.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/decision-journal.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.quickstart-check.v0.5",
+        "expected": "valuation-scenario-lab.quickstart-check.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/quickstart-check.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.visual-receipt.v0.5",
+        "expected": "valuation-scenario-lab.visual-receipt.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/visual-receipt.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.fixture-doctor.v0.5",
+        "expected": "valuation-scenario-lab.fixture-doctor.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/fixture-doctor.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.public-readiness.v0.5",
+        "expected": "valuation-scenario-lab.public-readiness.v0.5",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/public-readiness-landing.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.showcase-dashboard.v0.6",
+        "expected": "valuation-scenario-lab.showcase-dashboard.v0.6",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/showcase-dashboard.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.thesis-brief.v0.7",
+        "expected": "valuation-scenario-lab.thesis-brief.v0.7",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/thesis-brief.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.scenario-library.v0.7",
+        "expected": "valuation-scenario-lab.scenario-library.v0.7",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/scenario-library.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.reproducibility-audit.v0.8",
+        "expected": "valuation-scenario-lab.reproducibility-audit.v0.8",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/reproducibility-audit.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.sample-workflow.v0.8",
+        "expected": "valuation-scenario-lab.sample-workflow.v0.8",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/sample-workflow.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.casebook.v0.9",
+        "expected": "valuation-scenario-lab.casebook.v0.9",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/casebook.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.reviewer-scorecard.v1.1",
+        "expected": "valuation-scenario-lab.reviewer-scorecard.v1.1",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/reviewer-scorecard.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.troubleshoot.v1.1",
+        "expected": "valuation-scenario-lab.troubleshoot.v1.1",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/troubleshoot.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.readme-snippet.v1.2",
+        "expected": "valuation-scenario-lab.readme-snippet.v1.2",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/readme-snippet.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.release-deck.v1.2",
+        "expected": "valuation-scenario-lab.release-deck.v1.2",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/release-deck.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.artifact-catalog.v1.3",
+        "expected": "valuation-scenario-lab.artifact-catalog.v1.3",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/artifact-catalog.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.fixture-linter-report.v1.3",
+        "expected": "valuation-scenario-lab.fixture-linter-report.v1.3",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "demo/fixture-linter-report.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.install-smoke-receipt.v1.0",
+        "expected": "valuation-scenario-lab.install-smoke-receipt.v1.0",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "release/install-smoke-receipt.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.public-bundle.v1.0",
+        "expected": "valuation-scenario-lab.public-bundle.v1.0",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "release/public-bundle.json"
+      }
+    ],
+    "mismatches": [],
+    "status": "pass"
+  },
+  "schema_version": "valuation-scenario-lab.artifact-catalog.v1.3",
+  "self_outputs": [
+    {
+      "path": "demo/artifact-catalog.html",
+      "usage_note": "Generated catalog output; excluded from its own hash index."
+    },
+    {
+      "path": "demo/artifact-catalog.json",
+      "usage_note": "Generated catalog output; excluded from its own hash index."
+    },
+    {
+      "path": "demo/artifact-catalog.md",
+      "usage_note": "Generated catalog output; excluded from its own hash index."
+    }
+  ],
+  "status": "fail"
+}

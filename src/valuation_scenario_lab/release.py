@@ -80,6 +80,12 @@ REQUIRED_FILES = [
     "demo/release-deck.json",
     "demo/release-deck.md",
     "demo/release-deck.html",
+    "demo/artifact-catalog.json",
+    "demo/artifact-catalog.md",
+    "demo/artifact-catalog.html",
+    "demo/fixture-linter-report.json",
+    "demo/fixture-linter-report.md",
+    "demo/fixture-linter-report.html",
     "demo/onboarding-template/README.md",
     "demo/onboarding-template/company.json",
     "demo/onboarding-template/review-policy.json",
@@ -118,6 +124,8 @@ EXPECTED_SCHEMA_VERSIONS = {
     "demo/troubleshoot.json": "valuation-scenario-lab.troubleshoot.v1.1",
     "demo/readme-snippet.json": "valuation-scenario-lab.readme-snippet.v1.2",
     "demo/release-deck.json": "valuation-scenario-lab.release-deck.v1.2",
+    "demo/artifact-catalog.json": "valuation-scenario-lab.artifact-catalog.v1.3",
+    "demo/fixture-linter-report.json": "valuation-scenario-lab.fixture-linter-report.v1.3",
     "release/install-smoke-receipt.json": "valuation-scenario-lab.install-smoke-receipt.v1.0",
     "release/public-bundle.json": "valuation-scenario-lab.public-bundle.v1.0",
 }
@@ -251,12 +259,211 @@ def export_bundle_manifest(root: Path) -> dict[str, Any]:
     }
 
 
+def artifact_catalog(root: Path, generated_outputs: list[str] | None = None) -> dict[str, Any]:
+    package_data = package_data_files(root)
+    required = set(REQUIRED_FILES)
+    self_outputs = {
+        "demo/artifact-catalog.json",
+        "demo/artifact-catalog.md",
+        "demo/artifact-catalog.html",
+    }
+    generated = set(generated_outputs or [])
+    entries = []
+    for path in public_files(root):
+        rel = path.relative_to(root).as_posix()
+        if rel in self_outputs:
+            continue
+        entries.append(catalog_entry(path, root, package_data, required, generated))
+    groups = []
+    for audience in ["researcher", "reviewer", "agent-builder", "release-operator", "maintainer"]:
+        audience_items = [item for item in entries if item["audience"] == audience]
+        if not audience_items:
+            continue
+        purposes = []
+        for purpose in sorted({item["reuse_purpose"] for item in audience_items}):
+            purpose_items = [item for item in audience_items if item["reuse_purpose"] == purpose]
+            purposes.append(
+                {
+                    "reuse_purpose": purpose,
+                    "artifact_count": len(purpose_items),
+                    "artifacts": purpose_items,
+                }
+            )
+        groups.append({"audience": audience, "artifact_count": len(audience_items), "purposes": purposes})
+    required_checks = [{"path": name, "exists": (root / name).exists() or name in generated} for name in REQUIRED_FILES]
+    schema_checks = schema_version_checks(root, generated)
+    deps = dependency_metadata_checks(root)
+    validation = validate_release(root)
+    manifest = manifest_coverage_checks(root)
+    ignored_manifest_message = None
+    if manifest["hash_mismatches"] and set(manifest["hash_mismatches"]).issubset(self_outputs):
+        ignored_manifest_message = f"release manifest has {len(manifest['hash_mismatches'])} hash mismatches"
+    validation_findings = [
+        item
+        for item in validation["findings"]
+        if item["message"] not in {f"missing {name}" for name in self_outputs}
+        and item["message"] != ignored_manifest_message
+    ]
+    validation_status = "pass" if not any(item["severity"] == "error" for item in validation_findings) else "fail"
+    return {
+        "schema_version": "valuation-scenario-lab.artifact-catalog.v1.3",
+        "generated_on": "static-local",
+        "status": "pass" if validation_status == "pass" and schema_checks["status"] == "pass" else "fail",
+        "artifact_count": len(entries),
+        "package_data_count": sum(1 for item in entries if item["packaged_data_file"]),
+        "required_release_file_count": sum(1 for item in entries if item["required_for_release"]),
+        "audience_count": len(groups),
+        "release_validation": {
+            "schema_version": validation["schema_version"],
+            "status": validation_status,
+            "finding_count": len(validation_findings),
+        },
+        "required_file_checks": required_checks,
+        "schema_checks": schema_checks,
+        "package_data_checks": deps,
+        "groups": groups,
+        "self_outputs": [
+            {"path": item, "usage_note": "Generated catalog output; excluded from its own hash index."}
+            for item in sorted(self_outputs)
+        ],
+        "boundaries": SAFETY_BOUNDARIES,
+    }
+
+
+def catalog_entry(path: Path, root: Path, package_data: set[str], required: set[str], generated: set[str]) -> dict[str, Any]:
+    rel = path.relative_to(root).as_posix()
+    return {
+        "path": rel,
+        "category": public_file_category(rel, package_data),
+        "audience": artifact_audience(rel),
+        "reuse_purpose": artifact_reuse_purpose(rel),
+        "format": artifact_format(rel),
+        "sha256": sha256(path),
+        "bytes": path.stat().st_size,
+        "required_for_release": rel in required,
+        "packaged_data_file": rel in package_data,
+        "generated_artifact": rel.startswith("demo/") or rel.startswith("release/"),
+        "generated_by_current_command": rel in generated,
+        "usage_note": usage_note(rel),
+    }
+
+
+def artifact_format(path: str) -> str:
+    suffix = Path(path).suffix.lower().lstrip(".")
+    return suffix or "text"
+
+
+def artifact_audience(path: str) -> str:
+    if path.startswith("release/") or path in {"CHANGELOG.md", "RELEASE_NOTES.md", "pyproject.toml", "MANIFEST.in"}:
+        return "release-operator"
+    if path.startswith("tests/") or path.startswith("src/"):
+        return "maintainer"
+    if path.startswith("skills/") or path.startswith("docs/") or "readme-snippet" in path or "sample-workflow" in path:
+        return "agent-builder"
+    if any(token in path for token in ["review", "doctor", "linter", "audit", "scorecard", "troubleshoot", "catalog"]):
+        return "reviewer"
+    return "researcher"
+
+
+def artifact_reuse_purpose(path: str) -> str:
+    if "fixture-linter-report" in path or "fixture-doctor" in path:
+        return "fixture diagnostics and remediation"
+    if "artifact-catalog" in path or "public-bundle" in path or "release-manifest" in path:
+        return "artifact reuse inventory"
+    if "reproducibility-audit" in path or "validate" in path or path.startswith("release/"):
+        return "release validation evidence"
+    if path.startswith("skills/"):
+        return "agent workflow reuse"
+    if path.startswith("docs/") or path in {"README.md", "CHANGELOG.md", "RELEASE_NOTES.md"}:
+        return "documentation reuse"
+    if path.startswith("examples/") or "onboarding-template" in path:
+        return "fictional fixture reuse"
+    if path.startswith("tests/"):
+        return "regression test reuse"
+    if path.startswith("src/") or path in {"pyproject.toml", "MANIFEST.in", "LICENSE"}:
+        return "package maintenance reuse"
+    if any(token in path for token in ["scenario", "valuation", "sensitivity", "thesis", "casebook", "journal", "gallery"]):
+        return "research artifact reuse"
+    return "public review reuse"
+
+
+def fixture_linter_report(root: Path, fixtures: Path, policy: dict[str, Any] | None = None) -> dict[str, Any]:
+    doctor = fixture_doctor(fixtures, policy)
+    fixture_label = public_report_path(fixtures, root)
+    severity_counts = severity_count(doctor["issues"])
+    diagnostics = []
+    for item in doctor["issues"]:
+        diagnostics.append(
+            {
+                **item,
+                "remediation_commands": remediation_commands(item, fixtures),
+            }
+        )
+    safety = safety_boundary_checks(root)
+    validation = validate_release(root)
+    return {
+        "schema_version": "valuation-scenario-lab.fixture-linter-report.v1.3",
+        "generated_on": "static-local",
+        "status": doctor["status"],
+        "fixture_source": fixture_label,
+        "fixture_count": doctor["fixture_count"],
+        "issue_count": doctor["issue_count"],
+        "severity_counts": severity_counts,
+        "files": doctor["files"],
+        "diagnostics": diagnostics,
+        "remediation_commands": [
+            f"valuation-scenario-lab fixture-doctor --fixtures {fixture_label} --format markdown",
+            "valuation-scenario-lab build-packet --fixtures examples --output demo",
+            "valuation-scenario-lab quickstart-check --root . --output demo",
+            "valuation-scenario-lab validate-release --root . --format markdown",
+        ],
+        "release_checks": {
+            "required_files": artifact_presence_checks(root, {"demo/fixture-linter-report.json", "demo/fixture-linter-report.md", "demo/fixture-linter-report.html"}),
+            "schema_versions": schema_version_checks(root, {"demo/fixture-linter-report.json"}),
+            "release_validation_status": validation["status"],
+            "release_validation_findings": len(validation["findings"]),
+        },
+        "safety_summary": {
+            "status": safety["status"],
+            "boundaries": SAFETY_BOUNDARIES,
+            "files_checked": len(safety["files"]),
+            "files_missing_boundaries": safety["files_missing_boundaries"],
+        },
+        "source_doctor": doctor,
+        "boundaries": SAFETY_BOUNDARIES,
+    }
+
+
+def severity_count(issues: list[dict[str, Any]]) -> dict[str, int]:
+    return {
+        "error": sum(1 for item in issues if item["severity"] == "error"),
+        "warning": sum(1 for item in issues if item["severity"] == "warning"),
+        "info": sum(1 for item in issues if item["severity"] == "info"),
+    }
+
+
+def remediation_commands(issue: dict[str, Any], fixtures: Path) -> list[str]:
+    base = f"valuation-scenario-lab fixture-doctor --fixtures {fixtures.name if fixtures.name else 'examples'} --format markdown"
+    if issue["category"] in {"schema", "numeric", "weight"}:
+        return [base, "valuation-scenario-lab build-packet --fixtures examples --output demo"]
+    if issue["category"] == "staleness":
+        return [base, "valuation-scenario-lab review-ledger --packet demo/valuation-packet.json --policy examples/review-policy.json --output demo"]
+    return [base]
+
+
+def public_report_path(path: Path, root: Path) -> str:
+    try:
+        return path.resolve().relative_to(root.resolve()).as_posix()
+    except ValueError:
+        return path.name
+
+
 def install_smoke_receipt(root: Path) -> dict[str, Any]:
-    wheel_name = f"valuation_scenario_lab-1.2.0-py3-none-any.whl"
+    wheel_name = f"valuation_scenario_lab-1.3.0-py3-none-any.whl"
     smoke_commands = [
         {
             "command": "valuation-scenario-lab --version",
-            "expected_output_contains": "1.2.0",
+            "expected_output_contains": "1.3.0",
             "network_required": False,
         },
         {
@@ -282,7 +489,7 @@ def install_smoke_receipt(root: Path) -> dict[str, Any]:
     ]
     required = [
         "dist/" + wheel_name,
-        "dist/valuation_scenario_lab-1.2.0.tar.gz",
+        "dist/valuation_scenario_lab-1.3.0.tar.gz",
         "release/public-bundle.json",
         "release/public-bundle.md",
         "release/public-bundle.html",
@@ -296,13 +503,13 @@ def install_smoke_receipt(root: Path) -> dict[str, Any]:
             {
                 "name": "local wheel",
                 "command": f"python -m pip install --no-index --find-links dist {wheel_name}",
-                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.2.0",
+                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.3.0",
                 "network_required": False,
             },
             {
                 "name": "editable local checkout",
                 "command": "python -m pip install -e .",
-                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.2.0",
+                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.3.0",
                 "network_required": False,
             },
         ],
@@ -444,6 +651,10 @@ def safety_boundary_checks(root: Path) -> dict[str, Any]:
         "demo/readme-snippet.html",
         "demo/release-deck.md",
         "demo/release-deck.html",
+        "demo/artifact-catalog.md",
+        "demo/artifact-catalog.html",
+        "demo/fixture-linter-report.md",
+        "demo/fixture-linter-report.html",
         "demo/onboarding-template/README.md",
         "release/install-smoke-receipt.md",
         "release/install-smoke-receipt.html",

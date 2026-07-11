@@ -14,7 +14,7 @@
     "source",
     "test"
   ],
-  "file_count": 89,
+  "file_count": 95,
   "files": [
     {
       "bytes": 60,
@@ -26,12 +26,12 @@
       "usage_note": "Public repository file included for release review."
     },
     {
-      "bytes": 6026,
+      "bytes": 6783,
       "category": "package-data",
       "packaged_data_file": true,
       "path": "CHANGELOG.md",
       "required_for_release": true,
-      "sha256": "2f5dc9b8c8f2a645368ae43119739400c17b4f369734394f6501551acd868f51",
+      "sha256": "7d44cdbc1d3ed45c7cbcb1ab37a82d6403f73a02d0c6842ee0a9289b5bfc56c0",
       "usage_note": "Public repository file included for release review."
     },
     {
@@ -53,22 +53,49 @@
       "usage_note": "Public repository file included for release review."
     },
     {
-      "bytes": 9230,
+      "bytes": 9835,
       "category": "package-data",
       "packaged_data_file": true,
       "path": "README.md",
       "required_for_release": true,
-      "sha256": "bba33a96364f67136e0936ccd6dd4538b46271a1392d00c3fe875cd11ead9fe9",
+      "sha256": "6d47f5f9456e539bd3ec27d02cca4a3b5f4d1c4c513f931d81a87c5574cc7365",
       "usage_note": "Primary user documentation, command list, quickstart, and safety boundaries."
     },
     {
-      "bytes": 7178,
+      "bytes": 7922,
       "category": "package-data",
       "packaged_data_file": true,
       "path": "RELEASE_NOTES.md",
       "required_for_release": true,
-      "sha256": "2aa24137f89cbc1255e0b7c2554436e991099c1438d648d36a06f87fb86462d4",
+      "sha256": "f9d0ce34742e7ad4ae5c5b7e635835889ea82b11211b56aa79da74f24c4039bd",
       "usage_note": "Public repository file included for release review."
+    },
+    {
+      "bytes": 23353,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/artifact-catalog.html",
+      "required_for_release": true,
+      "sha256": "c4e14f652a3dec856add84d17be41c2cae82b40ff307ce63b624d891d741b1fe",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 78181,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/artifact-catalog.json",
+      "required_for_release": true,
+      "sha256": "12a4ba7147a7c295a0e9c3d545e1a52f4b67afea71562f57867bd788c1d5b412",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 15853,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/artifact-catalog.md",
+      "required_for_release": true,
+      "sha256": "cdb7c75ab6e875c57f1afcd4f45c672591273b10bfe07d3d6bdb4e08dd4b4875",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
       "bytes": 1657,
@@ -179,6 +206,33 @@
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
+      "bytes": 1677,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/fixture-linter-report.html",
+      "required_for_release": true,
+      "sha256": "b3de7b26002e28cd2d6d82c32d25b1847a1bf688f3145763f0cbc9158da86963",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 20156,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/fixture-linter-report.json",
+      "required_for_release": true,
+      "sha256": "13158d8b9549ee24358a4e3c9ecb499be5783870148abf3623450e63217f7f26",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 815,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/fixture-linter-report.md",
+      "required_for_release": true,
+      "sha256": "298ce2a50de392614e9facd30685781819a19596545982dd8f9dba37829660a9",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
       "bytes": 1154,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
@@ -242,75 +296,75 @@
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 3875,
+      "bytes": 4315,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/public-readiness-landing.html",
       "required_for_release": true,
-      "sha256": "4cf8523ff86aa1a6f52836c785bc785fcbfe80020f0e9027d3ac3528bf4b9361",
+      "sha256": "95c62a58d564be1c8bf05189f1dd373ab6634f6e00a0b9d9da2bcdca4e38b505",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 3210,
+      "bytes": 3666,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/public-readiness-landing.json",
       "required_for_release": true,
-      "sha256": "8d7206d8cb17c1bef97847bb755eaa3501edf80f1a63747426faa917dd653998",
+      "sha256": "8136e3be806e1acdb583bfb699ef2ef94005ca32325590c32cc2ab27132dccf3",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 2281,
+      "bytes": 2609,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/public-readiness-landing.md",
       "required_for_release": true,
-      "sha256": "b722cac85cced0b64984c52b61a9e26579994566621c37e971b5b1fbf2a5332d",
+      "sha256": "db84899efbb0b0f3a03a095cc48af42ca93a1ae8c4e9ce2a743d832d7da2e719",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 6525,
+      "bytes": 7149,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/quickstart-check.json",
       "required_for_release": true,
-      "sha256": "32e5fa64bc3d30442285aebebb75c275c9f9229b87233f0f3d72b755cb0d76b2",
+      "sha256": "3b16b69bf5480bdb95497518b35b7bc5f77c013a5ca543a8108edbd0c8a9e62d",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 3864,
+      "bytes": 4224,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/quickstart-check.md",
       "required_for_release": true,
-      "sha256": "e26c7413bf02e64d27c3d46ac1d0e1249124c744d4944ac671ff5841e9bc29cd",
+      "sha256": "731641c8e132b580a2d1aef182490753a709a6842af03e4a5ca7b3852001d33f",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 2018,
+      "bytes": 2233,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/readme-snippet.html",
       "required_for_release": true,
-      "sha256": "b40eebb57b905ee52ff0b3bc882a00f19e07be0eaaa92c0438b9ab71ba6e050c",
+      "sha256": "45de48af5381330884022eac3e3354cfb311d18b9e6760e0425d1e664069ad38",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 1856,
+      "bytes": 2103,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/readme-snippet.json",
       "required_for_release": true,
-      "sha256": "5e9f188424368504e24c6564c0f259f7f150129e19c36aedb1e79fc867fff6d6",
+      "sha256": "9e883d57c981185c20fa7ac4dc0ea5d7464dc08f5b94a4b0a762d51ca7f81fb4",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 891,
+      "bytes": 1022,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/readme-snippet.md",
       "required_for_release": true,
-      "sha256": "97ff6db82eb2318e7b9508416f8046c829264adb86da137b3a545d8bcdca28f0",
+      "sha256": "22830c367ada901234192c1d2840b0ffb65ee1746a2484444a8c9ec7e60fe127",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
@@ -346,16 +400,16 @@
       "packaged_data_file": true,
       "path": "demo/reproducibility-audit.html",
       "required_for_release": true,
-      "sha256": "9e338fd5a58b944c59271e8397114adcd64b2574042061916348b4bfab371136",
+      "sha256": "36f59c3ba9be725f94fe99d8665e5f5775c33ccdf3fb3bc49838907388745349",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 26339,
+      "bytes": 28875,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/reproducibility-audit.json",
       "required_for_release": true,
-      "sha256": "a1786ccee2ec3bcae53d5f8841da165c7a24e04c89a9a33cb4e524d865fc4b4c",
+      "sha256": "45bdbd1b7b1073dedbf79db5b7dbc7346837767e2102d727d834155aee46d635",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
@@ -364,7 +418,7 @@
       "packaged_data_file": true,
       "path": "demo/reproducibility-audit.md",
       "required_for_release": true,
-      "sha256": "d89933b21a122349b3098062febf4fce89e8e2992f9edf0d638e567b8e584f32",
+      "sha256": "d49ad2aa6614fd56c84368e8223382a3695cd1e9f3c96f4a201e5c88a3b1ad13",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
@@ -413,30 +467,30 @@
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 5252,
+      "bytes": 5738,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/sample-workflow.html",
       "required_for_release": true,
-      "sha256": "b6ae50a2e8642b3699d25564c11f093f30bfe3d6c7f1393cbfa5fbc4b0ad9b72",
+      "sha256": "2d1272d1aa28ed204262d90d1fd47ace14485f0c0832207c0c7e7cec000a9300",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 10931,
+      "bytes": 12029,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/sample-workflow.json",
       "required_for_release": true,
-      "sha256": "93f45968af560bfb172b6d0f5b3c94899b32284402698e6d59c07d5ee977d6bd",
+      "sha256": "c69609ea05db1da05bc3edb63280280db2e4d6f29dcf9bd533f5d532c4d5acff",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
-      "bytes": 3590,
+      "bytes": 3958,
       "category": "public-demo-artifact",
       "packaged_data_file": true,
       "path": "demo/sample-workflow.md",
       "required_for_release": true,
-      "sha256": "85697b4dc80ebc4d5812320d275fe47746e3300685fcafd76fc23d76f8b5c6e9",
+      "sha256": "4c6fb6d7b5564aabdb119f31814f6501824cb031fed81f61cc3d87944366173a",
       "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
     },
     {
@@ -638,12 +692,12 @@
       "usage_note": "Project documentation for packet format, release checks, and validation expectations."
     },
     {
-      "bytes": 3637,
+      "bytes": 3926,
       "category": "package-data",
       "packaged_data_file": true,
       "path": "docs/release-checks.md",
       "required_for_release": true,
-      "sha256": "0f1b906ee1142ca93dead32ca27261da8b2d7cac2b562fbcbf70c604e0807291",
+      "sha256": "9c94d2df9f2e0b7ced6d49cfec8eec180cbb2db949174ae990dc7a34cc4ef50b",
       "usage_note": "Project documentation for packet format, release checks, and validation expectations."
     },
     {
@@ -683,12 +737,12 @@
       "usage_note": "Static local fictional fixture data; not live market data."
     },
     {
-      "bytes": 4044,
+      "bytes": 4247,
       "category": "package-data",
       "packaged_data_file": true,
       "path": "pyproject.toml",
       "required_for_release": true,
-      "sha256": "7e5294e184990b18777903515df03e4eef72533d15c8a90e766ad9776b6e523f",
+      "sha256": "5673086abd4c79b367fe2c082ac94d1a17cf3b2fb795b21cad5fb25a55c11092",
       "usage_note": "Package metadata, entry point, package data, and zero dependency declaration."
     },
     {
@@ -697,7 +751,7 @@
       "packaged_data_file": true,
       "path": "release/install-smoke-receipt.html",
       "required_for_release": true,
-      "sha256": "7e33a315b544b6ef773a06855f3a617ffae5449bd3e9e44004beb040b44ef395",
+      "sha256": "3f3d5ab15087e841d5b82ee6724f01508b58c93da2952181ed8878574f1991fa",
       "usage_note": "Release validation asset for reviewers and package publication checks."
     },
     {
@@ -706,7 +760,7 @@
       "packaged_data_file": true,
       "path": "release/install-smoke-receipt.json",
       "required_for_release": true,
-      "sha256": "4c03b2e75929caaf5c5f99d13d3245727de7f53867fc59ebc94056aa668c14c8",
+      "sha256": "138327a924fcd45ed742fbab4c4a97ca04d7bf9d25182fefdd3cd0db999c6e54",
       "usage_note": "Release validation asset for reviewers and package publication checks."
     },
     {
@@ -715,16 +769,16 @@
       "packaged_data_file": true,
       "path": "release/install-smoke-receipt.md",
       "required_for_release": true,
-      "sha256": "7f5ee231c65df2f4d553230bc30127f17b50e81c612df615bcfc74e841f10acf",
+      "sha256": "030f092ec6838054f2a9cdc394ce4a567a76cc441101b88b52d5d54549508fda",
       "usage_note": "Release validation asset for reviewers and package publication checks."
     },
     {
-      "bytes": 4769,
+      "bytes": 5273,
       "category": "skill-file",
       "packaged_data_file": true,
       "path": "skills/agent/valuation-scenario-lab/SKILL.md",
       "required_for_release": true,
-      "sha256": "e83ad1541858279083d1081521436ea7a2c15036965dd7e582aa0804990d6a2e",
+      "sha256": "8758b1d2d36dfd55fdb757adb72a3cf63d136a1b7385f78edf7824d4ceac5e50",
       "usage_note": "Agent protocol file preserving finance safety boundaries and workflow order."
     },
     {
@@ -733,16 +787,16 @@
       "packaged_data_file": false,
       "path": "src/valuation_scenario_lab/__init__.py",
       "required_for_release": false,
-      "sha256": "7a6723cf4e9b76d9b2edc93fcca14149b2d5f3f927cdff071f432a3968a7f81d",
+      "sha256": "d0ea549aae3c2fa942687692adb1b313624265af7fa7dfe509768f5b6ded07e5",
       "usage_note": "Zero-runtime-dependency package source."
     },
     {
-      "bytes": 117312,
+      "bytes": 130632,
       "category": "source",
       "packaged_data_file": false,
       "path": "src/valuation_scenario_lab/cli.py",
       "required_for_release": false,
-      "sha256": "fa04e44c78c1d82c14f7e0b900e3a3cffeb2bb54cf0d4f9f437e808a8d4daa35",
+      "sha256": "2edee1052a0f6156351453a798addb4d24f5819238865a78d8b7697341c4e9d0",
       "usage_note": "Zero-runtime-dependency package source."
     },
     {
@@ -782,12 +836,12 @@
       "usage_note": "Zero-runtime-dependency package source."
     },
     {
-      "bytes": 23048,
+      "bytes": 32833,
       "category": "source",
       "packaged_data_file": false,
       "path": "src/valuation_scenario_lab/release.py",
       "required_for_release": false,
-      "sha256": "1f884a8d218b7b4181e1ad09197c1eb6f559340bde5243898b3fd26ae9cce878",
+      "sha256": "f8ebcb8327d27459c4888ae2e9a9a0d3ce32c00dd8299abbd5ac3016184c494f",
       "usage_note": "Zero-runtime-dependency package source."
     },
     {
@@ -809,12 +863,12 @@
       "usage_note": "Regression coverage for deterministic CLI behavior and release stability."
     },
     {
-      "bytes": 23345,
+      "bytes": 25852,
       "category": "test",
       "packaged_data_file": false,
       "path": "tests/test_cli.py",
       "required_for_release": false,
-      "sha256": "0ef02a1d800629e9db76393f4c3b5fa786e887d619b9ad48286956a3ec9baacc",
+      "sha256": "668ca37d00c5f4b4e45782d0f163c07d8160b47e0243be184919d82a34081145",
       "usage_note": "Regression coverage for deterministic CLI behavior and release stability."
     }
   ],

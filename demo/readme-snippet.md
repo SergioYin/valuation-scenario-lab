@@ -19,6 +19,8 @@ Build a deterministic offline valuation scenario packet from fictional local fix
 - `demo/casebook.html`: stranger-readable walkthrough (ok)
 - `demo/reviewer-scorecard.html`: reviewer operability (ok)
 - `demo/troubleshoot.html`: diagnostic map (ok)
+- `demo/fixture-linter-report.html`: expanded fixture diagnostics (ok)
+- `demo/artifact-catalog.html`: artifact reuse catalog (ok)
 - `demo/reproducibility-audit.html`: repeatability receipt (ok)
 - `release/public-bundle.html`: public bundle index (ok)
 

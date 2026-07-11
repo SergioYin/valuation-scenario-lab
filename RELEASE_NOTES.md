@@ -1,5 +1,17 @@
 # Release Notes
 
+## v1.3.0
+
+Reuse increment.
+
+This release adds `artifact-catalog`, a deterministic JSON, Markdown, and static no-JavaScript HTML catalog grouping demo, release, documentation, skill, package data, changelog, release note, and test artifacts by audience and reuse purpose with SHA-256 hashes.
+
+It also adds `fixture-linter-report`, an expanded deterministic fixture diagnostics report with severity counts, file paths, JSON paths, remediation commands, release-check context, and safety summary.
+
+Release validation, package data, README docs, release checks, tests, generated demos, and the agent skill now include both reuse artifacts.
+
+Boundaries: no live data, no broker connections, no orders, no predictions, and no buy/sell/hold advice.
+
 ## v1.2.0
 
 Publishing promotion increment.
