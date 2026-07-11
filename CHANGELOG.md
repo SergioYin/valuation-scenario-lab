@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.0
+
+- Added `new-fixture-template` to write a fictional documented company fixture, review policy, prior packet template, and onboarding README into an output directory.
+- Added `casebook` JSON, Markdown, and static HTML walkthroughs tying packet, scenario library, thesis brief, workflow receipt, and reproducibility audit artifacts together for public readers.
+- Included onboarding and casebook artifacts in `demo`, `quickstart-check`, `selfcheck`, release validation, package data, release docs, README examples, and the agent skill protocol.
+- Preserved zero runtime dependencies, static local fixtures, no live data, no broker connections, and no buy/sell/hold advice.
+
 ## 0.8.0
 
 - Added `reproducibility-audit` JSON, Markdown, and static HTML receipts for artifact presence, schema versions, hash manifest coverage, zero dependency metadata, and safety boundary coverage.

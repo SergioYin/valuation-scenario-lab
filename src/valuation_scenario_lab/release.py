@@ -64,6 +64,13 @@ REQUIRED_FILES = [
     "demo/sample-workflow.json",
     "demo/sample-workflow.md",
     "demo/sample-workflow.html",
+    "demo/casebook.json",
+    "demo/casebook.md",
+    "demo/casebook.html",
+    "demo/onboarding-template/README.md",
+    "demo/onboarding-template/company.json",
+    "demo/onboarding-template/review-policy.json",
+    "demo/onboarding-template/prior-packet.json",
     "docs/release-checks.md",
     "release/release-manifest.json",
     "release/release-manifest.md",
@@ -87,6 +94,7 @@ EXPECTED_SCHEMA_VERSIONS = {
     "demo/scenario-library.json": "valuation-scenario-lab.scenario-library.v0.7",
     "demo/reproducibility-audit.json": "valuation-scenario-lab.reproducibility-audit.v0.8",
     "demo/sample-workflow.json": "valuation-scenario-lab.sample-workflow.v0.8",
+    "demo/casebook.json": "valuation-scenario-lab.casebook.v0.9",
 }
 
 SAFETY_BOUNDARIES = [
@@ -291,6 +299,9 @@ def safety_boundary_checks(root: Path) -> dict[str, Any]:
         "demo/thesis-brief.html",
         "demo/scenario-library.md",
         "demo/scenario-library.html",
+        "demo/casebook.md",
+        "demo/casebook.html",
+        "demo/onboarding-template/README.md",
         "skills/agent/valuation-scenario-lab/SKILL.md",
     ]
     files = []

@@ -32,10 +32,12 @@ Use this skill when a user asks an agent to generate or review an offline valuat
 12. Run `valuation-scenario-lab scenario-library --fixtures <fixtures> --output <output>` to export reusable assumption cards from bundled fictional fixtures.
 13. Run `valuation-scenario-lab sample-workflow --root <root> --output <output>` to record the primary command and artifact chain.
 14. Run `valuation-scenario-lab reproducibility-audit --root <root> --output <output>` to record deterministic artifact, schema, hash-manifest, dependency, and safety-boundary checks.
-15. Summarize generated files, assumptions changed, and research boundaries.
+15. Run `valuation-scenario-lab new-fixture-template --output <output>/onboarding-template` when a new user needs a fictional fixture, review policy, and prior packet scaffold.
+16. Run `valuation-scenario-lab casebook --root <root> --output <output>` to create a stranger-readable public walkthrough tying packet, scenario library, thesis brief, workflow receipt, and reproducibility audit artifacts together.
+17. Summarize generated files, assumptions changed, and research boundaries.
 
 ## Public Output Standard
 
 Public summaries should mention that the packet is deterministic, local, broker-free, and research-only. They should not include private paths, private collaboration tools, credentials, tokens, or non-public account details.
 
-Public demo trees should include `public-readiness-landing`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `quickstart-check`, `visual-receipt`, `thesis-brief`, `scenario-library`, `sample-workflow`, and `reproducibility-audit` artifacts alongside the valuation packet, history comparison, review ledger, and sensitivity matrix.
+Public demo trees should include `public-readiness-landing`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `quickstart-check`, `visual-receipt`, `thesis-brief`, `scenario-library`, `sample-workflow`, `reproducibility-audit`, `casebook`, and `onboarding-template` artifacts alongside the valuation packet, history comparison, review ledger, and sensitivity matrix.

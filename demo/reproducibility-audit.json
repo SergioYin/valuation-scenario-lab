@@ -260,6 +260,41 @@
         {
           "exists": true,
           "generated_by_command": false,
+          "path": "demo/casebook.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/casebook.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/casebook.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/onboarding-template/README.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/onboarding-template/company.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/onboarding-template/review-policy.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "demo/onboarding-template/prior-packet.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
           "path": "docs/release-checks.md"
         },
         {
@@ -282,10 +317,10 @@
       "status": "pass"
     },
     "hash_manifest_coverage": {
-      "expected_file_count": 67,
+      "expected_file_count": 74,
       "extra": [],
       "hash_mismatches": [],
-      "manifest_file_count": 67,
+      "manifest_file_count": 74,
       "manifest_schema_version": "valuation-scenario-lab.release-manifest.v0.8",
       "missing": [],
       "status": "pass"
@@ -445,6 +480,36 @@
         {
           "exists": true,
           "missing": [],
+          "path": "demo/casebook.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/casebook.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "demo/onboarding-template/README.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
           "path": "skills/agent/valuation-scenario-lab/SKILL.md",
           "present": [
             "No live data.",
@@ -569,6 +634,13 @@
           "generated_by_command": false,
           "ok": true,
           "path": "demo/sample-workflow.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.casebook.v0.9",
+          "expected": "valuation-scenario-lab.casebook.v0.9",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "demo/casebook.json"
         }
       ],
       "mismatches": [],

@@ -1,0 +1,91 @@
+{
+  "company": "Northstar Kitchens Collective",
+  "currency": "USD",
+  "current_price": 24.5,
+  "net_cash_m": 95.0,
+  "scenarios": [
+    {
+      "catalysts": [
+        "store refresh cadence",
+        "private-label mix"
+      ],
+      "discount_rate_pct": 10.5,
+      "fcf_margin_pct": 9.5,
+      "name": "Base store refresh case",
+      "revenue_growth_pct": 5.5,
+      "risks": [
+        "freight inflation",
+        "regional demand softness"
+      ],
+      "source_freshness": [
+        {
+          "age_days": 18,
+          "name": "fictional base scenario memo"
+        }
+      ],
+      "starting_revenue_m": 760.0,
+      "terminal_growth_pct": 2.5,
+      "terminal_multiple": 13.0,
+      "weight": 0.55
+    },
+    {
+      "catalysts": [
+        "inventory discipline"
+      ],
+      "discount_rate_pct": 12.0,
+      "fcf_margin_pct": 7.0,
+      "name": "Traffic pressure case",
+      "revenue_growth_pct": 1.5,
+      "risks": [
+        "lower foot traffic",
+        "markdown pressure"
+      ],
+      "source_freshness": [
+        {
+          "age_days": 24,
+          "name": "fictional downside memo"
+        }
+      ],
+      "starting_revenue_m": 730.0,
+      "terminal_growth_pct": 1.5,
+      "terminal_multiple": 10.0,
+      "weight": 0.25
+    },
+    {
+      "catalysts": [
+        "commercial channel expansion",
+        "loyalty conversion"
+      ],
+      "discount_rate_pct": 10.0,
+      "fcf_margin_pct": 11.5,
+      "name": "Channel expansion case",
+      "revenue_growth_pct": 8.0,
+      "risks": [
+        "execution delay"
+      ],
+      "source_freshness": [
+        {
+          "age_days": 12,
+          "name": "fictional upside memo"
+        }
+      ],
+      "starting_revenue_m": 790.0,
+      "terminal_growth_pct": 3.0,
+      "terminal_multiple": 15.0,
+      "weight": 0.2
+    }
+  ],
+  "shares_outstanding_m": 88.0,
+  "source_freshness": [
+    {
+      "age_days": 14,
+      "name": "fictional annual operating memo"
+    },
+    {
+      "age_days": 21,
+      "name": "fictional segment margin review"
+    }
+  ],
+  "template_note": "Fictional onboarding fixture for local research practice only.",
+  "ticker": "NSKC"
+}

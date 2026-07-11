@@ -6,9 +6,9 @@
       "sha256": "b12ee9cd8e1b4fb3b724f04d9750b2d2388b2120fef33ac0a168bff8f53252cc"
     },
     {
-      "bytes": 3388,
+      "bytes": 4070,
       "path": "CHANGELOG.md",
-      "sha256": "d5c6766a7e7bf6f704af4957c81f405e6880827107130f4c7aedc79f5043e9cf"
+      "sha256": "7499a1410426c1526e9b2ae2ed99950de767c2f6087aa6afbfa95db9a525541e"
     },
     {
       "bytes": 1092,
@@ -21,14 +21,14 @@
       "sha256": "510f7e3cfd5792ff22fdb0576bbe1506013ee1eff79d224b5a904da53a797a2b"
     },
     {
-      "bytes": 7141,
+      "bytes": 7662,
       "path": "README.md",
-      "sha256": "024e2b9760b38b3842415f29579a1f4d714680af888715ba00e9d03c3ddefd58"
+      "sha256": "87d6d2a7aaaa40d051bdf7a8a1de8c4e98a864c2a939c48a3d93b3f5fcfd6fdc"
     },
     {
-      "bytes": 4246,
+      "bytes": 5023,
       "path": "RELEASE_NOTES.md",
-      "sha256": "73f20e678cce1c11a31de847dd851b927f58a64a9a4f728b8940745ce6e402a2"
+      "sha256": "e445265e404566b0c9166392359f75b50dc5dcd87f82f6fcc4104de35c5c99da"
     },
     {
       "bytes": 1657,
@@ -44,6 +44,21 @@
       "bytes": 795,
       "path": "demo/assumption-change-walkthrough.md",
       "sha256": "20dee5fe622feb6e4db3f306b7607457140adff552094a1aa585e4ffdb2ada59"
+    },
+    {
+      "bytes": 2094,
+      "path": "demo/casebook.html",
+      "sha256": "6c0f40b542c974c2790738abcf126d89821f9562e360865bde81cd2714767df3"
+    },
+    {
+      "bytes": 1853,
+      "path": "demo/casebook.json",
+      "sha256": "578bb2026bc1ffe540c126d1432d787955d2d493103d3268677863dd592cf0b3"
+    },
+    {
+      "bytes": 1384,
+      "path": "demo/casebook.md",
+      "sha256": "d76dc63dfe027c2ed27dac06a6e14a687aaa10bf59e6b586bcad695e05c7a31b"
     },
     {
       "bytes": 1091,
@@ -91,6 +106,26 @@
       "sha256": "f19cfddfec07ef908fdea82b2f4a47ae26d81680b58a7bd5c0409ce40f330c8e"
     },
     {
+      "bytes": 573,
+      "path": "demo/onboarding-template/README.md",
+      "sha256": "86d405e58381e5775597977e3775e0aa70f50ff87bdef48a2dacac940599e881"
+    },
+    {
+      "bytes": 2143,
+      "path": "demo/onboarding-template/company.json",
+      "sha256": "fe6391e5b8cb4cd888473cb5843e16a4aad87e7e7fd144cbaa13fd3657c7086c"
+    },
+    {
+      "bytes": 2311,
+      "path": "demo/onboarding-template/prior-packet.json",
+      "sha256": "f7b5af8e0cfdde9f0bdf778181db166629e0cc8b6f654dc1de4f5f32121f5d55"
+    },
+    {
+      "bytes": 331,
+      "path": "demo/onboarding-template/review-policy.json",
+      "sha256": "56b95f5cb808f80ad2c2dc9dbdab0aef378241117e678868ddeadbe09b23eeff"
+    },
+    {
       "bytes": 3066,
       "path": "demo/public-readiness-landing.html",
       "sha256": "1c2e2662e9d51d1deffa538ce55c690fa1d681f5852c9c25af25e8afb2bf923a"
@@ -106,29 +141,29 @@
       "sha256": "f08cd268124d9f5c898aed76ff67839b5caaa2d3a5fe84f7d289efd919755c25"
     },
     {
-      "bytes": 4409,
+      "bytes": 5128,
       "path": "demo/quickstart-check.json",
-      "sha256": "f386fa6ddd9df1fe8d222ad91c0a70c6941ac32e602f08b6075bfbde9599bec1"
+      "sha256": "1240982cb0afdd9da19a61dd9ec96aea0c9324d773fc5c7b8c5ad9277e69faf1"
     },
     {
-      "bytes": 2592,
+      "bytes": 3004,
       "path": "demo/quickstart-check.md",
-      "sha256": "108b7dab9f6d19b18b2c6434ecd6f603c52dd2a9ba9fa74b8ecda4e4ef326751"
+      "sha256": "32fb672d8e4915aa4867203bb4dbfd82f82e9f0afa326ac2648add41b42f2fe3"
     },
     {
       "bytes": 1092,
       "path": "demo/reproducibility-audit.html",
-      "sha256": "90d11d309d577720f3c8cef208e55f7dd5745fe2c3b4e017d3e518ae6daf7102"
+      "sha256": "ea4b52f35aa7c10a38f4157c1aee5592fe6a24a3041265b033b7734d08766415"
     },
     {
-      "bytes": 17077,
+      "bytes": 19066,
       "path": "demo/reproducibility-audit.json",
-      "sha256": "8f005ebc83c7bff78290d9abb1b802d2d89223c62abcedebd501e2ef56c7e98d"
+      "sha256": "fddfcaec8c4e7a88c18be46e9b82d2400b90e376e3bb9e04c7aa0d7fd7f5ca7c"
     },
     {
       "bytes": 396,
       "path": "demo/reproducibility-audit.md",
-      "sha256": "2232cc67e9111bbc044c7e90554b5cf8c76f225e83b6156cc7a53ccbee7bc104"
+      "sha256": "49ba25a850ee6e898133e5fe37479fe82a2332ed93791a747471b583777aee3d"
     },
     {
       "bytes": 1313,
@@ -251,9 +286,9 @@
       "sha256": "7a127855a424875508477bff35a9311c759880cc871d39bc0479ee04ac61aa22"
     },
     {
-      "bytes": 2548,
+      "bytes": 2807,
       "path": "docs/release-checks.md",
-      "sha256": "c92d852279baf499ecba793133fac1c3622c80b7611b1aafce3bdbd0430202ab"
+      "sha256": "ee42bb05a7772a254106d893dde8bd6278774ad4fc03a82da9549e1a9e5c6260"
     },
     {
       "bytes": 1664,
@@ -276,24 +311,24 @@
       "sha256": "c6bef8b98a5570c82396bf77faab8959a9fc7a386da0b9c41f791445052ea144"
     },
     {
-      "bytes": 3168,
+      "bytes": 3480,
       "path": "pyproject.toml",
-      "sha256": "b68cb65eca5c309f27a2c14c225849002faf3a69bd5e8c43273350a781a38da9"
+      "sha256": "491f83df6f8acf22a1acd80007c6d5e9093ccbcba58092512cb0a5a01edee847"
     },
     {
-      "bytes": 3065,
+      "bytes": 3510,
       "path": "skills/agent/valuation-scenario-lab/SKILL.md",
-      "sha256": "e9594c6304624f8871c22f3c2f4b16aaea987cff5bc33fbc64f9a1bfde5fe6c8"
+      "sha256": "830eeb44c23f8d94fa3a17c8017b873114ead6d0e059ea611a2df6b42cc23458"
     },
     {
       "bytes": 74,
       "path": "src/valuation_scenario_lab/__init__.py",
-      "sha256": "2ed9b34630b9273af471f40fec1941b8c8ade0889d88edf9d6916198dd15b161"
+      "sha256": "7e3bbc9d2f255c3f9aacda38191c9035777afe28efcc27910f0f95e3f33a6bb9"
     },
     {
-      "bytes": 63762,
+      "bytes": 75702,
       "path": "src/valuation_scenario_lab/cli.py",
-      "sha256": "1ec3ebb50c38b1d02cd567c7b7cd6fea9ec9847e09704a2b748fb7aa21f62dd4"
+      "sha256": "6aebd0f489d11d39aaeea79b195eadbc5909a9faa62871cb7f473eb14feee267"
     },
     {
       "bytes": 7756,
@@ -316,9 +351,9 @@
       "sha256": "8164c3ff7339f16f5e316c66e4c578d4eba08da883ec12a410eec6b5bf27d8a8"
     },
     {
-      "bytes": 14046,
+      "bytes": 14480,
       "path": "src/valuation_scenario_lab/release.py",
-      "sha256": "83847fca29cff7cef0e6c24d512e668d51276cb6aacd9fdd3a564f7fa9719ae7"
+      "sha256": "6eccd73a365ff69d76780fd1044e79b49ecd8a6a03b59859ed27aa3975883e5b"
     },
     {
       "bytes": 4037,
@@ -331,9 +366,9 @@
       "sha256": "2ccbb3dab5b0470a1afdd5e517776b7614764ad16bb3dddc73c188ff5821adc7"
     },
     {
-      "bytes": 15118,
+      "bytes": 16899,
       "path": "tests/test_cli.py",
-      "sha256": "0f6e4e14fdda09b938ec161c3b2d0025f345bc4cdf965b63225a25af3325ecc5"
+      "sha256": "d7dc5cd4ce3030a36b3843efb2f3d135c692a7545994803edbfad016dcb9074b"
     }
   ],
   "schema_version": "valuation-scenario-lab.release-manifest.v0.8"

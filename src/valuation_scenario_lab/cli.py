@@ -123,6 +123,13 @@ def main(argv: list[str] | None = None) -> int:
     workflow.add_argument("--root", default=".")
     workflow.add_argument("--output", default="demo")
 
+    template = sub.add_parser("new-fixture-template")
+    template.add_argument("--output", default="demo/onboarding-template")
+
+    casebook = sub.add_parser("casebook")
+    casebook.add_argument("--root", default=".")
+    casebook.add_argument("--output", default="demo")
+
     demo = sub.add_parser("demo")
     demo.add_argument("--root", default=".")
 
@@ -173,6 +180,10 @@ def main(argv: list[str] | None = None) -> int:
             return command_reproducibility_audit(Path(args.root), Path(args.output))
         if args.command == "sample-workflow":
             return command_sample_workflow(Path(args.root), Path(args.output))
+        if args.command == "new-fixture-template":
+            return command_new_fixture_template(Path(args.output))
+        if args.command == "casebook":
+            return command_casebook(Path(args.root), Path(args.output))
         if args.command == "demo":
             root = Path(args.root)
             command_build_packet(root / "examples", root / "demo")
@@ -191,6 +202,8 @@ def main(argv: list[str] | None = None) -> int:
             command_scenario_library(root / "examples", root / "demo")
             command_sample_workflow(root, root / "demo")
             command_reproducibility_audit(root, root / "demo")
+            command_new_fixture_template(root / "demo" / "onboarding-template")
+            command_casebook(root, root / "demo")
             return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -303,6 +316,8 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_scenario_library(root / "examples", out)
         command_sample_workflow(root, out)
         command_reproducibility_audit(root, out)
+        command_new_fixture_template(out / "onboarding-template")
+        command_casebook(root, out)
     validation = validate_release_payload(root)
     if validation["status"] != "pass":
         print("FAIL release validation")
@@ -322,6 +337,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
     command_thesis_brief(root, output)
     command_scenario_library(root / "examples", output)
     command_sample_workflow(root, output)
+    command_new_fixture_template(output / "onboarding-template")
+    command_casebook(root, output)
     expected = [
         "valuation-packet.json",
         "valuation-packet.md",
@@ -361,6 +378,13 @@ def command_quickstart_check(root: Path, output: Path) -> int:
         "sample-workflow.json",
         "sample-workflow.md",
         "sample-workflow.html",
+        "casebook.json",
+        "casebook.md",
+        "casebook.html",
+        "onboarding-template/README.md",
+        "onboarding-template/company.json",
+        "onboarding-template/review-policy.json",
+        "onboarding-template/prior-packet.json",
     ]
     files = [{"path": f"demo/{name}", "exists": (output / name).exists()} for name in expected]
     payload = {
@@ -377,6 +401,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab scenario-library --fixtures examples --output demo",
             "valuation-scenario-lab sample-workflow --root . --output demo",
             "valuation-scenario-lab reproducibility-audit --root . --output demo",
+            "valuation-scenario-lab new-fixture-template --output demo/onboarding-template",
+            "valuation-scenario-lab casebook --root . --output demo",
             "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
             "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
             "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -497,6 +523,57 @@ def command_sample_workflow(root: Path, output: Path) -> int:
     return 0 if payload["status"] == "pass" else 1
 
 
+def command_new_fixture_template(output: Path) -> int:
+    ensure_dir(output)
+    company = onboarding_company_template()
+    prior_packet = build_packet(company)
+    prior_packet["schema_version"] = "valuation-scenario-lab.prior-packet-template.v0.9"
+    prior_packet["generated_on"] = "static-local-template"
+    prior_packet["template_note"] = "Fictional prior packet scaffold; replace values with local research before use."
+    write_json(output / "company.json", company)
+    write_json(output / "review-policy.json", onboarding_review_policy_template())
+    write_json(output / "prior-packet.json", prior_packet)
+    write_text(output / "README.md", onboarding_template_readme())
+    print(f"wrote {output / 'company.json'}")
+    return 0
+
+
+def command_casebook(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    ensure_demo_artifacts(root, output)
+    command_thesis_brief(root, output)
+    command_scenario_library(root / "examples", output)
+    command_sample_workflow(root, output)
+    audit = read_json(output / "reproducibility-audit.json") if (output / "reproducibility-audit.json").exists() else {
+        "status": "pending",
+        "boundaries": ["No live data.", "No broker connections.", "No buy/sell/hold advice."],
+    }
+    payload = casebook_payload(
+        read_json(output / "valuation-packet.json"),
+        read_json(output / "scenario-library.json"),
+        read_json(output / "thesis-brief.json"),
+        read_json(output / "sample-workflow.json"),
+        audit,
+    )
+    write_json(output / "casebook.json", payload)
+    write_text(output / "casebook.md", casebook_markdown(payload))
+    write_text(output / "casebook.html", casebook_html(payload))
+    command_reproducibility_audit(root, output)
+    payload = casebook_payload(
+        read_json(output / "valuation-packet.json"),
+        read_json(output / "scenario-library.json"),
+        read_json(output / "thesis-brief.json"),
+        read_json(output / "sample-workflow.json"),
+        read_json(output / "reproducibility-audit.json"),
+    )
+    write_json(output / "casebook.json", payload)
+    write_text(output / "casebook.md", casebook_markdown(payload))
+    write_text(output / "casebook.html", casebook_html(payload))
+    print(f"wrote {output / 'casebook.html'}")
+    return 0
+
+
 def ensure_demo_artifacts(root: Path, output: Path) -> None:
     command_build_packet(root / "examples", output)
     command_compare_history(output / "valuation-packet.json", root / "examples" / "prior-packet.json", output)
@@ -505,6 +582,98 @@ def ensure_demo_artifacts(root: Path, output: Path) -> None:
     command_assumption_walkthrough(root / "examples", output, None, "fcf_margin_pct", 2.0)
     command_demo_gallery(root / "examples", output)
     command_decision_journal(output / "valuation-packet.json", output / "review-ledger.json", output)
+
+
+def onboarding_company_template() -> dict[str, Any]:
+    return {
+        "company": "Northstar Kitchens Collective",
+        "ticker": "NSKC",
+        "currency": "USD",
+        "template_note": "Fictional onboarding fixture for local research practice only.",
+        "current_price": 24.5,
+        "shares_outstanding_m": 88.0,
+        "net_cash_m": 95.0,
+        "source_freshness": [
+            {"name": "fictional annual operating memo", "age_days": 14},
+            {"name": "fictional segment margin review", "age_days": 21},
+        ],
+        "scenarios": [
+            {
+                "name": "Base store refresh case",
+                "weight": 0.55,
+                "starting_revenue_m": 760.0,
+                "revenue_growth_pct": 5.5,
+                "fcf_margin_pct": 9.5,
+                "discount_rate_pct": 10.5,
+                "terminal_growth_pct": 2.5,
+                "terminal_multiple": 13.0,
+                "catalysts": ["store refresh cadence", "private-label mix"],
+                "risks": ["freight inflation", "regional demand softness"],
+                "source_freshness": [{"name": "fictional base scenario memo", "age_days": 18}],
+            },
+            {
+                "name": "Traffic pressure case",
+                "weight": 0.25,
+                "starting_revenue_m": 730.0,
+                "revenue_growth_pct": 1.5,
+                "fcf_margin_pct": 7.0,
+                "discount_rate_pct": 12.0,
+                "terminal_growth_pct": 1.5,
+                "terminal_multiple": 10.0,
+                "catalysts": ["inventory discipline"],
+                "risks": ["lower foot traffic", "markdown pressure"],
+                "source_freshness": [{"name": "fictional downside memo", "age_days": 24}],
+            },
+            {
+                "name": "Channel expansion case",
+                "weight": 0.20,
+                "starting_revenue_m": 790.0,
+                "revenue_growth_pct": 8.0,
+                "fcf_margin_pct": 11.5,
+                "discount_rate_pct": 10.0,
+                "terminal_growth_pct": 3.0,
+                "terminal_multiple": 15.0,
+                "catalysts": ["commercial channel expansion", "loyalty conversion"],
+                "risks": ["execution delay"],
+                "source_freshness": [{"name": "fictional upside memo", "age_days": 12}],
+            },
+        ],
+    }
+
+
+def onboarding_review_policy_template() -> dict[str, Any]:
+    return {
+        "high_priority_abs_mos_pct": 20,
+        "owner_placeholder": "research reviewer",
+        "freshness_limit_days": 45,
+        "template_note": "Edit owner and freshness rules for local review cadence; do not add broker or account data.",
+        "boundaries": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice.",
+        ],
+    }
+
+
+def onboarding_template_readme() -> str:
+    return """# New Fixture Template
+
+This directory is a fictional onboarding scaffold for building a local valuation scenario fixture.
+
+Files:
+
+- `company.json`: fictional company assumptions with three weighted scenarios.
+- `review-policy.json`: local review thresholds and freshness policy.
+- `prior-packet.json`: deterministic prior packet template for `compare-history`.
+
+Replace the fictional values with documented local research notes before publishing outputs. Keep all inputs static and local.
+
+Boundaries:
+
+- No live data.
+- No broker connections.
+- No buy/sell/hold advice.
+"""
 
 
 def command_fixture_doctor(fixtures: Path, policy: Path | None, fmt: str, output: Path | None) -> int:
@@ -1319,6 +1488,125 @@ code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
 <h1>Sample Analyst Workflow Receipt</h1>
 <p>Status: {html.escape(payload['status'])}</p>
 {''.join(steps)}
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def casebook_payload(packet: dict[str, Any], library: dict[str, Any], thesis: dict[str, Any], workflow: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "schema_version": "valuation-scenario-lab.casebook.v0.9",
+        "generated_on": "static-local",
+        "title": "Public Valuation Scenario Casebook",
+        "audience": "stranger-readable public walkthrough of deterministic local artifacts",
+        "company": packet["company"],
+        "ticker": packet["ticker"],
+        "walkthrough": [
+            {
+                "section": "Packet",
+                "artifact": "demo/valuation-packet.html",
+                "summary": f"{packet['company']} has a weighted fair value of {packet['currency']} {packet['weighted_fair_value_per_share']:.2f} across {len(packet['valuation_ranges'])} local scenarios.",
+            },
+            {
+                "section": "Scenario Library",
+                "artifact": "demo/scenario-library.html",
+                "summary": f"{library['card_count']} reusable scenario cards across {library['company_count']} fictional companies document the assumption set.",
+            },
+            {
+                "section": "Thesis Brief",
+                "artifact": "demo/thesis-brief.html",
+                "summary": thesis["thesis_summary"],
+            },
+            {
+                "section": "Workflow Receipt",
+                "artifact": "demo/sample-workflow.html",
+                "summary": f"{len(workflow['steps'])} command steps connect source fixtures to public artifacts.",
+            },
+            {
+                "section": "Reproducibility Audit",
+                "artifact": "demo/reproducibility-audit.html",
+                "summary": f"Audit status is {audit['status']} for artifact, schema, dependency, manifest, and boundary checks.",
+            },
+        ],
+        "source_artifacts": [
+            "demo/valuation-packet.json",
+            "demo/scenario-library.json",
+            "demo/thesis-brief.json",
+            "demo/sample-workflow.json",
+            "demo/reproducibility-audit.json",
+        ],
+        "reader_prompts": [
+            "Which assumption would you inspect first, and which artifact records it?",
+            "Which boundary prevents this walkthrough from becoming a recommendation?",
+            "Can another reviewer regenerate the same artifact set from local files?",
+        ],
+        "boundaries": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice.",
+        ],
+    }
+
+
+def casebook_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        f"# {payload['title']}",
+        "",
+        f"Company: {payload['company']} ({payload['ticker']})",
+        "",
+        payload["audience"],
+        "",
+        "## Walkthrough",
+        "",
+    ]
+    for index, item in enumerate(payload["walkthrough"], start=1):
+        lines.append(f"### {index}. {item['section']}")
+        lines.append("")
+        lines.append(f"Artifact: `{item['artifact']}`")
+        lines.append("")
+        lines.append(item["summary"])
+        lines.append("")
+    lines.extend(["## Source Artifacts", ""])
+    lines.extend(f"- `{item}`" for item in payload["source_artifacts"])
+    lines.extend(["", "## Reader Prompts", ""])
+    lines.extend(f"- {item}" for item in payload["reader_prompts"])
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def casebook_html(payload: dict[str, Any]) -> str:
+    walkthrough = "".join(
+        "<section>"
+        f"<h2>{index}. {html.escape(item['section'])}</h2>"
+        f"<p><code>{html.escape(item['artifact'])}</code></p>"
+        f"<p>{html.escape(item['summary'])}</p>"
+        "</section>"
+        for index, item in enumerate(payload["walkthrough"], start=1)
+    )
+    sources = "".join(f"<li><code>{html.escape(item)}</code></li>" for item in payload["source_artifacts"])
+    prompts = "".join(f"<li>{html.escape(item)}</li>" for item in payload["reader_prompts"])
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{html.escape(payload['title'])}</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+section {{ border-top: 1px solid #d6dde4; padding: 1rem 0; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+.note {{ color: #566573; }}
+</style>
+</head>
+<body>
+<h1>{html.escape(payload['title'])}</h1>
+<p>{html.escape(payload['company'])} ({html.escape(payload['ticker'])})</p>
+<p class="note">{html.escape(payload['audience'])}</p>
+{walkthrough}
+<h2>Source Artifacts</h2><ul>{sources}</ul>
+<h2>Reader Prompts</h2><ul>{prompts}</ul>
 <h2>Boundaries</h2><ul>{boundaries}</ul>
 </body>
 </html>

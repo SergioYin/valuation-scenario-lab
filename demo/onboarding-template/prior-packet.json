@@ -1,0 +1,86 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "catalysts": [
+    "commercial channel expansion",
+    "inventory discipline",
+    "loyalty conversion",
+    "private-label mix",
+    "store refresh cadence"
+  ],
+  "company": "Northstar Kitchens Collective",
+  "currency": "USD",
+  "current_price": 24.5,
+  "generated_on": "static-local-template",
+  "margin_of_safety_label": "large negative gap",
+  "review_prompts": [
+    "Confirm that all assumptions are sourced from local research notes.",
+    "Review whether scenario weights still reflect the written thesis.",
+    "Document why the modeled value gap is large before using this packet in discussion.",
+    "Refresh any source with an age_days value above the local review policy."
+  ],
+  "risks": [
+    "execution delay",
+    "freight inflation",
+    "lower foot traffic",
+    "markdown pressure",
+    "regional demand softness"
+  ],
+  "schema_version": "valuation-scenario-lab.prior-packet-template.v0.9",
+  "source_freshness": [
+    {
+      "age_days": 14,
+      "name": "fictional annual operating memo"
+    },
+    {
+      "age_days": 21,
+      "name": "fictional segment margin review"
+    }
+  ],
+  "template_note": "Fictional prior packet scaffold; replace values with local research before use.",
+  "ticker": "NSKC",
+  "valuation_ranges": [
+    {
+      "base": 18.46,
+      "high": 20.3,
+      "low": 16.61,
+      "margin_label": "moderate negative gap",
+      "margin_of_safety_pct": -24.7,
+      "scenario": "Base store refresh case",
+      "score": -26.47,
+      "weight": 0.55
+    },
+    {
+      "base": 9.37,
+      "high": 10.31,
+      "low": 8.43,
+      "margin_label": "large negative gap",
+      "margin_of_safety_pct": -61.8,
+      "scenario": "Traffic pressure case",
+      "score": -64.15,
+      "weight": 0.25
+    },
+    {
+      "base": 28.42,
+      "high": 31.26,
+      "low": 25.58,
+      "margin_label": "moderate positive gap",
+      "margin_of_safety_pct": 16.0,
+      "scenario": "Channel expansion case",
+      "score": 14.79,
+      "weight": 0.2
+    }
+  ],
+  "weighted_fair_value_per_share": 18.18,
+  "weighted_margin_of_safety_pct": -25.8,
+  "weighted_range_per_share": [
+    16.36,
+    20.0
+  ]
+}

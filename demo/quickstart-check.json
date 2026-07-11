@@ -14,6 +14,8 @@
     "valuation-scenario-lab scenario-library --fixtures examples --output demo",
     "valuation-scenario-lab sample-workflow --root . --output demo",
     "valuation-scenario-lab reproducibility-audit --root . --output demo",
+    "valuation-scenario-lab new-fixture-template --output demo/onboarding-template",
+    "valuation-scenario-lab casebook --root . --output demo",
     "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
     "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
     "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -172,6 +174,34 @@
     {
       "exists": true,
       "path": "demo/sample-workflow.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/casebook.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/casebook.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/casebook.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/onboarding-template/README.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/onboarding-template/company.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/onboarding-template/review-policy.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/onboarding-template/prior-packet.json"
     }
   ],
   "fixture_source": "local-or-packaged-fixtures",

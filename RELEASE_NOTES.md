@@ -1,5 +1,17 @@
 # Release Notes
 
+## v0.9.0
+
+User-onboarding increment.
+
+This release adds `new-fixture-template`, a zero-runtime-dependency command that writes a fictional documented company fixture, local review policy, prior packet template, and onboarding README into an output directory.
+
+It also adds `casebook`, a deterministic JSON, Markdown, and static no-JavaScript HTML walkthrough that ties the packet, scenario library, thesis brief, sample workflow receipt, and reproducibility audit into a stranger-readable public casebook.
+
+`demo`, `quickstart-check`, `selfcheck`, release validation, package data, README docs, release checks, and the agent skill now include both onboarding artifacts.
+
+Boundaries: no live data, no broker connections, no orders, no predictions, and no buy/sell/hold advice.
+
 ## v0.8.0
 
 Release-grade reproducibility hardening increment.

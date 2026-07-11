@@ -1,0 +1,52 @@
+{
+  "audience": "stranger-readable public walkthrough of deterministic local artifacts",
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "company": "Example Components Inc.",
+  "generated_on": "static-local",
+  "reader_prompts": [
+    "Which assumption would you inspect first, and which artifact records it?",
+    "Which boundary prevents this walkthrough from becoming a recommendation?",
+    "Can another reviewer regenerate the same artifact set from local files?"
+  ],
+  "schema_version": "valuation-scenario-lab.casebook.v0.9",
+  "source_artifacts": [
+    "demo/valuation-packet.json",
+    "demo/scenario-library.json",
+    "demo/thesis-brief.json",
+    "demo/sample-workflow.json",
+    "demo/reproducibility-audit.json"
+  ],
+  "ticker": "EXCO",
+  "title": "Public Valuation Scenario Casebook",
+  "walkthrough": [
+    {
+      "artifact": "demo/valuation-packet.html",
+      "section": "Packet",
+      "summary": "Example Components Inc. has a weighted fair value of USD 37.38 across 3 local scenarios."
+    },
+    {
+      "artifact": "demo/scenario-library.html",
+      "section": "Scenario Library",
+      "summary": "6 reusable scenario cards across 2 fictional companies document the assumption set."
+    },
+    {
+      "artifact": "demo/thesis-brief.html",
+      "section": "Thesis Brief",
+      "summary": "Deterministic local-assumption research brief; no action recommendation."
+    },
+    {
+      "artifact": "demo/sample-workflow.html",
+      "section": "Workflow Receipt",
+      "summary": "9 command steps connect source fixtures to public artifacts."
+    },
+    {
+      "artifact": "demo/reproducibility-audit.html",
+      "section": "Reproducibility Audit",
+      "summary": "Audit status is fail for artifact, schema, dependency, manifest, and boundary checks."
+    }
+  ]
+}

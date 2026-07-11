@@ -1,0 +1,11 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "freshness_limit_days": 45,
+  "high_priority_abs_mos_pct": 20,
+  "owner_placeholder": "research reviewer",
+  "template_note": "Edit owner and freshness rules for local review cadence; do not add broker or account data."
+}

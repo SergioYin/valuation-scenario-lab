@@ -155,6 +155,33 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert "No live data." in (out / "reproducibility-audit.html").read_text(encoding="utf-8")
     assert "<script" not in (out / "reproducibility-audit.html").read_text(encoding="utf-8").lower()
 
+    template = run_cli("new-fixture-template", "--output", str(out / "onboarding-template"))
+    assert template.returncode == 0, template.stdout + template.stderr
+    template_company = json.loads((out / "onboarding-template" / "company.json").read_text(encoding="utf-8"))
+    template_policy = json.loads((out / "onboarding-template" / "review-policy.json").read_text(encoding="utf-8"))
+    template_prior = json.loads((out / "onboarding-template" / "prior-packet.json").read_text(encoding="utf-8"))
+    assert template_company["company"] == "Northstar Kitchens Collective"
+    assert len(template_company["scenarios"]) == 3
+    assert sum(item["weight"] for item in template_company["scenarios"]) == 1.0
+    assert template_policy["freshness_limit_days"] == 45
+    assert template_prior["schema_version"] == "valuation-scenario-lab.prior-packet-template.v0.9"
+    assert "No broker connections." in (out / "onboarding-template" / "README.md").read_text(encoding="utf-8")
+
+    casebook = run_cli("casebook", "--root", str(ROOT), "--output", str(out))
+    assert casebook.returncode == 0, casebook.stdout + casebook.stderr
+    casebook_payload = json.loads((out / "casebook.json").read_text(encoding="utf-8"))
+    assert casebook_payload["schema_version"] == "valuation-scenario-lab.casebook.v0.9"
+    assert [item["section"] for item in casebook_payload["walkthrough"]] == [
+        "Packet",
+        "Scenario Library",
+        "Thesis Brief",
+        "Workflow Receipt",
+        "Reproducibility Audit",
+    ]
+    assert "demo/reproducibility-audit.json" in casebook_payload["source_artifacts"]
+    assert "No buy/sell/hold advice." in (out / "casebook.html").read_text(encoding="utf-8")
+    assert "<script" not in (out / "casebook.html").read_text(encoding="utf-8").lower()
+
 
 def test_release_validation_and_maturity() -> None:
     validation = run_cli("validate-release", "--root", str(ROOT))
