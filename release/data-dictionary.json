@@ -1,0 +1,599 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "format_notes": [
+    "Fields are deterministic JSON keys emitted or consumed by the offline CLI.",
+    "Numeric valuation fields are rounded in generated artifacts for stable review.",
+    "All paths are repository-relative unless explicitly marked as placeholders."
+  ],
+  "generated_on": "static-local",
+  "release_version": "1.4.0",
+  "schema_version": "valuation-scenario-lab.data-dictionary.v1.4",
+  "scope": [
+    "company fixtures",
+    "valuation packets",
+    "review ledgers",
+    "decision journals",
+    "reviewer scorecards",
+    "artifact catalogs",
+    "fixture linter reports",
+    "release receipts"
+  ],
+  "sections": [
+    {
+      "artifacts": [
+        "examples/company.json",
+        "examples/software-compounder.json",
+        "demo/onboarding-template/company.json"
+      ],
+      "fields": [
+        {
+          "description": "Fictional company display name.",
+          "name": "company",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Fictional ticker or local identifier.",
+          "name": "ticker",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Currency label used for generated packet display.",
+          "name": "currency",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Onboarding note for scaffold fixtures.",
+          "name": "template_note",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Static local reference price used only for deterministic gap math.",
+          "name": "current_price",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Static share count in millions.",
+          "name": "shares_outstanding_m",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Static net cash balance in millions.",
+          "name": "net_cash_m",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Fixture-level source freshness entries with name and age_days.",
+          "name": "source_freshness",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Weighted local scenario assumptions; weights must sum to 1.0.",
+          "name": "scenarios",
+          "required": true,
+          "type": "array<object>"
+        },
+        {
+          "description": "Scenario label.",
+          "name": "scenarios[].name",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Scenario probability weight.",
+          "name": "scenarios[].weight",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Starting revenue in millions.",
+          "name": "scenarios[].starting_revenue_m",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Five-year annual revenue growth percentage.",
+          "name": "scenarios[].revenue_growth_pct",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Free-cash-flow margin percentage.",
+          "name": "scenarios[].fcf_margin_pct",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Discount rate percentage.",
+          "name": "scenarios[].discount_rate_pct",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Terminal growth percentage.",
+          "name": "scenarios[].terminal_growth_pct",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Terminal multiple cross-check.",
+          "name": "scenarios[].terminal_multiple",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Local catalyst notes.",
+          "name": "scenarios[].catalysts",
+          "required": false,
+          "type": "array<string>"
+        },
+        {
+          "description": "Local risk notes.",
+          "name": "scenarios[].risks",
+          "required": false,
+          "type": "array<string>"
+        },
+        {
+          "description": "Scenario-level source freshness entries.",
+          "name": "scenarios[].source_freshness",
+          "required": false,
+          "type": "array<object>"
+        }
+      ],
+      "name": "company fixture"
+    },
+    {
+      "artifacts": [
+        "demo/valuation-packet.json",
+        "examples/prior-packet.json"
+      ],
+      "fields": [
+        {
+          "description": "Packet schema identifier.",
+          "name": "schema_version",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Static generation marker.",
+          "name": "generated_on",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Company display name.",
+          "name": "company",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Ticker or local identifier.",
+          "name": "ticker",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Currency label.",
+          "name": "currency",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Rounded static reference price.",
+          "name": "current_price",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Scenario-weighted modeled fair value per share.",
+          "name": "weighted_fair_value_per_share",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Scenario-weighted low and high range.",
+          "name": "weighted_range_per_share",
+          "required": true,
+          "type": "array<number>"
+        },
+        {
+          "description": "Modeled percentage gap versus current_price.",
+          "name": "weighted_margin_of_safety_pct",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Neutral label for modeled value gap.",
+          "name": "margin_of_safety_label",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Per-scenario low/base/high outputs.",
+          "name": "valuation_ranges",
+          "required": true,
+          "type": "array<object>"
+        },
+        {
+          "description": "Scenario name.",
+          "name": "valuation_ranges[].scenario",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Scenario weight.",
+          "name": "valuation_ranges[].weight",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Low value per share.",
+          "name": "valuation_ranges[].low",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Blended base value per share.",
+          "name": "valuation_ranges[].base",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "High value per share.",
+          "name": "valuation_ranges[].high",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Scenario value gap percentage.",
+          "name": "valuation_ranges[].margin_of_safety_pct",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Scenario neutral gap label.",
+          "name": "valuation_ranges[].margin_label",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Internal deterministic review score.",
+          "name": "valuation_ranges[].score",
+          "required": true,
+          "type": "number"
+        },
+        {
+          "description": "Sorted catalyst notes from scenarios.",
+          "name": "catalysts",
+          "required": true,
+          "type": "array<string>"
+        },
+        {
+          "description": "Sorted risk notes from scenarios.",
+          "name": "risks",
+          "required": true,
+          "type": "array<string>"
+        },
+        {
+          "description": "Fixture source freshness entries.",
+          "name": "source_freshness",
+          "required": true,
+          "type": "array<object>"
+        },
+        {
+          "description": "Neutral review prompts.",
+          "name": "review_prompts",
+          "required": true,
+          "type": "array<string>"
+        },
+        {
+          "description": "Finance safety boundaries.",
+          "name": "boundaries",
+          "required": true,
+          "type": "array<string>"
+        }
+      ],
+      "name": "valuation packet"
+    },
+    {
+      "artifacts": [
+        "demo/review-ledger.json",
+        "demo/decision-journal.json",
+        "demo/reviewer-scorecard.json"
+      ],
+      "fields": [
+        {
+          "description": "Review ledger rows.",
+          "name": "entries",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Scenario under review.",
+          "name": "entries[].scenario",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Review priority bucket.",
+          "name": "entries[].priority",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Neutral gap label.",
+          "name": "entries[].margin_label",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Question for local review.",
+          "name": "entries[].review_question",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Local owner placeholder.",
+          "name": "entries[].owner",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Evidence artifact paths.",
+          "name": "entries[].evidence",
+          "required": false,
+          "type": "array<string>"
+        },
+        {
+          "description": "Decision journal rows.",
+          "name": "journal_entries",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "No-action research logging summary.",
+          "name": "summary_decision",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Open review questions.",
+          "name": "open_questions",
+          "required": false,
+          "type": "array<string>"
+        },
+        {
+          "description": "Scorecard status.",
+          "name": "status",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Awarded score.",
+          "name": "score",
+          "required": false,
+          "type": "number"
+        },
+        {
+          "description": "Maximum score.",
+          "name": "max_score",
+          "required": false,
+          "type": "number"
+        },
+        {
+          "description": "Scorecard rubric description.",
+          "name": "rubric",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Product, engineering, cold-user, and risk score lenses.",
+          "name": "lenses",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Criteria with max points, awarded points, status, and artifacts.",
+          "name": "lenses[].criteria",
+          "required": false,
+          "type": "array<object>"
+        }
+      ],
+      "name": "review and scorecard outputs"
+    },
+    {
+      "artifacts": [
+        "demo/artifact-catalog.json",
+        "demo/fixture-linter-report.json"
+      ],
+      "fields": [
+        {
+          "description": "Catalog artifact count.",
+          "name": "artifact_count",
+          "required": false,
+          "type": "number"
+        },
+        {
+          "description": "Number of artifacts included as package data.",
+          "name": "package_data_count",
+          "required": false,
+          "type": "number"
+        },
+        {
+          "description": "Count of required release files present in catalog.",
+          "name": "required_release_file_count",
+          "required": false,
+          "type": "number"
+        },
+        {
+          "description": "Catalog groups by audience and reuse purpose.",
+          "name": "groups",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Target reviewer audience.",
+          "name": "groups[].audience",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Reuse-purpose buckets.",
+          "name": "groups[].purposes",
+          "required": true,
+          "type": "array<object>"
+        },
+        {
+          "description": "Artifact rows with path, category, format, hash, size, flags, and usage note.",
+          "name": "groups[].purposes[].artifacts",
+          "required": true,
+          "type": "array<object>"
+        },
+        {
+          "description": "Fixture directory label.",
+          "name": "fixture_source",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Number of fixture files inspected.",
+          "name": "fixture_count",
+          "required": false,
+          "type": "number"
+        },
+        {
+          "description": "Total fixture diagnostic count.",
+          "name": "issue_count",
+          "required": false,
+          "type": "number"
+        },
+        {
+          "description": "Counts by error, warning, and info.",
+          "name": "severity_counts",
+          "required": false,
+          "type": "object"
+        },
+        {
+          "description": "Fixture doctor issues with remediation commands.",
+          "name": "diagnostics",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Release context for the linter report.",
+          "name": "release_checks",
+          "required": false,
+          "type": "object"
+        },
+        {
+          "description": "Safety-boundary coverage summary.",
+          "name": "safety_summary",
+          "required": false,
+          "type": "object"
+        }
+      ],
+      "name": "catalog and linter outputs"
+    },
+    {
+      "artifacts": [
+        "release/install-smoke-receipt.json",
+        "release/public-bundle.json",
+        "release/release-manifest.json",
+        "release/operator-handoff.json",
+        "release/data-dictionary.json"
+      ],
+      "fields": [
+        {
+          "description": "Offline install-smoke policy text.",
+          "name": "network_policy",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "description": "Documented local install commands and expected output.",
+          "name": "install_commands",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Documented CLI smoke commands and expected output.",
+          "name": "entry_point_smoke_commands",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Expected release file existence checks.",
+          "name": "expected_files",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Manifest or bundle file rows with path, hash, bytes, category, package-data flag, and usage note.",
+          "name": "files",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Outputs excluded from self hash indexing.",
+          "name": "self_outputs",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Repository, release, wheel, and source archive URL placeholders.",
+          "name": "repo_url_placeholders",
+          "required": false,
+          "type": "object"
+        },
+        {
+          "description": "Final local handoff command list.",
+          "name": "latest_commands",
+          "required": false,
+          "type": "array<string>"
+        },
+        {
+          "description": "Final release asset rows.",
+          "name": "release_assets",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Release validation status and finding counts.",
+          "name": "validation_results",
+          "required": false,
+          "type": "object"
+        },
+        {
+          "description": "Operational boundaries for handoff.",
+          "name": "known_boundaries",
+          "required": false,
+          "type": "array<string>"
+        },
+        {
+          "description": "Data dictionary schema sections.",
+          "name": "sections",
+          "required": false,
+          "type": "array<object>"
+        },
+        {
+          "description": "Data dictionary format notes.",
+          "name": "format_notes",
+          "required": false,
+          "type": "array<string>"
+        }
+      ],
+      "name": "release receipts"
+    }
+  ]
+}

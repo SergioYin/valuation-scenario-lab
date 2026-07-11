@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.0
+
+- Added `operator-handoff` JSON, Markdown, and static HTML release handoffs with repo URL placeholders, latest commands, release assets, validation results, and known boundaries.
+- Added `data-dictionary` JSON, Markdown, and static HTML schema dictionaries covering company fixtures, packets, scorecards, catalogs, linter reports, and release receipts.
+- Included both final handoff artifacts in `demo`, `selfcheck`, release validation, package data, release docs, README examples, tests, release notes, and the agent skill protocol.
+- Preserved zero runtime dependencies, offline fictional fixtures, no live data, no broker connections, and no buy/sell/hold advice.
+
 ## 1.3.0
 
 - Added `artifact-catalog` JSON, Markdown, and static HTML outputs grouping demo, release, docs, skill, package data, release note, changelog, and test artifacts by audience and reuse purpose with SHA-256 hashes.

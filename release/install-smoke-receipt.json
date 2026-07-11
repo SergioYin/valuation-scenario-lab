@@ -7,7 +7,7 @@
   "entry_point_smoke_commands": [
     {
       "command": "valuation-scenario-lab --version",
-      "expected_output_contains": "1.3.0",
+      "expected_output_contains": "1.4.0",
       "network_required": false
     },
     {
@@ -26,6 +26,16 @@
       "network_required": false
     },
     {
+      "command": "valuation-scenario-lab operator-handoff --root . --output release",
+      "expected_output_contains": "wrote release/operator-handoff.json",
+      "network_required": false
+    },
+    {
+      "command": "valuation-scenario-lab data-dictionary --root . --output release",
+      "expected_output_contains": "wrote release/data-dictionary.json",
+      "network_required": false
+    },
+    {
       "command": "valuation-scenario-lab validate-release --root . --format markdown",
       "expected_output_contains": "Status: pass",
       "network_required": false
@@ -34,11 +44,11 @@
   "expected_files": [
     {
       "exists": true,
-      "path": "dist/valuation_scenario_lab-1.3.0-py3-none-any.whl"
+      "path": "dist/valuation_scenario_lab-1.4.0-py3-none-any.whl"
     },
     {
       "exists": true,
-      "path": "dist/valuation_scenario_lab-1.3.0.tar.gz"
+      "path": "dist/valuation_scenario_lab-1.4.0.tar.gz"
     },
     {
       "exists": true,
@@ -51,19 +61,43 @@
     {
       "exists": true,
       "path": "release/public-bundle.html"
+    },
+    {
+      "exists": true,
+      "path": "release/operator-handoff.json"
+    },
+    {
+      "exists": true,
+      "path": "release/operator-handoff.md"
+    },
+    {
+      "exists": true,
+      "path": "release/operator-handoff.html"
+    },
+    {
+      "exists": true,
+      "path": "release/data-dictionary.json"
+    },
+    {
+      "exists": true,
+      "path": "release/data-dictionary.md"
+    },
+    {
+      "exists": true,
+      "path": "release/data-dictionary.html"
     }
   ],
   "generated_on": "static-local",
   "install_commands": [
     {
-      "command": "python -m pip install --no-index --find-links dist valuation_scenario_lab-1.3.0-py3-none-any.whl",
-      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.3.0",
+      "command": "python -m pip install --no-index --find-links dist valuation_scenario_lab-1.4.0-py3-none-any.whl",
+      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.4.0",
       "name": "local wheel",
       "network_required": false
     },
     {
       "command": "python -m pip install -e .",
-      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.3.0",
+      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.4.0",
       "name": "editable local checkout",
       "network_required": false
     }

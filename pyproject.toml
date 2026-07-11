@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "valuation-scenario-lab"
-version = "1.3.0"
+version = "1.4.0"
 description = "Zero-dependency offline valuation scenario packet generator."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -126,6 +126,12 @@ where = ["src"]
   "release/install-smoke-receipt.json",
   "release/install-smoke-receipt.md",
   "release/install-smoke-receipt.html",
+  "release/operator-handoff.json",
+  "release/operator-handoff.md",
+  "release/operator-handoff.html",
+  "release/data-dictionary.json",
+  "release/data-dictionary.md",
+  "release/data-dictionary.html",
   "release/public-bundle.json",
   "release/public-bundle.md",
   "release/public-bundle.html",

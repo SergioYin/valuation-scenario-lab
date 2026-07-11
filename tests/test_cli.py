@@ -144,6 +144,8 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert "demo/troubleshoot.html" in workflow_payload["steps"][10]["artifacts"]
     assert "demo/readme-snippet.html" in workflow_payload["steps"][11]["artifacts"]
     assert "demo/release-deck.html" in workflow_payload["steps"][11]["artifacts"]
+    assert "release/data-dictionary.html" in workflow_payload["steps"][-1]["artifacts"]
+    assert "release/operator-handoff.html" in workflow_payload["steps"][-1]["artifacts"]
     assert "release/public-bundle.html" in workflow_payload["steps"][-1]["artifacts"]
     assert "No buy/sell/hold advice." in (out / "sample-workflow.html").read_text(encoding="utf-8")
     assert "<script" not in (out / "sample-workflow.html").read_text(encoding="utf-8").lower()
@@ -281,9 +283,35 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert smoke_payload["status"] == "documented"
     assert all(not item["network_required"] for item in smoke_payload["entry_point_smoke_commands"])
     assert "valuation-scenario-lab selfcheck" in [item["command"] for item in smoke_payload["entry_point_smoke_commands"]]
-    assert smoke_payload["install_commands"][0]["expected_output_contains"].endswith("1.3.0")
+    assert smoke_payload["install_commands"][0]["expected_output_contains"].endswith("1.4.0")
     assert "No live data." in (release_out / "install-smoke-receipt.html").read_text(encoding="utf-8")
     assert "<script" not in (release_out / "install-smoke-receipt.html").read_text(encoding="utf-8").lower()
+
+    dictionary = run_cli("data-dictionary", "--root", str(ROOT), "--output", str(release_out))
+    assert dictionary.returncode == 0, dictionary.stdout + dictionary.stderr
+    dictionary_payload = json.loads((release_out / "data-dictionary.json").read_text(encoding="utf-8"))
+    assert dictionary_payload["schema_version"] == "valuation-scenario-lab.data-dictionary.v1.4"
+    section_names = {item["name"] for item in dictionary_payload["sections"]}
+    assert {"company fixture", "valuation packet", "review and scorecard outputs", "catalog and linter outputs", "release receipts"} <= section_names
+    fixture_fields = {
+        field["name"]
+        for section in dictionary_payload["sections"]
+        if section["name"] == "company fixture"
+        for field in section["fields"]
+    }
+    assert {"current_price", "scenarios[].terminal_multiple"} <= fixture_fields
+    assert "No buy/sell/hold advice." in (release_out / "data-dictionary.html").read_text(encoding="utf-8")
+    assert "<script" not in (release_out / "data-dictionary.html").read_text(encoding="utf-8").lower()
+
+    handoff = run_cli("operator-handoff", "--root", str(ROOT), "--output", str(release_out))
+    assert handoff.returncode == 0, handoff.stdout + handoff.stderr
+    handoff_payload = json.loads((release_out / "operator-handoff.json").read_text(encoding="utf-8"))
+    assert handoff_payload["schema_version"] == "valuation-scenario-lab.operator-handoff.v1.4"
+    assert handoff_payload["repo_url_placeholders"]["repository"] == "REPO_URL_PLACEHOLDER"
+    assert "valuation-scenario-lab data-dictionary --root . --output release" in handoff_payload["latest_commands"]
+    assert "No broker connections." in handoff_payload["known_boundaries"]
+    assert "No live data." in (release_out / "operator-handoff.html").read_text(encoding="utf-8")
+    assert "<script" not in (release_out / "operator-handoff.html").read_text(encoding="utf-8").lower()
 
     bundle = run_cli("export-bundle", "--root", str(ROOT), "--output", str(release_out))
     assert bundle.returncode == 0, bundle.stdout + bundle.stderr
@@ -293,6 +321,8 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     bundle_files = {item["path"]: item for item in bundle_payload["files"]}
     assert bundle_files["demo/valuation-packet.html"]["category"] == "public-demo-artifact"
     assert bundle_files["release/install-smoke-receipt.json"]["category"] == "release-asset"
+    assert bundle_files["release/data-dictionary.json"]["category"] == "release-asset"
+    assert bundle_files["release/operator-handoff.json"]["category"] == "release-asset"
     assert bundle_files["demo/reviewer-scorecard.json"]["category"] == "public-demo-artifact"
     assert bundle_files["demo/troubleshoot.json"]["category"] == "public-demo-artifact"
     assert bundle_files["demo/readme-snippet.json"]["category"] == "public-demo-artifact"
@@ -447,7 +477,7 @@ def test_quickstart_check_and_visual_receipt(tmp_path: Path) -> None:
     assert receipt.returncode == 0, receipt.stdout + receipt.stderr
     receipt_payload = json.loads((out / "visual-receipt.json").read_text(encoding="utf-8"))
     assert receipt_payload["schema_version"] == "valuation-scenario-lab.visual-receipt.v0.5"
-    assert receipt_payload["artifact_count"] == 50
+    assert receipt_payload["artifact_count"] == 56
     assert "No buy/sell/hold advice." in (out / "visual-receipt.html").read_text(encoding="utf-8")
 
 

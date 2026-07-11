@@ -11,3 +11,5 @@ Related deterministic artifacts:
 - `demo-gallery` summarizes multiple neutral bundled fixtures for public demos without live data.
 - `fixture-doctor` validates fixture shape, scenario weights, numeric fields, and source staleness without fetching live data.
 - `public-readiness-landing` summarizes first actions, demo outputs, release checks, and public boundaries in JSON, Markdown, and static HTML.
+- `data-dictionary` documents company fixture, packet, scorecard, catalog, linter, and release receipt schema fields.
+- `operator-handoff` summarizes final release commands, release assets, validation results, URL placeholders, and known boundaries.

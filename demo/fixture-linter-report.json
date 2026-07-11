@@ -432,6 +432,36 @@
         {
           "exists": true,
           "generated_by_command": false,
+          "path": "release/operator-handoff.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/operator-handoff.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/operator-handoff.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/data-dictionary.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/data-dictionary.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/data-dictionary.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
           "path": "release/public-bundle.json"
         },
         {
@@ -624,6 +654,20 @@
           "path": "release/install-smoke-receipt.json"
         },
         {
+          "actual": "valuation-scenario-lab.operator-handoff.v1.4",
+          "expected": "valuation-scenario-lab.operator-handoff.v1.4",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "release/operator-handoff.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.data-dictionary.v1.4",
+          "expected": "valuation-scenario-lab.data-dictionary.v1.4",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "release/data-dictionary.json"
+        },
+        {
           "actual": "valuation-scenario-lab.public-bundle.v1.0",
           "expected": "valuation-scenario-lab.public-bundle.v1.0",
           "generated_by_command": false,
@@ -647,7 +691,7 @@
       "No broker connections.",
       "No buy/sell/hold advice."
     ],
-    "files_checked": 35,
+    "files_checked": 39,
     "files_missing_boundaries": [],
     "status": "pass"
   },

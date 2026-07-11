@@ -40,12 +40,14 @@ Use this skill when a user asks an agent to generate or review an offline valuat
 20. Run `valuation-scenario-lab release-deck --root <root> --output <output>` to create static promotion slides for problem, user, workflow, evidence, limitations, and repeatability.
 21. Run `valuation-scenario-lab fixture-linter-report --root <root> --output <output>` to create expanded fixture diagnostics with severity counts, paths, remediation commands, release checks, and safety summary.
 22. Run `valuation-scenario-lab artifact-catalog --root <root> --output <output>` to create a reuse catalog grouping demo, release, docs, skill, package data, release note, changelog, and test artifacts by audience and reuse purpose with hashes.
-23. Run `valuation-scenario-lab install-smoke-receipt --root <root> --output release` to document local wheel install commands, entry point smoke commands, and expected outputs without running network.
-24. Run `valuation-scenario-lab export-bundle --root <root> --output release` to create a deterministic public bundle manifest with hashes and usage notes for demo, release, package data, docs, tests, and skill files.
-25. Summarize generated files, assumptions changed, and research boundaries.
+23. Run `valuation-scenario-lab data-dictionary --root <root> --output release` to document company fixture, packet, scorecard, catalog, linter, and release receipt schema fields.
+24. Run `valuation-scenario-lab operator-handoff --root <root> --output release` to create the final release handoff with URL placeholders, latest commands, release assets, validation results, and boundaries.
+25. Run `valuation-scenario-lab install-smoke-receipt --root <root> --output release` to document local wheel install commands, entry point smoke commands, and expected outputs without running network.
+26. Run `valuation-scenario-lab export-bundle --root <root> --output release` to create a deterministic public bundle manifest with hashes and usage notes for demo, release, package data, docs, tests, and skill files.
+27. Summarize generated files, assumptions changed, and research boundaries.
 
 ## Public Output Standard
 
 Public summaries should mention that the packet is deterministic, local, broker-free, and research-only. They should not include private paths, private collaboration tools, credentials, tokens, or non-public account details.
 
-Public demo trees should include `public-readiness-landing`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `quickstart-check`, `visual-receipt`, `thesis-brief`, `scenario-library`, `sample-workflow`, `reproducibility-audit`, `casebook`, `reviewer-scorecard`, `troubleshoot`, `readme-snippet`, `release-deck`, `fixture-linter-report`, `artifact-catalog`, and `onboarding-template` artifacts alongside the valuation packet, history comparison, review ledger, and sensitivity matrix. Release trees should include `release-manifest`, `install-smoke-receipt`, and `public-bundle` artifacts.
+Public demo trees should include `public-readiness-landing`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `quickstart-check`, `visual-receipt`, `thesis-brief`, `scenario-library`, `sample-workflow`, `reproducibility-audit`, `casebook`, `reviewer-scorecard`, `troubleshoot`, `readme-snippet`, `release-deck`, `fixture-linter-report`, `artifact-catalog`, and `onboarding-template` artifacts alongside the valuation packet, history comparison, review ledger, and sensitivity matrix. Release trees should include `release-manifest`, `install-smoke-receipt`, `data-dictionary`, `operator-handoff`, and `public-bundle` artifacts.

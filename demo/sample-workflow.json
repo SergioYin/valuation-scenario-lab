@@ -18,7 +18,7 @@
     "valuation-scenario-lab reviewer-scorecard --root . --output demo",
     "valuation-scenario-lab troubleshoot --root . --output demo",
     "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo && valuation-scenario-lab fixture-linter-report --root . --output demo && valuation-scenario-lab artifact-catalog --root . --output demo",
-    "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release"
+    "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab data-dictionary --root . --output release && valuation-scenario-lab operator-handoff --root . --output release && valuation-scenario-lab export-bundle --root . --output release"
   ],
   "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
   "status": "pass",
@@ -377,6 +377,30 @@
         },
         {
           "exists": true,
+          "path": "release/data-dictionary.json"
+        },
+        {
+          "exists": true,
+          "path": "release/data-dictionary.md"
+        },
+        {
+          "exists": true,
+          "path": "release/data-dictionary.html"
+        },
+        {
+          "exists": true,
+          "path": "release/operator-handoff.json"
+        },
+        {
+          "exists": true,
+          "path": "release/operator-handoff.md"
+        },
+        {
+          "exists": true,
+          "path": "release/operator-handoff.html"
+        },
+        {
+          "exists": true,
           "path": "release/public-bundle.json"
         },
         {
@@ -392,12 +416,18 @@
         "release/install-smoke-receipt.json",
         "release/install-smoke-receipt.md",
         "release/install-smoke-receipt.html",
+        "release/data-dictionary.json",
+        "release/data-dictionary.md",
+        "release/data-dictionary.html",
+        "release/operator-handoff.json",
+        "release/operator-handoff.md",
+        "release/operator-handoff.html",
         "release/public-bundle.json",
         "release/public-bundle.md",
         "release/public-bundle.html"
       ],
-      "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
-      "name": "Document install and bundle stability",
+      "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab data-dictionary --root . --output release && valuation-scenario-lab operator-handoff --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
+      "name": "Document install, schema, handoff, and bundle stability",
       "step": 13
     }
   ],

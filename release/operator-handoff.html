@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Operator Handoff</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }
+table { border-collapse: collapse; width: 100%; }
+td, th { border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }
+code { background: #eef3f8; padding: 0.1rem 0.25rem; }
+</style>
+</head>
+<body>
+<h1>Operator Handoff</h1>
+<p>Release version: 1.4.0; validation status: pass</p>
+<h2>Repository URL Placeholders</h2><ul><li><code>repository</code>: <code>REPO_URL_PLACEHOLDER</code></li><li><code>release</code>: <code>RELEASE_URL_PLACEHOLDER</code></li><li><code>wheel</code>: <code>WHEEL_URL_PLACEHOLDER</code></li><li><code>source_archive</code>: <code>SOURCE_ARCHIVE_URL_PLACEHOLDER</code></li></ul>
+<h2>Latest Commands</h2><ul><li><code>valuation-scenario-lab demo --root .</code></li><li><code>valuation-scenario-lab data-dictionary --root . --output release</code></li><li><code>valuation-scenario-lab operator-handoff --root . --output release</code></li><li><code>valuation-scenario-lab install-smoke-receipt --root . --output release</code></li><li><code>valuation-scenario-lab export-bundle --root . --output release</code></li><li><code>valuation-scenario-lab release-manifest --root . --output release</code></li><li><code>valuation-scenario-lab validate-release --root . --format markdown</code></li></ul>
+<h2>Release Assets</h2>
+<table><thead><tr><th>Path</th><th>Exists</th><th>Packaged</th><th>SHA-256</th></tr></thead><tbody><tr><td><code>release/install-smoke-receipt.json</code></td><td>yes</td><td>yes</td><td><code>f0f59ce7910e3338bb0fa3febd7aa36ba84b107207f3758233ceb6057859734d</code></td></tr><tr><td><code>release/install-smoke-receipt.md</code></td><td>yes</td><td>yes</td><td><code>e564926f3fe4e43ba335bc5f0b2deed7a54b6a6237d5382b0234584c963abd6e</code></td></tr><tr><td><code>release/install-smoke-receipt.html</code></td><td>yes</td><td>yes</td><td><code>615cfc04d8f6669286717c2f1f4d159cea9245886a25364e7796318ead5420fe</code></td></tr><tr><td><code>release/operator-handoff.json</code></td><td>yes</td><td>yes</td><td><code>a1355020b73198e8ad4c2a32d9217071ee4176cd79d0fd95b1e298d891748355</code></td></tr><tr><td><code>release/operator-handoff.md</code></td><td>yes</td><td>yes</td><td><code>17f7188093f80a0da9119855a7adbb329b7cc212b9885e28912639dd016b6440</code></td></tr><tr><td><code>release/operator-handoff.html</code></td><td>yes</td><td>yes</td><td><code>a7cfeac09b3448c554a0d2381c87142e25a9f94206bf20bb1d983d7299d81858</code></td></tr><tr><td><code>release/data-dictionary.json</code></td><td>yes</td><td>yes</td><td><code>cce338a6dd34b62d565172d42bcb44285c5bd6dd2e276f3260615cc5f07a8c87</code></td></tr><tr><td><code>release/data-dictionary.md</code></td><td>yes</td><td>yes</td><td><code>d9729bd213a697fbe811894d928b18d345463d7c9b440967205eb7a6de504a5e</code></td></tr><tr><td><code>release/data-dictionary.html</code></td><td>yes</td><td>yes</td><td><code>b2e9a59b3b03caac9cd76576f08851caf170aa4547ec6ea00017fb8e25189d05</code></td></tr><tr><td><code>release/public-bundle.json</code></td><td>yes</td><td>yes</td><td><code>08f210ed36a543f657c241d26e77107c63dc80ba4c02ff5e4738b831902dac59</code></td></tr><tr><td><code>release/public-bundle.md</code></td><td>yes</td><td>yes</td><td><code>7d089542c32f94a9e93f44c3f0e19b05fa8e0af73b65fa4cc130fabd4212e857</code></td></tr><tr><td><code>release/public-bundle.html</code></td><td>yes</td><td>yes</td><td><code>c38c98bd3c8778b98eda095dc57ba35a9a7c4ee2a2393351fd2f479d8eab054c</code></td></tr><tr><td><code>release/release-manifest.json</code></td><td>yes</td><td>yes</td><td><code>7aaf4d2916f347f8e8a9be8e5de0f963605be72da266c44b66b2071fec6f9cd2</code></td></tr><tr><td><code>release/release-manifest.md</code></td><td>yes</td><td>yes</td><td><code>457f4b5cc46c22bdd87e032443050f8972c57ef29ef901e16959463ff8fcf8fb</code></td></tr></tbody></table>
+<h2>Validation Results</h2><ul><li>schema_version: valuation-scenario-lab.release-validation.v0.8</li><li>status: pass</li><li>finding_count: 0</li><li>error_count: 0</li><li>warning_count: 0</li></ul>
+<h2>Known Boundaries</h2><ul><li>Research-only output.</li><li>Static local fictional fixtures.</li><li>No live data.</li><li>No broker connections.</li><li>No orders.</li><li>No predictions.</li><li>No buy/sell/hold advice.</li><li>No network access is required by package commands.</li></ul>
+<h2>Boundaries</h2><ul><li>No live data.</li><li>No broker connections.</li><li>No buy/sell/hold advice.</li></ul>
+</body>
+</html>

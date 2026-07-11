@@ -110,13 +110,19 @@ Command: `valuation-scenario-lab readme-snippet --root . --output demo && valuat
 - `demo/artifact-catalog.md`: ok
 - `demo/artifact-catalog.html`: ok
 
-### 13. Document install and bundle stability
+### 13. Document install, schema, handoff, and bundle stability
 
-Command: `valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release`
+Command: `valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab data-dictionary --root . --output release && valuation-scenario-lab operator-handoff --root . --output release && valuation-scenario-lab export-bundle --root . --output release`
 
 - `release/install-smoke-receipt.json`: ok
 - `release/install-smoke-receipt.md`: ok
 - `release/install-smoke-receipt.html`: ok
+- `release/data-dictionary.json`: ok
+- `release/data-dictionary.md`: ok
+- `release/data-dictionary.html`: ok
+- `release/operator-handoff.json`: ok
+- `release/operator-handoff.md`: ok
+- `release/operator-handoff.html`: ok
 - `release/public-bundle.json`: ok
 - `release/public-bundle.md`: ok
 - `release/public-bundle.html`: ok

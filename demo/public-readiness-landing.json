@@ -22,6 +22,8 @@
     "demo/release-deck.html",
     "demo/artifact-catalog.html",
     "demo/fixture-linter-report.html",
+    "release/data-dictionary.html",
+    "release/operator-handoff.html",
     "demo/decision-journal.md",
     "demo/assumption-change-walkthrough.html",
     "demo/multi-company-demo-gallery.html",
@@ -76,6 +78,16 @@
       "artifact": "demo/artifact-catalog.html",
       "command": "valuation-scenario-lab artifact-catalog --root . --output demo",
       "label": "Open artifact catalog"
+    },
+    {
+      "artifact": "release/data-dictionary.html",
+      "command": "valuation-scenario-lab data-dictionary --root . --output release",
+      "label": "Read data dictionary"
+    },
+    {
+      "artifact": "release/operator-handoff.html",
+      "command": "valuation-scenario-lab operator-handoff --root . --output release",
+      "label": "Read operator handoff"
     },
     {
       "artifact": "demo/fixture-linter-report.html",

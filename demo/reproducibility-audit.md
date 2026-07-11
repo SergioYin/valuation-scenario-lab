@@ -12,11 +12,11 @@ Status: fail
 
 ## Hash Manifest Coverage
 
-- Expected files: 95
-- Manifest files: 95
+- Expected files: 101
+- Manifest files: 101
 - Missing: 0
 - Extra: 0
-- Hash mismatches: 6
+- Hash mismatches: 21
 
 ## Boundaries
 

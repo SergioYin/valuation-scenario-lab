@@ -96,6 +96,12 @@ REQUIRED_FILES = [
     "release/install-smoke-receipt.json",
     "release/install-smoke-receipt.md",
     "release/install-smoke-receipt.html",
+    "release/operator-handoff.json",
+    "release/operator-handoff.md",
+    "release/operator-handoff.html",
+    "release/data-dictionary.json",
+    "release/data-dictionary.md",
+    "release/data-dictionary.html",
     "release/public-bundle.json",
     "release/public-bundle.md",
     "release/public-bundle.html",
@@ -127,6 +133,8 @@ EXPECTED_SCHEMA_VERSIONS = {
     "demo/artifact-catalog.json": "valuation-scenario-lab.artifact-catalog.v1.3",
     "demo/fixture-linter-report.json": "valuation-scenario-lab.fixture-linter-report.v1.3",
     "release/install-smoke-receipt.json": "valuation-scenario-lab.install-smoke-receipt.v1.0",
+    "release/operator-handoff.json": "valuation-scenario-lab.operator-handoff.v1.4",
+    "release/data-dictionary.json": "valuation-scenario-lab.data-dictionary.v1.4",
     "release/public-bundle.json": "valuation-scenario-lab.public-bundle.v1.0",
 }
 
@@ -368,8 +376,10 @@ def artifact_audience(path: str) -> str:
 def artifact_reuse_purpose(path: str) -> str:
     if "fixture-linter-report" in path or "fixture-doctor" in path:
         return "fixture diagnostics and remediation"
-    if "artifact-catalog" in path or "public-bundle" in path or "release-manifest" in path:
+    if "artifact-catalog" in path or "public-bundle" in path or "release-manifest" in path or "data-dictionary" in path:
         return "artifact reuse inventory"
+    if "operator-handoff" in path:
+        return "release operator handoff"
     if "reproducibility-audit" in path or "validate" in path or path.startswith("release/"):
         return "release validation evidence"
     if path.startswith("skills/"):
@@ -459,11 +469,12 @@ def public_report_path(path: Path, root: Path) -> str:
 
 
 def install_smoke_receipt(root: Path) -> dict[str, Any]:
-    wheel_name = f"valuation_scenario_lab-1.3.0-py3-none-any.whl"
+    version = project_version(root)
+    wheel_name = f"valuation_scenario_lab-{version}-py3-none-any.whl"
     smoke_commands = [
         {
             "command": "valuation-scenario-lab --version",
-            "expected_output_contains": "1.3.0",
+            "expected_output_contains": version,
             "network_required": False,
         },
         {
@@ -482,6 +493,16 @@ def install_smoke_receipt(root: Path) -> dict[str, Any]:
             "network_required": False,
         },
         {
+            "command": "valuation-scenario-lab operator-handoff --root . --output release",
+            "expected_output_contains": "wrote release/operator-handoff.json",
+            "network_required": False,
+        },
+        {
+            "command": "valuation-scenario-lab data-dictionary --root . --output release",
+            "expected_output_contains": "wrote release/data-dictionary.json",
+            "network_required": False,
+        },
+        {
             "command": "valuation-scenario-lab validate-release --root . --format markdown",
             "expected_output_contains": "Status: pass",
             "network_required": False,
@@ -489,10 +510,16 @@ def install_smoke_receipt(root: Path) -> dict[str, Any]:
     ]
     required = [
         "dist/" + wheel_name,
-        "dist/valuation_scenario_lab-1.3.0.tar.gz",
+        f"dist/valuation_scenario_lab-{version}.tar.gz",
         "release/public-bundle.json",
         "release/public-bundle.md",
         "release/public-bundle.html",
+        "release/operator-handoff.json",
+        "release/operator-handoff.md",
+        "release/operator-handoff.html",
+        "release/data-dictionary.json",
+        "release/data-dictionary.md",
+        "release/data-dictionary.html",
     ]
     return {
         "schema_version": "valuation-scenario-lab.install-smoke-receipt.v1.0",
@@ -503,13 +530,13 @@ def install_smoke_receipt(root: Path) -> dict[str, Any]:
             {
                 "name": "local wheel",
                 "command": f"python -m pip install --no-index --find-links dist {wheel_name}",
-                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.3.0",
+                "expected_output_contains": f"Successfully installed valuation-scenario-lab-{version}",
                 "network_required": False,
             },
             {
                 "name": "editable local checkout",
                 "command": "python -m pip install -e .",
-                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.3.0",
+                "expected_output_contains": f"Successfully installed valuation-scenario-lab-{version}",
                 "network_required": False,
             },
         ],
@@ -517,6 +544,251 @@ def install_smoke_receipt(root: Path) -> dict[str, Any]:
         "expected_files": [{"path": item, "exists": (root / item).exists()} for item in required],
         "boundaries": SAFETY_BOUNDARIES,
     }
+
+
+def operator_handoff(root: Path) -> dict[str, Any]:
+    validation = validate_release(root)
+    validation_summary = {
+        "schema_version": validation["schema_version"],
+        "status": validation["status"],
+        "finding_count": len(validation["findings"]),
+        "error_count": sum(1 for item in validation["findings"] if item["severity"] == "error"),
+        "warning_count": sum(1 for item in validation["findings"] if item["severity"] == "warning"),
+    }
+    return {
+        "schema_version": "valuation-scenario-lab.operator-handoff.v1.4",
+        "generated_on": "static-local",
+        "release_version": project_version(root),
+        "repo_url_placeholders": {
+            "repository": "REPO_URL_PLACEHOLDER",
+            "release": "RELEASE_URL_PLACEHOLDER",
+            "wheel": "WHEEL_URL_PLACEHOLDER",
+            "source_archive": "SOURCE_ARCHIVE_URL_PLACEHOLDER",
+        },
+        "latest_commands": [
+            "valuation-scenario-lab demo --root .",
+            "valuation-scenario-lab data-dictionary --root . --output release",
+            "valuation-scenario-lab operator-handoff --root . --output release",
+            "valuation-scenario-lab install-smoke-receipt --root . --output release",
+            "valuation-scenario-lab export-bundle --root . --output release",
+            "valuation-scenario-lab release-manifest --root . --output release",
+            "valuation-scenario-lab validate-release --root . --format markdown",
+        ],
+        "release_assets": release_asset_rows(root),
+        "validation_results": validation_summary,
+        "known_boundaries": [
+            "Research-only output.",
+            "Static local fictional fixtures.",
+            "No live data.",
+            "No broker connections.",
+            "No orders.",
+            "No predictions.",
+            "No buy/sell/hold advice.",
+            "No network access is required by package commands.",
+        ],
+        "handoff_note": "Concise release handoff for final operator review; replace URL placeholders after publication.",
+        "boundaries": SAFETY_BOUNDARIES,
+    }
+
+
+def data_dictionary(root: Path) -> dict[str, Any]:
+    return {
+        "schema_version": "valuation-scenario-lab.data-dictionary.v1.4",
+        "generated_on": "static-local",
+        "release_version": project_version(root),
+        "scope": [
+            "company fixtures",
+            "valuation packets",
+            "review ledgers",
+            "decision journals",
+            "reviewer scorecards",
+            "artifact catalogs",
+            "fixture linter reports",
+            "release receipts",
+        ],
+        "sections": schema_field_sections(),
+        "format_notes": [
+            "Fields are deterministic JSON keys emitted or consumed by the offline CLI.",
+            "Numeric valuation fields are rounded in generated artifacts for stable review.",
+            "All paths are repository-relative unless explicitly marked as placeholders.",
+        ],
+        "boundaries": SAFETY_BOUNDARIES,
+    }
+
+
+def project_version(root: Path) -> str:
+    pyproject = root / "pyproject.toml"
+    if not pyproject.exists():
+        return "unknown"
+    data = tomllib.loads(pyproject.read_text(encoding="utf-8"))
+    return str(data.get("project", {}).get("version", "unknown"))
+
+
+def release_asset_rows(root: Path) -> list[dict[str, Any]]:
+    package_data = package_data_files(root)
+    names = [
+        "release/install-smoke-receipt.json",
+        "release/install-smoke-receipt.md",
+        "release/install-smoke-receipt.html",
+        "release/operator-handoff.json",
+        "release/operator-handoff.md",
+        "release/operator-handoff.html",
+        "release/data-dictionary.json",
+        "release/data-dictionary.md",
+        "release/data-dictionary.html",
+        "release/public-bundle.json",
+        "release/public-bundle.md",
+        "release/public-bundle.html",
+        "release/release-manifest.json",
+        "release/release-manifest.md",
+    ]
+    rows = []
+    for name in names:
+        path = root / name
+        rows.append(
+            {
+                "path": name,
+                "exists": path.exists(),
+                "format": artifact_format(name),
+                "sha256": sha256(path) if path.exists() else None,
+                "bytes": path.stat().st_size if path.exists() else 0,
+                "packaged_data_file": name in package_data,
+                "usage_note": usage_note(name),
+            }
+        )
+    return rows
+
+
+def field(name: str, field_type: str, description: str, required: bool = True) -> dict[str, Any]:
+    return {"name": name, "type": field_type, "required": required, "description": description}
+
+
+def schema_field_sections() -> list[dict[str, Any]]:
+    return [
+        {
+            "name": "company fixture",
+            "artifacts": ["examples/company.json", "examples/software-compounder.json", "demo/onboarding-template/company.json"],
+            "fields": [
+                field("company", "string", "Fictional company display name."),
+                field("ticker", "string", "Fictional ticker or local identifier.", False),
+                field("currency", "string", "Currency label used for generated packet display.", False),
+                field("template_note", "string", "Onboarding note for scaffold fixtures.", False),
+                field("current_price", "number", "Static local reference price used only for deterministic gap math."),
+                field("shares_outstanding_m", "number", "Static share count in millions."),
+                field("net_cash_m", "number", "Static net cash balance in millions."),
+                field("source_freshness", "array<object>", "Fixture-level source freshness entries with name and age_days.", False),
+                field("scenarios", "array<object>", "Weighted local scenario assumptions; weights must sum to 1.0."),
+                field("scenarios[].name", "string", "Scenario label."),
+                field("scenarios[].weight", "number", "Scenario probability weight."),
+                field("scenarios[].starting_revenue_m", "number", "Starting revenue in millions."),
+                field("scenarios[].revenue_growth_pct", "number", "Five-year annual revenue growth percentage."),
+                field("scenarios[].fcf_margin_pct", "number", "Free-cash-flow margin percentage."),
+                field("scenarios[].discount_rate_pct", "number", "Discount rate percentage."),
+                field("scenarios[].terminal_growth_pct", "number", "Terminal growth percentage."),
+                field("scenarios[].terminal_multiple", "number", "Terminal multiple cross-check."),
+                field("scenarios[].catalysts", "array<string>", "Local catalyst notes.", False),
+                field("scenarios[].risks", "array<string>", "Local risk notes.", False),
+                field("scenarios[].source_freshness", "array<object>", "Scenario-level source freshness entries.", False),
+            ],
+        },
+        {
+            "name": "valuation packet",
+            "artifacts": ["demo/valuation-packet.json", "examples/prior-packet.json"],
+            "fields": [
+                field("schema_version", "string", "Packet schema identifier."),
+                field("generated_on", "string", "Static generation marker."),
+                field("company", "string", "Company display name."),
+                field("ticker", "string", "Ticker or local identifier."),
+                field("currency", "string", "Currency label."),
+                field("current_price", "number", "Rounded static reference price."),
+                field("weighted_fair_value_per_share", "number", "Scenario-weighted modeled fair value per share."),
+                field("weighted_range_per_share", "array<number>", "Scenario-weighted low and high range."),
+                field("weighted_margin_of_safety_pct", "number", "Modeled percentage gap versus current_price."),
+                field("margin_of_safety_label", "string", "Neutral label for modeled value gap."),
+                field("valuation_ranges", "array<object>", "Per-scenario low/base/high outputs."),
+                field("valuation_ranges[].scenario", "string", "Scenario name."),
+                field("valuation_ranges[].weight", "number", "Scenario weight."),
+                field("valuation_ranges[].low", "number", "Low value per share."),
+                field("valuation_ranges[].base", "number", "Blended base value per share."),
+                field("valuation_ranges[].high", "number", "High value per share."),
+                field("valuation_ranges[].margin_of_safety_pct", "number", "Scenario value gap percentage."),
+                field("valuation_ranges[].margin_label", "string", "Scenario neutral gap label."),
+                field("valuation_ranges[].score", "number", "Internal deterministic review score."),
+                field("catalysts", "array<string>", "Sorted catalyst notes from scenarios."),
+                field("risks", "array<string>", "Sorted risk notes from scenarios."),
+                field("source_freshness", "array<object>", "Fixture source freshness entries."),
+                field("review_prompts", "array<string>", "Neutral review prompts."),
+                field("boundaries", "array<string>", "Finance safety boundaries."),
+            ],
+        },
+        {
+            "name": "review and scorecard outputs",
+            "artifacts": ["demo/review-ledger.json", "demo/decision-journal.json", "demo/reviewer-scorecard.json"],
+            "fields": [
+                field("entries", "array<object>", "Review ledger rows.", False),
+                field("entries[].scenario", "string", "Scenario under review.", False),
+                field("entries[].priority", "string", "Review priority bucket.", False),
+                field("entries[].margin_label", "string", "Neutral gap label.", False),
+                field("entries[].review_question", "string", "Question for local review.", False),
+                field("entries[].owner", "string", "Local owner placeholder.", False),
+                field("entries[].evidence", "array<string>", "Evidence artifact paths.", False),
+                field("journal_entries", "array<object>", "Decision journal rows.", False),
+                field("summary_decision", "string", "No-action research logging summary.", False),
+                field("open_questions", "array<string>", "Open review questions.", False),
+                field("status", "string", "Scorecard status.", False),
+                field("score", "number", "Awarded score.", False),
+                field("max_score", "number", "Maximum score.", False),
+                field("rubric", "string", "Scorecard rubric description.", False),
+                field("lenses", "array<object>", "Product, engineering, cold-user, and risk score lenses.", False),
+                field("lenses[].criteria", "array<object>", "Criteria with max points, awarded points, status, and artifacts.", False),
+            ],
+        },
+        {
+            "name": "catalog and linter outputs",
+            "artifacts": ["demo/artifact-catalog.json", "demo/fixture-linter-report.json"],
+            "fields": [
+                field("artifact_count", "number", "Catalog artifact count.", False),
+                field("package_data_count", "number", "Number of artifacts included as package data.", False),
+                field("required_release_file_count", "number", "Count of required release files present in catalog.", False),
+                field("groups", "array<object>", "Catalog groups by audience and reuse purpose.", False),
+                field("groups[].audience", "string", "Target reviewer audience."),
+                field("groups[].purposes", "array<object>", "Reuse-purpose buckets."),
+                field("groups[].purposes[].artifacts", "array<object>", "Artifact rows with path, category, format, hash, size, flags, and usage note."),
+                field("fixture_source", "string", "Fixture directory label.", False),
+                field("fixture_count", "number", "Number of fixture files inspected.", False),
+                field("issue_count", "number", "Total fixture diagnostic count.", False),
+                field("severity_counts", "object", "Counts by error, warning, and info.", False),
+                field("diagnostics", "array<object>", "Fixture doctor issues with remediation commands.", False),
+                field("release_checks", "object", "Release context for the linter report.", False),
+                field("safety_summary", "object", "Safety-boundary coverage summary.", False),
+            ],
+        },
+        {
+            "name": "release receipts",
+            "artifacts": [
+                "release/install-smoke-receipt.json",
+                "release/public-bundle.json",
+                "release/release-manifest.json",
+                "release/operator-handoff.json",
+                "release/data-dictionary.json",
+            ],
+            "fields": [
+                field("network_policy", "string", "Offline install-smoke policy text.", False),
+                field("install_commands", "array<object>", "Documented local install commands and expected output.", False),
+                field("entry_point_smoke_commands", "array<object>", "Documented CLI smoke commands and expected output.", False),
+                field("expected_files", "array<object>", "Expected release file existence checks.", False),
+                field("files", "array<object>", "Manifest or bundle file rows with path, hash, bytes, category, package-data flag, and usage note.", False),
+                field("self_outputs", "array<object>", "Outputs excluded from self hash indexing.", False),
+                field("repo_url_placeholders", "object", "Repository, release, wheel, and source archive URL placeholders.", False),
+                field("latest_commands", "array<string>", "Final local handoff command list.", False),
+                field("release_assets", "array<object>", "Final release asset rows.", False),
+                field("validation_results", "object", "Release validation status and finding counts.", False),
+                field("known_boundaries", "array<string>", "Operational boundaries for handoff.", False),
+                field("sections", "array<object>", "Data dictionary schema sections.", False),
+                field("format_notes", "array<string>", "Data dictionary format notes.", False),
+            ],
+        },
+    ]
 
 
 def reproducibility_audit(root: Path, generated_outputs: list[str] | None = None) -> dict[str, Any]:
@@ -658,6 +930,10 @@ def safety_boundary_checks(root: Path) -> dict[str, Any]:
         "demo/onboarding-template/README.md",
         "release/install-smoke-receipt.md",
         "release/install-smoke-receipt.html",
+        "release/operator-handoff.md",
+        "release/operator-handoff.html",
+        "release/data-dictionary.md",
+        "release/data-dictionary.html",
         "release/public-bundle.md",
         "release/public-bundle.html",
         "skills/agent/valuation-scenario-lab/SKILL.md",

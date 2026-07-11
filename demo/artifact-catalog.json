@@ -1,5 +1,5 @@
 {
-  "artifact_count": 92,
+  "artifact_count": 98,
   "audience_count": 5,
   "boundaries": [
     "No live data.",
@@ -17,7 +17,7 @@
           "artifacts": [
             {
               "audience": "researcher",
-              "bytes": 9835,
+              "bytes": 10322,
               "category": "package-data",
               "format": "md",
               "generated_artifact": false,
@@ -26,7 +26,7 @@
               "path": "README.md",
               "required_for_release": true,
               "reuse_purpose": "documentation reuse",
-              "sha256": "6d47f5f9456e539bd3ec27d02cca4a3b5f4d1c4c513f931d81a87c5574cc7365",
+              "sha256": "c14f928d9540069bfecaa5bb765ea395fdf37bd85d732d1012384e636a5ca37c",
               "usage_note": "Primary user documentation, command list, quickstart, and safety boundaries."
             }
           ],
@@ -231,7 +231,7 @@
             },
             {
               "audience": "researcher",
-              "bytes": 4315,
+              "bytes": 4747,
               "category": "public-demo-artifact",
               "format": "html",
               "generated_artifact": true,
@@ -240,12 +240,12 @@
               "path": "demo/public-readiness-landing.html",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "95c62a58d564be1c8bf05189f1dd373ab6634f6e00a0b9d9da2bcdca4e38b505",
+              "sha256": "556382f0c9d4f4d85f5dbc66fea62a632e22b920b24e704ba184689e80ba62cd",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
               "audience": "researcher",
-              "bytes": 3666,
+              "bytes": 4114,
               "category": "public-demo-artifact",
               "format": "json",
               "generated_artifact": true,
@@ -254,12 +254,12 @@
               "path": "demo/public-readiness-landing.json",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "8136e3be806e1acdb583bfb699ef2ef94005ca32325590c32cc2ab27132dccf3",
+              "sha256": "9a19ea6733170e76a2501c2cdbd8ab0f836c06ceec55e66f93adcd9faf2a0943",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
               "audience": "researcher",
-              "bytes": 2609,
+              "bytes": 2929,
               "category": "public-demo-artifact",
               "format": "md",
               "generated_artifact": true,
@@ -268,12 +268,12 @@
               "path": "demo/public-readiness-landing.md",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "db84899efbb0b0f3a03a095cc48af42ca93a1ae8c4e9ce2a743d832d7da2e719",
+              "sha256": "80a3f13f6f52356f5bf2a54a35dd03051e6798308240afc3a8fb88219ff6cc33",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
               "audience": "researcher",
-              "bytes": 7149,
+              "bytes": 7294,
               "category": "public-demo-artifact",
               "format": "json",
               "generated_artifact": true,
@@ -282,12 +282,12 @@
               "path": "demo/quickstart-check.json",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "3b16b69bf5480bdb95497518b35b7bc5f77c013a5ca543a8108edbd0c8a9e62d",
+              "sha256": "821125e8e81bd5c34041412e383695f73562040bede13cffd00de24501f45b04",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
               "audience": "researcher",
-              "bytes": 4224,
+              "bytes": 4363,
               "category": "public-demo-artifact",
               "format": "md",
               "generated_artifact": true,
@@ -296,7 +296,7 @@
               "path": "demo/quickstart-check.md",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "731641c8e132b580a2d1aef182490753a709a6842af03e4a5ca7b3852001d33f",
+              "sha256": "c67570ba1ae612c71f4a65791d9de7c777edc13e6bfd37724fd1b7a80709872f",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
@@ -422,7 +422,7 @@
               "path": "demo/visual-receipt.json",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "ef7b1d344931a6c8af320a8a77a419719bf41ec69d8e61b0de161a6591277b54",
+              "sha256": "496716957d786e7a5a81c8bb7842df16b7c19764b86c1e01c676d172f330f6e7",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
@@ -436,7 +436,7 @@
               "path": "demo/visual-receipt.md",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "a2430684ba523d4759494e24382b147829042d73be4a278cd41bd68145080521",
+              "sha256": "9ccec62bca9459b2d85557b43add3995055250b9a0cc6c08ce90944cc1e623d9",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             }
           ],
@@ -796,12 +796,12 @@
               "path": "demo/fixture-linter-report.html",
               "required_for_release": true,
               "reuse_purpose": "fixture diagnostics and remediation",
-              "sha256": "b3de7b26002e28cd2d6d82c32d25b1847a1bf688f3145763f0cbc9158da86963",
+              "sha256": "1eddb419d86118c7d16fdb10d1e10725a5c0c4ef0f9300e92b5da2e22cf994fa",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
               "audience": "reviewer",
-              "bytes": 20156,
+              "bytes": 21518,
               "category": "public-demo-artifact",
               "format": "json",
               "generated_artifact": true,
@@ -810,7 +810,7 @@
               "path": "demo/fixture-linter-report.json",
               "required_for_release": true,
               "reuse_purpose": "fixture diagnostics and remediation",
-              "sha256": "13158d8b9549ee24358a4e3c9ecb499be5783870148abf3623450e63217f7f26",
+              "sha256": "f9d1019aa53eaf898f53f1c7234cfac17dd0453643c1300f25e1959413fb0b08",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
@@ -824,7 +824,7 @@
               "path": "demo/fixture-linter-report.md",
               "required_for_release": true,
               "reuse_purpose": "fixture diagnostics and remediation",
-              "sha256": "298ce2a50de392614e9facd30685781819a19596545982dd8f9dba37829660a9",
+              "sha256": "a70b8bfb14506e7a26902692638b1b0a78923466e453d59e8b1b983412829d7a",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             }
           ],
@@ -953,7 +953,7 @@
           "artifacts": [
             {
               "audience": "reviewer",
-              "bytes": 1092,
+              "bytes": 1095,
               "category": "public-demo-artifact",
               "format": "html",
               "generated_artifact": true,
@@ -962,12 +962,12 @@
               "path": "demo/reproducibility-audit.html",
               "required_for_release": true,
               "reuse_purpose": "release validation evidence",
-              "sha256": "36f59c3ba9be725f94fe99d8665e5f5775c33ccdf3fb3bc49838907388745349",
+              "sha256": "d4985a0a00b0ea2b7b8adaf6fba8e6a5c2438f89f0fa12ce96a29f58e7dd52f0",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
               "audience": "reviewer",
-              "bytes": 28875,
+              "bytes": 31843,
               "category": "public-demo-artifact",
               "format": "json",
               "generated_artifact": true,
@@ -976,12 +976,12 @@
               "path": "demo/reproducibility-audit.json",
               "required_for_release": true,
               "reuse_purpose": "release validation evidence",
-              "sha256": "45bdbd1b7b1073dedbf79db5b7dbc7346837767e2102d727d834155aee46d635",
+              "sha256": "f99cb5cae8d64bde01e379569af218be92987588b72ae7601e5e074f1ee36488",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
               "audience": "reviewer",
-              "bytes": 396,
+              "bytes": 399,
               "category": "public-demo-artifact",
               "format": "md",
               "generated_artifact": true,
@@ -990,7 +990,7 @@
               "path": "demo/reproducibility-audit.md",
               "required_for_release": true,
               "reuse_purpose": "release validation evidence",
-              "sha256": "d49ad2aa6614fd56c84368e8223382a3695cd1e9f3c96f4a201e5c88a3b1ad13",
+              "sha256": "6a201d03b70e2fece001616b727127cc41dfe9189f5cca71d78dbc6842f2143a",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             }
           ],
@@ -1007,7 +1007,7 @@
           "artifacts": [
             {
               "audience": "agent-builder",
-              "bytes": 5273,
+              "bytes": 5701,
               "category": "skill-file",
               "format": "md",
               "generated_artifact": false,
@@ -1016,7 +1016,7 @@
               "path": "skills/agent/valuation-scenario-lab/SKILL.md",
               "required_for_release": true,
               "reuse_purpose": "agent workflow reuse",
-              "sha256": "8758b1d2d36dfd55fdb757adb72a3cf63d136a1b7385f78edf7824d4ceac5e50",
+              "sha256": "a190e393105200c077dd2e5ff0686532410c45aaf0ced4a40cfba360ca6fd808",
               "usage_note": "Agent protocol file preserving finance safety boundaries and workflow order."
             }
           ],
@@ -1027,7 +1027,7 @@
           "artifacts": [
             {
               "audience": "agent-builder",
-              "bytes": 1096,
+              "bytes": 1346,
               "category": "package-data",
               "format": "md",
               "generated_artifact": false,
@@ -1036,12 +1036,12 @@
               "path": "docs/packet-format.md",
               "required_for_release": false,
               "reuse_purpose": "documentation reuse",
-              "sha256": "7a127855a424875508477bff35a9311c759880cc871d39bc0479ee04ac61aa22",
+              "sha256": "a86bb9e5da9e72636eed3e8b4a30562917399def4affc5c2c27b351fac282506",
               "usage_note": "Project documentation for packet format, release checks, and validation expectations."
             },
             {
               "audience": "agent-builder",
-              "bytes": 3926,
+              "bytes": 4374,
               "category": "package-data",
               "format": "md",
               "generated_artifact": false,
@@ -1050,7 +1050,7 @@
               "path": "docs/release-checks.md",
               "required_for_release": true,
               "reuse_purpose": "documentation reuse",
-              "sha256": "9c94d2df9f2e0b7ced6d49cfec8eec180cbb2db949174ae990dc7a34cc4ef50b",
+              "sha256": "23a360665b73ba86e8c2395848fbeb7969f9e831200ca878c5dbcc9c7121a22d",
               "usage_note": "Project documentation for packet format, release checks, and validation expectations."
             }
           ],
@@ -1103,7 +1103,7 @@
             },
             {
               "audience": "agent-builder",
-              "bytes": 5738,
+              "bytes": 6232,
               "category": "public-demo-artifact",
               "format": "html",
               "generated_artifact": true,
@@ -1112,12 +1112,12 @@
               "path": "demo/sample-workflow.html",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "2d1272d1aa28ed204262d90d1fd47ace14485f0c0832207c0c7e7cec000a9300",
+              "sha256": "af8615d8600dafada8b15542d4a1a08839a9d87ffccb713b6a45f8e8b4e6f84c",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
               "audience": "agent-builder",
-              "bytes": 12029,
+              "bytes": 13135,
               "category": "public-demo-artifact",
               "format": "json",
               "generated_artifact": true,
@@ -1126,12 +1126,12 @@
               "path": "demo/sample-workflow.json",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "c69609ea05db1da05bc3edb63280280db2e4d6f29dcf9bd533f5d532c4d5acff",
+              "sha256": "8274054a1e774304b56a123dc824e4263ebbb026cf704f8304f360a1aacb61ca",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             },
             {
               "audience": "agent-builder",
-              "bytes": 3958,
+              "bytes": 4334,
               "category": "public-demo-artifact",
               "format": "md",
               "generated_artifact": true,
@@ -1140,7 +1140,7 @@
               "path": "demo/sample-workflow.md",
               "required_for_release": true,
               "reuse_purpose": "public review reuse",
-              "sha256": "4c6fb6d7b5564aabdb119f31814f6501824cb031fed81f61cc3d87944366173a",
+              "sha256": "8129e6ac1c9c1c60191bff46da32aba77f7bc313d2cb6669237bd4f2be724be7",
               "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
             }
           ],
@@ -1149,15 +1149,63 @@
       ]
     },
     {
-      "artifact_count": 7,
+      "artifact_count": 13,
       "audience": "release-operator",
       "purposes": [
+        {
+          "artifact_count": 3,
+          "artifacts": [
+            {
+              "audience": "release-operator",
+              "bytes": 13136,
+              "category": "release-asset",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "release/data-dictionary.html",
+              "required_for_release": true,
+              "reuse_purpose": "artifact reuse inventory",
+              "sha256": "b2e9a59b3b03caac9cd76576f08851caf170aa4547ec6ea00017fb8e25189d05",
+              "usage_note": "Release validation asset for reviewers and package publication checks."
+            },
+            {
+              "audience": "release-operator",
+              "bytes": 17599,
+              "category": "release-asset",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "release/data-dictionary.json",
+              "required_for_release": true,
+              "reuse_purpose": "artifact reuse inventory",
+              "sha256": "cce338a6dd34b62d565172d42bcb44285c5bd6dd2e276f3260615cc5f07a8c87",
+              "usage_note": "Release validation asset for reviewers and package publication checks."
+            },
+            {
+              "audience": "release-operator",
+              "bytes": 8492,
+              "category": "release-asset",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "release/data-dictionary.md",
+              "required_for_release": true,
+              "reuse_purpose": "artifact reuse inventory",
+              "sha256": "d9729bd213a697fbe811894d928b18d345463d7c9b440967205eb7a6de504a5e",
+              "usage_note": "Release validation asset for reviewers and package publication checks."
+            }
+          ],
+          "reuse_purpose": "artifact reuse inventory"
+        },
         {
           "artifact_count": 2,
           "artifacts": [
             {
               "audience": "release-operator",
-              "bytes": 6783,
+              "bytes": 7461,
               "category": "package-data",
               "format": "md",
               "generated_artifact": false,
@@ -1166,12 +1214,12 @@
               "path": "CHANGELOG.md",
               "required_for_release": true,
               "reuse_purpose": "documentation reuse",
-              "sha256": "7d44cdbc1d3ed45c7cbcb1ab37a82d6403f73a02d0c6842ee0a9289b5bfc56c0",
+              "sha256": "566318e4070802c6994208803803e0976dd4eb29477d370a214014a731f1d585",
               "usage_note": "Public repository file included for release review."
             },
             {
               "audience": "release-operator",
-              "bytes": 7922,
+              "bytes": 8686,
               "category": "package-data",
               "format": "md",
               "generated_artifact": false,
@@ -1180,7 +1228,7 @@
               "path": "RELEASE_NOTES.md",
               "required_for_release": true,
               "reuse_purpose": "documentation reuse",
-              "sha256": "f9d0ce34742e7ad4ae5c5b7e635835889ea82b11211b56aa79da74f24c4039bd",
+              "sha256": "b1fa9260b8678c2481d82df4c0af1856b79e02f133d8194c123da2ade349739d",
               "usage_note": "Public repository file included for release review."
             }
           ],
@@ -1205,7 +1253,7 @@
             },
             {
               "audience": "release-operator",
-              "bytes": 4247,
+              "bytes": 4450,
               "category": "package-data",
               "format": "toml",
               "generated_artifact": false,
@@ -1214,7 +1262,7 @@
               "path": "pyproject.toml",
               "required_for_release": true,
               "reuse_purpose": "package maintenance reuse",
-              "sha256": "5673086abd4c79b367fe2c082ac94d1a17cf3b2fb795b21cad5fb25a55c11092",
+              "sha256": "d3bff0ce9eb0bf2a402722ceb0c184b6e2cfc55f272ac829c22f3df62f121250",
               "usage_note": "Package metadata, entry point, package data, and zero dependency declaration."
             }
           ],
@@ -1225,7 +1273,55 @@
           "artifacts": [
             {
               "audience": "release-operator",
-              "bytes": 2394,
+              "bytes": 4563,
+              "category": "release-asset",
+              "format": "html",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "release/operator-handoff.html",
+              "required_for_release": true,
+              "reuse_purpose": "release operator handoff",
+              "sha256": "27fe224bfb16d06ac4c32525df4c3d0fa232f36986d0a71b7a322ccf3deb0aed",
+              "usage_note": "Release validation asset for reviewers and package publication checks."
+            },
+            {
+              "audience": "release-operator",
+              "bytes": 6299,
+              "category": "release-asset",
+              "format": "json",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "release/operator-handoff.json",
+              "required_for_release": true,
+              "reuse_purpose": "release operator handoff",
+              "sha256": "c07616da5f82e536bfcd6075f79ebaa92dff8ed82044844097ae23e5907ff53c",
+              "usage_note": "Release validation asset for reviewers and package publication checks."
+            },
+            {
+              "audience": "release-operator",
+              "bytes": 3031,
+              "category": "release-asset",
+              "format": "md",
+              "generated_artifact": true,
+              "generated_by_current_command": false,
+              "packaged_data_file": true,
+              "path": "release/operator-handoff.md",
+              "required_for_release": true,
+              "reuse_purpose": "release operator handoff",
+              "sha256": "f40d555ed8d9994b6517749bbbba5f4d85878a2698d37257d09ec365026c7d9c",
+              "usage_note": "Release validation asset for reviewers and package publication checks."
+            }
+          ],
+          "reuse_purpose": "release operator handoff"
+        },
+        {
+          "artifact_count": 3,
+          "artifacts": [
+            {
+              "audience": "release-operator",
+              "bytes": 3083,
               "category": "release-asset",
               "format": "html",
               "generated_artifact": true,
@@ -1234,12 +1330,12 @@
               "path": "release/install-smoke-receipt.html",
               "required_for_release": true,
               "reuse_purpose": "release validation evidence",
-              "sha256": "3f3d5ab15087e841d5b82ee6724f01508b58c93da2952181ed8878574f1991fa",
+              "sha256": "89df46f9db94ba7025cf610d8987bf449d61dba26921d7370dc777d43f320b02",
               "usage_note": "Release validation asset for reviewers and package publication checks."
             },
             {
               "audience": "release-operator",
-              "bytes": 2284,
+              "bytes": 3177,
               "category": "release-asset",
               "format": "json",
               "generated_artifact": true,
@@ -1248,12 +1344,12 @@
               "path": "release/install-smoke-receipt.json",
               "required_for_release": true,
               "reuse_purpose": "release validation evidence",
-              "sha256": "138327a924fcd45ed742fbab4c4a97ca04d7bf9d25182fefdd3cd0db999c6e54",
+              "sha256": "78cabd5ae62edb92922e1992842f40da449f5f148f262e34e8793682d0673462",
               "usage_note": "Release validation asset for reviewers and package publication checks."
             },
             {
               "audience": "release-operator",
-              "bytes": 1296,
+              "bytes": 1795,
               "category": "release-asset",
               "format": "md",
               "generated_artifact": true,
@@ -1262,7 +1358,7 @@
               "path": "release/install-smoke-receipt.md",
               "required_for_release": true,
               "reuse_purpose": "release validation evidence",
-              "sha256": "030f092ec6838054f2a9cdc394ce4a567a76cc441101b88b52d5d54549508fda",
+              "sha256": "414c3d5b83b5a3caf6b84d6b533d9e7385143762408adab41984284119bd2ae7",
               "usage_note": "Release validation asset for reviewers and package publication checks."
             }
           ],
@@ -1288,12 +1384,12 @@
               "path": "src/valuation_scenario_lab/__init__.py",
               "required_for_release": false,
               "reuse_purpose": "package maintenance reuse",
-              "sha256": "d0ea549aae3c2fa942687692adb1b313624265af7fa7dfe509768f5b6ded07e5",
+              "sha256": "9bd7ea4497aaf37c70a8eabd5f3810dc651a372f828cccc37c50a152e6a70c44",
               "usage_note": "Zero-runtime-dependency package source."
             },
             {
               "audience": "maintainer",
-              "bytes": 130632,
+              "bytes": 139759,
               "category": "source",
               "format": "py",
               "generated_artifact": false,
@@ -1302,7 +1398,7 @@
               "path": "src/valuation_scenario_lab/cli.py",
               "required_for_release": false,
               "reuse_purpose": "package maintenance reuse",
-              "sha256": "2edee1052a0f6156351453a798addb4d24f5819238865a78d8b7697341c4e9d0",
+              "sha256": "66f056b481781b1c2dfc226c92d62cfdb9dc5fe94355cfaef425432bdb6da20a",
               "usage_note": "Zero-runtime-dependency package source."
             },
             {
@@ -1363,7 +1459,7 @@
             },
             {
               "audience": "maintainer",
-              "bytes": 32833,
+              "bytes": 48764,
               "category": "source",
               "format": "py",
               "generated_artifact": false,
@@ -1372,7 +1468,7 @@
               "path": "src/valuation_scenario_lab/release.py",
               "required_for_release": false,
               "reuse_purpose": "package maintenance reuse",
-              "sha256": "f8ebcb8327d27459c4888ae2e9a9a0d3ce32c00dd8299abbd5ac3016184c494f",
+              "sha256": "771bb40e431e07122697d735802d4640b07826af744884f311be3570056a9bda",
               "usage_note": "Zero-runtime-dependency package source."
             },
             {
@@ -1411,7 +1507,7 @@
             },
             {
               "audience": "maintainer",
-              "bytes": 25852,
+              "bytes": 28133,
               "category": "test",
               "format": "py",
               "generated_artifact": false,
@@ -1420,7 +1516,7 @@
               "path": "tests/test_cli.py",
               "required_for_release": false,
               "reuse_purpose": "regression test reuse",
-              "sha256": "668ca37d00c5f4b4e45782d0f163c07d8160b47e0243be184919d82a34081145",
+              "sha256": "ca007bdef3a37a8f46c4ad1f9a1b552dd795f13266f5f8882272987d8fa84b02",
               "usage_note": "Regression coverage for deterministic CLI behavior and release stability."
             }
           ],
@@ -1454,7 +1550,7 @@
     ],
     "status": "pass"
   },
-  "package_data_count": 80,
+  "package_data_count": 86,
   "release_validation": {
     "finding_count": 1,
     "schema_version": "valuation-scenario-lab.release-validation.v0.8",
@@ -1787,6 +1883,30 @@
     },
     {
       "exists": true,
+      "path": "release/operator-handoff.json"
+    },
+    {
+      "exists": true,
+      "path": "release/operator-handoff.md"
+    },
+    {
+      "exists": true,
+      "path": "release/operator-handoff.html"
+    },
+    {
+      "exists": true,
+      "path": "release/data-dictionary.json"
+    },
+    {
+      "exists": true,
+      "path": "release/data-dictionary.md"
+    },
+    {
+      "exists": true,
+      "path": "release/data-dictionary.html"
+    },
+    {
+      "exists": true,
       "path": "release/public-bundle.json"
     },
     {
@@ -1802,7 +1922,7 @@
       "path": "skills/agent/valuation-scenario-lab/SKILL.md"
     }
   ],
-  "required_release_file_count": 77,
+  "required_release_file_count": 83,
   "schema_checks": {
     "files": [
       {
@@ -1972,6 +2092,20 @@
         "generated_by_command": false,
         "ok": true,
         "path": "release/install-smoke-receipt.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.operator-handoff.v1.4",
+        "expected": "valuation-scenario-lab.operator-handoff.v1.4",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "release/operator-handoff.json"
+      },
+      {
+        "actual": "valuation-scenario-lab.data-dictionary.v1.4",
+        "expected": "valuation-scenario-lab.data-dictionary.v1.4",
+        "generated_by_command": false,
+        "ok": true,
+        "path": "release/data-dictionary.json"
       },
       {
         "actual": "valuation-scenario-lab.public-bundle.v1.0",

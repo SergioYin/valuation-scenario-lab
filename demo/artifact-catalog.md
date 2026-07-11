@@ -1,9 +1,9 @@
 # Artifact Catalog
 
 Status: fail
-Artifact count: 92
-Package data files: 80
-Required release files: 77
+Artifact count: 98
+Package data files: 86
+Required release files: 83
 
 ## Release Validation
 
@@ -18,7 +18,7 @@ Required release files: 77
 
 | Path | Format | Category | SHA-256 | Required | Package Data |
 | --- | --- | --- | --- | --- | --- |
-| `README.md` | md | package-data | `6d47f5f9456e539bd3ec27d02cca4a3b5f4d1c4c513f931d81a87c5574cc7365` | yes | yes |
+| `README.md` | md | package-data | `c14f928d9540069bfecaa5bb765ea395fdf37bd85d732d1012384e636a5ca37c` | yes | yes |
 
 ### fictional fixture reuse
 
@@ -47,11 +47,11 @@ Required release files: 77
 | `demo/assumption-change-walkthrough.md` | md | public-demo-artifact | `20dee5fe622feb6e4db3f306b7607457140adff552094a1aa585e4ffdb2ada59` | yes | yes |
 | `demo/compare-history.json` | json | public-demo-artifact | `d24881ef0f777a5771dc9987a9b04ad4211a5dcdca26220930df55ece025c826` | yes | yes |
 | `demo/compare-history.md` | md | public-demo-artifact | `d4a37ea7e1c182d8b67c35f276efb2862d8c1aef74c42cdaa86c94c61f34c4e9` | yes | yes |
-| `demo/public-readiness-landing.html` | html | public-demo-artifact | `95c62a58d564be1c8bf05189f1dd373ab6634f6e00a0b9d9da2bcdca4e38b505` | yes | yes |
-| `demo/public-readiness-landing.json` | json | public-demo-artifact | `8136e3be806e1acdb583bfb699ef2ef94005ca32325590c32cc2ab27132dccf3` | yes | yes |
-| `demo/public-readiness-landing.md` | md | public-demo-artifact | `db84899efbb0b0f3a03a095cc48af42ca93a1ae8c4e9ce2a743d832d7da2e719` | yes | yes |
-| `demo/quickstart-check.json` | json | public-demo-artifact | `3b16b69bf5480bdb95497518b35b7bc5f77c013a5ca543a8108edbd0c8a9e62d` | yes | yes |
-| `demo/quickstart-check.md` | md | public-demo-artifact | `731641c8e132b580a2d1aef182490753a709a6842af03e4a5ca7b3852001d33f` | yes | yes |
+| `demo/public-readiness-landing.html` | html | public-demo-artifact | `556382f0c9d4f4d85f5dbc66fea62a632e22b920b24e704ba184689e80ba62cd` | yes | yes |
+| `demo/public-readiness-landing.json` | json | public-demo-artifact | `9a19ea6733170e76a2501c2cdbd8ab0f836c06ceec55e66f93adcd9faf2a0943` | yes | yes |
+| `demo/public-readiness-landing.md` | md | public-demo-artifact | `80a3f13f6f52356f5bf2a54a35dd03051e6798308240afc3a8fb88219ff6cc33` | yes | yes |
+| `demo/quickstart-check.json` | json | public-demo-artifact | `821125e8e81bd5c34041412e383695f73562040bede13cffd00de24501f45b04` | yes | yes |
+| `demo/quickstart-check.md` | md | public-demo-artifact | `c67570ba1ae612c71f4a65791d9de7c777edc13e6bfd37724fd1b7a80709872f` | yes | yes |
 | `demo/release-deck.html` | html | public-demo-artifact | `e9bcbc6b65d75fd7d72066400369483a813d5b760f443586f44cbb60eeacc9ad` | yes | yes |
 | `demo/release-deck.json` | json | public-demo-artifact | `037902e492cb4546040f5c412b6c3bf118fcc17ddc55727b9f987d87bcc4a066` | yes | yes |
 | `demo/release-deck.md` | md | public-demo-artifact | `2de3b9fcd3bb92076535176514cd7b4272d66ba251d4201cc67aeed655dcc42f` | yes | yes |
@@ -60,8 +60,8 @@ Required release files: 77
 | `demo/showcase-dashboard.md` | md | public-demo-artifact | `a86dffd75f819650f43ea9fc670efcf9c3dc3869531658d0b8502b3d6e948c78` | yes | yes |
 | `demo/showcase-dashboard.svg` | svg | public-demo-artifact | `0f3e6a01d1ad6317899deaf285f58465f6b367dd204d44b23137a2a43e5a65ca` | yes | yes |
 | `demo/visual-receipt.html` | html | public-demo-artifact | `aa3a21ddb96c8d3ae8eee9de18957ed04b7dfbaf6ccbef45624efd03bc07d362` | yes | yes |
-| `demo/visual-receipt.json` | json | public-demo-artifact | `ef7b1d344931a6c8af320a8a77a419719bf41ec69d8e61b0de161a6591277b54` | yes | yes |
-| `demo/visual-receipt.md` | md | public-demo-artifact | `a2430684ba523d4759494e24382b147829042d73be4a278cd41bd68145080521` | yes | yes |
+| `demo/visual-receipt.json` | json | public-demo-artifact | `496716957d786e7a5a81c8bb7842df16b7c19764b86c1e01c676d172f330f6e7` | yes | yes |
+| `demo/visual-receipt.md` | md | public-demo-artifact | `9ccec62bca9459b2d85557b43add3995055250b9a0cc6c08ce90944cc1e623d9` | yes | yes |
 
 ### research artifact reuse
 
@@ -102,9 +102,9 @@ Required release files: 77
 | --- | --- | --- | --- | --- | --- |
 | `demo/fixture-doctor.json` | json | public-demo-artifact | `c5019694a5302b9e3a8e695ceb062df6618dc5202c0247401203751f03f61fa0` | yes | yes |
 | `demo/fixture-doctor.md` | md | public-demo-artifact | `36cbe266f397361bf6976a89bd794b6c08de2c806943997260382c68da602036` | yes | yes |
-| `demo/fixture-linter-report.html` | html | public-demo-artifact | `b3de7b26002e28cd2d6d82c32d25b1847a1bf688f3145763f0cbc9158da86963` | yes | yes |
-| `demo/fixture-linter-report.json` | json | public-demo-artifact | `13158d8b9549ee24358a4e3c9ecb499be5783870148abf3623450e63217f7f26` | yes | yes |
-| `demo/fixture-linter-report.md` | md | public-demo-artifact | `298ce2a50de392614e9facd30685781819a19596545982dd8f9dba37829660a9` | yes | yes |
+| `demo/fixture-linter-report.html` | html | public-demo-artifact | `1eddb419d86118c7d16fdb10d1e10725a5c0c4ef0f9300e92b5da2e22cf994fa` | yes | yes |
+| `demo/fixture-linter-report.json` | json | public-demo-artifact | `f9d1019aa53eaf898f53f1c7234cfac17dd0453643c1300f25e1959413fb0b08` | yes | yes |
+| `demo/fixture-linter-report.md` | md | public-demo-artifact | `a70b8bfb14506e7a26902692638b1b0a78923466e453d59e8b1b983412829d7a` | yes | yes |
 
 ### public review reuse
 
@@ -123,9 +123,9 @@ Required release files: 77
 
 | Path | Format | Category | SHA-256 | Required | Package Data |
 | --- | --- | --- | --- | --- | --- |
-| `demo/reproducibility-audit.html` | html | public-demo-artifact | `36f59c3ba9be725f94fe99d8665e5f5775c33ccdf3fb3bc49838907388745349` | yes | yes |
-| `demo/reproducibility-audit.json` | json | public-demo-artifact | `45bdbd1b7b1073dedbf79db5b7dbc7346837767e2102d727d834155aee46d635` | yes | yes |
-| `demo/reproducibility-audit.md` | md | public-demo-artifact | `d49ad2aa6614fd56c84368e8223382a3695cd1e9f3c96f4a201e5c88a3b1ad13` | yes | yes |
+| `demo/reproducibility-audit.html` | html | public-demo-artifact | `d4985a0a00b0ea2b7b8adaf6fba8e6a5c2438f89f0fa12ce96a29f58e7dd52f0` | yes | yes |
+| `demo/reproducibility-audit.json` | json | public-demo-artifact | `f99cb5cae8d64bde01e379569af218be92987588b72ae7601e5e074f1ee36488` | yes | yes |
+| `demo/reproducibility-audit.md` | md | public-demo-artifact | `6a201d03b70e2fece001616b727127cc41dfe9189f5cca71d78dbc6842f2143a` | yes | yes |
 
 ## agent-builder
 
@@ -133,14 +133,14 @@ Required release files: 77
 
 | Path | Format | Category | SHA-256 | Required | Package Data |
 | --- | --- | --- | --- | --- | --- |
-| `skills/agent/valuation-scenario-lab/SKILL.md` | md | skill-file | `8758b1d2d36dfd55fdb757adb72a3cf63d136a1b7385f78edf7824d4ceac5e50` | yes | yes |
+| `skills/agent/valuation-scenario-lab/SKILL.md` | md | skill-file | `a190e393105200c077dd2e5ff0686532410c45aaf0ced4a40cfba360ca6fd808` | yes | yes |
 
 ### documentation reuse
 
 | Path | Format | Category | SHA-256 | Required | Package Data |
 | --- | --- | --- | --- | --- | --- |
-| `docs/packet-format.md` | md | package-data | `7a127855a424875508477bff35a9311c759880cc871d39bc0479ee04ac61aa22` | no | yes |
-| `docs/release-checks.md` | md | package-data | `9c94d2df9f2e0b7ced6d49cfec8eec180cbb2db949174ae990dc7a34cc4ef50b` | yes | yes |
+| `docs/packet-format.md` | md | package-data | `a86bb9e5da9e72636eed3e8b4a30562917399def4affc5c2c27b351fac282506` | no | yes |
+| `docs/release-checks.md` | md | package-data | `23a360665b73ba86e8c2395848fbeb7969f9e831200ca878c5dbcc9c7121a22d` | yes | yes |
 
 ### public review reuse
 
@@ -149,33 +149,49 @@ Required release files: 77
 | `demo/readme-snippet.html` | html | public-demo-artifact | `45de48af5381330884022eac3e3354cfb311d18b9e6760e0425d1e664069ad38` | yes | yes |
 | `demo/readme-snippet.json` | json | public-demo-artifact | `9e883d57c981185c20fa7ac4dc0ea5d7464dc08f5b94a4b0a762d51ca7f81fb4` | yes | yes |
 | `demo/readme-snippet.md` | md | public-demo-artifact | `22830c367ada901234192c1d2840b0ffb65ee1746a2484444a8c9ec7e60fe127` | yes | yes |
-| `demo/sample-workflow.html` | html | public-demo-artifact | `2d1272d1aa28ed204262d90d1fd47ace14485f0c0832207c0c7e7cec000a9300` | yes | yes |
-| `demo/sample-workflow.json` | json | public-demo-artifact | `c69609ea05db1da05bc3edb63280280db2e4d6f29dcf9bd533f5d532c4d5acff` | yes | yes |
-| `demo/sample-workflow.md` | md | public-demo-artifact | `4c6fb6d7b5564aabdb119f31814f6501824cb031fed81f61cc3d87944366173a` | yes | yes |
+| `demo/sample-workflow.html` | html | public-demo-artifact | `af8615d8600dafada8b15542d4a1a08839a9d87ffccb713b6a45f8e8b4e6f84c` | yes | yes |
+| `demo/sample-workflow.json` | json | public-demo-artifact | `8274054a1e774304b56a123dc824e4263ebbb026cf704f8304f360a1aacb61ca` | yes | yes |
+| `demo/sample-workflow.md` | md | public-demo-artifact | `8129e6ac1c9c1c60191bff46da32aba77f7bc313d2cb6669237bd4f2be724be7` | yes | yes |
 
 ## release-operator
+
+### artifact reuse inventory
+
+| Path | Format | Category | SHA-256 | Required | Package Data |
+| --- | --- | --- | --- | --- | --- |
+| `release/data-dictionary.html` | html | release-asset | `b2e9a59b3b03caac9cd76576f08851caf170aa4547ec6ea00017fb8e25189d05` | yes | yes |
+| `release/data-dictionary.json` | json | release-asset | `cce338a6dd34b62d565172d42bcb44285c5bd6dd2e276f3260615cc5f07a8c87` | yes | yes |
+| `release/data-dictionary.md` | md | release-asset | `d9729bd213a697fbe811894d928b18d345463d7c9b440967205eb7a6de504a5e` | yes | yes |
 
 ### documentation reuse
 
 | Path | Format | Category | SHA-256 | Required | Package Data |
 | --- | --- | --- | --- | --- | --- |
-| `CHANGELOG.md` | md | package-data | `7d44cdbc1d3ed45c7cbcb1ab37a82d6403f73a02d0c6842ee0a9289b5bfc56c0` | yes | yes |
-| `RELEASE_NOTES.md` | md | package-data | `f9d0ce34742e7ad4ae5c5b7e635835889ea82b11211b56aa79da74f24c4039bd` | yes | yes |
+| `CHANGELOG.md` | md | package-data | `566318e4070802c6994208803803e0976dd4eb29477d370a214014a731f1d585` | yes | yes |
+| `RELEASE_NOTES.md` | md | package-data | `b1fa9260b8678c2481d82df4c0af1856b79e02f133d8194c123da2ade349739d` | yes | yes |
 
 ### package maintenance reuse
 
 | Path | Format | Category | SHA-256 | Required | Package Data |
 | --- | --- | --- | --- | --- | --- |
 | `MANIFEST.in` | in | project-metadata | `7279c813b7a44b360b15b0dfac6923da61cb2b50da472d45fc41e25350a06f5a` | no | no |
-| `pyproject.toml` | toml | package-data | `5673086abd4c79b367fe2c082ac94d1a17cf3b2fb795b21cad5fb25a55c11092` | yes | yes |
+| `pyproject.toml` | toml | package-data | `d3bff0ce9eb0bf2a402722ceb0c184b6e2cfc55f272ac829c22f3df62f121250` | yes | yes |
+
+### release operator handoff
+
+| Path | Format | Category | SHA-256 | Required | Package Data |
+| --- | --- | --- | --- | --- | --- |
+| `release/operator-handoff.html` | html | release-asset | `27fe224bfb16d06ac4c32525df4c3d0fa232f36986d0a71b7a322ccf3deb0aed` | yes | yes |
+| `release/operator-handoff.json` | json | release-asset | `c07616da5f82e536bfcd6075f79ebaa92dff8ed82044844097ae23e5907ff53c` | yes | yes |
+| `release/operator-handoff.md` | md | release-asset | `f40d555ed8d9994b6517749bbbba5f4d85878a2698d37257d09ec365026c7d9c` | yes | yes |
 
 ### release validation evidence
 
 | Path | Format | Category | SHA-256 | Required | Package Data |
 | --- | --- | --- | --- | --- | --- |
-| `release/install-smoke-receipt.html` | html | release-asset | `3f3d5ab15087e841d5b82ee6724f01508b58c93da2952181ed8878574f1991fa` | yes | yes |
-| `release/install-smoke-receipt.json` | json | release-asset | `138327a924fcd45ed742fbab4c4a97ca04d7bf9d25182fefdd3cd0db999c6e54` | yes | yes |
-| `release/install-smoke-receipt.md` | md | release-asset | `030f092ec6838054f2a9cdc394ce4a567a76cc441101b88b52d5d54549508fda` | yes | yes |
+| `release/install-smoke-receipt.html` | html | release-asset | `89df46f9db94ba7025cf610d8987bf449d61dba26921d7370dc777d43f320b02` | yes | yes |
+| `release/install-smoke-receipt.json` | json | release-asset | `78cabd5ae62edb92922e1992842f40da449f5f148f262e34e8793682d0673462` | yes | yes |
+| `release/install-smoke-receipt.md` | md | release-asset | `414c3d5b83b5a3caf6b84d6b533d9e7385143762408adab41984284119bd2ae7` | yes | yes |
 
 ## maintainer
 
@@ -183,13 +199,13 @@ Required release files: 77
 
 | Path | Format | Category | SHA-256 | Required | Package Data |
 | --- | --- | --- | --- | --- | --- |
-| `src/valuation_scenario_lab/__init__.py` | py | source | `d0ea549aae3c2fa942687692adb1b313624265af7fa7dfe509768f5b6ded07e5` | no | no |
-| `src/valuation_scenario_lab/cli.py` | py | source | `2edee1052a0f6156351453a798addb4d24f5819238865a78d8b7697341c4e9d0` | no | no |
+| `src/valuation_scenario_lab/__init__.py` | py | source | `9bd7ea4497aaf37c70a8eabd5f3810dc651a372f828cccc37c50a152e6a70c44` | no | no |
+| `src/valuation_scenario_lab/cli.py` | py | source | `66f056b481781b1c2dfc226c92d62cfdb9dc5fe94355cfaef425432bdb6da20a` | no | no |
 | `src/valuation_scenario_lab/doctor.py` | py | source | `459c6eda0613cbe06fa979bda9913d26b1d2ed665ecd0b138242ff54fdf04b97` | no | no |
 | `src/valuation_scenario_lab/engine.py` | py | source | `eb51e3aecf602a85d2e9f40be1eda2a7861304d7b25f720d202bdeb12a8f5c1f` | no | no |
 | `src/valuation_scenario_lab/io.py` | py | source | `509dac4767440e12060fc112a09638e6547db4186e65547579230adaa0896aab` | no | no |
 | `src/valuation_scenario_lab/model.py` | py | source | `8164c3ff7339f16f5e316c66e4c578d4eba08da883ec12a410eec6b5bf27d8a8` | no | no |
-| `src/valuation_scenario_lab/release.py` | py | source | `f8ebcb8327d27459c4888ae2e9a9a0d3ce32c00dd8299abbd5ac3016184c494f` | no | no |
+| `src/valuation_scenario_lab/release.py` | py | source | `771bb40e431e07122697d735802d4640b07826af744884f311be3570056a9bda` | no | no |
 | `src/valuation_scenario_lab/render.py` | py | source | `b98499a2e33c9a7210cfc31406158ffbe0e7a0bf1f43f9b22b2d1e58e0c70387` | no | no |
 
 ### regression test reuse
@@ -197,7 +213,7 @@ Required release files: 77
 | Path | Format | Category | SHA-256 | Required | Package Data |
 | --- | --- | --- | --- | --- | --- |
 | `tests/golden/key-demo-snapshots.json` | json | test | `2ccbb3dab5b0470a1afdd5e517776b7614764ad16bb3dddc73c188ff5821adc7` | no | no |
-| `tests/test_cli.py` | py | test | `668ca37d00c5f4b4e45782d0f163c07d8160b47e0243be184919d82a34081145` | no | no |
+| `tests/test_cli.py` | py | test | `ca007bdef3a37a8f46c4ad1f9a1b552dd795f13266f5f8882272987d8fa84b02` | no | no |
 
 ## Self Outputs
 

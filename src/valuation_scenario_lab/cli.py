@@ -30,6 +30,8 @@ from .release import release_manifest as manifest_payload
 from .release import export_bundle_manifest as export_bundle_payload
 from .release import install_smoke_receipt as install_smoke_payload
 from .release import artifact_catalog as artifact_catalog_payload
+from .release import operator_handoff as operator_handoff_payload
+from .release import data_dictionary as data_dictionary_payload
 from .release import fixture_linter_report as fixture_linter_report_payload
 from .release import validate_release as validate_release_payload
 from .release import safety_boundary_checks, schema_version_checks
@@ -128,6 +130,14 @@ def main(argv: list[str] | None = None) -> int:
     smoke.add_argument("--root", default=".")
     smoke.add_argument("--output", default="release")
 
+    handoff = sub.add_parser("operator-handoff")
+    handoff.add_argument("--root", default=".")
+    handoff.add_argument("--output", default="release")
+
+    dictionary = sub.add_parser("data-dictionary")
+    dictionary.add_argument("--root", default=".")
+    dictionary.add_argument("--output", default="release")
+
     audit = sub.add_parser("reproducibility-audit")
     audit.add_argument("--root", default=".")
     audit.add_argument("--output", default="demo")
@@ -219,6 +229,10 @@ def main(argv: list[str] | None = None) -> int:
             return command_export_bundle(Path(args.root), Path(args.output))
         if args.command == "install-smoke-receipt":
             return command_install_smoke_receipt(Path(args.root), Path(args.output))
+        if args.command == "operator-handoff":
+            return command_operator_handoff(Path(args.root), Path(args.output))
+        if args.command == "data-dictionary":
+            return command_data_dictionary(Path(args.root), Path(args.output))
         if args.command == "reproducibility-audit":
             return command_reproducibility_audit(Path(args.root), Path(args.output))
         if args.command == "sample-workflow":
@@ -272,8 +286,10 @@ def main(argv: list[str] | None = None) -> int:
             command_fixture_linter_report(root, None, None, root / "demo")
             command_artifact_catalog(root, root / "demo")
             command_install_smoke_receipt(root, root / "release")
-            command_manifest(root, root / "release")
+            command_data_dictionary(root, root / "release")
+            command_operator_handoff(root, root / "release")
             command_export_bundle(root, root / "release")
+            command_manifest(root, root / "release")
             return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -395,8 +411,10 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_fixture_linter_report(root, None, None, out)
         command_artifact_catalog(root, out)
         command_install_smoke_receipt(root, out / "release")
-        command_manifest(root, out / "release")
+        command_data_dictionary(root, out / "release")
+        command_operator_handoff(root, out / "release")
         command_export_bundle(root, out / "release")
+        command_manifest(root, out / "release")
     validation = validate_release_payload(root)
     if validation["status"] != "pass":
         print("FAIL release validation")
@@ -518,6 +536,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
             "valuation-scenario-lab public-readiness-landing --root . --output demo",
             "valuation-scenario-lab install-smoke-receipt --root . --output release",
+            "valuation-scenario-lab data-dictionary --root . --output release",
+            "valuation-scenario-lab operator-handoff --root . --output release",
             "valuation-scenario-lab release-manifest --root . --output release",
             "valuation-scenario-lab export-bundle --root . --output release",
         ],
@@ -552,7 +572,7 @@ def command_visual_receipt(root: Path, output: Path) -> int:
         "weighted_range_per_share": packet["weighted_range_per_share"],
         "margin_of_safety_label": packet["margin_of_safety_label"],
         "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
-        "artifact_count": 50,
+        "artifact_count": 56,
         "boundaries": packet["boundaries"],
     }
     write_json(output / "visual-receipt.json", payload)
@@ -1164,6 +1184,16 @@ def public_readiness_payload(packet: dict) -> dict:
                 "artifact": "demo/artifact-catalog.html",
             },
             {
+                "label": "Read data dictionary",
+                "command": "valuation-scenario-lab data-dictionary --root . --output release",
+                "artifact": "release/data-dictionary.html",
+            },
+            {
+                "label": "Read operator handoff",
+                "command": "valuation-scenario-lab operator-handoff --root . --output release",
+                "artifact": "release/operator-handoff.html",
+            },
+            {
                 "label": "Review fixture linter report",
                 "command": "valuation-scenario-lab fixture-linter-report --root . --output demo",
                 "artifact": "demo/fixture-linter-report.html",
@@ -1195,6 +1225,8 @@ def public_readiness_payload(packet: dict) -> dict:
             "demo/release-deck.html",
             "demo/artifact-catalog.html",
             "demo/fixture-linter-report.html",
+            "release/data-dictionary.html",
+            "release/operator-handoff.html",
             "demo/decision-journal.md",
             "demo/assumption-change-walkthrough.html",
             "demo/multi-company-demo-gallery.html",
@@ -1692,12 +1724,18 @@ def sample_workflow_payload(root: Path) -> dict[str, Any]:
         },
         {
             "step": 13,
-            "name": "Document install and bundle stability",
-            "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
+            "name": "Document install, schema, handoff, and bundle stability",
+            "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab data-dictionary --root . --output release && valuation-scenario-lab operator-handoff --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
             "artifacts": [
                 "release/install-smoke-receipt.json",
                 "release/install-smoke-receipt.md",
                 "release/install-smoke-receipt.html",
+                "release/data-dictionary.json",
+                "release/data-dictionary.md",
+                "release/data-dictionary.html",
+                "release/operator-handoff.json",
+                "release/operator-handoff.md",
+                "release/operator-handoff.html",
                 "release/public-bundle.json",
                 "release/public-bundle.md",
                 "release/public-bundle.html",
@@ -2757,6 +2795,28 @@ def command_install_smoke_receipt(root: Path, output: Path) -> int:
     return 0
 
 
+def command_operator_handoff(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    payload = operator_handoff_payload(root)
+    write_json(output / "operator-handoff.json", payload)
+    write_text(output / "operator-handoff.md", operator_handoff_markdown(payload))
+    write_text(output / "operator-handoff.html", operator_handoff_html(payload))
+    print(f"wrote {output / 'operator-handoff.json'}")
+    return 0
+
+
+def command_data_dictionary(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    payload = data_dictionary_payload(root)
+    write_json(output / "data-dictionary.json", payload)
+    write_text(output / "data-dictionary.md", data_dictionary_markdown(payload))
+    write_text(output / "data-dictionary.html", data_dictionary_html(payload))
+    print(f"wrote {output / 'data-dictionary.json'}")
+    return 0
+
+
 def command_export_bundle(root: Path, output: Path) -> int:
     root = resolve_root(root)
     ensure_dir(output)
@@ -2766,6 +2826,146 @@ def command_export_bundle(root: Path, output: Path) -> int:
     write_text(output / "public-bundle.html", public_bundle_html(payload))
     print(f"wrote {output / 'public-bundle.json'}")
     return 0 if payload["status"] == "pass" else 1
+
+
+def operator_handoff_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Operator Handoff",
+        "",
+        f"Release version: {payload['release_version']}",
+        f"Validation status: {payload['validation_results']['status']}",
+        "",
+        "## Repository URL Placeholders",
+        "",
+    ]
+    lines.extend(f"- `{key}`: `{value}`" for key, value in payload["repo_url_placeholders"].items())
+    lines.extend(["", "## Latest Commands", ""])
+    lines.extend(f"- `{item}`" for item in payload["latest_commands"])
+    lines.extend(["", "## Release Assets", ""])
+    lines.extend("| Path | Exists | Packaged | SHA-256 |")
+    lines.extend("| --- | --- | --- | --- |")
+    for item in payload["release_assets"]:
+        digest = item["sha256"] or "missing"
+        lines.append(f"| `{item['path']}` | {item['exists']} | {item['packaged_data_file']} | `{digest}` |")
+    lines.extend(["", "## Validation Results", ""])
+    for key, value in payload["validation_results"].items():
+        lines.append(f"- {key}: {value}")
+    lines.extend(["", "## Known Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["known_boundaries"])
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def operator_handoff_html(payload: dict[str, Any]) -> str:
+    placeholders = "".join(f"<li><code>{html.escape(key)}</code>: <code>{html.escape(value)}</code></li>" for key, value in payload["repo_url_placeholders"].items())
+    commands = "".join(f"<li><code>{html.escape(item)}</code></li>" for item in payload["latest_commands"])
+    rows = "".join(
+        "<tr>"
+        f"<td><code>{html.escape(item['path'])}</code></td>"
+        f"<td>{'yes' if item['exists'] else 'no'}</td>"
+        f"<td>{'yes' if item['packaged_data_file'] else 'no'}</td>"
+        f"<td><code>{html.escape(item['sha256'] or 'missing')}</code></td>"
+        "</tr>"
+        for item in payload["release_assets"]
+    )
+    validation = "".join(f"<li>{html.escape(key)}: {html.escape(str(value))}</li>" for key, value in payload["validation_results"].items())
+    known = "".join(f"<li>{html.escape(item)}</li>" for item in payload["known_boundaries"])
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Operator Handoff</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Operator Handoff</h1>
+<p>Release version: {html.escape(payload['release_version'])}; validation status: {html.escape(payload['validation_results']['status'])}</p>
+<h2>Repository URL Placeholders</h2><ul>{placeholders}</ul>
+<h2>Latest Commands</h2><ul>{commands}</ul>
+<h2>Release Assets</h2>
+<table><thead><tr><th>Path</th><th>Exists</th><th>Packaged</th><th>SHA-256</th></tr></thead><tbody>{rows}</tbody></table>
+<h2>Validation Results</h2><ul>{validation}</ul>
+<h2>Known Boundaries</h2><ul>{known}</ul>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def data_dictionary_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Data Dictionary",
+        "",
+        f"Release version: {payload['release_version']}",
+        "",
+        "## Scope",
+        "",
+    ]
+    lines.extend(f"- {item}" for item in payload["scope"])
+    for section in payload["sections"]:
+        lines.extend(["", f"## {section['name'].title()}", ""])
+        lines.append("Artifacts: " + ", ".join(f"`{item}`" for item in section["artifacts"]))
+        lines.extend(["", "| Field | Type | Required | Description |", "| --- | --- | --- | --- |"])
+        for item in section["fields"]:
+            lines.append(f"| `{item['name']}` | {item['type']} | {item['required']} | {item['description']} |")
+    lines.extend(["", "## Format Notes", ""])
+    lines.extend(f"- {item}" for item in payload["format_notes"])
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def data_dictionary_html(payload: dict[str, Any]) -> str:
+    sections = []
+    for section in payload["sections"]:
+        artifacts = ", ".join(section["artifacts"])
+        rows = "".join(
+            "<tr>"
+            f"<td><code>{html.escape(item['name'])}</code></td>"
+            f"<td>{html.escape(item['type'])}</td>"
+            f"<td>{'yes' if item['required'] else 'no'}</td>"
+            f"<td>{html.escape(item['description'])}</td>"
+            "</tr>"
+            for item in section["fields"]
+        )
+        sections.append(
+            f"<section><h2>{html.escape(section['name'].title())}</h2>"
+            f"<p><code>{html.escape(artifacts)}</code></p>"
+            f"<table><thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody>{rows}</tbody></table></section>"
+        )
+    scope = "".join(f"<li>{html.escape(item)}</li>" for item in payload["scope"])
+    notes = "".join(f"<li>{html.escape(item)}</li>" for item in payload["format_notes"])
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Data Dictionary</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+section {{ border-top: 1px solid #d6dde4; padding: 1rem 0; }}
+table {{ border-collapse: collapse; width: 100%; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Data Dictionary</h1>
+<p>Release version: {html.escape(payload['release_version'])}</p>
+<h2>Scope</h2><ul>{scope}</ul>
+{''.join(sections)}
+<h2>Format Notes</h2><ul>{notes}</ul>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
 
 
 def install_smoke_markdown(payload: dict[str, Any]) -> str:

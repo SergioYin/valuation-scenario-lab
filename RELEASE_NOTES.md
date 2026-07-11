@@ -1,5 +1,17 @@
 # Release Notes
 
+## v1.4.0
+
+Final handoff increment.
+
+This release adds `operator-handoff`, a concise deterministic JSON, Markdown, and static no-JavaScript HTML handoff with repository URL placeholders, latest local commands, release asset hashes, validation result counts, and known operating boundaries.
+
+It also adds `data-dictionary`, a deterministic schema dictionary covering company fixtures, valuation packets, review and scorecard outputs, artifact catalogs, fixture linter reports, and release receipts.
+
+Release validation, package data, README docs, release checks, tests, generated release artifacts, and the agent skill now include both final handoff assets.
+
+Boundaries: no live data, no broker connections, no orders, no predictions, and no buy/sell/hold advice.
+
 ## v1.3.0
 
 Reuse increment.
