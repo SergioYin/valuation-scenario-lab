@@ -25,10 +25,12 @@ Use this skill when a user asks an agent to generate or review an offline valuat
 8. Run `valuation-scenario-lab public-readiness-landing --root <root> --output <output>` when preparing a public demo tree.
 9. Run `valuation-scenario-lab quickstart-check --root <root> --output <output>` when checking public demo files.
 10. Run `valuation-scenario-lab visual-receipt --root <root> --output <output>` when a deterministic Markdown/HTML receipt is useful.
-11. Summarize generated files, assumptions changed, and research boundaries.
+11. Run `valuation-scenario-lab thesis-brief --root <root> --output <output>` to compose a deterministic analyst brief from packet, history, journal, doctor, and dashboard artifacts.
+12. Run `valuation-scenario-lab scenario-library --fixtures <fixtures> --output <output>` to export reusable assumption cards from bundled fictional fixtures.
+13. Summarize generated files, assumptions changed, and research boundaries.
 
 ## Public Output Standard
 
 Public summaries should mention that the packet is deterministic, local, broker-free, and research-only. They should not include private paths, private collaboration tools, credentials, tokens, or non-public account details.
 
-Public demo trees should include `public-readiness-landing`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `quickstart-check`, and `visual-receipt` artifacts alongside the valuation packet, history comparison, review ledger, and sensitivity matrix.
+Public demo trees should include `public-readiness-landing`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `quickstart-check`, `visual-receipt`, `thesis-brief`, and `scenario-library` artifacts alongside the valuation packet, history comparison, review ledger, and sensitivity matrix.

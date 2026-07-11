@@ -13,11 +13,13 @@ from . import __version__
 from .doctor import fixture_doctor, fixture_doctor_markdown
 from .engine import (
     assumption_change_walkthrough,
+    build_thesis_brief,
     build_decision_journal,
     build_packet,
     build_review_ledger,
     compare_packets,
     demo_gallery,
+    scenario_library,
     sensitivity_matrix,
     validate_company,
 )
@@ -92,6 +94,14 @@ def main(argv: list[str] | None = None) -> int:
     showcase.add_argument("--root", default=".")
     showcase.add_argument("--output", default="demo")
 
+    thesis = sub.add_parser("thesis-brief")
+    thesis.add_argument("--root", default=".")
+    thesis.add_argument("--output", default="demo")
+
+    library = sub.add_parser("scenario-library")
+    library.add_argument("--fixtures", default="examples")
+    library.add_argument("--output", default="demo")
+
     validate = sub.add_parser("validate-release")
     validate.add_argument("--root", default=".")
     validate.add_argument("--format", choices=["json", "markdown"], default="json")
@@ -140,6 +150,10 @@ def main(argv: list[str] | None = None) -> int:
             return command_visual_receipt(Path(args.root), Path(args.output))
         if args.command == "showcase-dashboard":
             return command_showcase_dashboard(Path(args.root), Path(args.output))
+        if args.command == "thesis-brief":
+            return command_thesis_brief(Path(args.root), Path(args.output))
+        if args.command == "scenario-library":
+            return command_scenario_library(Path(args.fixtures), Path(args.output))
         if args.command == "validate-release":
             return emit_validation(validate_release_payload(Path(args.root)), args.format)
         if args.command == "maturity-report":
@@ -160,6 +174,8 @@ def main(argv: list[str] | None = None) -> int:
             command_quickstart_check(root, root / "demo")
             command_visual_receipt(root, root / "demo")
             command_showcase_dashboard(root, root / "demo")
+            command_thesis_brief(root, root / "demo")
+            command_scenario_library(root / "examples", root / "demo")
             return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -237,6 +253,8 @@ def command_decision_journal(packet: Path, ledger: Path, output: Path) -> int:
 def command_public_readiness_landing(root: Path, output: Path) -> int:
     root = resolve_root(root)
     ensure_demo_artifacts(root, output)
+    command_thesis_brief(root, output)
+    command_scenario_library(root / "examples", output)
     packet = read_json(output / "valuation-packet.json")
     payload = public_readiness_payload(packet)
     write_json(output / "public-readiness-landing.json", payload)
@@ -266,6 +284,8 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_public_readiness_landing(root, out)
         command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", out)
         command_showcase_dashboard(root, out)
+        command_thesis_brief(root, out)
+        command_scenario_library(root / "examples", out)
     validation = validate_release_payload(root)
     if validation["status"] != "pass":
         print("FAIL release validation")
@@ -282,6 +302,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
     command_public_readiness_landing(root, output)
     command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", output)
     command_showcase_dashboard(root, output)
+    command_thesis_brief(root, output)
+    command_scenario_library(root / "examples", output)
     expected = [
         "valuation-packet.json",
         "valuation-packet.md",
@@ -309,6 +331,12 @@ def command_quickstart_check(root: Path, output: Path) -> int:
         "showcase-dashboard.svg",
         "showcase-dashboard.md",
         "showcase-dashboard.html",
+        "thesis-brief.json",
+        "thesis-brief.md",
+        "thesis-brief.html",
+        "scenario-library.json",
+        "scenario-library.md",
+        "scenario-library.html",
     ]
     files = [{"path": f"demo/{name}", "exists": (output / name).exists()} for name in expected]
     payload = {
@@ -321,6 +349,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab quickstart-check --root . --output demo",
             "valuation-scenario-lab visual-receipt --root . --output demo",
             "valuation-scenario-lab showcase-dashboard --root . --output demo",
+            "valuation-scenario-lab thesis-brief --root . --output demo",
+            "valuation-scenario-lab scenario-library --fixtures examples --output demo",
             "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
             "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
             "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -352,7 +382,7 @@ def command_visual_receipt(root: Path, output: Path) -> int:
         "weighted_range_per_share": packet["weighted_range_per_share"],
         "margin_of_safety_label": packet["margin_of_safety_label"],
         "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
-        "artifact_count": 26,
+        "artifact_count": 32,
         "boundaries": packet["boundaries"],
     }
     write_json(output / "visual-receipt.json", payload)
@@ -376,6 +406,35 @@ def command_showcase_dashboard(root: Path, output: Path) -> int:
     write_text(output / "showcase-dashboard.md", showcase_markdown(payload))
     write_text(output / "showcase-dashboard.html", showcase_html(payload))
     print(f"wrote {output / 'showcase-dashboard.svg'}")
+    return 0
+
+
+def command_thesis_brief(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_demo_artifacts(root, output)
+    command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", output)
+    command_showcase_dashboard(root, output)
+    payload = build_thesis_brief(
+        read_json(output / "valuation-packet.json"),
+        read_json(output / "compare-history.json"),
+        read_json(output / "decision-journal.json"),
+        read_json(output / "fixture-doctor.json"),
+        read_json(output / "showcase-dashboard.json"),
+    )
+    write_json(output / "thesis-brief.json", payload)
+    write_text(output / "thesis-brief.md", thesis_brief_markdown(payload))
+    write_text(output / "thesis-brief.html", thesis_brief_html(payload))
+    print(f"wrote {output / 'thesis-brief.json'}")
+    return 0
+
+
+def command_scenario_library(fixtures: Path, output: Path) -> int:
+    payload = scenario_library(fixture_companies(fixtures))
+    ensure_dir(output)
+    write_json(output / "scenario-library.json", payload)
+    write_text(output / "scenario-library.md", scenario_library_markdown(payload))
+    write_text(output / "scenario-library.html", scenario_library_html(payload))
+    print(f"wrote {output / 'scenario-library.json'}")
     return 0
 
 
@@ -652,6 +711,16 @@ def public_readiness_payload(packet: dict) -> dict:
                 "artifact": "demo/decision-journal.md",
             },
             {
+                "label": "Read the thesis brief",
+                "command": "valuation-scenario-lab thesis-brief --root . --output demo",
+                "artifact": "demo/thesis-brief.md",
+            },
+            {
+                "label": "Export scenario cards",
+                "command": "valuation-scenario-lab scenario-library --fixtures examples --output demo",
+                "artifact": "demo/scenario-library.html",
+            },
+            {
                 "label": "Doctor fixtures",
                 "command": "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown",
                 "artifact": "demo/fixture-doctor.md",
@@ -665,6 +734,8 @@ def public_readiness_payload(packet: dict) -> dict:
             "demo/visual-receipt.html",
             "demo/showcase-dashboard.svg",
             "demo/showcase-dashboard.html",
+            "demo/thesis-brief.html",
+            "demo/scenario-library.html",
             "demo/decision-journal.md",
             "demo/assumption-change-walkthrough.html",
             "demo/multi-company-demo-gallery.html",
@@ -891,6 +962,153 @@ def showcase_svg(payload: dict[str, Any]) -> str:
 <text x="48" y="526" class="label">Finance boundaries</text>
 {boundary_text}
 </svg>
+"""
+
+
+def thesis_brief_markdown(payload: dict[str, Any]) -> str:
+    snapshot = payload["packet_snapshot"]
+    lines = [
+        "# Thesis Brief",
+        "",
+        f"Company: {payload['company']} ({payload['ticker']})",
+        "",
+        payload["thesis_summary"],
+        "",
+        "## Packet Snapshot",
+        "",
+        f"- Current price: {payload['currency']} {snapshot['current_price']:.2f}",
+        f"- Weighted fair value per share: {payload['currency']} {snapshot['weighted_fair_value_per_share']:.2f}",
+        f"- Weighted range per share: {payload['currency']} {snapshot['weighted_range_per_share'][0]:.2f} to {payload['currency']} {snapshot['weighted_range_per_share'][1]:.2f}",
+        f"- Margin-of-safety label: {snapshot['margin_of_safety_label']} ({snapshot['weighted_margin_of_safety_pct']:.1f}%)",
+        "",
+        "## Scenario Thesis",
+        "",
+        "| Scenario | Weight | Base | Range | Label |",
+        "| --- | ---: | ---: | --- | --- |",
+    ]
+    for item in payload["scenario_thesis"]:
+        lines.append(
+            f"| {item['scenario']} | {item['weight']:.3f} | {item['base']:.2f} | "
+            f"{item['range'][0]:.2f} to {item['range'][1]:.2f} | {item['margin_label']} |"
+        )
+    lines.extend(["", "## History Changes", ""])
+    lines.extend(f"- {item['field']}: {item['prior']} -> {item['current']}" for item in payload["history_changes"])
+    lines.extend(["", "## Open Questions", ""])
+    lines.extend(f"- {item}" for item in payload["open_questions"])
+    lines.extend(["", "## Evidence Artifacts", ""])
+    lines.extend(f"- `{item}`" for item in payload["evidence_artifacts"])
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def thesis_brief_html(payload: dict[str, Any]) -> str:
+    snapshot = payload["packet_snapshot"]
+    scenarios = "".join(
+        "<tr>"
+        f"<td>{html.escape(item['scenario'])}</td>"
+        f"<td>{item['weight']:.3f}</td>"
+        f"<td>{item['base']:.2f}</td>"
+        f"<td>{item['range'][0]:.2f} to {item['range'][1]:.2f}</td>"
+        f"<td>{html.escape(item['margin_label'])}</td>"
+        "</tr>"
+        for item in payload["scenario_thesis"]
+    )
+    changes = "".join(
+        f"<li>{html.escape(item['field'])}: {html.escape(str(item['prior']))} to {html.escape(str(item['current']))}</li>"
+        for item in payload["history_changes"]
+    )
+    questions = "".join(f"<li>{html.escape(item)}</li>" for item in payload["open_questions"])
+    evidence = "".join(f"<li><code>{html.escape(item)}</code></li>" for item in payload["evidence_artifacts"])
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Thesis Brief</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; }}
+.metric {{ border: 1px solid #ccd1d1; display: inline-block; margin: 0.25rem; padding: 0.5rem; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Thesis Brief</h1>
+<p>{html.escape(payload['company'])} ({html.escape(payload['ticker'])})</p>
+<p>{html.escape(payload['thesis_summary'])}</p>
+<div class="metric">Fair value: {html.escape(payload['currency'])} {snapshot['weighted_fair_value_per_share']:.2f}</div>
+<div class="metric">Range: {snapshot['weighted_range_per_share'][0]:.2f} to {snapshot['weighted_range_per_share'][1]:.2f}</div>
+<div class="metric">Label: {html.escape(snapshot['margin_of_safety_label'])}</div>
+<h2>Scenario Thesis</h2>
+<table><thead><tr><th>Scenario</th><th>Weight</th><th>Base</th><th>Range</th><th>Label</th></tr></thead><tbody>{scenarios}</tbody></table>
+<h2>History Changes</h2><ul>{changes}</ul>
+<h2>Open Questions</h2><ul>{questions}</ul>
+<h2>Evidence Artifacts</h2><ul>{evidence}</ul>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def scenario_library_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Scenario Library",
+        "",
+        f"Companies: {payload['company_count']}",
+        f"Cards: {payload['card_count']}",
+        "",
+        "| ID | Company | Scenario | Growth | FCF Margin | Discount | Base | Label |",
+        "| --- | --- | --- | ---: | ---: | ---: | ---: | --- |",
+    ]
+    for item in payload["cards"]:
+        assumptions = item["assumptions"]
+        outputs = item["model_outputs"]
+        lines.append(
+            f"| {item['id']} | {item['company']} | {item['scenario']} | "
+            f"{assumptions['revenue_growth_pct']:.1f}% | {assumptions['fcf_margin_pct']:.1f}% | "
+            f"{assumptions['discount_rate_pct']:.1f}% | {outputs['base_value_per_share']:.2f} | {outputs['margin_label']} |"
+        )
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def scenario_library_html(payload: dict[str, Any]) -> str:
+    rows = "".join(
+        "<tr>"
+        f"<td><code>{html.escape(item['id'])}</code></td>"
+        f"<td>{html.escape(item['company'])}</td>"
+        f"<td>{html.escape(item['scenario'])}</td>"
+        f"<td>{item['assumptions']['revenue_growth_pct']:.1f}%</td>"
+        f"<td>{item['assumptions']['fcf_margin_pct']:.1f}%</td>"
+        f"<td>{item['assumptions']['discount_rate_pct']:.1f}%</td>"
+        f"<td>{item['model_outputs']['base_value_per_share']:.2f}</td>"
+        f"<td>{html.escape(item['model_outputs']['margin_label'])}</td>"
+        "</tr>"
+        for item in payload["cards"]
+    )
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scenario Library</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Scenario Library</h1>
+<p>{payload['card_count']} reusable assumption cards from bundled fictional fixtures.</p>
+<table><thead><tr><th>ID</th><th>Company</th><th>Scenario</th><th>Growth</th><th>FCF Margin</th><th>Discount</th><th>Base</th><th>Label</th></tr></thead><tbody>{rows}</tbody></table>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
 """
 
 

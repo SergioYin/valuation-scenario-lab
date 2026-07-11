@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "valuation-scenario-lab"
-version = "0.6.0"
+version = "0.7.0"
 description = "Zero-dependency offline valuation scenario packet generator."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -76,6 +76,12 @@ where = ["src"]
   "demo/showcase-dashboard.svg",
   "demo/showcase-dashboard.md",
   "demo/showcase-dashboard.html",
+  "demo/thesis-brief.json",
+  "demo/thesis-brief.md",
+  "demo/thesis-brief.html",
+  "demo/scenario-library.json",
+  "demo/scenario-library.md",
+  "demo/scenario-library.html",
 ]
 "share/valuation-scenario-lab/docs" = [
   "docs/packet-format.md",

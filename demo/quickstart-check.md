@@ -9,6 +9,8 @@ Status: pass
 - `valuation-scenario-lab quickstart-check --root . --output demo`
 - `valuation-scenario-lab visual-receipt --root . --output demo`
 - `valuation-scenario-lab showcase-dashboard --root . --output demo`
+- `valuation-scenario-lab thesis-brief --root . --output demo`
+- `valuation-scenario-lab scenario-library --fixtures examples --output demo`
 - `valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo`
 - `valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo`
 - `valuation-scenario-lab demo-gallery --fixtures examples --output demo`
@@ -43,6 +45,12 @@ Status: pass
 - `demo/showcase-dashboard.svg`: ok
 - `demo/showcase-dashboard.md`: ok
 - `demo/showcase-dashboard.html`: ok
+- `demo/thesis-brief.json`: ok
+- `demo/thesis-brief.md`: ok
+- `demo/thesis-brief.html`: ok
+- `demo/scenario-library.json`: ok
+- `demo/scenario-library.md`: ok
+- `demo/scenario-library.html`: ok
 
 ## Boundaries
 

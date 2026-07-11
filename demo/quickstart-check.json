@@ -10,6 +10,8 @@
     "valuation-scenario-lab quickstart-check --root . --output demo",
     "valuation-scenario-lab visual-receipt --root . --output demo",
     "valuation-scenario-lab showcase-dashboard --root . --output demo",
+    "valuation-scenario-lab thesis-brief --root . --output demo",
+    "valuation-scenario-lab scenario-library --fixtures examples --output demo",
     "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
     "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
     "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -120,6 +122,30 @@
     {
       "exists": true,
       "path": "demo/showcase-dashboard.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/thesis-brief.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/thesis-brief.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/thesis-brief.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/scenario-library.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/scenario-library.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/scenario-library.html"
     }
   ],
   "fixture_source": "local-or-packaged-fixtures",

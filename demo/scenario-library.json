@@ -1,0 +1,232 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "card_count": 6,
+  "cards": [
+    {
+      "assumptions": {
+        "discount_rate_pct": 10.0,
+        "fcf_margin_pct": 14.0,
+        "revenue_growth_pct": 7.0,
+        "starting_revenue_m": 1280.0,
+        "terminal_growth_pct": 3.0,
+        "terminal_multiple": 16.0
+      },
+      "catalysts": [
+        "new product cycle",
+        "operating leverage"
+      ],
+      "company": "Example Components Inc.",
+      "currency": "USD",
+      "id": "EXCO-base-reinvestment-case",
+      "model_outputs": {
+        "base_value_per_share": 38.4,
+        "margin_label": "near modeled value",
+        "margin_of_safety_pct": -8.6,
+        "range_per_share": [
+          34.56,
+          42.24
+        ]
+      },
+      "reuse_notes": [
+        "Copy assumptions only after replacing fictional fixture data with local research.",
+        "Keep the card offline and broker-free."
+      ],
+      "risks": [
+        "component shortages"
+      ],
+      "scenario": "Base reinvestment case",
+      "ticker": "EXCO",
+      "weight": 0.5
+    },
+    {
+      "assumptions": {
+        "discount_rate_pct": 11.5,
+        "fcf_margin_pct": 10.0,
+        "revenue_growth_pct": 3.0,
+        "starting_revenue_m": 1240.0,
+        "terminal_growth_pct": 2.0,
+        "terminal_multiple": 12.0
+      },
+      "catalysts": [
+        "pricing discipline"
+      ],
+      "company": "Example Components Inc.",
+      "currency": "USD",
+      "id": "EXCO-margin-pressure-case",
+      "model_outputs": {
+        "base_value_per_share": 18.16,
+        "margin_label": "large negative gap",
+        "margin_of_safety_pct": -56.8,
+        "range_per_share": [
+          16.34,
+          19.97
+        ]
+      },
+      "reuse_notes": [
+        "Copy assumptions only after replacing fictional fixture data with local research.",
+        "Keep the card offline and broker-free."
+      ],
+      "risks": [
+        "customer concentration",
+        "input inflation"
+      ],
+      "scenario": "Margin pressure case",
+      "ticker": "EXCO",
+      "weight": 0.3
+    },
+    {
+      "assumptions": {
+        "discount_rate_pct": 9.5,
+        "fcf_margin_pct": 17.0,
+        "revenue_growth_pct": 11.0,
+        "starting_revenue_m": 1320.0,
+        "terminal_growth_pct": 3.5,
+        "terminal_multiple": 18.0
+      },
+      "catalysts": [
+        "channel expansion",
+        "software attach"
+      ],
+      "company": "Example Components Inc.",
+      "currency": "USD",
+      "id": "EXCO-upside-adoption-case",
+      "model_outputs": {
+        "base_value_per_share": 63.65,
+        "margin_label": "large positive gap",
+        "margin_of_safety_pct": 51.6,
+        "range_per_share": [
+          57.29,
+          70.02
+        ]
+      },
+      "reuse_notes": [
+        "Copy assumptions only after replacing fictional fixture data with local research.",
+        "Keep the card offline and broker-free."
+      ],
+      "risks": [
+        "execution delay"
+      ],
+      "scenario": "Upside adoption case",
+      "ticker": "EXCO",
+      "weight": 0.2
+    },
+    {
+      "assumptions": {
+        "discount_rate_pct": 10.0,
+        "fcf_margin_pct": 24.0,
+        "revenue_growth_pct": 13.0,
+        "starting_revenue_m": 860.0,
+        "terminal_growth_pct": 3.0,
+        "terminal_multiple": 20.0
+      },
+      "catalysts": [
+        "process automation attach",
+        "seat expansion"
+      ],
+      "company": "Nimbus Collaboration Software",
+      "currency": "USD",
+      "id": "NIMB-durable-retention-case",
+      "model_outputs": {
+        "base_value_per_share": 84.11,
+        "margin_label": "large positive gap",
+        "margin_of_safety_pct": 45.0,
+        "range_per_share": [
+          75.7,
+          92.52
+        ]
+      },
+      "reuse_notes": [
+        "Copy assumptions only after replacing fictional fixture data with local research.",
+        "Keep the card offline and broker-free."
+      ],
+      "risks": [
+        "sales productivity reset"
+      ],
+      "scenario": "Durable retention case",
+      "ticker": "NIMB",
+      "weight": 0.55
+    },
+    {
+      "assumptions": {
+        "discount_rate_pct": 11.0,
+        "fcf_margin_pct": 20.0,
+        "revenue_growth_pct": 8.0,
+        "starting_revenue_m": 835.0,
+        "terminal_growth_pct": 2.5,
+        "terminal_multiple": 16.0
+      },
+      "catalysts": [
+        "partner channel discipline"
+      ],
+      "company": "Nimbus Collaboration Software",
+      "currency": "USD",
+      "id": "NIMB-normalization-case",
+      "model_outputs": {
+        "base_value_per_share": 48.25,
+        "margin_label": "moderate negative gap",
+        "margin_of_safety_pct": -16.8,
+        "range_per_share": [
+          43.42,
+          53.07
+        ]
+      },
+      "reuse_notes": [
+        "Copy assumptions only after replacing fictional fixture data with local research.",
+        "Keep the card offline and broker-free."
+      ],
+      "risks": [
+        "competitive discounting",
+        "renewal compression"
+      ],
+      "scenario": "Normalization case",
+      "ticker": "NIMB",
+      "weight": 0.3
+    },
+    {
+      "assumptions": {
+        "discount_rate_pct": 9.5,
+        "fcf_margin_pct": 28.0,
+        "revenue_growth_pct": 16.0,
+        "starting_revenue_m": 880.0,
+        "terminal_growth_pct": 3.5,
+        "terminal_multiple": 22.0
+      },
+      "catalysts": [
+        "enterprise module mix",
+        "lower support cost"
+      ],
+      "company": "Nimbus Collaboration Software",
+      "currency": "USD",
+      "id": "NIMB-operating-leverage-case",
+      "model_outputs": {
+        "base_value_per_share": 125.59,
+        "margin_label": "large positive gap",
+        "margin_of_safety_pct": 116.5,
+        "range_per_share": [
+          113.03,
+          138.15
+        ]
+      },
+      "reuse_notes": [
+        "Copy assumptions only after replacing fictional fixture data with local research.",
+        "Keep the card offline and broker-free."
+      ],
+      "risks": [
+        "platform migration delay"
+      ],
+      "scenario": "Operating leverage case",
+      "ticker": "NIMB",
+      "weight": 0.15
+    }
+  ],
+  "company_count": 2,
+  "generated_on": "static-local",
+  "schema_version": "valuation-scenario-lab.scenario-library.v0.7"
+}

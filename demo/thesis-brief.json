@@ -1,0 +1,124 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "company": "Example Components Inc.",
+  "currency": "USD",
+  "evidence_artifacts": [
+    "demo/valuation-packet.json",
+    "demo/compare-history.json",
+    "demo/decision-journal.json",
+    "demo/fixture-doctor.json",
+    "demo/showcase-dashboard.json"
+  ],
+  "fixture_quality": {
+    "fixture_count": 2,
+    "issue_count": 0,
+    "status": "pass"
+  },
+  "generated_on": "static-local",
+  "history_changes": [
+    {
+      "current": 37.38,
+      "field": "weighted_fair_value_per_share",
+      "prior": 37.2
+    },
+    {
+      "current": -11.0,
+      "field": "weighted_margin_of_safety_pct",
+      "prior": -7.0
+    },
+    {
+      "current": "moderate negative gap",
+      "field": "margin_of_safety_label",
+      "prior": "near modeled value"
+    }
+  ],
+  "journal_summary": "research packet logged; no action recommendation",
+  "open_questions": [
+    "Which assumption would most change the Base reinvestment case valuation range?",
+    "Which assumption would most change the Margin pressure case valuation range?",
+    "Which assumption would most change the Upside adoption case valuation range?"
+  ],
+  "packet_snapshot": {
+    "current_price": 42.0,
+    "margin_of_safety_label": "moderate negative gap",
+    "scenario_count": 3,
+    "weighted_fair_value_per_share": 37.38,
+    "weighted_margin_of_safety_pct": -11.0,
+    "weighted_range_per_share": [
+      33.64,
+      41.12
+    ]
+  },
+  "scenario_history": [
+    {
+      "current_base": 38.4,
+      "delta": 0.6,
+      "prior_base": 37.8,
+      "scenario": "Base reinvestment case"
+    },
+    {
+      "current_base": 18.16,
+      "delta": -4.94,
+      "prior_base": 23.1,
+      "scenario": "Margin pressure case"
+    },
+    {
+      "current_base": 63.65,
+      "delta": 3.25,
+      "prior_base": 60.4,
+      "scenario": "Upside adoption case"
+    }
+  ],
+  "scenario_thesis": [
+    {
+      "base": 38.4,
+      "margin_label": "near modeled value",
+      "range": [
+        34.56,
+        42.24
+      ],
+      "review_prompt": "Confirm that all assumptions are sourced from local research notes.",
+      "scenario": "Base reinvestment case",
+      "weight": 0.5
+    },
+    {
+      "base": 18.16,
+      "margin_label": "large negative gap",
+      "range": [
+        16.34,
+        19.97
+      ],
+      "review_prompt": "Confirm that all assumptions are sourced from local research notes.",
+      "scenario": "Margin pressure case",
+      "weight": 0.3
+    },
+    {
+      "base": 63.65,
+      "margin_label": "large positive gap",
+      "range": [
+        57.29,
+        70.02
+      ],
+      "review_prompt": "Confirm that all assumptions are sourced from local research notes.",
+      "scenario": "Upside adoption case",
+      "weight": 0.2
+    }
+  ],
+  "schema_version": "valuation-scenario-lab.thesis-brief.v0.7",
+  "showcase_context": {
+    "fixture_doctor_status": "pass",
+    "gallery_company_count": 2,
+    "sensitivity_case_count": 9,
+    "sensitivity_high_fair_value": 42.1,
+    "sensitivity_low_fair_value": 33.56
+  },
+  "thesis_summary": "Deterministic local-assumption research brief; no action recommendation.",
+  "ticker": "EXCO"
+}

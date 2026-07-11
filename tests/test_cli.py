@@ -114,6 +114,26 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert "Sensitivity matrix" in svg
     assert "No buy/sell/hold advice." in svg
 
+    thesis = run_cli("thesis-brief", "--root", str(ROOT), "--output", str(out))
+    assert thesis.returncode == 0, thesis.stdout + thesis.stderr
+    thesis_payload = json.loads((out / "thesis-brief.json").read_text(encoding="utf-8"))
+    assert thesis_payload["schema_version"] == "valuation-scenario-lab.thesis-brief.v0.7"
+    assert thesis_payload["journal_summary"] == "research packet logged; no action recommendation"
+    assert thesis_payload["fixture_quality"]["status"] == "pass"
+    assert "demo/showcase-dashboard.json" in thesis_payload["evidence_artifacts"]
+    assert "No buy/sell/hold advice." in (out / "thesis-brief.html").read_text(encoding="utf-8")
+    assert "<script" not in (out / "thesis-brief.html").read_text(encoding="utf-8").lower()
+
+    library = run_cli("scenario-library", "--fixtures", str(ROOT / "examples"), "--output", str(out))
+    assert library.returncode == 0, library.stdout + library.stderr
+    library_payload = json.loads((out / "scenario-library.json").read_text(encoding="utf-8"))
+    assert library_payload["schema_version"] == "valuation-scenario-lab.scenario-library.v0.7"
+    assert library_payload["company_count"] == 2
+    assert library_payload["card_count"] == 6
+    assert library_payload["cards"][0]["id"] == "EXCO-base-reinvestment-case"
+    assert "No broker connections." in library_payload["boundaries"]
+    assert "<script" not in (out / "scenario-library.html").read_text(encoding="utf-8").lower()
+
 
 def test_release_validation_and_maturity() -> None:
     validation = run_cli("validate-release", "--root", str(ROOT))
@@ -234,12 +254,16 @@ def test_quickstart_check_and_visual_receipt(tmp_path: Path) -> None:
     assert (out / "public-readiness-landing.html").exists()
     assert (out / "showcase-dashboard.svg").exists()
     assert (out / "showcase-dashboard.html").exists()
+    assert (out / "thesis-brief.md").exists()
+    assert (out / "thesis-brief.html").exists()
+    assert (out / "scenario-library.md").exists()
+    assert (out / "scenario-library.html").exists()
 
     receipt = run_cli("visual-receipt", "--root", str(ROOT), "--output", str(out))
     assert receipt.returncode == 0, receipt.stdout + receipt.stderr
     receipt_payload = json.loads((out / "visual-receipt.json").read_text(encoding="utf-8"))
     assert receipt_payload["schema_version"] == "valuation-scenario-lab.visual-receipt.v0.5"
-    assert receipt_payload["artifact_count"] == 26
+    assert receipt_payload["artifact_count"] == 32
     assert "No buy/sell/hold advice." in (out / "visual-receipt.html").read_text(encoding="utf-8")
 
 

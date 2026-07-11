@@ -52,6 +52,12 @@ REQUIRED_FILES = [
     "demo/showcase-dashboard.svg",
     "demo/showcase-dashboard.md",
     "demo/showcase-dashboard.html",
+    "demo/thesis-brief.json",
+    "demo/thesis-brief.md",
+    "demo/thesis-brief.html",
+    "demo/scenario-library.json",
+    "demo/scenario-library.md",
+    "demo/scenario-library.html",
     "docs/release-checks.md",
     "release/release-manifest.json",
     "release/release-manifest.md",
@@ -90,7 +96,7 @@ def validate_release(root: Path) -> dict[str, Any]:
                 }
             )
     status = "pass" if not any(item["severity"] == "error" for item in findings) else "fail"
-    return {"schema_version": "valuation-scenario-lab.release-validation.v0.6", "status": status, "findings": findings}
+    return {"schema_version": "valuation-scenario-lab.release-validation.v0.7", "status": status, "findings": findings}
 
 
 def maturity_report(root: Path) -> dict[str, Any]:
@@ -99,7 +105,7 @@ def maturity_report(root: Path) -> dict[str, Any]:
     score -= 25 * sum(1 for item in validation["findings"] if item["severity"] == "error")
     score -= 5 * sum(1 for item in validation["findings"] if item["severity"] == "warning")
     return {
-        "schema_version": "valuation-scenario-lab.maturity.v0.6",
+        "schema_version": "valuation-scenario-lab.maturity.v0.7",
         "score": max(score, 0),
         "status": "ready" if validation["status"] == "pass" and score >= 90 else "needs work",
         "release_validation": validation,
@@ -112,7 +118,7 @@ def release_manifest(root: Path) -> dict[str, Any]:
     for path in public_files(root):
         rel = path.relative_to(root).as_posix()
         files.append({"path": rel, "sha256": sha256(path), "bytes": path.stat().st_size})
-    return {"schema_version": "valuation-scenario-lab.release-manifest.v0.6", "files": files}
+    return {"schema_version": "valuation-scenario-lab.release-manifest.v0.7", "files": files}
 
 
 def public_files(root: Path) -> list[Path]:

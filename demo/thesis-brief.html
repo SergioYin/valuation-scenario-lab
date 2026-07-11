@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Thesis Brief</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }
+table { border-collapse: collapse; width: 100%; }
+td, th { border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; }
+.metric { border: 1px solid #ccd1d1; display: inline-block; margin: 0.25rem; padding: 0.5rem; }
+code { background: #eef3f8; padding: 0.1rem 0.25rem; }
+</style>
+</head>
+<body>
+<h1>Thesis Brief</h1>
+<p>Example Components Inc. (EXCO)</p>
+<p>Deterministic local-assumption research brief; no action recommendation.</p>
+<div class="metric">Fair value: USD 37.38</div>
+<div class="metric">Range: 33.64 to 41.12</div>
+<div class="metric">Label: moderate negative gap</div>
+<h2>Scenario Thesis</h2>
+<table><thead><tr><th>Scenario</th><th>Weight</th><th>Base</th><th>Range</th><th>Label</th></tr></thead><tbody><tr><td>Base reinvestment case</td><td>0.500</td><td>38.40</td><td>34.56 to 42.24</td><td>near modeled value</td></tr><tr><td>Margin pressure case</td><td>0.300</td><td>18.16</td><td>16.34 to 19.97</td><td>large negative gap</td></tr><tr><td>Upside adoption case</td><td>0.200</td><td>63.65</td><td>57.29 to 70.02</td><td>large positive gap</td></tr></tbody></table>
+<h2>History Changes</h2><ul><li>weighted_fair_value_per_share: 37.2 to 37.38</li><li>weighted_margin_of_safety_pct: -7.0 to -11.0</li><li>margin_of_safety_label: near modeled value to moderate negative gap</li></ul>
+<h2>Open Questions</h2><ul><li>Which assumption would most change the Base reinvestment case valuation range?</li><li>Which assumption would most change the Margin pressure case valuation range?</li><li>Which assumption would most change the Upside adoption case valuation range?</li></ul>
+<h2>Evidence Artifacts</h2><ul><li><code>demo/valuation-packet.json</code></li><li><code>demo/compare-history.json</code></li><li><code>demo/decision-journal.json</code></li><li><code>demo/fixture-doctor.json</code></li><li><code>demo/showcase-dashboard.json</code></li></ul>
+<h2>Boundaries</h2><ul><li>Research-only output.</li><li>No live data.</li><li>No broker connections.</li><li>No orders.</li><li>No predictions.</li><li>No buy/sell/hold advice.</li></ul>
+</body>
+</html>

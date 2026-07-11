@@ -361,3 +361,141 @@ def demo_gallery(companies: list[dict[str, Any]]) -> dict[str, Any]:
         "gallery_note": "Neutral bundled fixtures for deterministic command demonstrations.",
         "boundaries": BOUNDARIES,
     }
+
+
+def build_thesis_brief(
+    packet: dict[str, Any],
+    compare_history: dict[str, Any],
+    decision_journal: dict[str, Any],
+    fixture_doctor: dict[str, Any],
+    showcase_dashboard: dict[str, Any],
+) -> dict[str, Any]:
+    key_changes = [
+        {
+            "field": item["field"],
+            "prior": item.get("prior"),
+            "current": item.get("current"),
+        }
+        for item in compare_history.get("changes", [])
+    ]
+    scenario_updates = [
+        {
+            "scenario": item["scenario"],
+            "prior_base": item.get("prior_base"),
+            "current_base": item.get("current_base"),
+            "delta": item.get("delta"),
+        }
+        for item in compare_history.get("scenario_changes", [])
+    ]
+    evidence = [
+        "demo/valuation-packet.json",
+        "demo/compare-history.json",
+        "demo/decision-journal.json",
+        "demo/fixture-doctor.json",
+        "demo/showcase-dashboard.json",
+    ]
+    return {
+        "schema_version": "valuation-scenario-lab.thesis-brief.v0.7",
+        "generated_on": "static-local",
+        "company": packet.get("company"),
+        "ticker": packet.get("ticker"),
+        "currency": packet.get("currency", "USD"),
+        "thesis_summary": "Deterministic local-assumption research brief; no action recommendation.",
+        "packet_snapshot": {
+            "current_price": packet.get("current_price"),
+            "weighted_fair_value_per_share": packet.get("weighted_fair_value_per_share"),
+            "weighted_range_per_share": packet.get("weighted_range_per_share"),
+            "weighted_margin_of_safety_pct": packet.get("weighted_margin_of_safety_pct"),
+            "margin_of_safety_label": packet.get("margin_of_safety_label"),
+            "scenario_count": len(packet.get("valuation_ranges", [])),
+        },
+        "scenario_thesis": [
+            {
+                "scenario": item["scenario"],
+                "weight": item["weight"],
+                "base": item["base"],
+                "range": [item["low"], item["high"]],
+                "margin_label": item["margin_label"],
+                "review_prompt": packet.get("review_prompts", ["Document local assumptions before reuse."])[0],
+            }
+            for item in packet.get("valuation_ranges", [])
+        ],
+        "history_changes": key_changes,
+        "scenario_history": scenario_updates,
+        "journal_summary": decision_journal.get("summary_decision"),
+        "open_questions": decision_journal.get("open_questions", []),
+        "fixture_quality": {
+            "status": fixture_doctor.get("status"),
+            "issue_count": fixture_doctor.get("issue_count"),
+            "fixture_count": fixture_doctor.get("fixture_count"),
+        },
+        "showcase_context": {
+            "gallery_company_count": showcase_dashboard.get("gallery_company_count"),
+            "fixture_doctor_status": showcase_dashboard.get("fixture_doctor_status"),
+            "sensitivity_case_count": showcase_dashboard.get("sensitivity_case_count"),
+            "sensitivity_low_fair_value": showcase_dashboard.get("sensitivity_low_fair_value"),
+            "sensitivity_high_fair_value": showcase_dashboard.get("sensitivity_high_fair_value"),
+        },
+        "evidence_artifacts": evidence,
+        "boundaries": BOUNDARIES,
+    }
+
+
+def scenario_library(companies: list[dict[str, Any]]) -> dict[str, Any]:
+    cards = []
+    for company in companies:
+        packet = build_packet(company)
+        packet_ranges = {item["scenario"]: item for item in packet["valuation_ranges"]}
+        for scenario in company.get("scenarios", []):
+            result = packet_ranges[str(scenario["name"])]
+            cards.append(
+                {
+                    "id": f"{packet['ticker']}-{slugify(str(scenario['name']))}",
+                    "company": packet["company"],
+                    "ticker": packet["ticker"],
+                    "currency": packet["currency"],
+                    "scenario": str(scenario["name"]),
+                    "weight": round(as_float(scenario["weight"], "weight"), 3),
+                    "assumptions": {
+                        "starting_revenue_m": round(as_float(scenario["starting_revenue_m"], "starting_revenue_m"), 4),
+                        "revenue_growth_pct": round(as_float(scenario["revenue_growth_pct"], "revenue_growth_pct"), 4),
+                        "fcf_margin_pct": round(as_float(scenario["fcf_margin_pct"], "fcf_margin_pct"), 4),
+                        "discount_rate_pct": round(as_float(scenario["discount_rate_pct"], "discount_rate_pct"), 4),
+                        "terminal_growth_pct": round(as_float(scenario["terminal_growth_pct"], "terminal_growth_pct"), 4),
+                        "terminal_multiple": round(as_float(scenario["terminal_multiple"], "terminal_multiple"), 4),
+                    },
+                    "model_outputs": {
+                        "base_value_per_share": result["base"],
+                        "range_per_share": [result["low"], result["high"]],
+                        "margin_of_safety_pct": result["margin_of_safety_pct"],
+                        "margin_label": result["margin_label"],
+                    },
+                    "catalysts": sorted(scenario.get("catalysts", [])),
+                    "risks": sorted(scenario.get("risks", [])),
+                    "reuse_notes": [
+                        "Copy assumptions only after replacing fictional fixture data with local research.",
+                        "Keep the card offline and broker-free.",
+                    ],
+                }
+            )
+    return {
+        "schema_version": "valuation-scenario-lab.scenario-library.v0.7",
+        "generated_on": "static-local",
+        "company_count": len(companies),
+        "card_count": len(cards),
+        "cards": sorted(cards, key=lambda item: item["id"]),
+        "boundaries": BOUNDARIES,
+    }
+
+
+def slugify(value: str) -> str:
+    chars = []
+    previous_dash = False
+    for char in value.lower():
+        if char.isalnum():
+            chars.append(char)
+            previous_dash = False
+        elif not previous_dash:
+            chars.append("-")
+            previous_dash = True
+    return "".join(chars).strip("-")

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.0
+
+- Added `thesis-brief` JSON, Markdown, and static HTML artifacts composed from packet, compare-history, decision-journal, fixture-doctor, and showcase-dashboard inputs.
+- Added `scenario-library` JSON, Markdown, and static HTML reusable assumption cards from bundled fictional company fixtures.
+- Included both analyst workflow outputs in `demo`, `quickstart-check`, `selfcheck`, `validate-release`, package data, release docs, README examples, and the agent skill protocol.
+- Regenerated v0.7 demo artifacts and preserved zero runtime dependencies and finance safety boundaries.
+
 ## 0.6.0
 
 - Added `showcase-dashboard` JSON, SVG, Markdown, and static HTML artifacts from the current demo packet, gallery, fixture doctor, and sensitivity matrix.

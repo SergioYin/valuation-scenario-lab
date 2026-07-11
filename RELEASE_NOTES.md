@@ -1,5 +1,15 @@
 # Release Notes
 
+## v0.7.0
+
+Analyst workflow increment.
+
+This release adds `thesis-brief`, a zero-runtime-dependency command that composes deterministic JSON, Markdown, and static no-JavaScript HTML from the demo packet, compare-history, decision-journal, fixture-doctor, and showcase-dashboard artifacts.
+
+It also adds `scenario-library`, which exports reusable scenario assumption cards from bundled fictional company fixtures as JSON, Markdown, and static HTML. `demo`, `quickstart-check`, `selfcheck`, release validation, package data, README docs, release checks, and the agent skill now include both workflow artifacts.
+
+Boundaries: no live data, no broker connections, no orders, no predictions, and no buy/sell/hold advice.
+
 ## v0.6.0
 
 Showcase dashboard release.

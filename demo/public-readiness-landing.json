@@ -14,6 +14,8 @@
     "demo/visual-receipt.html",
     "demo/showcase-dashboard.svg",
     "demo/showcase-dashboard.html",
+    "demo/thesis-brief.html",
+    "demo/scenario-library.html",
     "demo/decision-journal.md",
     "demo/assumption-change-walkthrough.html",
     "demo/multi-company-demo-gallery.html",
@@ -38,6 +40,16 @@
       "artifact": "demo/decision-journal.md",
       "command": "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
       "label": "Read the journal"
+    },
+    {
+      "artifact": "demo/thesis-brief.md",
+      "command": "valuation-scenario-lab thesis-brief --root . --output demo",
+      "label": "Read the thesis brief"
+    },
+    {
+      "artifact": "demo/scenario-library.html",
+      "command": "valuation-scenario-lab scenario-library --fixtures examples --output demo",
+      "label": "Export scenario cards"
     },
     {
       "artifact": "demo/fixture-doctor.md",
