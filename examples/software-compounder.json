@@ -1,0 +1,53 @@
+{
+  "company": "Nimbus Collaboration Software",
+  "ticker": "NIMB",
+  "currency": "USD",
+  "current_price": 58.0,
+  "shares_outstanding_m": 92.0,
+  "net_cash_m": 420.0,
+  "source_freshness": [
+    {"name": "annual subscription cohort notes", "age_days": 28},
+    {"name": "software margin benchmark memo", "age_days": 21}
+  ],
+  "scenarios": [
+    {
+      "name": "Durable retention case",
+      "weight": 0.55,
+      "starting_revenue_m": 860.0,
+      "revenue_growth_pct": 13.0,
+      "fcf_margin_pct": 24.0,
+      "discount_rate_pct": 10.0,
+      "terminal_growth_pct": 3.0,
+      "terminal_multiple": 20.0,
+      "catalysts": ["seat expansion", "process automation attach"],
+      "risks": ["sales productivity reset"],
+      "source_freshness": [{"name": "retention bridge memo", "age_days": 24}]
+    },
+    {
+      "name": "Normalization case",
+      "weight": 0.3,
+      "starting_revenue_m": 835.0,
+      "revenue_growth_pct": 8.0,
+      "fcf_margin_pct": 20.0,
+      "discount_rate_pct": 11.0,
+      "terminal_growth_pct": 2.5,
+      "terminal_multiple": 16.0,
+      "catalysts": ["partner channel discipline"],
+      "risks": ["renewal compression", "competitive discounting"],
+      "source_freshness": [{"name": "normalization review memo", "age_days": 31}]
+    },
+    {
+      "name": "Operating leverage case",
+      "weight": 0.15,
+      "starting_revenue_m": 880.0,
+      "revenue_growth_pct": 16.0,
+      "fcf_margin_pct": 28.0,
+      "discount_rate_pct": 9.5,
+      "terminal_growth_pct": 3.5,
+      "terminal_multiple": 22.0,
+      "catalysts": ["lower support cost", "enterprise module mix"],
+      "risks": ["platform migration delay"],
+      "source_freshness": [{"name": "leverage scenario memo", "age_days": 19}]
+    }
+  ]
+}

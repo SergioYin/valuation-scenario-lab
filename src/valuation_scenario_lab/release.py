@@ -18,6 +18,7 @@ REQUIRED_FILES = [
     "CHANGELOG.md",
     "RELEASE_NOTES.md",
     "examples/company.json",
+    "examples/software-compounder.json",
     "demo/valuation-packet.json",
     "demo/valuation-packet.md",
     "demo/valuation-packet.html",
@@ -27,6 +28,12 @@ REQUIRED_FILES = [
     "demo/review-ledger.md",
     "demo/sensitivity-matrix.json",
     "demo/sensitivity-matrix.md",
+    "demo/assumption-change-walkthrough.json",
+    "demo/assumption-change-walkthrough.md",
+    "demo/assumption-change-walkthrough.html",
+    "demo/multi-company-demo-gallery.json",
+    "demo/multi-company-demo-gallery.md",
+    "demo/multi-company-demo-gallery.html",
     "demo/decision-journal.json",
     "demo/decision-journal.md",
     "demo/quickstart-check.json",
@@ -61,7 +68,7 @@ def validate_release(root: Path) -> dict[str, Any]:
         if phrase not in readme:
             findings.append({"severity": "warning", "message": f"README missing phrase: {phrase}"})
     status = "pass" if not any(item["severity"] == "error" for item in findings) else "fail"
-    return {"schema_version": "valuation-scenario-lab.release-validation.v0.3", "status": status, "findings": findings}
+    return {"schema_version": "valuation-scenario-lab.release-validation.v0.4", "status": status, "findings": findings}
 
 
 def maturity_report(root: Path) -> dict[str, Any]:
@@ -70,7 +77,7 @@ def maturity_report(root: Path) -> dict[str, Any]:
     score -= 25 * sum(1 for item in validation["findings"] if item["severity"] == "error")
     score -= 5 * sum(1 for item in validation["findings"] if item["severity"] == "warning")
     return {
-        "schema_version": "valuation-scenario-lab.maturity.v0.3",
+        "schema_version": "valuation-scenario-lab.maturity.v0.4",
         "score": max(score, 0),
         "status": "ready" if validation["status"] == "pass" and score >= 90 else "needs work",
         "release_validation": validation,
@@ -83,7 +90,7 @@ def release_manifest(root: Path) -> dict[str, Any]:
     for path in public_files(root):
         rel = path.relative_to(root).as_posix()
         files.append({"path": rel, "sha256": sha256(path), "bytes": path.stat().st_size})
-    return {"schema_version": "valuation-scenario-lab.release-manifest.v0.3", "files": files}
+    return {"schema_version": "valuation-scenario-lab.release-manifest.v0.4", "files": files}
 
 
 def public_files(root: Path) -> list[Path]:

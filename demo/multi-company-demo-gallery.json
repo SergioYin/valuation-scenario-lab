@@ -1,0 +1,44 @@
+{
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "cards": [
+    {
+      "company": "Example Components Inc.",
+      "currency": "USD",
+      "margin_of_safety_label": "moderate negative gap",
+      "scenario_count": 3,
+      "ticker": "EXCO",
+      "top_review_prompt": "Confirm that all assumptions are sourced from local research notes.",
+      "weighted_fair_value_per_share": 37.38,
+      "weighted_margin_of_safety_pct": -11.0,
+      "weighted_range_per_share": [
+        33.64,
+        41.12
+      ]
+    },
+    {
+      "company": "Nimbus Collaboration Software",
+      "currency": "USD",
+      "margin_of_safety_label": "large positive gap",
+      "scenario_count": 3,
+      "ticker": "NIMB",
+      "top_review_prompt": "Confirm that all assumptions are sourced from local research notes.",
+      "weighted_fair_value_per_share": 79.57,
+      "weighted_margin_of_safety_pct": 37.2,
+      "weighted_range_per_share": [
+        71.62,
+        87.53
+      ]
+    }
+  ],
+  "company_count": 2,
+  "gallery_note": "Neutral bundled fixtures for deterministic command demonstrations.",
+  "generated_on": "static-local",
+  "schema_version": "valuation-scenario-lab.demo-gallery.v0.4"
+}

@@ -5,7 +5,7 @@ from typing import Any
 
 from .model import BOUNDARIES, ScenarioResult, as_float
 
-PACKET_SCHEMA_VERSION = "valuation-scenario-lab.v0.3"
+PACKET_SCHEMA_VERSION = "valuation-scenario-lab.v0.4"
 
 
 def validate_company(company: dict[str, Any]) -> list[str]:
@@ -178,7 +178,7 @@ def compare_packets(current: dict[str, Any], prior: dict[str, Any]) -> dict[str,
             }
         )
     return {
-        "schema_version": "valuation-scenario-lab.compare.v0.3",
+        "schema_version": "valuation-scenario-lab.compare.v0.4",
         "generated_on": "static-local",
         "company": current.get("company"),
         "changes": changes,
@@ -203,7 +203,7 @@ def build_review_ledger(packet: dict[str, Any], policy: dict[str, Any] | None = 
             }
         )
     return {
-        "schema_version": "valuation-scenario-lab.ledger.v0.3",
+        "schema_version": "valuation-scenario-lab.ledger.v0.4",
         "generated_on": "static-local",
         "company": packet.get("company"),
         "entries": entries,
@@ -230,7 +230,7 @@ def build_decision_journal(packet: dict[str, Any], ledger: dict[str, Any] | None
         if isinstance(entry, dict) and entry.get("review_question")
     ]
     return {
-        "schema_version": "valuation-scenario-lab.decision-journal.v0.3",
+        "schema_version": "valuation-scenario-lab.decision-journal.v0.4",
         "generated_on": "static-local",
         "company": packet.get("company"),
         "ticker": packet.get("ticker"),
@@ -264,10 +264,100 @@ def sensitivity_matrix(company: dict[str, Any]) -> dict[str, Any]:
                 }
             )
     return {
-        "schema_version": "valuation-scenario-lab.sensitivity.v0.3",
+        "schema_version": "valuation-scenario-lab.sensitivity.v0.4",
         "generated_on": "static-local",
         "company": base["company"],
         "base_weighted_fair_value_per_share": base["weighted_fair_value_per_share"],
         "rows": rows,
+        "boundaries": BOUNDARIES,
+    }
+
+
+def assumption_change_walkthrough(
+    company: dict[str, Any],
+    scenario_name: str | None = None,
+    field: str = "fcf_margin_pct",
+    delta: float = 2.0,
+) -> dict[str, Any]:
+    base_packet = build_packet(company)
+    scenario_index = scenario_index_for(company, scenario_name)
+    base_scenario = company["scenarios"][scenario_index]
+    if field not in base_scenario:
+        raise ValueError(f"scenario does not contain assumption field: {field}")
+    original_value = as_float(base_scenario[field], field)
+    changed_company = {**company, "scenarios": [dict(item) for item in company["scenarios"]]}
+    changed_company["scenarios"][scenario_index][field] = original_value + delta
+    changed_packet = build_packet(changed_company)
+    return {
+        "schema_version": "valuation-scenario-lab.assumption-change.v0.4",
+        "generated_on": "static-local",
+        "company": base_packet["company"],
+        "ticker": base_packet["ticker"],
+        "scenario": str(base_scenario["name"]),
+        "changed_assumption": field,
+        "prior_value": round(original_value, 4),
+        "new_value": round(original_value + delta, 4),
+        "delta": round(delta, 4),
+        "before": {
+            "weighted_fair_value_per_share": base_packet["weighted_fair_value_per_share"],
+            "weighted_margin_of_safety_pct": base_packet["weighted_margin_of_safety_pct"],
+            "margin_of_safety_label": base_packet["margin_of_safety_label"],
+        },
+        "after": {
+            "weighted_fair_value_per_share": changed_packet["weighted_fair_value_per_share"],
+            "weighted_margin_of_safety_pct": changed_packet["weighted_margin_of_safety_pct"],
+            "margin_of_safety_label": changed_packet["margin_of_safety_label"],
+        },
+        "movement": {
+            "weighted_fair_value_per_share": round(
+                changed_packet["weighted_fair_value_per_share"] - base_packet["weighted_fair_value_per_share"], 2
+            ),
+            "weighted_margin_of_safety_pct": round(
+                changed_packet["weighted_margin_of_safety_pct"] - base_packet["weighted_margin_of_safety_pct"], 1
+            ),
+        },
+        "walkthrough_steps": [
+            "Start with the checked local fixture.",
+            f"Change {field} for the selected scenario only.",
+            "Rebuild the deterministic packet with the same model.",
+            "Compare weighted fair value, margin label, and margin-of-safety movement.",
+            "Record the result as research review evidence, not as an action recommendation.",
+        ],
+        "boundaries": BOUNDARIES,
+    }
+
+
+def scenario_index_for(company: dict[str, Any], scenario_name: str | None) -> int:
+    if scenario_name is None:
+        return 0
+    for index, scenario in enumerate(company.get("scenarios", [])):
+        if scenario.get("name") == scenario_name:
+            return index
+    raise ValueError(f"unknown scenario: {scenario_name}")
+
+
+def demo_gallery(companies: list[dict[str, Any]]) -> dict[str, Any]:
+    packets = [build_packet(company) for company in companies]
+    cards = []
+    for packet in packets:
+        cards.append(
+            {
+                "company": packet["company"],
+                "ticker": packet["ticker"],
+                "currency": packet["currency"],
+                "weighted_fair_value_per_share": packet["weighted_fair_value_per_share"],
+                "weighted_range_per_share": packet["weighted_range_per_share"],
+                "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
+                "margin_of_safety_label": packet["margin_of_safety_label"],
+                "scenario_count": len(packet["valuation_ranges"]),
+                "top_review_prompt": packet["review_prompts"][0],
+            }
+        )
+    return {
+        "schema_version": "valuation-scenario-lab.demo-gallery.v0.4",
+        "generated_on": "static-local",
+        "company_count": len(cards),
+        "cards": cards,
+        "gallery_note": "Neutral bundled fixtures for deterministic command demonstrations.",
         "boundaries": BOUNDARIES,
     }

@@ -66,5 +66,5 @@
       "weighted_margin_of_safety_pct": -8.5
     }
   ],
-  "schema_version": "valuation-scenario-lab.sensitivity.v0.3"
+  "schema_version": "valuation-scenario-lab.sensitivity.v0.4"
 }

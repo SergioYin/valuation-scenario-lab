@@ -13,6 +13,8 @@
     "demo/quickstart-check.md",
     "demo/visual-receipt.html",
     "demo/decision-journal.md",
+    "demo/assumption-change-walkthrough.html",
+    "demo/multi-company-demo-gallery.html",
     "demo/public-readiness-landing.html"
   ],
   "demo_ticker": "EXCO",
@@ -42,6 +44,6 @@
     "public-neutral boundary text",
     "no workflow automation"
   ],
-  "schema_version": "valuation-scenario-lab.public-readiness.v0.3",
+  "schema_version": "valuation-scenario-lab.public-readiness.v0.4",
   "subhead": "Deterministic Markdown, JSON, and static HTML artifacts from local assumptions."
 }

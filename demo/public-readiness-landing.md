@@ -16,6 +16,8 @@ Deterministic Markdown, JSON, and static HTML artifacts from local assumptions.
 - `demo/quickstart-check.md`
 - `demo/visual-receipt.html`
 - `demo/decision-journal.md`
+- `demo/assumption-change-walkthrough.html`
+- `demo/multi-company-demo-gallery.html`
 - `demo/public-readiness-landing.html`
 
 ## Readiness Checks

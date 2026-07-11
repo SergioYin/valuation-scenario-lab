@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Assumption Change Walkthrough</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }
+table { border-collapse: collapse; width: 100%; max-width: 760px; }
+td, th { border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; }
+.badge { display: inline-block; border: 1px solid #5d6d7e; padding: 0.2rem 0.45rem; }
+</style>
+</head>
+<body>
+<h1>Assumption Change Walkthrough</h1>
+<p>Example Components Inc. (EXCO)</p>
+<p class="badge">Research only; no advice or execution.</p>
+<p>Scenario: Base reinvestment case</p>
+<p>Changed assumption: <code>fcf_margin_pct</code> 14.0 to 16.0</p>
+<table><thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Movement</th></tr></thead><tbody>
+<tr><td>Weighted fair value per share</td><td>37.38</td><td>40.02</td><td>+2.64</td></tr>
+<tr><td>Weighted margin of safety</td><td>-11.0%</td><td>-4.7%</td><td>+6.3 pts</td></tr>
+<tr><td>Label</td><td>moderate negative gap</td><td>near modeled value</td><td>review context</td></tr>
+</tbody></table>
+<h2>Steps</h2><ul><li>Start with the checked local fixture.</li><li>Change fcf_margin_pct for the selected scenario only.</li><li>Rebuild the deterministic packet with the same model.</li><li>Compare weighted fair value, margin label, and margin-of-safety movement.</li><li>Record the result as research review evidence, not as an action recommendation.</li></ul>
+<h2>Boundaries</h2><ul><li>Research-only output.</li><li>No live data.</li><li>No broker connections.</li><li>No orders.</li><li>No predictions.</li><li>No buy/sell/hold advice.</li></ul>
+</body>
+</html>

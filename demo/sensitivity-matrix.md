@@ -1,6 +1,6 @@
 # Valuation Sensitivity Matrix
 
-Schema: `valuation-scenario-lab.sensitivity.v0.3`
+Schema: `valuation-scenario-lab.sensitivity.v0.4`
 
 ## Matrix
 

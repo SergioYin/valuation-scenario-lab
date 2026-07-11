@@ -1,6 +1,6 @@
 # Valuation Review Ledger
 
-Schema: `valuation-scenario-lab.ledger.v0.3`
+Schema: `valuation-scenario-lab.ledger.v0.4`
 
 ## Ledger Entries
 

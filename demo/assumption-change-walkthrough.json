@@ -1,0 +1,40 @@
+{
+  "after": {
+    "margin_of_safety_label": "near modeled value",
+    "weighted_fair_value_per_share": 40.02,
+    "weighted_margin_of_safety_pct": -4.7
+  },
+  "before": {
+    "margin_of_safety_label": "moderate negative gap",
+    "weighted_fair_value_per_share": 37.38,
+    "weighted_margin_of_safety_pct": -11.0
+  },
+  "boundaries": [
+    "Research-only output.",
+    "No live data.",
+    "No broker connections.",
+    "No orders.",
+    "No predictions.",
+    "No buy/sell/hold advice."
+  ],
+  "changed_assumption": "fcf_margin_pct",
+  "company": "Example Components Inc.",
+  "delta": 2.0,
+  "generated_on": "static-local",
+  "movement": {
+    "weighted_fair_value_per_share": 2.64,
+    "weighted_margin_of_safety_pct": 6.3
+  },
+  "new_value": 16.0,
+  "prior_value": 14.0,
+  "scenario": "Base reinvestment case",
+  "schema_version": "valuation-scenario-lab.assumption-change.v0.4",
+  "ticker": "EXCO",
+  "walkthrough_steps": [
+    "Start with the checked local fixture.",
+    "Change fcf_margin_pct for the selected scenario only.",
+    "Rebuild the deterministic packet with the same model.",
+    "Compare weighted fair value, margin label, and margin-of-safety movement.",
+    "Record the result as research review evidence, not as an action recommendation."
+  ]
+}

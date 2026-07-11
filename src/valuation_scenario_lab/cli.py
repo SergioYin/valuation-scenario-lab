@@ -8,7 +8,16 @@ import tempfile
 from pathlib import Path
 
 from . import __version__
-from .engine import build_decision_journal, build_packet, build_review_ledger, compare_packets, sensitivity_matrix, validate_company
+from .engine import (
+    assumption_change_walkthrough,
+    build_decision_journal,
+    build_packet,
+    build_review_ledger,
+    compare_packets,
+    demo_gallery,
+    sensitivity_matrix,
+    validate_company,
+)
 from .io import ensure_dir, read_json, write_json, write_text
 from .release import maturity_report as maturity_payload
 from .release import release_manifest as manifest_payload
@@ -38,6 +47,17 @@ def main(argv: list[str] | None = None) -> int:
     matrix = sub.add_parser("sensitivity-matrix")
     matrix.add_argument("--fixtures", default="examples")
     matrix.add_argument("--output", default="demo")
+
+    walkthrough = sub.add_parser("assumption-change-walkthrough")
+    walkthrough.add_argument("--fixtures", default="examples")
+    walkthrough.add_argument("--output", default="demo")
+    walkthrough.add_argument("--scenario", default=None)
+    walkthrough.add_argument("--field", default="fcf_margin_pct")
+    walkthrough.add_argument("--delta", type=float, default=2.0)
+
+    gallery = sub.add_parser("demo-gallery")
+    gallery.add_argument("--fixtures", default="examples")
+    gallery.add_argument("--output", default="demo")
 
     journal = sub.add_parser("decision-journal")
     journal.add_argument("--packet", default="demo/valuation-packet.json")
@@ -84,6 +104,10 @@ def main(argv: list[str] | None = None) -> int:
             return command_review_ledger(Path(args.packet), Path(args.policy), Path(args.output))
         if args.command == "sensitivity-matrix":
             return command_sensitivity(Path(args.fixtures), Path(args.output))
+        if args.command == "assumption-change-walkthrough":
+            return command_assumption_walkthrough(Path(args.fixtures), Path(args.output), args.scenario, args.field, args.delta)
+        if args.command == "demo-gallery":
+            return command_demo_gallery(Path(args.fixtures), Path(args.output))
         if args.command == "decision-journal":
             return command_decision_journal(Path(args.packet), Path(args.ledger), Path(args.output))
         if args.command == "public-readiness-landing":
@@ -106,6 +130,8 @@ def main(argv: list[str] | None = None) -> int:
             command_compare_history(root / "demo" / "valuation-packet.json", root / "examples" / "prior-packet.json", root / "demo")
             command_review_ledger(root / "demo" / "valuation-packet.json", root / "examples" / "review-policy.json", root / "demo")
             command_sensitivity(root / "examples", root / "demo")
+            command_assumption_walkthrough(root / "examples", root / "demo", None, "fcf_margin_pct", 2.0)
+            command_demo_gallery(root / "examples", root / "demo")
             command_decision_journal(root / "demo" / "valuation-packet.json", root / "demo" / "review-ledger.json", root / "demo")
             command_public_readiness_landing(root, root / "demo")
             command_quickstart_check(root, root / "demo")
@@ -154,6 +180,27 @@ def command_sensitivity(fixtures: Path, output: Path) -> int:
     return 0
 
 
+def command_assumption_walkthrough(fixtures: Path, output: Path, scenario: str | None, field: str, delta: float) -> int:
+    payload = assumption_change_walkthrough(read_json(fixtures / "company.json"), scenario, field, delta)
+    ensure_dir(output)
+    write_json(output / "assumption-change-walkthrough.json", payload)
+    write_text(output / "assumption-change-walkthrough.md", assumption_walkthrough_markdown(payload))
+    write_text(output / "assumption-change-walkthrough.html", assumption_walkthrough_html(payload))
+    print(f"wrote {output / 'assumption-change-walkthrough.json'}")
+    return 0
+
+
+def command_demo_gallery(fixtures: Path, output: Path) -> int:
+    companies = fixture_companies(fixtures)
+    payload = demo_gallery(companies)
+    ensure_dir(output)
+    write_json(output / "multi-company-demo-gallery.json", payload)
+    write_text(output / "multi-company-demo-gallery.md", demo_gallery_markdown(payload))
+    write_text(output / "multi-company-demo-gallery.html", demo_gallery_html(payload))
+    print(f"wrote {output / 'multi-company-demo-gallery.json'}")
+    return 0
+
+
 def command_decision_journal(packet: Path, ledger: Path, output: Path) -> int:
     payload = build_decision_journal(read_json(packet), read_json(ledger) if ledger.exists() else None)
     ensure_dir(output)
@@ -188,6 +235,8 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_compare_history(out / "valuation-packet.json", root / "examples" / "prior-packet.json", out)
         command_review_ledger(out / "valuation-packet.json", root / "examples" / "review-policy.json", out)
         command_sensitivity(root / "examples", out)
+        command_assumption_walkthrough(root / "examples", out, None, "fcf_margin_pct", 2.0)
+        command_demo_gallery(root / "examples", out)
         command_decision_journal(out / "valuation-packet.json", out / "review-ledger.json", out)
         command_public_readiness_landing(root, out)
     validation = validate_release_payload(root)
@@ -214,6 +263,12 @@ def command_quickstart_check(root: Path, output: Path) -> int:
         "review-ledger.md",
         "sensitivity-matrix.json",
         "sensitivity-matrix.md",
+        "assumption-change-walkthrough.json",
+        "assumption-change-walkthrough.md",
+        "assumption-change-walkthrough.html",
+        "multi-company-demo-gallery.json",
+        "multi-company-demo-gallery.md",
+        "multi-company-demo-gallery.html",
         "decision-journal.json",
         "decision-journal.md",
         "public-readiness-landing.json",
@@ -222,7 +277,7 @@ def command_quickstart_check(root: Path, output: Path) -> int:
     ]
     files = [{"path": f"demo/{name}", "exists": (output / name).exists()} for name in expected]
     payload = {
-        "schema_version": "valuation-scenario-lab.quickstart-check.v0.3",
+        "schema_version": "valuation-scenario-lab.quickstart-check.v0.4",
         "status": "pass" if all(item["exists"] for item in files) else "fail",
         "fixture_source": "local-or-packaged-fixtures",
         "commands": [
@@ -230,6 +285,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab selfcheck --root .",
             "valuation-scenario-lab quickstart-check --root . --output demo",
             "valuation-scenario-lab visual-receipt --root . --output demo",
+            "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
+            "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
             "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
             "valuation-scenario-lab public-readiness-landing --root . --output demo",
         ],
@@ -251,14 +308,14 @@ def command_visual_receipt(root: Path, output: Path) -> int:
     ensure_demo_artifacts(root, output)
     packet = read_json(output / "valuation-packet.json")
     payload = {
-        "schema_version": "valuation-scenario-lab.visual-receipt.v0.3",
+        "schema_version": "valuation-scenario-lab.visual-receipt.v0.4",
         "company": packet["company"],
         "ticker": packet["ticker"],
         "weighted_fair_value_per_share": packet["weighted_fair_value_per_share"],
         "weighted_range_per_share": packet["weighted_range_per_share"],
         "margin_of_safety_label": packet["margin_of_safety_label"],
         "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
-        "artifact_count": 14,
+        "artifact_count": 20,
         "boundaries": packet["boundaries"],
     }
     write_json(output / "visual-receipt.json", payload)
@@ -273,7 +330,22 @@ def ensure_demo_artifacts(root: Path, output: Path) -> None:
     command_compare_history(output / "valuation-packet.json", root / "examples" / "prior-packet.json", output)
     command_review_ledger(output / "valuation-packet.json", root / "examples" / "review-policy.json", output)
     command_sensitivity(root / "examples", output)
+    command_assumption_walkthrough(root / "examples", output, None, "fcf_margin_pct", 2.0)
+    command_demo_gallery(root / "examples", output)
     command_decision_journal(output / "valuation-packet.json", output / "review-ledger.json", output)
+
+
+def fixture_companies(fixtures: Path) -> list[dict]:
+    companies = []
+    for path in sorted(fixtures.glob("*.json")):
+        if path.name in {"prior-packet.json", "review-policy.json"}:
+            continue
+        payload = read_json(path)
+        if not validate_company(payload):
+            companies.append(payload)
+    if not companies:
+        raise ValueError(f"no valid company fixtures found in {fixtures}")
+    return companies
 
 
 def resolve_root(root_arg: Path | None) -> Path:
@@ -355,6 +427,118 @@ body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
 """
 
 
+def assumption_walkthrough_markdown(payload: dict) -> str:
+    lines = [
+        "# Assumption Change Walkthrough",
+        "",
+        f"Company: {payload['company']} ({payload['ticker']})",
+        f"Scenario: {payload['scenario']}",
+        f"Changed assumption: `{payload['changed_assumption']}` {payload['prior_value']} -> {payload['new_value']}",
+        "",
+        "## Movement",
+        "",
+        f"- Weighted fair value per share: {payload['before']['weighted_fair_value_per_share']:.2f} -> {payload['after']['weighted_fair_value_per_share']:.2f} ({payload['movement']['weighted_fair_value_per_share']:+.2f})",
+        f"- Weighted margin of safety: {payload['before']['weighted_margin_of_safety_pct']:.1f}% -> {payload['after']['weighted_margin_of_safety_pct']:.1f}% ({payload['movement']['weighted_margin_of_safety_pct']:+.1f} pts)",
+        f"- Label: {payload['before']['margin_of_safety_label']} -> {payload['after']['margin_of_safety_label']}",
+        "",
+        "## Steps",
+        "",
+    ]
+    lines.extend(f"- {item}" for item in payload["walkthrough_steps"])
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def assumption_walkthrough_html(payload: dict) -> str:
+    steps = "".join(f"<li>{html.escape(item)}</li>" for item in payload["walkthrough_steps"])
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Assumption Change Walkthrough</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; max-width: 760px; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; }}
+.badge {{ display: inline-block; border: 1px solid #5d6d7e; padding: 0.2rem 0.45rem; }}
+</style>
+</head>
+<body>
+<h1>Assumption Change Walkthrough</h1>
+<p>{html.escape(payload['company'])} ({html.escape(payload['ticker'])})</p>
+<p class="badge">Research only; no advice or execution.</p>
+<p>Scenario: {html.escape(payload['scenario'])}</p>
+<p>Changed assumption: <code>{html.escape(payload['changed_assumption'])}</code> {payload['prior_value']} to {payload['new_value']}</p>
+<table><thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Movement</th></tr></thead><tbody>
+<tr><td>Weighted fair value per share</td><td>{payload['before']['weighted_fair_value_per_share']:.2f}</td><td>{payload['after']['weighted_fair_value_per_share']:.2f}</td><td>{payload['movement']['weighted_fair_value_per_share']:+.2f}</td></tr>
+<tr><td>Weighted margin of safety</td><td>{payload['before']['weighted_margin_of_safety_pct']:.1f}%</td><td>{payload['after']['weighted_margin_of_safety_pct']:.1f}%</td><td>{payload['movement']['weighted_margin_of_safety_pct']:+.1f} pts</td></tr>
+<tr><td>Label</td><td>{html.escape(payload['before']['margin_of_safety_label'])}</td><td>{html.escape(payload['after']['margin_of_safety_label'])}</td><td>review context</td></tr>
+</tbody></table>
+<h2>Steps</h2><ul>{steps}</ul>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def demo_gallery_markdown(payload: dict) -> str:
+    lines = [
+        "# Multi-Company Demo Gallery",
+        "",
+        payload["gallery_note"],
+        "",
+        "| Company | Ticker | Fair Value | Range | MOS | Label | Scenarios |",
+        "| --- | --- | ---: | --- | ---: | --- | ---: |",
+    ]
+    for item in payload["cards"]:
+        lines.append(
+            f"| {item['company']} | {item['ticker']} | {item['currency']} {item['weighted_fair_value_per_share']:.2f} | "
+            f"{item['weighted_range_per_share'][0]:.2f} to {item['weighted_range_per_share'][1]:.2f} | "
+            f"{item['weighted_margin_of_safety_pct']:.1f}% | {item['margin_of_safety_label']} | {item['scenario_count']} |"
+        )
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def demo_gallery_html(payload: dict) -> str:
+    rows = "".join(
+        "<tr>"
+        f"<td>{html.escape(item['company'])}</td>"
+        f"<td>{html.escape(item['ticker'])}</td>"
+        f"<td>{html.escape(item['currency'])} {item['weighted_fair_value_per_share']:.2f}</td>"
+        f"<td>{item['weighted_range_per_share'][0]:.2f} to {item['weighted_range_per_share'][1]:.2f}</td>"
+        f"<td>{item['weighted_margin_of_safety_pct']:.1f}%</td>"
+        f"<td>{html.escape(item['margin_of_safety_label'])}</td>"
+        f"<td>{item['scenario_count']}</td>"
+        "</tr>"
+        for item in payload["cards"]
+    )
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Multi-Company Demo Gallery</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; }}
+.note {{ color: #566573; }}
+</style>
+</head>
+<body>
+<h1>Multi-Company Demo Gallery</h1>
+<p class="note">{html.escape(payload['gallery_note'])}</p>
+<table><thead><tr><th>Company</th><th>Ticker</th><th>Fair Value</th><th>Range</th><th>MOS</th><th>Label</th><th>Scenarios</th></tr></thead><tbody>{rows}</tbody></table>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
 def decision_journal_markdown(payload: dict) -> str:
     lines = [
         "# Decision Journal",
@@ -377,7 +561,7 @@ def decision_journal_markdown(payload: dict) -> str:
 
 def public_readiness_payload(packet: dict) -> dict:
     return {
-        "schema_version": "valuation-scenario-lab.public-readiness.v0.3",
+        "schema_version": "valuation-scenario-lab.public-readiness.v0.4",
         "generated_on": "static-local",
         "headline": "Offline valuation scenario lab",
         "subhead": "Deterministic Markdown, JSON, and static HTML artifacts from local assumptions.",
@@ -405,6 +589,8 @@ def public_readiness_payload(packet: dict) -> dict:
             "demo/quickstart-check.md",
             "demo/visual-receipt.html",
             "demo/decision-journal.md",
+            "demo/assumption-change-walkthrough.html",
+            "demo/multi-company-demo-gallery.html",
             "demo/public-readiness-landing.html",
         ],
         "readiness_checks": [
