@@ -149,6 +149,14 @@ def main(argv: list[str] | None = None) -> int:
     troubleshoot.add_argument("--root", default=".")
     troubleshoot.add_argument("--output", default="demo")
 
+    snippet = sub.add_parser("readme-snippet")
+    snippet.add_argument("--root", default=".")
+    snippet.add_argument("--output", default="demo")
+
+    deck = sub.add_parser("release-deck")
+    deck.add_argument("--root", default=".")
+    deck.add_argument("--output", default="demo")
+
     demo = sub.add_parser("demo")
     demo.add_argument("--root", default=".")
 
@@ -211,6 +219,10 @@ def main(argv: list[str] | None = None) -> int:
             return command_reviewer_scorecard(Path(args.root), Path(args.output))
         if args.command == "troubleshoot":
             return command_troubleshoot(Path(args.root), Path(args.output))
+        if args.command == "readme-snippet":
+            return command_readme_snippet(Path(args.root), Path(args.output))
+        if args.command == "release-deck":
+            return command_release_deck(Path(args.root), Path(args.output))
         if args.command == "demo":
             root = Path(args.root)
             command_build_packet(root / "examples", root / "demo")
@@ -233,6 +245,8 @@ def main(argv: list[str] | None = None) -> int:
             command_casebook(root, root / "demo")
             command_reviewer_scorecard(root, root / "demo")
             command_troubleshoot(root, root / "demo")
+            command_readme_snippet(root, root / "demo")
+            command_release_deck(root, root / "demo")
             command_install_smoke_receipt(root, root / "release")
             command_manifest(root, root / "release")
             command_export_bundle(root, root / "release")
@@ -352,6 +366,8 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_casebook(root, out)
         command_reviewer_scorecard(root, out)
         command_troubleshoot(root, out)
+        command_readme_snippet(root, out)
+        command_release_deck(root, out)
         command_install_smoke_receipt(root, out / "release")
         command_manifest(root, out / "release")
         command_export_bundle(root, out / "release")
@@ -378,6 +394,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
     command_casebook(root, output)
     command_reviewer_scorecard(root, output)
     command_troubleshoot(root, output)
+    command_readme_snippet(root, output)
+    command_release_deck(root, output)
     expected = [
         "valuation-packet.json",
         "valuation-packet.md",
@@ -426,6 +444,12 @@ def command_quickstart_check(root: Path, output: Path) -> int:
         "troubleshoot.json",
         "troubleshoot.md",
         "troubleshoot.html",
+        "readme-snippet.json",
+        "readme-snippet.md",
+        "readme-snippet.html",
+        "release-deck.json",
+        "release-deck.md",
+        "release-deck.html",
         "onboarding-template/README.md",
         "onboarding-template/company.json",
         "onboarding-template/review-policy.json",
@@ -450,6 +474,8 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab casebook --root . --output demo",
             "valuation-scenario-lab reviewer-scorecard --root . --output demo",
             "valuation-scenario-lab troubleshoot --root . --output demo",
+            "valuation-scenario-lab readme-snippet --root . --output demo",
+            "valuation-scenario-lab release-deck --root . --output demo",
             "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
             "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
             "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -490,7 +516,7 @@ def command_visual_receipt(root: Path, output: Path) -> int:
         "weighted_range_per_share": packet["weighted_range_per_share"],
         "margin_of_safety_label": packet["margin_of_safety_label"],
         "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
-        "artifact_count": 44,
+        "artifact_count": 50,
         "boundaries": packet["boundaries"],
     }
     write_json(output / "visual-receipt.json", payload)
@@ -648,6 +674,32 @@ def command_troubleshoot(root: Path, output: Path) -> int:
     write_text(output / "troubleshoot.md", troubleshoot_markdown(payload))
     write_text(output / "troubleshoot.html", troubleshoot_html(payload))
     print(f"wrote {output / 'troubleshoot.json'}")
+    return 0
+
+
+def command_readme_snippet(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    ensure_demo_artifacts(root, output)
+    payload = readme_snippet_payload(root, output)
+    write_json(output / "readme-snippet.json", payload)
+    write_text(output / "readme-snippet.md", readme_snippet_markdown(payload))
+    write_text(output / "readme-snippet.html", readme_snippet_html(payload))
+    print(f"wrote {output / 'readme-snippet.json'}")
+    return 0
+
+
+def command_release_deck(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    ensure_demo_artifacts(root, output)
+    command_readme_snippet(root, output)
+    command_reviewer_scorecard(root, output)
+    payload = release_deck_payload(root, output)
+    write_json(output / "release-deck.json", payload)
+    write_text(output / "release-deck.md", release_deck_markdown(payload))
+    write_text(output / "release-deck.html", release_deck_html(payload))
+    print(f"wrote {output / 'release-deck.json'}")
     return 0
 
 
@@ -1031,6 +1083,16 @@ def public_readiness_payload(packet: dict) -> dict:
                 "artifact": "demo/troubleshoot.html",
             },
             {
+                "label": "Copy README snippet",
+                "command": "valuation-scenario-lab readme-snippet --root . --output demo",
+                "artifact": "demo/readme-snippet.md",
+            },
+            {
+                "label": "Open release deck",
+                "command": "valuation-scenario-lab release-deck --root . --output demo",
+                "artifact": "demo/release-deck.html",
+            },
+            {
                 "label": "Export scenario cards",
                 "command": "valuation-scenario-lab scenario-library --fixtures examples --output demo",
                 "artifact": "demo/scenario-library.html",
@@ -1053,6 +1115,8 @@ def public_readiness_payload(packet: dict) -> dict:
             "demo/scenario-library.html",
             "demo/reviewer-scorecard.html",
             "demo/troubleshoot.html",
+            "demo/readme-snippet.html",
+            "demo/release-deck.html",
             "demo/decision-journal.md",
             "demo/assumption-change-walkthrough.html",
             "demo/multi-company-demo-gallery.html",
@@ -1531,6 +1595,19 @@ def sample_workflow_payload(root: Path) -> dict[str, Any]:
         },
         {
             "step": 12,
+            "name": "Prepare public promotion snippets",
+            "command": "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo",
+            "artifacts": [
+                "demo/readme-snippet.json",
+                "demo/readme-snippet.md",
+                "demo/readme-snippet.html",
+                "demo/release-deck.json",
+                "demo/release-deck.md",
+                "demo/release-deck.html",
+            ],
+        },
+        {
+            "step": 13,
             "name": "Document install and bundle stability",
             "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
             "artifacts": [
@@ -1549,7 +1626,7 @@ def sample_workflow_payload(root: Path) -> dict[str, Any]:
         item
         for step in steps
         for item in step["artifact_status"]
-        if not item["path"].startswith(("demo/reproducibility-audit", "demo/reviewer-scorecard", "demo/troubleshoot"))
+        if not item["path"].startswith(("demo/reproducibility-audit", "demo/reviewer-scorecard", "demo/troubleshoot", "demo/readme-snippet", "demo/release-deck"))
     ]
     return {
         "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
@@ -1845,6 +1922,12 @@ def validation_status_ignoring_generated_operability(validation: dict[str, Any])
         "demo/troubleshoot.json",
         "demo/troubleshoot.md",
         "demo/troubleshoot.html",
+        "demo/readme-snippet.json",
+        "demo/readme-snippet.md",
+        "demo/readme-snippet.html",
+        "demo/release-deck.json",
+        "demo/release-deck.md",
+        "demo/release-deck.html",
     )
     blocking = []
     for item in validation.get("findings", []):
@@ -1863,6 +1946,8 @@ def schema_status_ignoring_generated_operability(schemas: dict[str, Any]) -> str
     generated = {
         "demo/reviewer-scorecard.json",
         "demo/troubleshoot.json",
+        "demo/readme-snippet.json",
+        "demo/release-deck.json",
     }
     mismatches = [name for name in schemas.get("mismatches", []) if name not in generated]
     return "pass" if not mismatches else "fail"
@@ -2065,6 +2150,256 @@ code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
 <p>Status: {html.escape(payload['status'])}; release validation: {html.escape(payload['release_validation_status'])}</p>
 {''.join(sections)}
 <h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def readme_snippet_payload(root: Path, output: Path) -> dict[str, Any]:
+    packet = read_json(output / "valuation-packet.json")
+    artifact_paths = [
+        "demo/valuation-packet.html",
+        "demo/showcase-dashboard.html",
+        "demo/thesis-brief.html",
+        "demo/scenario-library.html",
+        "demo/casebook.html",
+        "demo/reviewer-scorecard.html",
+        "demo/troubleshoot.html",
+        "demo/reproducibility-audit.html",
+        "release/public-bundle.html",
+    ]
+    quickstart = [
+        "python -m venv .venv",
+        ". .venv/bin/activate",
+        "pip install -e .",
+        "valuation-scenario-lab demo",
+        "valuation-scenario-lab selfcheck --root .",
+    ]
+    return {
+        "schema_version": "valuation-scenario-lab.readme-snippet.v1.2",
+        "generated_on": "static-local",
+        "title": "Shortest Public Quickstart Snippet",
+        "audience": "new public reader evaluating deterministic local artifacts",
+        "quickstart": quickstart,
+        "one_line": "Build a deterministic offline valuation scenario packet from fictional local fixtures.",
+        "demo_snapshot": {
+            "company": packet["company"],
+            "ticker": packet["ticker"],
+            "weighted_fair_value_per_share": packet["weighted_fair_value_per_share"],
+            "margin_of_safety_label": packet["margin_of_safety_label"],
+        },
+        "artifact_map": [
+            {"path": path, "exists": (root / path).exists() or (output / Path(path).name).exists(), "role": readme_artifact_role(path)}
+            for path in artifact_paths
+        ],
+        "boundaries": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice.",
+        ],
+    }
+
+
+def readme_artifact_role(path: str) -> str:
+    roles = {
+        "demo/valuation-packet.html": "primary packet",
+        "demo/showcase-dashboard.html": "visual summary",
+        "demo/thesis-brief.html": "analyst narrative",
+        "demo/scenario-library.html": "assumption cards",
+        "demo/casebook.html": "stranger-readable walkthrough",
+        "demo/reviewer-scorecard.html": "reviewer operability",
+        "demo/troubleshoot.html": "diagnostic map",
+        "demo/reproducibility-audit.html": "repeatability receipt",
+        "release/public-bundle.html": "public bundle index",
+    }
+    return roles.get(path, "public artifact")
+
+
+def readme_snippet_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Shortest Public Quickstart Snippet",
+        "",
+        payload["one_line"],
+        "",
+        "## Quickstart",
+        "",
+    ]
+    lines.extend(f"- `{item}`" for item in payload["quickstart"])
+    lines.extend(["", "## Artifact Map", ""])
+    lines.extend(
+        f"- `{item['path']}`: {item['role']} ({'ok' if item['exists'] else 'missing'})"
+        for item in payload["artifact_map"]
+    )
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines) + "\n"
+
+
+def readme_snippet_html(payload: dict[str, Any]) -> str:
+    commands = "".join(f"<li><code>{html.escape(item)}</code></li>" for item in payload["quickstart"])
+    artifacts = "".join(
+        "<li>"
+        f"<code>{html.escape(item['path'])}</code>"
+        f"<span>{html.escape(item['role'])}</span>"
+        f"<strong>{'ok' if item['exists'] else 'missing'}</strong>"
+        "</li>"
+        for item in payload["artifact_map"]
+    )
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shortest Public Quickstart Snippet</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+main {{ max-width: 860px; }}
+li {{ margin: 0.4rem 0; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+.artifacts li {{ display: grid; grid-template-columns: minmax(220px, 1fr) 1fr auto; gap: 0.75rem; border-top: 1px solid #d6dde4; padding-top: 0.45rem; }}
+</style>
+</head>
+<body>
+<main>
+<h1>{html.escape(payload['title'])}</h1>
+<p>{html.escape(payload['one_line'])}</p>
+<p>{html.escape(payload['demo_snapshot']['company'])} ({html.escape(payload['demo_snapshot']['ticker'])}) static fixture snapshot.</p>
+<h2>Quickstart</h2>
+<ol>{commands}</ol>
+<h2>Artifact Map</h2>
+<ul class="artifacts">{artifacts}</ul>
+<h2>Boundaries</h2>
+<ul>{boundaries}</ul>
+</main>
+</body>
+</html>
+"""
+
+
+def release_deck_payload(root: Path, output: Path) -> dict[str, Any]:
+    packet = read_json(output / "valuation-packet.json")
+    snippet = read_json(output / "readme-snippet.json") if (output / "readme-snippet.json").exists() else readme_snippet_payload(root, output)
+    scorecard = read_json(output / "reviewer-scorecard.json") if (output / "reviewer-scorecard.json").exists() else {"score": 0, "status": "missing"}
+    slides = [
+        release_slide(
+            "problem",
+            "Problem",
+            "Public valuation demos often mix assumptions, narrative, and execution context.",
+            ["Readers need static artifacts they can inspect without accounts, feeds, or scripts.", "Reviewers need boundaries and evidence in the same release tree."],
+            ["README.md", "docs/release-checks.md"],
+        ),
+        release_slide(
+            "user",
+            "User",
+            "Research-oriented investors, analysts, and agent builders evaluating local assumptions.",
+            ["The user starts with fictional JSON fixtures.", "The user reviews deterministic Markdown, JSON, HTML, and SVG outputs."],
+            ["examples/company.json", "examples/software-compounder.json"],
+        ),
+        release_slide(
+            "workflow",
+            "Workflow",
+            "One command builds the public demo tree and release receipts.",
+            snippet["quickstart"],
+            ["demo/sample-workflow.html", "demo/readme-snippet.html"],
+        ),
+        release_slide(
+            "evidence",
+            "Evidence",
+            f"The bundled demo for {packet['company']} ({packet['ticker']}) produces a fair value snapshot and reviewer scorecard.",
+            [
+                f"Weighted fair value per share: {packet['currency']} {packet['weighted_fair_value_per_share']:.2f}.",
+                f"Reviewer score: {scorecard.get('score', 0)}/100 ({scorecard.get('status', 'missing')}).",
+                "Fixture doctor, reproducibility audit, manifest, and public bundle are checked locally.",
+            ],
+            ["demo/valuation-packet.html", "demo/reviewer-scorecard.html", "demo/reproducibility-audit.html", "release/public-bundle.html"],
+        ),
+        release_slide(
+            "limitations",
+            "Limitations",
+            "The project intentionally stops at static research artifacts.",
+            ["No live data.", "No broker connections.", "No buy/sell/hold advice."],
+            ["README.md", "skills/agent/valuation-scenario-lab/SKILL.md"],
+        ),
+        release_slide(
+            "repeatability",
+            "Repeatability",
+            "The release is validated by deterministic commands and checked-in artifacts.",
+            ["python -m pytest -q", "valuation-scenario-lab selfcheck --root .", "valuation-scenario-lab validate-release --root . --format markdown"],
+            ["tests/test_cli.py", "demo/reproducibility-audit.html", "release/release-manifest.json"],
+        ),
+    ]
+    return {
+        "schema_version": "valuation-scenario-lab.release-deck.v1.2",
+        "generated_on": "static-local",
+        "title": "Valuation Scenario Lab v1.2.0 Promotion Deck",
+        "format": "static JSON, Markdown, and no-JavaScript HTML",
+        "slide_count": len(slides),
+        "slides": slides,
+        "boundaries": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice.",
+        ],
+    }
+
+
+def release_slide(slug: str, title: str, statement: str, bullets: list[str], artifacts: list[str]) -> dict[str, Any]:
+    return {"slug": slug, "title": title, "statement": statement, "bullets": bullets, "artifacts": artifacts}
+
+
+def release_deck_markdown(payload: dict[str, Any]) -> str:
+    lines = [f"# {payload['title']}", "", f"Format: {payload['format']}", ""]
+    for index, slide in enumerate(payload["slides"], start=1):
+        lines.extend([f"## {index}. {slide['title']}", "", slide["statement"], ""])
+        lines.extend(f"- {item}" for item in slide["bullets"])
+        lines.extend(["", "Artifacts:"])
+        lines.extend(f"- `{item}`" for item in slide["artifacts"])
+        lines.append("")
+    lines.extend(["## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines) + "\n"
+
+
+def release_deck_html(payload: dict[str, Any]) -> str:
+    sections = []
+    for index, slide in enumerate(payload["slides"], start=1):
+        bullets = "".join(f"<li>{html.escape(item)}</li>" for item in slide["bullets"])
+        artifacts = "".join(f"<li><code>{html.escape(item)}</code></li>" for item in slide["artifacts"])
+        sections.append(
+            "<section>"
+            f"<p class=\"kicker\">{index:02d} / {html.escape(slide['slug'])}</p>"
+            f"<h2>{html.escape(slide['title'])}</h2>"
+            f"<p class=\"statement\">{html.escape(slide['statement'])}</p>"
+            f"<ul>{bullets}</ul>"
+            f"<h3>Artifacts</h3><ul>{artifacts}</ul>"
+            "</section>"
+        )
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{html.escape(payload['title'])}</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 0; color: #17202a; background: #f6f8fa; }}
+main {{ max-width: 980px; margin: 0 auto; padding: 2rem 1rem; }}
+header, section {{ background: #ffffff; border: 1px solid #d6dde4; margin: 1rem 0; padding: 1.25rem; }}
+h1 {{ margin: 0 0 0.4rem; }}
+h2 {{ margin: 0.2rem 0 0.6rem; font-size: 1.8rem; }}
+.kicker {{ color: #5d6d7e; text-transform: uppercase; font-size: 0.78rem; }}
+.statement {{ font-size: 1.1rem; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>{html.escape(payload['title'])}</h1>
+<p>{html.escape(payload['format'])}</p>
+</header>
+{''.join(sections)}
+<section><h2>Boundaries</h2><ul>{boundaries}</ul></section>
+</main>
 </body>
 </html>
 """

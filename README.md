@@ -31,6 +31,8 @@ valuation-scenario-lab new-fixture-template --output demo/onboarding-template
 valuation-scenario-lab casebook --root . --output demo
 valuation-scenario-lab reviewer-scorecard --root . --output demo
 valuation-scenario-lab troubleshoot --root . --output demo
+valuation-scenario-lab readme-snippet --root . --output demo
+valuation-scenario-lab release-deck --root . --output demo
 valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo
 valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo
 valuation-scenario-lab demo-gallery --fixtures examples --output demo
@@ -55,7 +57,7 @@ Weighted range per share: USD 33.64 to USD 41.12
 Margin-of-safety label: moderate negative gap (-11.0%)
 ```
 
-Open `demo/showcase-dashboard.svg`, `demo/showcase-dashboard.html`, `demo/thesis-brief.html`, `demo/scenario-library.html`, `demo/casebook.html`, `demo/reviewer-scorecard.html`, `demo/troubleshoot.html`, `demo/sample-workflow.html`, `demo/reproducibility-audit.html`, `demo/public-readiness-landing.html`, `demo/valuation-packet.md`, `demo/valuation-packet.json`, or `demo/valuation-packet.html` to inspect the checked-in packet. The demo also includes `compare-history`, `review-ledger`, `sensitivity-matrix`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `fixture-doctor`, `quickstart-check`, `visual-receipt`, and `onboarding-template` artifacts.
+Open `demo/showcase-dashboard.svg`, `demo/showcase-dashboard.html`, `demo/thesis-brief.html`, `demo/scenario-library.html`, `demo/casebook.html`, `demo/reviewer-scorecard.html`, `demo/troubleshoot.html`, `demo/readme-snippet.html`, `demo/release-deck.html`, `demo/sample-workflow.html`, `demo/reproducibility-audit.html`, `demo/public-readiness-landing.html`, `demo/valuation-packet.md`, `demo/valuation-packet.json`, or `demo/valuation-packet.html` to inspect the checked-in packet. The demo also includes `compare-history`, `review-ledger`, `sensitivity-matrix`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `fixture-doctor`, `quickstart-check`, `visual-receipt`, and `onboarding-template` artifacts.
 
 Wheel-installed users can run `valuation-scenario-lab selfcheck` from an empty current directory. The command falls back to the packaged fixtures installed under `share/valuation-scenario-lab`. Use `--root <repo-or-share-root>` to point selfcheck at a specific unpacked release tree.
 
@@ -93,6 +95,8 @@ This package does not fetch market prices, connect to accounts, place orders, ra
 - `casebook`: write public JSON, Markdown, and static HTML walkthroughs tying the packet, scenario library, thesis brief, workflow receipt, and reproducibility audit together for a new reader.
 - `reviewer-scorecard`: write deterministic JSON, Markdown, and static HTML reviewer-operability scorecards with product, engineering, cold-user, and risk lenses scored from local artifacts.
 - `troubleshoot`: write deterministic JSON, Markdown, and static HTML diagnostic guides mapping common failure modes to local commands and artifacts.
+- `readme-snippet`: write deterministic JSON, Markdown, and static HTML public promotion snippets with the shortest quickstart, boundaries, and artifact map.
+- `release-deck`: write deterministic JSON, Markdown, and static HTML promotion decks with problem, user, workflow, evidence, limitations, and repeatability slides.
 - `validate-release`: verify required public files, generated demos, safety strings, and private-reference hygiene.
 - `maturity-report`: score release readiness from validation findings.
 - `release-manifest`: emit file hashes for public release review.

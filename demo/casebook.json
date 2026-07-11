@@ -41,7 +41,7 @@
     {
       "artifact": "demo/sample-workflow.html",
       "section": "Workflow Receipt",
-      "summary": "12 command steps connect source fixtures to public artifacts."
+      "summary": "13 command steps connect source fixtures to public artifacts."
     },
     {
       "artifact": "demo/reproducibility-audit.html",

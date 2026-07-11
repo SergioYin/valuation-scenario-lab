@@ -93,7 +93,18 @@ Command: `valuation-scenario-lab troubleshoot --root . --output demo`
 - `demo/troubleshoot.md`: ok
 - `demo/troubleshoot.html`: ok
 
-### 12. Document install and bundle stability
+### 12. Prepare public promotion snippets
+
+Command: `valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo`
+
+- `demo/readme-snippet.json`: ok
+- `demo/readme-snippet.md`: ok
+- `demo/readme-snippet.html`: ok
+- `demo/release-deck.json`: ok
+- `demo/release-deck.md`: ok
+- `demo/release-deck.html`: ok
+
+### 13. Document install and bundle stability
 
 Command: `valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release`
 

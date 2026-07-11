@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0
+
+- Added `readme-snippet` JSON, Markdown, and static HTML outputs with a stranger-readable quickstart, boundaries, and artifact map for public promotion.
+- Added `release-deck` JSON, Markdown, and static HTML promotion slides covering problem, user, workflow, evidence, limitations, and repeatability.
+- Included promotion artifacts in `demo`, `quickstart-check`, `selfcheck`, release validation, package data, release docs, README examples, sample workflow, and the agent skill protocol.
+- Preserved zero runtime dependencies, static local fixtures, no live data, no broker connections, and no buy/sell/hold advice.
+
 ## 1.1.0
 
 - Added `reviewer-scorecard` JSON, Markdown, and static HTML outputs with deterministic product, engineering, cold-user, and risk lenses scored from local artifacts.

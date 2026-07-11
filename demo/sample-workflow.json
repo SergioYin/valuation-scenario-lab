@@ -17,6 +17,7 @@
     "valuation-scenario-lab reproducibility-audit --root . --output demo",
     "valuation-scenario-lab reviewer-scorecard --root . --output demo",
     "valuation-scenario-lab troubleshoot --root . --output demo",
+    "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo",
     "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release"
   ],
   "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
@@ -295,6 +296,45 @@
       "artifact_status": [
         {
           "exists": true,
+          "path": "demo/readme-snippet.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/readme-snippet.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/readme-snippet.html"
+        },
+        {
+          "exists": true,
+          "path": "demo/release-deck.json"
+        },
+        {
+          "exists": true,
+          "path": "demo/release-deck.md"
+        },
+        {
+          "exists": true,
+          "path": "demo/release-deck.html"
+        }
+      ],
+      "artifacts": [
+        "demo/readme-snippet.json",
+        "demo/readme-snippet.md",
+        "demo/readme-snippet.html",
+        "demo/release-deck.json",
+        "demo/release-deck.md",
+        "demo/release-deck.html"
+      ],
+      "command": "valuation-scenario-lab readme-snippet --root . --output demo && valuation-scenario-lab release-deck --root . --output demo",
+      "name": "Prepare public promotion snippets",
+      "step": 12
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
           "path": "release/install-smoke-receipt.json"
         },
         {
@@ -328,7 +368,7 @@
       ],
       "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
       "name": "Document install and bundle stability",
-      "step": 12
+      "step": 13
     }
   ],
   "title": "Sample Analyst Workflow Receipt"

@@ -6,15 +6,15 @@ No network commands are run by this receipt; install commands are documented for
 
 ## Install Commands
 
-- local wheel: `python -m pip install --no-index --find-links dist valuation_scenario_lab-1.1.0-py3-none-any.whl`
-  Expected: `Successfully installed valuation-scenario-lab-1.1.0`
+- local wheel: `python -m pip install --no-index --find-links dist valuation_scenario_lab-1.2.0-py3-none-any.whl`
+  Expected: `Successfully installed valuation-scenario-lab-1.2.0`
 - editable local checkout: `python -m pip install -e .`
-  Expected: `Successfully installed valuation-scenario-lab-1.1.0`
+  Expected: `Successfully installed valuation-scenario-lab-1.2.0`
 
 ## Entry Point Smoke Commands
 
 - `valuation-scenario-lab --version`
-  Expected: `1.1.0`
+  Expected: `1.2.0`
 - `valuation-scenario-lab selfcheck`
   Expected: `selfcheck passed`
 - `valuation-scenario-lab install-smoke-receipt --root . --output release`
@@ -26,8 +26,8 @@ No network commands are run by this receipt; install commands are documented for
 
 ## Expected Files
 
-- `dist/valuation_scenario_lab-1.1.0-py3-none-any.whl`: ok
-- `dist/valuation_scenario_lab-1.1.0.tar.gz`: ok
+- `dist/valuation_scenario_lab-1.2.0-py3-none-any.whl`: ok
+- `dist/valuation_scenario_lab-1.2.0.tar.gz`: ok
 - `release/public-bundle.json`: ok
 - `release/public-bundle.md`: ok
 - `release/public-bundle.html`: ok

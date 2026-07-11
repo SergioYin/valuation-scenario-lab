@@ -7,7 +7,7 @@
   "entry_point_smoke_commands": [
     {
       "command": "valuation-scenario-lab --version",
-      "expected_output_contains": "1.1.0",
+      "expected_output_contains": "1.2.0",
       "network_required": false
     },
     {
@@ -34,11 +34,11 @@
   "expected_files": [
     {
       "exists": true,
-      "path": "dist/valuation_scenario_lab-1.1.0-py3-none-any.whl"
+      "path": "dist/valuation_scenario_lab-1.2.0-py3-none-any.whl"
     },
     {
       "exists": true,
-      "path": "dist/valuation_scenario_lab-1.1.0.tar.gz"
+      "path": "dist/valuation_scenario_lab-1.2.0.tar.gz"
     },
     {
       "exists": true,
@@ -56,14 +56,14 @@
   "generated_on": "static-local",
   "install_commands": [
     {
-      "command": "python -m pip install --no-index --find-links dist valuation_scenario_lab-1.1.0-py3-none-any.whl",
-      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.1.0",
+      "command": "python -m pip install --no-index --find-links dist valuation_scenario_lab-1.2.0-py3-none-any.whl",
+      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.2.0",
       "name": "local wheel",
       "network_required": false
     },
     {
       "command": "python -m pip install -e .",
-      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.1.0",
+      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.2.0",
       "name": "editable local checkout",
       "network_required": false
     }

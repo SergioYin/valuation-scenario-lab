@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Valuation Scenario Lab v1.2.0 Promotion Deck</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 0; color: #17202a; background: #f6f8fa; }
+main { max-width: 980px; margin: 0 auto; padding: 2rem 1rem; }
+header, section { background: #ffffff; border: 1px solid #d6dde4; margin: 1rem 0; padding: 1.25rem; }
+h1 { margin: 0 0 0.4rem; }
+h2 { margin: 0.2rem 0 0.6rem; font-size: 1.8rem; }
+.kicker { color: #5d6d7e; text-transform: uppercase; font-size: 0.78rem; }
+.statement { font-size: 1.1rem; }
+code { background: #eef3f8; padding: 0.1rem 0.25rem; }
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>Valuation Scenario Lab v1.2.0 Promotion Deck</h1>
+<p>static JSON, Markdown, and no-JavaScript HTML</p>
+</header>
+<section><p class="kicker">01 / problem</p><h2>Problem</h2><p class="statement">Public valuation demos often mix assumptions, narrative, and execution context.</p><ul><li>Readers need static artifacts they can inspect without accounts, feeds, or scripts.</li><li>Reviewers need boundaries and evidence in the same release tree.</li></ul><h3>Artifacts</h3><ul><li><code>README.md</code></li><li><code>docs/release-checks.md</code></li></ul></section><section><p class="kicker">02 / user</p><h2>User</h2><p class="statement">Research-oriented investors, analysts, and agent builders evaluating local assumptions.</p><ul><li>The user starts with fictional JSON fixtures.</li><li>The user reviews deterministic Markdown, JSON, HTML, and SVG outputs.</li></ul><h3>Artifacts</h3><ul><li><code>examples/company.json</code></li><li><code>examples/software-compounder.json</code></li></ul></section><section><p class="kicker">03 / workflow</p><h2>Workflow</h2><p class="statement">One command builds the public demo tree and release receipts.</p><ul><li>python -m venv .venv</li><li>. .venv/bin/activate</li><li>pip install -e .</li><li>valuation-scenario-lab demo</li><li>valuation-scenario-lab selfcheck --root .</li></ul><h3>Artifacts</h3><ul><li><code>demo/sample-workflow.html</code></li><li><code>demo/readme-snippet.html</code></li></ul></section><section><p class="kicker">04 / evidence</p><h2>Evidence</h2><p class="statement">The bundled demo for Example Components Inc. (EXCO) produces a fair value snapshot and reviewer scorecard.</p><ul><li>Weighted fair value per share: USD 37.38.</li><li>Reviewer score: 100/100 (strong).</li><li>Fixture doctor, reproducibility audit, manifest, and public bundle are checked locally.</li></ul><h3>Artifacts</h3><ul><li><code>demo/valuation-packet.html</code></li><li><code>demo/reviewer-scorecard.html</code></li><li><code>demo/reproducibility-audit.html</code></li><li><code>release/public-bundle.html</code></li></ul></section><section><p class="kicker">05 / limitations</p><h2>Limitations</h2><p class="statement">The project intentionally stops at static research artifacts.</p><ul><li>No live data.</li><li>No broker connections.</li><li>No buy/sell/hold advice.</li></ul><h3>Artifacts</h3><ul><li><code>README.md</code></li><li><code>skills/agent/valuation-scenario-lab/SKILL.md</code></li></ul></section><section><p class="kicker">06 / repeatability</p><h2>Repeatability</h2><p class="statement">The release is validated by deterministic commands and checked-in artifacts.</p><ul><li>python -m pytest -q</li><li>valuation-scenario-lab selfcheck --root .</li><li>valuation-scenario-lab validate-release --root . --format markdown</li></ul><h3>Artifacts</h3><ul><li><code>tests/test_cli.py</code></li><li><code>demo/reproducibility-audit.html</code></li><li><code>release/release-manifest.json</code></li></ul></section>
+<section><h2>Boundaries</h2><ul><li>No live data.</li><li>No broker connections.</li><li>No buy/sell/hold advice.</li></ul></section>
+</main>
+</body>
+</html>

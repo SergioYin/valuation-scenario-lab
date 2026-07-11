@@ -28,7 +28,7 @@ Deterministic local-assumption research brief; no action recommendation.
 
 Artifact: `demo/sample-workflow.html`
 
-12 command steps connect source fixtures to public artifacts.
+13 command steps connect source fixtures to public artifacts.
 
 ### 5. Reproducibility Audit
 

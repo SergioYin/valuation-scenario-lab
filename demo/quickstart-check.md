@@ -17,6 +17,8 @@ Status: pass
 - `valuation-scenario-lab casebook --root . --output demo`
 - `valuation-scenario-lab reviewer-scorecard --root . --output demo`
 - `valuation-scenario-lab troubleshoot --root . --output demo`
+- `valuation-scenario-lab readme-snippet --root . --output demo`
+- `valuation-scenario-lab release-deck --root . --output demo`
 - `valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo`
 - `valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo`
 - `valuation-scenario-lab demo-gallery --fixtures examples --output demo`
@@ -75,6 +77,12 @@ Status: pass
 - `demo/troubleshoot.json`: ok
 - `demo/troubleshoot.md`: ok
 - `demo/troubleshoot.html`: ok
+- `demo/readme-snippet.json`: ok
+- `demo/readme-snippet.md`: ok
+- `demo/readme-snippet.html`: ok
+- `demo/release-deck.json`: ok
+- `demo/release-deck.md`: ok
+- `demo/release-deck.html`: ok
 - `demo/onboarding-template/README.md`: ok
 - `demo/onboarding-template/company.json`: ok
 - `demo/onboarding-template/review-policy.json`: ok

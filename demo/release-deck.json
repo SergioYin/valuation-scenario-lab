@@ -1,0 +1,101 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "format": "static JSON, Markdown, and no-JavaScript HTML",
+  "generated_on": "static-local",
+  "schema_version": "valuation-scenario-lab.release-deck.v1.2",
+  "slide_count": 6,
+  "slides": [
+    {
+      "artifacts": [
+        "README.md",
+        "docs/release-checks.md"
+      ],
+      "bullets": [
+        "Readers need static artifacts they can inspect without accounts, feeds, or scripts.",
+        "Reviewers need boundaries and evidence in the same release tree."
+      ],
+      "slug": "problem",
+      "statement": "Public valuation demos often mix assumptions, narrative, and execution context.",
+      "title": "Problem"
+    },
+    {
+      "artifacts": [
+        "examples/company.json",
+        "examples/software-compounder.json"
+      ],
+      "bullets": [
+        "The user starts with fictional JSON fixtures.",
+        "The user reviews deterministic Markdown, JSON, HTML, and SVG outputs."
+      ],
+      "slug": "user",
+      "statement": "Research-oriented investors, analysts, and agent builders evaluating local assumptions.",
+      "title": "User"
+    },
+    {
+      "artifacts": [
+        "demo/sample-workflow.html",
+        "demo/readme-snippet.html"
+      ],
+      "bullets": [
+        "python -m venv .venv",
+        ". .venv/bin/activate",
+        "pip install -e .",
+        "valuation-scenario-lab demo",
+        "valuation-scenario-lab selfcheck --root ."
+      ],
+      "slug": "workflow",
+      "statement": "One command builds the public demo tree and release receipts.",
+      "title": "Workflow"
+    },
+    {
+      "artifacts": [
+        "demo/valuation-packet.html",
+        "demo/reviewer-scorecard.html",
+        "demo/reproducibility-audit.html",
+        "release/public-bundle.html"
+      ],
+      "bullets": [
+        "Weighted fair value per share: USD 37.38.",
+        "Reviewer score: 100/100 (strong).",
+        "Fixture doctor, reproducibility audit, manifest, and public bundle are checked locally."
+      ],
+      "slug": "evidence",
+      "statement": "The bundled demo for Example Components Inc. (EXCO) produces a fair value snapshot and reviewer scorecard.",
+      "title": "Evidence"
+    },
+    {
+      "artifacts": [
+        "README.md",
+        "skills/agent/valuation-scenario-lab/SKILL.md"
+      ],
+      "bullets": [
+        "No live data.",
+        "No broker connections.",
+        "No buy/sell/hold advice."
+      ],
+      "slug": "limitations",
+      "statement": "The project intentionally stops at static research artifacts.",
+      "title": "Limitations"
+    },
+    {
+      "artifacts": [
+        "tests/test_cli.py",
+        "demo/reproducibility-audit.html",
+        "release/release-manifest.json"
+      ],
+      "bullets": [
+        "python -m pytest -q",
+        "valuation-scenario-lab selfcheck --root .",
+        "valuation-scenario-lab validate-release --root . --format markdown"
+      ],
+      "slug": "repeatability",
+      "statement": "The release is validated by deterministic commands and checked-in artifacts.",
+      "title": "Repeatability"
+    }
+  ],
+  "title": "Valuation Scenario Lab v1.2.0 Promotion Deck"
+}

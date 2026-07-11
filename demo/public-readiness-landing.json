@@ -18,6 +18,8 @@
     "demo/scenario-library.html",
     "demo/reviewer-scorecard.html",
     "demo/troubleshoot.html",
+    "demo/readme-snippet.html",
+    "demo/release-deck.html",
     "demo/decision-journal.md",
     "demo/assumption-change-walkthrough.html",
     "demo/multi-company-demo-gallery.html",
@@ -57,6 +59,16 @@
       "artifact": "demo/troubleshoot.html",
       "command": "valuation-scenario-lab troubleshoot --root . --output demo",
       "label": "Open troubleshooting"
+    },
+    {
+      "artifact": "demo/readme-snippet.md",
+      "command": "valuation-scenario-lab readme-snippet --root . --output demo",
+      "label": "Copy README snippet"
+    },
+    {
+      "artifact": "demo/release-deck.html",
+      "command": "valuation-scenario-lab release-deck --root . --output demo",
+      "label": "Open release deck"
     },
     {
       "artifact": "demo/scenario-library.html",

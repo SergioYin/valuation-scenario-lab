@@ -1,0 +1,72 @@
+{
+  "artifact_map": [
+    {
+      "exists": true,
+      "path": "demo/valuation-packet.html",
+      "role": "primary packet"
+    },
+    {
+      "exists": true,
+      "path": "demo/showcase-dashboard.html",
+      "role": "visual summary"
+    },
+    {
+      "exists": true,
+      "path": "demo/thesis-brief.html",
+      "role": "analyst narrative"
+    },
+    {
+      "exists": true,
+      "path": "demo/scenario-library.html",
+      "role": "assumption cards"
+    },
+    {
+      "exists": true,
+      "path": "demo/casebook.html",
+      "role": "stranger-readable walkthrough"
+    },
+    {
+      "exists": true,
+      "path": "demo/reviewer-scorecard.html",
+      "role": "reviewer operability"
+    },
+    {
+      "exists": true,
+      "path": "demo/troubleshoot.html",
+      "role": "diagnostic map"
+    },
+    {
+      "exists": true,
+      "path": "demo/reproducibility-audit.html",
+      "role": "repeatability receipt"
+    },
+    {
+      "exists": true,
+      "path": "release/public-bundle.html",
+      "role": "public bundle index"
+    }
+  ],
+  "audience": "new public reader evaluating deterministic local artifacts",
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "demo_snapshot": {
+    "company": "Example Components Inc.",
+    "margin_of_safety_label": "moderate negative gap",
+    "ticker": "EXCO",
+    "weighted_fair_value_per_share": 37.38
+  },
+  "generated_on": "static-local",
+  "one_line": "Build a deterministic offline valuation scenario packet from fictional local fixtures.",
+  "quickstart": [
+    "python -m venv .venv",
+    ". .venv/bin/activate",
+    "pip install -e .",
+    "valuation-scenario-lab demo",
+    "valuation-scenario-lab selfcheck --root ."
+  ],
+  "schema_version": "valuation-scenario-lab.readme-snippet.v1.2",
+  "title": "Shortest Public Quickstart Snippet"
+}

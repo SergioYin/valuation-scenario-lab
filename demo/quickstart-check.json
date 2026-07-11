@@ -18,6 +18,8 @@
     "valuation-scenario-lab casebook --root . --output demo",
     "valuation-scenario-lab reviewer-scorecard --root . --output demo",
     "valuation-scenario-lab troubleshoot --root . --output demo",
+    "valuation-scenario-lab readme-snippet --root . --output demo",
+    "valuation-scenario-lab release-deck --root . --output demo",
     "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
     "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
     "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
@@ -215,6 +217,30 @@
     {
       "exists": true,
       "path": "demo/troubleshoot.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/readme-snippet.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/readme-snippet.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/readme-snippet.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/release-deck.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/release-deck.md"
+    },
+    {
+      "exists": true,
+      "path": "demo/release-deck.html"
     },
     {
       "exists": true,

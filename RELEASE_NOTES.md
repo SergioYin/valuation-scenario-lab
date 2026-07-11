@@ -1,5 +1,17 @@
 # Release Notes
 
+## v1.2.0
+
+Publishing promotion increment.
+
+This release adds `readme-snippet`, a deterministic JSON, Markdown, and static no-JavaScript HTML snippet containing the shortest stranger-readable quickstart, finance boundaries, and artifact map for public promotion.
+
+It also adds `release-deck`, a deterministic static promotion deck with problem, user, workflow, evidence, limitations, and repeatability slides.
+
+Release validation, package data, README docs, release checks, sample workflow, and the agent skill now include both publishing artifacts.
+
+Boundaries: no live data, no broker connections, no orders, no predictions, and no buy/sell/hold advice.
+
 ## v1.1.0
 
 Reviewer-operability increment.
