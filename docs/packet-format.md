@@ -9,4 +9,5 @@ Related deterministic artifacts:
 - `decision-journal` records scenario review decisions, evidence files, and open questions while preserving the no-advice boundary.
 - `assumption-change-walkthrough` changes one local scenario assumption and records before/after movement without making a recommendation.
 - `demo-gallery` summarizes multiple neutral bundled fixtures for public demos without live data.
+- `fixture-doctor` validates fixture shape, scenario weights, numeric fields, and source staleness without fetching live data.
 - `public-readiness-landing` summarizes first actions, demo outputs, release checks, and public boundaries in JSON, Markdown, and static HTML.

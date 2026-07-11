@@ -28,7 +28,7 @@
   "new_value": 16.0,
   "prior_value": 14.0,
   "scenario": "Base reinvestment case",
-  "schema_version": "valuation-scenario-lab.assumption-change.v0.4",
+  "schema_version": "valuation-scenario-lab.assumption-change.v0.5",
   "ticker": "EXCO",
   "walkthrough_steps": [
     "Start with the checked local fixture.",

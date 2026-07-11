@@ -50,7 +50,7 @@
     "Which assumption would most change the Margin pressure case valuation range?",
     "Which assumption would most change the Upside adoption case valuation range?"
   ],
-  "schema_version": "valuation-scenario-lab.decision-journal.v0.4",
+  "schema_version": "valuation-scenario-lab.decision-journal.v0.5",
   "summary_decision": "research packet logged; no action recommendation",
   "ticker": "EXCO",
   "weighted_fair_value_per_share": 37.38,

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0
+
+- Added `fixture-doctor` JSON and Markdown reporting for fixture schema, scenario weight, numeric-field, and source staleness issues.
+- Included fixture doctor output in `demo`, `quickstart-check`, `selfcheck`, `validate-release`, release docs, package data, and release artifacts.
+- Added golden snapshot tests for key deterministic demo outputs and malformed fixture tests for doctor/build failure paths.
+- Regenerated v0.5 demo artifacts and preserved zero runtime dependencies and finance safety boundaries.
+
 ## 0.4.0
 
 - Added a second neutral software compounder fixture.

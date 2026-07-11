@@ -1,5 +1,5 @@
 {
-  "artifact_count": 20,
+  "artifact_count": 22,
   "boundaries": [
     "Research-only output.",
     "No live data.",
@@ -10,7 +10,7 @@
   ],
   "company": "Example Components Inc.",
   "margin_of_safety_label": "moderate negative gap",
-  "schema_version": "valuation-scenario-lab.visual-receipt.v0.4",
+  "schema_version": "valuation-scenario-lab.visual-receipt.v0.5",
   "ticker": "EXCO",
   "weighted_fair_value_per_share": 37.38,
   "weighted_margin_of_safety_pct": -11.0,

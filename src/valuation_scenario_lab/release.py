@@ -4,6 +4,8 @@ import hashlib
 from pathlib import Path
 from typing import Any
 
+from .doctor import fixture_doctor
+
 PRIVATE_TERMS = [
     "Her" + "mes",
     "Fei" + "shu",
@@ -44,6 +46,8 @@ REQUIRED_FILES = [
     "demo/public-readiness-landing.json",
     "demo/public-readiness-landing.md",
     "demo/public-readiness-landing.html",
+    "demo/fixture-doctor.json",
+    "demo/fixture-doctor.md",
     "docs/release-checks.md",
     "release/release-manifest.json",
     "release/release-manifest.md",
@@ -67,8 +71,22 @@ def validate_release(root: Path) -> dict[str, Any]:
     for phrase in ["No live data", "No broker", "No buy/sell/hold advice", "valuation-scenario-lab selfcheck"]:
         if phrase not in readme:
             findings.append({"severity": "warning", "message": f"README missing phrase: {phrase}"})
+    if (root / "examples").exists():
+        policy = {}
+        if (root / "examples" / "review-policy.json").exists():
+            import json
+
+            policy = json.loads((root / "examples" / "review-policy.json").read_text(encoding="utf-8"))
+        doctor = fixture_doctor(root / "examples", policy)
+        for item in doctor["issues"]:
+            findings.append(
+                {
+                    "severity": item["severity"],
+                    "message": f"fixture-doctor {item['category']} {item['file']} {item['path']}: {item['message']}",
+                }
+            )
     status = "pass" if not any(item["severity"] == "error" for item in findings) else "fail"
-    return {"schema_version": "valuation-scenario-lab.release-validation.v0.4", "status": status, "findings": findings}
+    return {"schema_version": "valuation-scenario-lab.release-validation.v0.5", "status": status, "findings": findings}
 
 
 def maturity_report(root: Path) -> dict[str, Any]:
@@ -77,7 +95,7 @@ def maturity_report(root: Path) -> dict[str, Any]:
     score -= 25 * sum(1 for item in validation["findings"] if item["severity"] == "error")
     score -= 5 * sum(1 for item in validation["findings"] if item["severity"] == "warning")
     return {
-        "schema_version": "valuation-scenario-lab.maturity.v0.4",
+        "schema_version": "valuation-scenario-lab.maturity.v0.5",
         "score": max(score, 0),
         "status": "ready" if validation["status"] == "pass" and score >= 90 else "needs work",
         "release_validation": validation,
@@ -90,7 +108,7 @@ def release_manifest(root: Path) -> dict[str, Any]:
     for path in public_files(root):
         rel = path.relative_to(root).as_posix()
         files.append({"path": rel, "sha256": sha256(path), "bytes": path.stat().st_size})
-    return {"schema_version": "valuation-scenario-lab.release-manifest.v0.4", "files": files}
+    return {"schema_version": "valuation-scenario-lab.release-manifest.v0.5", "files": files}
 
 
 def public_files(root: Path) -> list[Path]:

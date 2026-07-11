@@ -9,6 +9,7 @@ Deterministic Markdown, JSON, and static HTML artifacts from local assumptions.
 - Run the demo: `valuation-scenario-lab demo` -> `demo/valuation-packet.html`
 - Validate release: `valuation-scenario-lab validate-release --format markdown` -> `release/release-manifest.md`
 - Read the journal: `valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo` -> `demo/decision-journal.md`
+- Doctor fixtures: `valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown` -> `demo/fixture-doctor.md`
 
 ## Demo Outputs
 
@@ -18,6 +19,7 @@ Deterministic Markdown, JSON, and static HTML artifacts from local assumptions.
 - `demo/decision-journal.md`
 - `demo/assumption-change-walkthrough.html`
 - `demo/multi-company-demo-gallery.html`
+- `demo/fixture-doctor.md`
 - `demo/public-readiness-landing.html`
 
 ## Readiness Checks
@@ -25,6 +27,7 @@ Deterministic Markdown, JSON, and static HTML artifacts from local assumptions.
 - zero runtime dependencies
 - static local fixtures
 - deterministic demo artifacts
+- fixture doctor schema, weight, numeric, and staleness checks
 - public-neutral boundary text
 - no workflow automation
 

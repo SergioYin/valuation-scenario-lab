@@ -1,6 +1,6 @@
 # Valuation History Comparison
 
-Schema: `valuation-scenario-lab.compare.v0.4`
+Schema: `valuation-scenario-lab.compare.v0.5`
 
 ## Changes
 

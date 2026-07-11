@@ -21,6 +21,7 @@ valuation-scenario-lab demo
 valuation-scenario-lab selfcheck --root .
 valuation-scenario-lab quickstart-check --root . --output demo
 valuation-scenario-lab visual-receipt --root . --output demo
+valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo
 valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo
 valuation-scenario-lab demo-gallery --fixtures examples --output demo
 valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo
@@ -42,7 +43,7 @@ Weighted range per share: USD 33.64 to USD 41.12
 Margin-of-safety label: moderate negative gap (-11.0%)
 ```
 
-Open `demo/public-readiness-landing.html`, `demo/valuation-packet.md`, `demo/valuation-packet.json`, or `demo/valuation-packet.html` to inspect the checked-in packet. The demo also includes `compare-history`, `review-ledger`, `sensitivity-matrix`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `quickstart-check`, and `visual-receipt` artifacts.
+Open `demo/public-readiness-landing.html`, `demo/valuation-packet.md`, `demo/valuation-packet.json`, or `demo/valuation-packet.html` to inspect the checked-in packet. The demo also includes `compare-history`, `review-ledger`, `sensitivity-matrix`, `assumption-change-walkthrough`, `multi-company-demo-gallery`, `decision-journal`, `fixture-doctor`, `quickstart-check`, and `visual-receipt` artifacts.
 
 Wheel-installed users can run `valuation-scenario-lab selfcheck` from an empty current directory. The command falls back to the packaged fixtures installed under `share/valuation-scenario-lab`. Use `--root <repo-or-share-root>` to point selfcheck at a specific unpacked release tree.
 
@@ -67,6 +68,7 @@ This package does not fetch market prices, connect to accounts, place orders, ra
 - `demo-gallery`: build a neutral multi-company gallery from bundled company fixtures.
 - `decision-journal`: log scenario review decisions, evidence, and open questions without trade recommendations.
 - `public-readiness-landing`: write a static public landing artifact with first actions, demo outputs, readiness checks, and boundaries.
+- `fixture-doctor`: report fixture schema, scenario weight, numeric-field, and source staleness issues as JSON or Markdown.
 - `selfcheck`: regenerate artifacts in a temporary directory and run release hygiene checks; accepts `--root`.
 - `quickstart-check`: regenerate demo files and write deterministic quickstart JSON and Markdown receipts.
 - `visual-receipt`: write deterministic JSON, Markdown, and static HTML receipts for a demo packet.
@@ -79,6 +81,8 @@ This package does not fetch market prices, connect to accounts, place orders, ra
 `examples/company.json` and `examples/software-compounder.json` contain neutral fictional company metadata, current reference price, share count, net cash, source freshness entries, and weighted valuation scenarios. Each scenario includes revenue, revenue growth, FCF margin, discount rate, terminal growth, terminal multiple, catalysts, risks, and source freshness.
 
 All inputs are static JSON. Keep fixtures generic and local. Do not include account identifiers, client records, broker exports, API keys, or private notes.
+
+Run `valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown` before publishing fixture changes. Schema, weight, and numeric issues fail validation; staleness issues are warnings unless they also break fixture shape.
 
 ## Development
 

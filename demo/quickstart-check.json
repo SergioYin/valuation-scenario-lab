@@ -9,6 +9,7 @@
     "valuation-scenario-lab selfcheck --root .",
     "valuation-scenario-lab quickstart-check --root . --output demo",
     "valuation-scenario-lab visual-receipt --root . --output demo",
+    "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
     "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
     "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
     "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
@@ -94,9 +95,17 @@
     {
       "exists": true,
       "path": "demo/public-readiness-landing.html"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-doctor.json"
+    },
+    {
+      "exists": true,
+      "path": "demo/fixture-doctor.md"
     }
   ],
   "fixture_source": "local-or-packaged-fixtures",
-  "schema_version": "valuation-scenario-lab.quickstart-check.v0.4",
+  "schema_version": "valuation-scenario-lab.quickstart-check.v0.5",
   "status": "pass"
 }

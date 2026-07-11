@@ -5,7 +5,7 @@ from typing import Any
 
 from .model import BOUNDARIES, ScenarioResult, as_float
 
-PACKET_SCHEMA_VERSION = "valuation-scenario-lab.v0.4"
+PACKET_SCHEMA_VERSION = "valuation-scenario-lab.v0.5"
 
 
 def validate_company(company: dict[str, Any]) -> list[str]:
@@ -178,7 +178,7 @@ def compare_packets(current: dict[str, Any], prior: dict[str, Any]) -> dict[str,
             }
         )
     return {
-        "schema_version": "valuation-scenario-lab.compare.v0.4",
+        "schema_version": "valuation-scenario-lab.compare.v0.5",
         "generated_on": "static-local",
         "company": current.get("company"),
         "changes": changes,
@@ -203,7 +203,7 @@ def build_review_ledger(packet: dict[str, Any], policy: dict[str, Any] | None = 
             }
         )
     return {
-        "schema_version": "valuation-scenario-lab.ledger.v0.4",
+        "schema_version": "valuation-scenario-lab.ledger.v0.5",
         "generated_on": "static-local",
         "company": packet.get("company"),
         "entries": entries,
@@ -230,7 +230,7 @@ def build_decision_journal(packet: dict[str, Any], ledger: dict[str, Any] | None
         if isinstance(entry, dict) and entry.get("review_question")
     ]
     return {
-        "schema_version": "valuation-scenario-lab.decision-journal.v0.4",
+        "schema_version": "valuation-scenario-lab.decision-journal.v0.5",
         "generated_on": "static-local",
         "company": packet.get("company"),
         "ticker": packet.get("ticker"),
@@ -264,7 +264,7 @@ def sensitivity_matrix(company: dict[str, Any]) -> dict[str, Any]:
                 }
             )
     return {
-        "schema_version": "valuation-scenario-lab.sensitivity.v0.4",
+        "schema_version": "valuation-scenario-lab.sensitivity.v0.5",
         "generated_on": "static-local",
         "company": base["company"],
         "base_weighted_fair_value_per_share": base["weighted_fair_value_per_share"],
@@ -289,7 +289,7 @@ def assumption_change_walkthrough(
     changed_company["scenarios"][scenario_index][field] = original_value + delta
     changed_packet = build_packet(changed_company)
     return {
-        "schema_version": "valuation-scenario-lab.assumption-change.v0.4",
+        "schema_version": "valuation-scenario-lab.assumption-change.v0.5",
         "generated_on": "static-local",
         "company": base_packet["company"],
         "ticker": base_packet["ticker"],
@@ -354,7 +354,7 @@ def demo_gallery(companies: list[dict[str, Any]]) -> dict[str, Any]:
             }
         )
     return {
-        "schema_version": "valuation-scenario-lab.demo-gallery.v0.4",
+        "schema_version": "valuation-scenario-lab.demo-gallery.v0.5",
         "generated_on": "static-local",
         "company_count": len(cards),
         "cards": cards,

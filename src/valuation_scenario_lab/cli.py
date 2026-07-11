@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import html
 import sys
 import sysconfig
@@ -8,6 +9,7 @@ import tempfile
 from pathlib import Path
 
 from . import __version__
+from .doctor import fixture_doctor, fixture_doctor_markdown
 from .engine import (
     assumption_change_walkthrough,
     build_decision_journal,
@@ -75,6 +77,12 @@ def main(argv: list[str] | None = None) -> int:
     quickstart.add_argument("--root", default=".")
     quickstart.add_argument("--output", default="demo")
 
+    doctor = sub.add_parser("fixture-doctor")
+    doctor.add_argument("--fixtures", default="examples")
+    doctor.add_argument("--policy", default=None)
+    doctor.add_argument("--format", choices=["json", "markdown"], default="json")
+    doctor.add_argument("--output", default=None)
+
     receipt = sub.add_parser("visual-receipt")
     receipt.add_argument("--root", default=".")
     receipt.add_argument("--output", default="demo")
@@ -116,6 +124,13 @@ def main(argv: list[str] | None = None) -> int:
             return command_selfcheck(Path(args.root) if args.root else None)
         if args.command == "quickstart-check":
             return command_quickstart_check(Path(args.root), Path(args.output))
+        if args.command == "fixture-doctor":
+            return command_fixture_doctor(
+                Path(args.fixtures),
+                Path(args.policy) if args.policy else None,
+                args.format,
+                Path(args.output) if args.output else None,
+            )
         if args.command == "visual-receipt":
             return command_visual_receipt(Path(args.root), Path(args.output))
         if args.command == "validate-release":
@@ -134,6 +149,7 @@ def main(argv: list[str] | None = None) -> int:
             command_demo_gallery(root / "examples", root / "demo")
             command_decision_journal(root / "demo" / "valuation-packet.json", root / "demo" / "review-ledger.json", root / "demo")
             command_public_readiness_landing(root, root / "demo")
+            command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", root / "demo")
             command_quickstart_check(root, root / "demo")
             command_visual_receipt(root, root / "demo")
             return 0
@@ -224,10 +240,11 @@ def command_public_readiness_landing(root: Path, output: Path) -> int:
 
 def command_selfcheck(root_arg: Path | None = None) -> int:
     root = resolve_root(root_arg)
-    findings = validate_company(read_json(root / "examples" / "company.json"))
-    if findings:
-        for item in findings:
-            print(f"FAIL {item}")
+    doctor = fixture_doctor(root / "examples", read_json(root / "examples" / "review-policy.json"))
+    if doctor["status"] != "pass":
+        for item in doctor["issues"]:
+            if item["severity"] == "error":
+                print(f"FAIL {item['category']} {item['file']} {item['path']}: {item['message']}")
         return 1
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp)
@@ -239,6 +256,7 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_demo_gallery(root / "examples", out)
         command_decision_journal(out / "valuation-packet.json", out / "review-ledger.json", out)
         command_public_readiness_landing(root, out)
+        command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", out)
     validation = validate_release_payload(root)
     if validation["status"] != "pass":
         print("FAIL release validation")
@@ -253,6 +271,7 @@ def command_quickstart_check(root: Path, output: Path) -> int:
     root = resolve_root(root)
     ensure_demo_artifacts(root, output)
     command_public_readiness_landing(root, output)
+    command_fixture_doctor(root / "examples", root / "examples" / "review-policy.json", "json", output)
     expected = [
         "valuation-packet.json",
         "valuation-packet.md",
@@ -274,10 +293,12 @@ def command_quickstart_check(root: Path, output: Path) -> int:
         "public-readiness-landing.json",
         "public-readiness-landing.md",
         "public-readiness-landing.html",
+        "fixture-doctor.json",
+        "fixture-doctor.md",
     ]
     files = [{"path": f"demo/{name}", "exists": (output / name).exists()} for name in expected]
     payload = {
-        "schema_version": "valuation-scenario-lab.quickstart-check.v0.4",
+        "schema_version": "valuation-scenario-lab.quickstart-check.v0.5",
         "status": "pass" if all(item["exists"] for item in files) else "fail",
         "fixture_source": "local-or-packaged-fixtures",
         "commands": [
@@ -285,6 +306,7 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab selfcheck --root .",
             "valuation-scenario-lab quickstart-check --root . --output demo",
             "valuation-scenario-lab visual-receipt --root . --output demo",
+            "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
             "valuation-scenario-lab assumption-change-walkthrough --fixtures examples --output demo",
             "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
             "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
@@ -308,14 +330,14 @@ def command_visual_receipt(root: Path, output: Path) -> int:
     ensure_demo_artifacts(root, output)
     packet = read_json(output / "valuation-packet.json")
     payload = {
-        "schema_version": "valuation-scenario-lab.visual-receipt.v0.4",
+        "schema_version": "valuation-scenario-lab.visual-receipt.v0.5",
         "company": packet["company"],
         "ticker": packet["ticker"],
         "weighted_fair_value_per_share": packet["weighted_fair_value_per_share"],
         "weighted_range_per_share": packet["weighted_range_per_share"],
         "margin_of_safety_label": packet["margin_of_safety_label"],
         "weighted_margin_of_safety_pct": packet["weighted_margin_of_safety_pct"],
-        "artifact_count": 20,
+        "artifact_count": 22,
         "boundaries": packet["boundaries"],
     }
     write_json(output / "visual-receipt.json", payload)
@@ -333,6 +355,22 @@ def ensure_demo_artifacts(root: Path, output: Path) -> None:
     command_assumption_walkthrough(root / "examples", output, None, "fcf_margin_pct", 2.0)
     command_demo_gallery(root / "examples", output)
     command_decision_journal(output / "valuation-packet.json", output / "review-ledger.json", output)
+
+
+def command_fixture_doctor(fixtures: Path, policy: Path | None, fmt: str, output: Path | None) -> int:
+    policy_payload = read_json(policy) if policy and policy.exists() else None
+    payload = fixture_doctor(fixtures, policy_payload)
+    markdown = fixture_doctor_markdown(payload)
+    if output is not None:
+        ensure_dir(output)
+        write_json(output / "fixture-doctor.json", payload)
+        write_text(output / "fixture-doctor.md", markdown)
+        print(f"wrote {output / 'fixture-doctor.json'}")
+    elif fmt == "json":
+        print(json.dumps(payload, indent=2, sort_keys=True))
+    else:
+        print(markdown)
+    return 0 if payload["status"] == "pass" else 1
 
 
 def fixture_companies(fixtures: Path) -> list[dict]:
@@ -561,7 +599,7 @@ def decision_journal_markdown(payload: dict) -> str:
 
 def public_readiness_payload(packet: dict) -> dict:
     return {
-        "schema_version": "valuation-scenario-lab.public-readiness.v0.4",
+        "schema_version": "valuation-scenario-lab.public-readiness.v0.5",
         "generated_on": "static-local",
         "headline": "Offline valuation scenario lab",
         "subhead": "Deterministic Markdown, JSON, and static HTML artifacts from local assumptions.",
@@ -581,6 +619,11 @@ def public_readiness_payload(packet: dict) -> dict:
                 "command": "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
                 "artifact": "demo/decision-journal.md",
             },
+            {
+                "label": "Doctor fixtures",
+                "command": "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown",
+                "artifact": "demo/fixture-doctor.md",
+            },
         ],
         "demo_company": packet.get("company"),
         "demo_ticker": packet.get("ticker"),
@@ -591,12 +634,14 @@ def public_readiness_payload(packet: dict) -> dict:
             "demo/decision-journal.md",
             "demo/assumption-change-walkthrough.html",
             "demo/multi-company-demo-gallery.html",
+            "demo/fixture-doctor.md",
             "demo/public-readiness-landing.html",
         ],
         "readiness_checks": [
             "zero runtime dependencies",
             "static local fixtures",
             "deterministic demo artifacts",
+            "fixture doctor schema, weight, numeric, and staleness checks",
             "public-neutral boundary text",
             "no workflow automation",
         ],

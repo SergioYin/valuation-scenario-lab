@@ -1,0 +1,55 @@
+{
+  "demo_gallery": {
+    "company_count": 2,
+    "fair_values": [
+      37.38,
+      79.57
+    ],
+    "schema_version": "valuation-scenario-lab.demo-gallery.v0.5",
+    "tickers": [
+      "EXCO",
+      "NIMB"
+    ]
+  },
+  "fixture_doctor": {
+    "files": [
+      {
+        "path": "examples/company.json",
+        "status": "pass"
+      },
+      {
+        "path": "examples/software-compounder.json",
+        "status": "pass"
+      }
+    ],
+    "fixture_count": 2,
+    "issue_count": 0,
+    "schema_version": "valuation-scenario-lab.fixture-doctor.v0.5",
+    "status": "pass"
+  },
+  "valuation_packet": {
+    "boundaries": [
+      "Research-only output.",
+      "No live data.",
+      "No broker connections.",
+      "No orders.",
+      "No predictions.",
+      "No buy/sell/hold advice."
+    ],
+    "company": "Example Components Inc.",
+    "margin_of_safety_label": "moderate negative gap",
+    "scenario_bases": [
+      38.4,
+      18.16,
+      63.65
+    ],
+    "schema_version": "valuation-scenario-lab.v0.5",
+    "ticker": "EXCO",
+    "weighted_fair_value_per_share": 37.38,
+    "weighted_margin_of_safety_pct": -11.0,
+    "weighted_range_per_share": [
+      33.64,
+      41.12
+    ]
+  }
+}

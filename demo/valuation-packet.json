@@ -30,7 +30,7 @@
     "execution delay",
     "input inflation"
   ],
-  "schema_version": "valuation-scenario-lab.v0.4",
+  "schema_version": "valuation-scenario-lab.v0.5",
   "source_freshness": [
     {
       "age_days": 35,

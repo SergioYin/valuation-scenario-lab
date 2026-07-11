@@ -1,0 +1,24 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "files": [
+    {
+      "path": "examples/company.json",
+      "status": "pass"
+    },
+    {
+      "path": "examples/software-compounder.json",
+      "status": "pass"
+    }
+  ],
+  "fixture_count": 2,
+  "freshness_limit_days": 45,
+  "generated_on": "static-local",
+  "issue_count": 0,
+  "issues": [],
+  "schema_version": "valuation-scenario-lab.fixture-doctor.v0.5",
+  "status": "pass"
+}

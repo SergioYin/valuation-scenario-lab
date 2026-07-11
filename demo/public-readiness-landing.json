@@ -15,6 +15,7 @@
     "demo/decision-journal.md",
     "demo/assumption-change-walkthrough.html",
     "demo/multi-company-demo-gallery.html",
+    "demo/fixture-doctor.md",
     "demo/public-readiness-landing.html"
   ],
   "demo_ticker": "EXCO",
@@ -35,15 +36,21 @@
       "artifact": "demo/decision-journal.md",
       "command": "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
       "label": "Read the journal"
+    },
+    {
+      "artifact": "demo/fixture-doctor.md",
+      "command": "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown",
+      "label": "Doctor fixtures"
     }
   ],
   "readiness_checks": [
     "zero runtime dependencies",
     "static local fixtures",
     "deterministic demo artifacts",
+    "fixture doctor schema, weight, numeric, and staleness checks",
     "public-neutral boundary text",
     "no workflow automation"
   ],
-  "schema_version": "valuation-scenario-lab.public-readiness.v0.4",
+  "schema_version": "valuation-scenario-lab.public-readiness.v0.5",
   "subhead": "Deterministic Markdown, JSON, and static HTML artifacts from local assumptions."
 }
