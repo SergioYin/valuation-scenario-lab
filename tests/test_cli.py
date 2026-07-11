@@ -139,7 +139,8 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     workflow_payload = json.loads((out / "sample-workflow.json").read_text(encoding="utf-8"))
     assert workflow_payload["schema_version"] == "valuation-scenario-lab.sample-workflow.v0.8"
     assert workflow_payload["steps"][0]["command"] == "valuation-scenario-lab demo --root ."
-    assert "demo/reproducibility-audit.html" in workflow_payload["steps"][-1]["artifacts"]
+    assert "demo/reproducibility-audit.html" in workflow_payload["steps"][-2]["artifacts"]
+    assert "release/public-bundle.html" in workflow_payload["steps"][-1]["artifacts"]
     assert "No buy/sell/hold advice." in (out / "sample-workflow.html").read_text(encoding="utf-8")
     assert "<script" not in (out / "sample-workflow.html").read_text(encoding="utf-8").lower()
 
@@ -181,6 +182,32 @@ def test_build_packet_compare_ledger_and_matrix(tmp_path: Path) -> None:
     assert "demo/reproducibility-audit.json" in casebook_payload["source_artifacts"]
     assert "No buy/sell/hold advice." in (out / "casebook.html").read_text(encoding="utf-8")
     assert "<script" not in (out / "casebook.html").read_text(encoding="utf-8").lower()
+
+    release_out = tmp_path / "release"
+    smoke = run_cli("install-smoke-receipt", "--root", str(ROOT), "--output", str(release_out))
+    assert smoke.returncode == 0, smoke.stdout + smoke.stderr
+    smoke_payload = json.loads((release_out / "install-smoke-receipt.json").read_text(encoding="utf-8"))
+    assert smoke_payload["schema_version"] == "valuation-scenario-lab.install-smoke-receipt.v1.0"
+    assert smoke_payload["status"] == "documented"
+    assert all(not item["network_required"] for item in smoke_payload["entry_point_smoke_commands"])
+    assert "valuation-scenario-lab selfcheck" in [item["command"] for item in smoke_payload["entry_point_smoke_commands"]]
+    assert "No live data." in (release_out / "install-smoke-receipt.html").read_text(encoding="utf-8")
+    assert "<script" not in (release_out / "install-smoke-receipt.html").read_text(encoding="utf-8").lower()
+
+    bundle = run_cli("export-bundle", "--root", str(ROOT), "--output", str(release_out))
+    assert bundle.returncode == 0, bundle.stdout + bundle.stderr
+    bundle_payload = json.loads((release_out / "public-bundle.json").read_text(encoding="utf-8"))
+    assert bundle_payload["schema_version"] == "valuation-scenario-lab.public-bundle.v1.0"
+    assert bundle_payload["status"] == "pass"
+    bundle_files = {item["path"]: item for item in bundle_payload["files"]}
+    assert bundle_files["demo/valuation-packet.html"]["category"] == "public-demo-artifact"
+    assert bundle_files["release/install-smoke-receipt.json"]["category"] == "release-asset"
+    assert bundle_files["skills/agent/valuation-scenario-lab/SKILL.md"]["category"] == "skill-file"
+    assert bundle_files["README.md"]["packaged_data_file"] is True
+    assert len(bundle_files["README.md"]["sha256"]) == 64
+    assert "release/public-bundle.json" in [item["path"] for item in bundle_payload["self_outputs"]]
+    assert "No buy/sell/hold advice." in (release_out / "public-bundle.html").read_text(encoding="utf-8")
+    assert "<script" not in (release_out / "public-bundle.html").read_text(encoding="utf-8").lower()
 
 
 def test_release_validation_and_maturity() -> None:

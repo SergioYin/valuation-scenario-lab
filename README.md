@@ -40,7 +40,9 @@ valuation-scenario-lab review-ledger --packet demo/valuation-packet.json --polic
 valuation-scenario-lab sensitivity-matrix --fixtures examples --output demo
 valuation-scenario-lab validate-release --format markdown
 valuation-scenario-lab maturity-report --format markdown
+valuation-scenario-lab install-smoke-receipt --root . --output release
 valuation-scenario-lab release-manifest --output release
+valuation-scenario-lab export-bundle --root . --output release
 ```
 
 Example output:
@@ -90,6 +92,8 @@ This package does not fetch market prices, connect to accounts, place orders, ra
 - `validate-release`: verify required public files, generated demos, safety strings, and private-reference hygiene.
 - `maturity-report`: score release readiness from validation findings.
 - `release-manifest`: emit file hashes for public release review.
+- `install-smoke-receipt`: write deterministic JSON, Markdown, and static HTML receipts documenting local wheel install commands, entry point smoke commands, and expected outputs without running network.
+- `export-bundle`: write deterministic JSON, Markdown, and static HTML public bundle manifests with SHA-256 hashes, categories, package-data flags, release-required flags, and usage notes for public artifacts.
 
 ## Fixture Shape
 

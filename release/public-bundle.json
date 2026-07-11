@@ -1,0 +1,731 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "categories": [
+    "package-data",
+    "project-metadata",
+    "public-demo-artifact",
+    "public-file",
+    "release-asset",
+    "skill-file",
+    "source",
+    "test"
+  ],
+  "file_count": 77,
+  "files": [
+    {
+      "bytes": 60,
+      "category": "public-file",
+      "packaged_data_file": false,
+      "path": ".gitignore",
+      "required_for_release": false,
+      "sha256": "b12ee9cd8e1b4fb3b724f04d9750b2d2388b2120fef33ac0a168bff8f53252cc",
+      "usage_note": "Public repository file included for release review."
+    },
+    {
+      "bytes": 4771,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "CHANGELOG.md",
+      "required_for_release": true,
+      "sha256": "139c365a0aa508a7d38e0e230851fcec2134fbc45f021ccd063248937442a57c",
+      "usage_note": "Public repository file included for release review."
+    },
+    {
+      "bytes": 1092,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "LICENSE",
+      "required_for_release": true,
+      "sha256": "91cdf92bf0f3378b989793b256f81e7fb22d0222152411b79ab0634b3de90b4f",
+      "usage_note": "Public repository file included for release review."
+    },
+    {
+      "bytes": 272,
+      "category": "project-metadata",
+      "packaged_data_file": false,
+      "path": "MANIFEST.in",
+      "required_for_release": false,
+      "sha256": "510f7e3cfd5792ff22fdb0576bbe1506013ee1eff79d224b5a904da53a797a2b",
+      "usage_note": "Public repository file included for release review."
+    },
+    {
+      "bytes": 8210,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "README.md",
+      "required_for_release": true,
+      "sha256": "8e30a9b6da3a65212135f053b29d60069cfc5e2dd0a4850dfe6adfe64bac3bc0",
+      "usage_note": "Primary user documentation, command list, quickstart, and safety boundaries."
+    },
+    {
+      "bytes": 5753,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "RELEASE_NOTES.md",
+      "required_for_release": true,
+      "sha256": "d092ecdb5100ff1938fc797d88ffd0e27bae48d0f1aa000eb2bc70bf5435c0b5",
+      "usage_note": "Public repository file included for release review."
+    },
+    {
+      "bytes": 1657,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/assumption-change-walkthrough.html",
+      "required_for_release": true,
+      "sha256": "4c155578b08adcdd6f07b916037df2ceebcd43365d741f42b6cbfc8aacb5a84e",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1269,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/assumption-change-walkthrough.json",
+      "required_for_release": true,
+      "sha256": "2f42241e2749754f14ef4a266bd36a86d19d7b603dcdf20ada76a49d89644e8c",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 795,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/assumption-change-walkthrough.md",
+      "required_for_release": true,
+      "sha256": "20dee5fe622feb6e4db3f306b7607457140adff552094a1aa585e4ffdb2ada59",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 2095,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/casebook.html",
+      "required_for_release": true,
+      "sha256": "29d2ca64db504605f0af9eb81a9550b73706daee15f9a8da2d969ea398a70d50",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1854,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/casebook.json",
+      "required_for_release": true,
+      "sha256": "6562731b009ac0a81385767cbcefcda851207b2f99a976031be79975e64232d8",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1385,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/casebook.md",
+      "required_for_release": true,
+      "sha256": "e906b3f3716c8ce3f9fae9664ff92614d9aa1cd2d39c2a1fb18a99a5aa0d4912",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1091,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/compare-history.json",
+      "required_for_release": true,
+      "sha256": "d24881ef0f777a5771dc9987a9b04ad4211a5dcdca26220930df55ece025c826",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 570,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/compare-history.md",
+      "required_for_release": true,
+      "sha256": "d4a37ea7e1c182d8b67c35f276efb2862d8c1aef74c42cdaa86c94c61f34c4e9",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1958,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/decision-journal.json",
+      "required_for_release": true,
+      "sha256": "b563bcc104b3d0cc51c71b0030f3223d06d2dbe65f9f90ff86237bdabb9726e0",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 902,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/decision-journal.md",
+      "required_for_release": true,
+      "sha256": "f5396dc6d7ea4b4b67d0118ebdd6260b1f829dfda4e150de5ec831fa019debae",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 495,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/fixture-doctor.json",
+      "required_for_release": true,
+      "sha256": "c5019694a5302b9e3a8e695ceb062df6618dc5202c0247401203751f03f61fa0",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 263,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/fixture-doctor.md",
+      "required_for_release": true,
+      "sha256": "36cbe266f397361bf6976a89bd794b6c08de2c806943997260382c68da602036",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1154,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/multi-company-demo-gallery.html",
+      "required_for_release": true,
+      "sha256": "22f93a2089e60f12ae1876eeb8e0f4829cefe37975ee791fbb1417b49a53bdd2",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1311,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/multi-company-demo-gallery.json",
+      "required_for_release": true,
+      "sha256": "c27f07de56dc690215bc25a14f88822db9738ac9eed208f612dcbc8b914dde4d",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 556,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/multi-company-demo-gallery.md",
+      "required_for_release": true,
+      "sha256": "f19cfddfec07ef908fdea82b2f4a47ae26d81680b58a7bd5c0409ce40f330c8e",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 573,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/onboarding-template/README.md",
+      "required_for_release": true,
+      "sha256": "86d405e58381e5775597977e3775e0aa70f50ff87bdef48a2dacac940599e881",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 2143,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/onboarding-template/company.json",
+      "required_for_release": true,
+      "sha256": "fe6391e5b8cb4cd888473cb5843e16a4aad87e7e7fd144cbaa13fd3657c7086c",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 2311,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/onboarding-template/prior-packet.json",
+      "required_for_release": true,
+      "sha256": "f7b5af8e0cfdde9f0bdf778181db166629e0cc8b6f654dc1de4f5f32121f5d55",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 331,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/onboarding-template/review-policy.json",
+      "required_for_release": true,
+      "sha256": "56b95f5cb808f80ad2c2dc9dbdab0aef378241117e678868ddeadbe09b23eeff",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 3066,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/public-readiness-landing.html",
+      "required_for_release": true,
+      "sha256": "1c2e2662e9d51d1deffa538ce55c690fa1d681f5852c9c25af25e8afb2bf923a",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 2369,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/public-readiness-landing.json",
+      "required_for_release": true,
+      "sha256": "5da9b6c6d9021d6123928d76c570959b7e71d84e1c2077a473a5fa9ca5a367ae",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1696,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/public-readiness-landing.md",
+      "required_for_release": true,
+      "sha256": "f08cd268124d9f5c898aed76ff67839b5caaa2d3a5fe84f7d289efd919755c25",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 5349,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/quickstart-check.json",
+      "required_for_release": true,
+      "sha256": "cb6de72b7f3be064dd61fceab0abe594ec29d4754ca97f8e5190d72d03e62d28",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 3216,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/quickstart-check.md",
+      "required_for_release": true,
+      "sha256": "8fec0044301605a9cd3a9154a6d80ced0f5bab3cd94cfd3a9664cdf199f035b1",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1092,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/reproducibility-audit.html",
+      "required_for_release": true,
+      "sha256": "3952af39c0bf7b25d9ce0176537b8719389010ba77694ecd0e7be941e4c2f75f",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 21635,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/reproducibility-audit.json",
+      "required_for_release": true,
+      "sha256": "a437b79da63e3c7b86ccf3c82742f2ce3bf9ad9d1be7ee88fcf84c6ecf3d6f07",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 396,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/reproducibility-audit.md",
+      "required_for_release": true,
+      "sha256": "bf3b0d646caad89fae3898e51fab0aa48e2edd33d7369be73166b3d25cddd035",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1313,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/review-ledger.json",
+      "required_for_release": true,
+      "sha256": "9187eda32b060fedf9950b955a85ac7f6beb00b31384666547ddc076996e307c",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 561,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/review-ledger.md",
+      "required_for_release": true,
+      "sha256": "0515577fe3939fc30e1dbbcbbc22da310517273f29378bf2cc7e01be2523fa7a",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 4144,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/sample-workflow.html",
+      "required_for_release": true,
+      "sha256": "bab893b30851bc3d55852f9927d8a9209eee6f6dc4e9cff611ae4d59395ca7f2",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 8419,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/sample-workflow.json",
+      "required_for_release": true,
+      "sha256": "d375eb6f65e5f27f4d33fdf8c838c16c5742043bb9743f0ef537961b00b59b57",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 2805,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/sample-workflow.md",
+      "required_for_release": true,
+      "sha256": "782f314282072f2295476dda39bf4ecbf3e8b8392e836cf248520840488454c5",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 2083,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/scenario-library.html",
+      "required_for_release": true,
+      "sha256": "662e03f6c1d8ad9a9ae324ee4b2daba20021cc4c21bff9fc76043d9105be1480",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 6387,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/scenario-library.json",
+      "required_for_release": true,
+      "sha256": "5592fa11c6dd305336973056512a2d0e86f6426ffc9715fb89ea773a69e88651",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1131,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/scenario-library.md",
+      "required_for_release": true,
+      "sha256": "65f4dbda4cedb24b1fcfe9682a640d7fad5f15491f4be7a443c9bc189d663949",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1923,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/sensitivity-matrix.json",
+      "required_for_release": true,
+      "sha256": "a121adccfbc75b98bdd97d28f8522314acaec80a1d36987fdebfaf5f48354454",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 596,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/sensitivity-matrix.md",
+      "required_for_release": true,
+      "sha256": "95bb5e57d5e939dbd5465adeaa275d83ba391e4940e9034ada1f62e8c55ad43c",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 4299,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/showcase-dashboard.html",
+      "required_for_release": true,
+      "sha256": "fa4492e6897ceeb0e1f38965c6937c3c857cc04c88cf47228e0b17bca399a875",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1043,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/showcase-dashboard.json",
+      "required_for_release": true,
+      "sha256": "f1d639f37b80dcae6ac9bb15e8e14c20167a9523a28b84cdaf2d0c6004b95cbb",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 614,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/showcase-dashboard.md",
+      "required_for_release": true,
+      "sha256": "a86dffd75f819650f43ea9fc670efcf9c3dc3869531658d0b8502b3d6e948c78",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 3170,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/showcase-dashboard.svg",
+      "required_for_release": true,
+      "sha256": "0f3e6a01d1ad6317899deaf285f58465f6b367dd204d44b23137a2a43e5a65ca",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 2253,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/thesis-brief.html",
+      "required_for_release": true,
+      "sha256": "cb4b416ed28d3e8c32f585e4aadb482ab416b1f5a77bba28e60e119800ed9395",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 3283,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/thesis-brief.json",
+      "required_for_release": true,
+      "sha256": "03cd9c1e8758e6a5b97485dcad527015fc085b354a9a809e4ba9709f491d4dad",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1429,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/thesis-brief.md",
+      "required_for_release": true,
+      "sha256": "29bdf36bf36c4717b0801b92faed5734629a37c393d9d50a4eb34b64a57f6718",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1370,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/valuation-packet.html",
+      "required_for_release": true,
+      "sha256": "e7c9b0f2c2f69d563ddd11350c54f4c42166d9fdfd8130f41cccae124071b5b3",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 2004,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/valuation-packet.json",
+      "required_for_release": true,
+      "sha256": "3d734f1c1c4a12f0e7fb658f3f698db757893bbc8c5401e693dca98f84dea4fd",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 916,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/valuation-packet.md",
+      "required_for_release": true,
+      "sha256": "7d583f202732d141b0ddfa50b9fb932fd61a2524219bc420562fe8f22ab91c36",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 733,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/visual-receipt.html",
+      "required_for_release": true,
+      "sha256": "aa3a21ddb96c8d3ae8eee9de18957ed04b7dfbaf6ccbef45624efd03bc07d362",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 523,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/visual-receipt.json",
+      "required_for_release": true,
+      "sha256": "6f02b7958affbbaf185f6d73c8878f65ae3628221896f03840f433677d747b8f",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 350,
+      "category": "public-demo-artifact",
+      "packaged_data_file": true,
+      "path": "demo/visual-receipt.md",
+      "required_for_release": true,
+      "sha256": "f5e3f9ee9270874b86c9ae0e556baf72fe2021966f7d10e9d5e76fdf85cb6987",
+      "usage_note": "Public deterministic demo artifact generated from local fictional fixtures."
+    },
+    {
+      "bytes": 1096,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "docs/packet-format.md",
+      "required_for_release": false,
+      "sha256": "7a127855a424875508477bff35a9311c759880cc871d39bc0479ee04ac61aa22",
+      "usage_note": "Project documentation for packet format, release checks, and validation expectations."
+    },
+    {
+      "bytes": 3188,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "docs/release-checks.md",
+      "required_for_release": true,
+      "sha256": "a402e468b5431e617e40861a7df75e5c104f4de2d1101226fa661470997046c7",
+      "usage_note": "Project documentation for packet format, release checks, and validation expectations."
+    },
+    {
+      "bytes": 1664,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "examples/company.json",
+      "required_for_release": true,
+      "sha256": "1f41125d6afff5a7de0b085a9c1fb35080628c4dba34d3a7dc2422021bd8bc80",
+      "usage_note": "Static local fictional fixture data; not live market data."
+    },
+    {
+      "bytes": 1244,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "examples/prior-packet.json",
+      "required_for_release": false,
+      "sha256": "3f287ac96cb3a5a7a477b0e2332e7c2cb046f9e5b72c6f2289838a9e9a48b880",
+      "usage_note": "Static local fictional fixture data; not live market data."
+    },
+    {
+      "bytes": 112,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "examples/review-policy.json",
+      "required_for_release": false,
+      "sha256": "6c6ce8bf0f676d75ebae1a93e62e8d18bf51952522fcbf6ce74d44c4ba03a5df",
+      "usage_note": "Static local fictional fixture data; not live market data."
+    },
+    {
+      "bytes": 1748,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "examples/software-compounder.json",
+      "required_for_release": true,
+      "sha256": "c6bef8b98a5570c82396bf77faab8959a9fc7a386da0b9c41f791445052ea144",
+      "usage_note": "Static local fictional fixture data; not live market data."
+    },
+    {
+      "bytes": 3692,
+      "category": "package-data",
+      "packaged_data_file": true,
+      "path": "pyproject.toml",
+      "required_for_release": true,
+      "sha256": "1803bd6e3b54040ffc6e38373fa7dfa619ae02c54904edc2088c6775ca97d48c",
+      "usage_note": "Package metadata, entry point, package data, and zero dependency declaration."
+    },
+    {
+      "bytes": 2394,
+      "category": "release-asset",
+      "packaged_data_file": true,
+      "path": "release/install-smoke-receipt.html",
+      "required_for_release": true,
+      "sha256": "25a92cdb6e49e45c80af12fdd1923d7103c5990b207723d8330837f27ad83e73",
+      "usage_note": "Release validation asset for reviewers and package publication checks."
+    },
+    {
+      "bytes": 2284,
+      "category": "release-asset",
+      "packaged_data_file": true,
+      "path": "release/install-smoke-receipt.json",
+      "required_for_release": true,
+      "sha256": "c130b1241658e0bc5c2ac9c9cf9cb20c1c6d2268317bf1995d3338e037b198b9",
+      "usage_note": "Release validation asset for reviewers and package publication checks."
+    },
+    {
+      "bytes": 1296,
+      "category": "release-asset",
+      "packaged_data_file": true,
+      "path": "release/install-smoke-receipt.md",
+      "required_for_release": true,
+      "sha256": "e34a29a62f9828259d34cfc706cb6bf92921783a7be91f94c08fb349b5826886",
+      "usage_note": "Release validation asset for reviewers and package publication checks."
+    },
+    {
+      "bytes": 4035,
+      "category": "skill-file",
+      "packaged_data_file": true,
+      "path": "skills/agent/valuation-scenario-lab/SKILL.md",
+      "required_for_release": true,
+      "sha256": "fc12c8af8fc3dc004726e01c3413e399a680b70be2b408e09a144adc29c3306e",
+      "usage_note": "Agent protocol file preserving finance safety boundaries and workflow order."
+    },
+    {
+      "bytes": 74,
+      "category": "source",
+      "packaged_data_file": false,
+      "path": "src/valuation_scenario_lab/__init__.py",
+      "required_for_release": false,
+      "sha256": "e7cc402239b4cb6ba2c16f3aba14c155467cfe83333988598648324db8d08b1d",
+      "usage_note": "Zero-runtime-dependency package source."
+    },
+    {
+      "bytes": 83712,
+      "category": "source",
+      "packaged_data_file": false,
+      "path": "src/valuation_scenario_lab/cli.py",
+      "required_for_release": false,
+      "sha256": "fe85340bdabd3fe5fbdc2be323abcd2ff88048bfb153af7ac33e25848d0a6687",
+      "usage_note": "Zero-runtime-dependency package source."
+    },
+    {
+      "bytes": 7756,
+      "category": "source",
+      "packaged_data_file": false,
+      "path": "src/valuation_scenario_lab/doctor.py",
+      "required_for_release": false,
+      "sha256": "459c6eda0613cbe06fa979bda9913d26b1d2ed665ecd0b138242ff54fdf04b97",
+      "usage_note": "Zero-runtime-dependency package source."
+    },
+    {
+      "bytes": 22474,
+      "category": "source",
+      "packaged_data_file": false,
+      "path": "src/valuation_scenario_lab/engine.py",
+      "required_for_release": false,
+      "sha256": "eb51e3aecf602a85d2e9f40be1eda2a7861304d7b25f720d202bdeb12a8f5c1f",
+      "usage_note": "Zero-runtime-dependency package source."
+    },
+    {
+      "bytes": 807,
+      "category": "source",
+      "packaged_data_file": false,
+      "path": "src/valuation_scenario_lab/io.py",
+      "required_for_release": false,
+      "sha256": "509dac4767440e12060fc112a09638e6547db4186e65547579230adaa0896aab",
+      "usage_note": "Zero-runtime-dependency package source."
+    },
+    {
+      "bytes": 784,
+      "category": "source",
+      "packaged_data_file": false,
+      "path": "src/valuation_scenario_lab/model.py",
+      "required_for_release": false,
+      "sha256": "8164c3ff7339f16f5e316c66e4c578d4eba08da883ec12a410eec6b5bf27d8a8",
+      "usage_note": "Zero-runtime-dependency package source."
+    },
+    {
+      "bytes": 22080,
+      "category": "source",
+      "packaged_data_file": false,
+      "path": "src/valuation_scenario_lab/release.py",
+      "required_for_release": false,
+      "sha256": "ee9010b2f775be61edc82e7c068a61a76229ea676a028e9a659c66b2f39796ed",
+      "usage_note": "Zero-runtime-dependency package source."
+    },
+    {
+      "bytes": 4037,
+      "category": "source",
+      "packaged_data_file": false,
+      "path": "src/valuation_scenario_lab/render.py",
+      "required_for_release": false,
+      "sha256": "b98499a2e33c9a7210cfc31406158ffbe0e7a0bf1f43f9b22b2d1e58e0c70387",
+      "usage_note": "Zero-runtime-dependency package source."
+    },
+    {
+      "bytes": 1195,
+      "category": "test",
+      "packaged_data_file": false,
+      "path": "tests/golden/key-demo-snapshots.json",
+      "required_for_release": false,
+      "sha256": "2ccbb3dab5b0470a1afdd5e517776b7614764ad16bb3dddc73c188ff5821adc7",
+      "usage_note": "Regression coverage for deterministic CLI behavior and release stability."
+    },
+    {
+      "bytes": 19057,
+      "category": "test",
+      "packaged_data_file": false,
+      "path": "tests/test_cli.py",
+      "required_for_release": false,
+      "sha256": "13fbb0b35b9d81ae02a9d0a8189e127e4025e48c14b1a73b36127356b6dcccf2",
+      "usage_note": "Regression coverage for deterministic CLI behavior and release stability."
+    }
+  ],
+  "generated_on": "static-local",
+  "missing_required_files": [],
+  "schema_version": "valuation-scenario-lab.public-bundle.v1.0",
+  "self_outputs": [
+    {
+      "path": "release/public-bundle.json",
+      "usage_note": "Generated JSON bundle receipt; excluded from its own hash index."
+    },
+    {
+      "path": "release/public-bundle.md",
+      "usage_note": "Generated Markdown bundle receipt; excluded from its own hash index."
+    },
+    {
+      "path": "release/public-bundle.html",
+      "usage_note": "Generated static HTML bundle receipt; excluded from its own hash index."
+    }
+  ],
+  "status": "pass"
+}

@@ -20,6 +20,9 @@ Status: pass
 - `valuation-scenario-lab demo-gallery --fixtures examples --output demo`
 - `valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo`
 - `valuation-scenario-lab public-readiness-landing --root . --output demo`
+- `valuation-scenario-lab install-smoke-receipt --root . --output release`
+- `valuation-scenario-lab release-manifest --root . --output release`
+- `valuation-scenario-lab export-bundle --root . --output release`
 
 ## Files
 

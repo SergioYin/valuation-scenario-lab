@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0
+
+- Added `export-bundle` JSON, Markdown, and static HTML manifests listing public demo artifacts, release assets, package data, docs, tests, source files, and skill files with SHA-256 hashes and usage notes.
+- Added `install-smoke-receipt` JSON, Markdown, and static HTML receipts documenting local wheel/editable install commands, entry point smoke commands, and expected outputs without running network.
+- Included both public-stability receipts in package data, release validation, release docs, README examples, sample workflow, and the agent skill protocol.
+- Preserved zero runtime dependencies, static local fixtures, no live data, no broker connections, and no buy/sell/hold advice.
+
 ## 0.9.0
 
 - Added `new-fixture-template` to write a fictional documented company fixture, review policy, prior packet template, and onboarding README into an output directory.

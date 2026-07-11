@@ -1,5 +1,17 @@
 # Release Notes
 
+## v1.0.0
+
+Public-stability increment.
+
+This release adds `export-bundle`, a deterministic JSON, Markdown, and static no-JavaScript HTML manifest that lists public demo artifacts, release assets, package data, docs, tests, source files, and skill files with SHA-256 hashes and usage notes.
+
+It also adds `install-smoke-receipt`, a deterministic receipt documenting local wheel/editable install commands, entry point smoke commands, and expected outputs without running network.
+
+Release validation, package data, README docs, release checks, sample workflow, and the agent skill now include both public-stability receipts.
+
+Boundaries: no live data, no broker connections, no orders, no predictions, and no buy/sell/hold advice.
+
 ## v0.9.0
 
 User-onboarding increment.

@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 from typing import Any
+import tomllib
 
 from .doctor import fixture_doctor
 
@@ -74,6 +75,12 @@ REQUIRED_FILES = [
     "docs/release-checks.md",
     "release/release-manifest.json",
     "release/release-manifest.md",
+    "release/install-smoke-receipt.json",
+    "release/install-smoke-receipt.md",
+    "release/install-smoke-receipt.html",
+    "release/public-bundle.json",
+    "release/public-bundle.md",
+    "release/public-bundle.html",
     "skills/agent/valuation-scenario-lab/SKILL.md",
 ]
 
@@ -95,6 +102,8 @@ EXPECTED_SCHEMA_VERSIONS = {
     "demo/reproducibility-audit.json": "valuation-scenario-lab.reproducibility-audit.v0.8",
     "demo/sample-workflow.json": "valuation-scenario-lab.sample-workflow.v0.8",
     "demo/casebook.json": "valuation-scenario-lab.casebook.v0.9",
+    "release/install-smoke-receipt.json": "valuation-scenario-lab.install-smoke-receipt.v1.0",
+    "release/public-bundle.json": "valuation-scenario-lab.public-bundle.v1.0",
 }
 
 SAFETY_BOUNDARIES = [
@@ -174,7 +183,117 @@ def release_manifest(root: Path) -> dict[str, Any]:
     for path in public_files(root):
         rel = path.relative_to(root).as_posix()
         files.append({"path": rel, "sha256": sha256(path), "bytes": path.stat().st_size})
-    return {"schema_version": "valuation-scenario-lab.release-manifest.v0.8", "files": files}
+    return {"schema_version": "valuation-scenario-lab.release-manifest.v1.0", "files": files}
+
+
+def export_bundle_manifest(root: Path) -> dict[str, Any]:
+    files = []
+    package_data = package_data_files(root)
+    required = set(REQUIRED_FILES)
+    for path in public_files(root):
+        rel = path.relative_to(root).as_posix()
+        files.append(
+            {
+                "path": rel,
+                "category": public_file_category(rel, package_data),
+                "sha256": sha256(path),
+                "bytes": path.stat().st_size,
+                "required_for_release": rel in required,
+                "packaged_data_file": rel in package_data,
+                "usage_note": usage_note(rel),
+            }
+        )
+    self_output_paths = {
+        "release/public-bundle.json",
+        "release/public-bundle.md",
+        "release/public-bundle.html",
+    }
+    missing_required = sorted(name for name in REQUIRED_FILES if name not in self_output_paths and not (root / name).exists())
+    return {
+        "schema_version": "valuation-scenario-lab.public-bundle.v1.0",
+        "generated_on": "static-local",
+        "status": "pass" if not missing_required else "fail",
+        "file_count": len(files),
+        "missing_required_files": missing_required,
+        "self_outputs": [
+            {
+                "path": "release/public-bundle.json",
+                "usage_note": "Generated JSON bundle receipt; excluded from its own hash index.",
+            },
+            {
+                "path": "release/public-bundle.md",
+                "usage_note": "Generated Markdown bundle receipt; excluded from its own hash index.",
+            },
+            {
+                "path": "release/public-bundle.html",
+                "usage_note": "Generated static HTML bundle receipt; excluded from its own hash index.",
+            },
+        ],
+        "categories": sorted({item["category"] for item in files}),
+        "boundaries": SAFETY_BOUNDARIES,
+        "files": files,
+    }
+
+
+def install_smoke_receipt(root: Path) -> dict[str, Any]:
+    wheel_name = f"valuation_scenario_lab-1.0.0-py3-none-any.whl"
+    smoke_commands = [
+        {
+            "command": "valuation-scenario-lab --version",
+            "expected_output_contains": "1.0.0",
+            "network_required": False,
+        },
+        {
+            "command": "valuation-scenario-lab selfcheck",
+            "expected_output_contains": "selfcheck passed",
+            "network_required": False,
+        },
+        {
+            "command": "valuation-scenario-lab install-smoke-receipt --root . --output release",
+            "expected_output_contains": "wrote release/install-smoke-receipt.json",
+            "network_required": False,
+        },
+        {
+            "command": "valuation-scenario-lab export-bundle --root . --output release",
+            "expected_output_contains": "wrote release/public-bundle.json",
+            "network_required": False,
+        },
+        {
+            "command": "valuation-scenario-lab validate-release --root . --format markdown",
+            "expected_output_contains": "Status: pass",
+            "network_required": False,
+        },
+    ]
+    required = [
+        "dist/" + wheel_name,
+        "dist/valuation_scenario_lab-1.0.0.tar.gz",
+        "release/public-bundle.json",
+        "release/public-bundle.md",
+        "release/public-bundle.html",
+    ]
+    return {
+        "schema_version": "valuation-scenario-lab.install-smoke-receipt.v1.0",
+        "generated_on": "static-local",
+        "status": "documented",
+        "network_policy": "No network commands are run by this receipt; install commands are documented for offline/local wheel validation.",
+        "install_commands": [
+            {
+                "name": "local wheel",
+                "command": f"python -m pip install --no-index --find-links dist {wheel_name}",
+                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.0.0",
+                "network_required": False,
+            },
+            {
+                "name": "editable local checkout",
+                "command": "python -m pip install -e .",
+                "expected_output_contains": "Successfully installed valuation-scenario-lab-1.0.0",
+                "network_required": False,
+            },
+        ],
+        "entry_point_smoke_commands": smoke_commands,
+        "expected_files": [{"path": item, "exists": (root / item).exists()} for item in required],
+        "boundaries": SAFETY_BOUNDARIES,
+    }
 
 
 def reproducibility_audit(root: Path, generated_outputs: list[str] | None = None) -> dict[str, Any]:
@@ -302,6 +421,10 @@ def safety_boundary_checks(root: Path) -> dict[str, Any]:
         "demo/casebook.md",
         "demo/casebook.html",
         "demo/onboarding-template/README.md",
+        "release/install-smoke-receipt.md",
+        "release/install-smoke-receipt.html",
+        "release/public-bundle.md",
+        "release/public-bundle.html",
         "skills/agent/valuation-scenario-lab/SKILL.md",
     ]
     files = []
@@ -316,11 +439,18 @@ def safety_boundary_checks(root: Path) -> dict[str, Any]:
 
 def public_files(root: Path) -> list[Path]:
     skip_parts = {".git", ".pytest_cache", "__pycache__", ".venv", "dist", "build"}
+    excluded = {
+        "release/release-manifest.json",
+        "release/release-manifest.md",
+        "release/public-bundle.json",
+        "release/public-bundle.md",
+        "release/public-bundle.html",
+    }
     return sorted(
         path
         for path in root.rglob("*")
         if path.is_file()
-        and path.relative_to(root).as_posix() not in {"release/release-manifest.json", "release/release-manifest.md"}
+        and path.relative_to(root).as_posix() not in excluded
         and not any(part in skip_parts or part.endswith(".egg-info") for part in path.parts)
     )
 
@@ -329,3 +459,61 @@ def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     digest.update(path.read_bytes())
     return digest.hexdigest()
+
+
+def package_data_files(root: Path) -> set[str]:
+    pyproject = root / "pyproject.toml"
+    if not pyproject.exists():
+        return set()
+    data = tomllib.loads(pyproject.read_text(encoding="utf-8"))
+    groups = data.get("tool", {}).get("setuptools", {}).get("data-files", {})
+    files = set()
+    if isinstance(groups, dict):
+        for entries in groups.values():
+            if isinstance(entries, list):
+                files.update(str(item) for item in entries)
+    return files
+
+
+def public_file_category(path: str, package_data: set[str]) -> str:
+    if path.startswith("demo/"):
+        return "public-demo-artifact"
+    if path.startswith("release/"):
+        return "release-asset"
+    if path.startswith("skills/"):
+        return "skill-file"
+    if path in package_data:
+        return "package-data"
+    if path.startswith("docs/"):
+        return "documentation"
+    if path.startswith("examples/"):
+        return "fixture"
+    if path.startswith("tests/"):
+        return "test"
+    if path.startswith("src/"):
+        return "source"
+    if path in {"README.md", "CHANGELOG.md", "RELEASE_NOTES.md", "LICENSE", "pyproject.toml", "MANIFEST.in"}:
+        return "project-metadata"
+    return "public-file"
+
+
+def usage_note(path: str) -> str:
+    if path.startswith("demo/"):
+        return "Public deterministic demo artifact generated from local fictional fixtures."
+    if path.startswith("release/"):
+        return "Release validation asset for reviewers and package publication checks."
+    if path.startswith("skills/"):
+        return "Agent protocol file preserving finance safety boundaries and workflow order."
+    if path.startswith("docs/"):
+        return "Project documentation for packet format, release checks, and validation expectations."
+    if path.startswith("examples/"):
+        return "Static local fictional fixture data; not live market data."
+    if path.startswith("tests/"):
+        return "Regression coverage for deterministic CLI behavior and release stability."
+    if path.startswith("src/"):
+        return "Zero-runtime-dependency package source."
+    if path == "pyproject.toml":
+        return "Package metadata, entry point, package data, and zero dependency declaration."
+    if path == "README.md":
+        return "Primary user documentation, command list, quickstart, and safety boundaries."
+    return "Public repository file included for release review."

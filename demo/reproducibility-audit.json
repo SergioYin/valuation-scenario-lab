@@ -310,6 +310,36 @@
         {
           "exists": true,
           "generated_by_command": false,
+          "path": "release/install-smoke-receipt.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/install-smoke-receipt.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/install-smoke-receipt.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/public-bundle.json"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/public-bundle.md"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
+          "path": "release/public-bundle.html"
+        },
+        {
+          "exists": true,
+          "generated_by_command": false,
           "path": "skills/agent/valuation-scenario-lab/SKILL.md"
         }
       ],
@@ -317,13 +347,17 @@
       "status": "pass"
     },
     "hash_manifest_coverage": {
-      "expected_file_count": 74,
+      "expected_file_count": 77,
       "extra": [],
-      "hash_mismatches": [],
-      "manifest_file_count": 74,
-      "manifest_schema_version": "valuation-scenario-lab.release-manifest.v0.8",
+      "hash_mismatches": [
+        "demo/reproducibility-audit.html",
+        "demo/reproducibility-audit.json",
+        "demo/reproducibility-audit.md"
+      ],
+      "manifest_file_count": 77,
+      "manifest_schema_version": "valuation-scenario-lab.release-manifest.v1.0",
       "missing": [],
-      "status": "pass"
+      "status": "fail"
     },
     "safety_boundary_coverage": {
       "files": [
@@ -510,6 +544,46 @@
         {
           "exists": true,
           "missing": [],
+          "path": "release/install-smoke-receipt.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "release/install-smoke-receipt.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "release/public-bundle.md",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
+          "path": "release/public-bundle.html",
+          "present": [
+            "No live data.",
+            "No broker connections.",
+            "No buy/sell/hold advice."
+          ]
+        },
+        {
+          "exists": true,
+          "missing": [],
           "path": "skills/agent/valuation-scenario-lab/SKILL.md",
           "present": [
             "No live data.",
@@ -641,6 +715,20 @@
           "generated_by_command": false,
           "ok": true,
           "path": "demo/casebook.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.install-smoke-receipt.v1.0",
+          "expected": "valuation-scenario-lab.install-smoke-receipt.v1.0",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "release/install-smoke-receipt.json"
+        },
+        {
+          "actual": "valuation-scenario-lab.public-bundle.v1.0",
+          "expected": "valuation-scenario-lab.public-bundle.v1.0",
+          "generated_by_command": false,
+          "ok": true,
+          "path": "release/public-bundle.json"
         }
       ],
       "mismatches": [],
@@ -674,5 +762,5 @@
   },
   "generated_on": "static-local",
   "schema_version": "valuation-scenario-lab.reproducibility-audit.v0.8",
-  "status": "pass"
+  "status": "fail"
 }

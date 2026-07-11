@@ -27,6 +27,8 @@ from .io import ensure_dir, read_json, write_json, write_text
 from .release import maturity_report as maturity_payload
 from .release import reproducibility_audit as reproducibility_audit_payload
 from .release import release_manifest as manifest_payload
+from .release import export_bundle_manifest as export_bundle_payload
+from .release import install_smoke_receipt as install_smoke_payload
 from .release import validate_release as validate_release_payload
 from .render import packet_html, packet_markdown, simple_markdown
 
@@ -115,6 +117,14 @@ def main(argv: list[str] | None = None) -> int:
     manifest.add_argument("--root", default=".")
     manifest.add_argument("--output", default="release")
 
+    bundle = sub.add_parser("export-bundle")
+    bundle.add_argument("--root", default=".")
+    bundle.add_argument("--output", default="release")
+
+    smoke = sub.add_parser("install-smoke-receipt")
+    smoke.add_argument("--root", default=".")
+    smoke.add_argument("--output", default="release")
+
     audit = sub.add_parser("reproducibility-audit")
     audit.add_argument("--root", default=".")
     audit.add_argument("--output", default="demo")
@@ -176,6 +186,10 @@ def main(argv: list[str] | None = None) -> int:
             return emit_validation(maturity_payload(Path(args.root)), args.format)
         if args.command == "release-manifest":
             return command_manifest(Path(args.root), Path(args.output))
+        if args.command == "export-bundle":
+            return command_export_bundle(Path(args.root), Path(args.output))
+        if args.command == "install-smoke-receipt":
+            return command_install_smoke_receipt(Path(args.root), Path(args.output))
         if args.command == "reproducibility-audit":
             return command_reproducibility_audit(Path(args.root), Path(args.output))
         if args.command == "sample-workflow":
@@ -204,6 +218,9 @@ def main(argv: list[str] | None = None) -> int:
             command_reproducibility_audit(root, root / "demo")
             command_new_fixture_template(root / "demo" / "onboarding-template")
             command_casebook(root, root / "demo")
+            command_install_smoke_receipt(root, root / "release")
+            command_manifest(root, root / "release")
+            command_export_bundle(root, root / "release")
             return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)
@@ -318,6 +335,9 @@ def command_selfcheck(root_arg: Path | None = None) -> int:
         command_reproducibility_audit(root, out)
         command_new_fixture_template(out / "onboarding-template")
         command_casebook(root, out)
+        command_install_smoke_receipt(root, out / "release")
+        command_manifest(root, out / "release")
+        command_export_bundle(root, out / "release")
     validation = validate_release_payload(root)
     if validation["status"] != "pass":
         print("FAIL release validation")
@@ -408,6 +428,9 @@ def command_quickstart_check(root: Path, output: Path) -> int:
             "valuation-scenario-lab demo-gallery --fixtures examples --output demo",
             "valuation-scenario-lab decision-journal --packet demo/valuation-packet.json --ledger demo/review-ledger.json --output demo",
             "valuation-scenario-lab public-readiness-landing --root . --output demo",
+            "valuation-scenario-lab install-smoke-receipt --root . --output release",
+            "valuation-scenario-lab release-manifest --root . --output release",
+            "valuation-scenario-lab export-bundle --root . --output release",
         ],
         "files": files,
         "boundaries": [
@@ -1420,6 +1443,19 @@ def sample_workflow_payload(root: Path) -> dict[str, Any]:
                 "release/release-manifest.md",
             ],
         },
+        {
+            "step": 10,
+            "name": "Document install and bundle stability",
+            "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
+            "artifacts": [
+                "release/install-smoke-receipt.json",
+                "release/install-smoke-receipt.md",
+                "release/install-smoke-receipt.html",
+                "release/public-bundle.json",
+                "release/public-bundle.md",
+                "release/public-bundle.html",
+            ],
+        },
     ]
     for step in steps:
         step["artifact_status"] = [{"path": item, "exists": (root / item).exists()} for item in step["artifacts"]]
@@ -1668,6 +1704,161 @@ code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
 <li>Extra: {len(manifest['extra'])}</li>
 <li>Hash mismatches: {len(manifest['hash_mismatches'])}</li>
 </ul>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def command_install_smoke_receipt(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    payload = install_smoke_payload(root)
+    write_json(output / "install-smoke-receipt.json", payload)
+    write_text(output / "install-smoke-receipt.md", install_smoke_markdown(payload))
+    write_text(output / "install-smoke-receipt.html", install_smoke_html(payload))
+    print(f"wrote {output / 'install-smoke-receipt.json'}")
+    return 0
+
+
+def command_export_bundle(root: Path, output: Path) -> int:
+    root = resolve_root(root)
+    ensure_dir(output)
+    payload = export_bundle_payload(root)
+    write_json(output / "public-bundle.json", payload)
+    write_text(output / "public-bundle.md", public_bundle_markdown(payload))
+    write_text(output / "public-bundle.html", public_bundle_html(payload))
+    print(f"wrote {output / 'public-bundle.json'}")
+    return 0 if payload["status"] == "pass" else 1
+
+
+def install_smoke_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Install Smoke Receipt",
+        "",
+        f"Status: {payload['status']}",
+        "",
+        payload["network_policy"],
+        "",
+        "## Install Commands",
+        "",
+    ]
+    for item in payload["install_commands"]:
+        lines.append(f"- {item['name']}: `{item['command']}`")
+        lines.append(f"  Expected: `{item['expected_output_contains']}`")
+    lines.extend(["", "## Entry Point Smoke Commands", ""])
+    for item in payload["entry_point_smoke_commands"]:
+        lines.append(f"- `{item['command']}`")
+        lines.append(f"  Expected: `{item['expected_output_contains']}`")
+    lines.extend(["", "## Expected Files", ""])
+    lines.extend(f"- `{item['path']}`: {'ok' if item['exists'] else 'missing'}" for item in payload["expected_files"])
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def install_smoke_html(payload: dict[str, Any]) -> str:
+    installs = "".join(
+        "<tr>"
+        f"<td>{html.escape(item['name'])}</td>"
+        f"<td><code>{html.escape(item['command'])}</code></td>"
+        f"<td><code>{html.escape(item['expected_output_contains'])}</code></td>"
+        "</tr>"
+        for item in payload["install_commands"]
+    )
+    smokes = "".join(
+        "<tr>"
+        f"<td><code>{html.escape(item['command'])}</code></td>"
+        f"<td><code>{html.escape(item['expected_output_contains'])}</code></td>"
+        f"<td>{'no' if not item['network_required'] else 'yes'}</td>"
+        "</tr>"
+        for item in payload["entry_point_smoke_commands"]
+    )
+    files = "".join(f"<li><code>{html.escape(item['path'])}</code>: {'ok' if item['exists'] else 'missing'}</li>" for item in payload["expected_files"])
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Install Smoke Receipt</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Install Smoke Receipt</h1>
+<p>Status: {html.escape(payload['status'])}</p>
+<p>{html.escape(payload['network_policy'])}</p>
+<h2>Install Commands</h2>
+<table><thead><tr><th>Name</th><th>Command</th><th>Expected Output</th></tr></thead><tbody>{installs}</tbody></table>
+<h2>Entry Point Smoke Commands</h2>
+<table><thead><tr><th>Command</th><th>Expected Output</th><th>Network</th></tr></thead><tbody>{smokes}</tbody></table>
+<h2>Expected Files</h2><ul>{files}</ul>
+<h2>Boundaries</h2><ul>{boundaries}</ul>
+</body>
+</html>
+"""
+
+
+def public_bundle_markdown(payload: dict[str, Any]) -> str:
+    lines = [
+        "# Public Bundle Manifest",
+        "",
+        f"Status: {payload['status']}",
+        f"File count: {payload['file_count']}",
+        "",
+        "## Files",
+        "",
+        "| Path | Category | SHA-256 | Bytes | Usage |",
+        "| --- | --- | --- | ---: | --- |",
+    ]
+    for item in payload["files"]:
+        lines.append(
+            f"| `{item['path']}` | {item['category']} | `{item['sha256']}` | {item['bytes']} | {item['usage_note']} |"
+        )
+    lines.extend(["", "## Self Outputs", ""])
+    lines.extend(f"- `{item['path']}`: {item['usage_note']}" for item in payload["self_outputs"])
+    lines.extend(["", "## Boundaries", ""])
+    lines.extend(f"- {item}" for item in payload["boundaries"])
+    return "\n".join(lines)
+
+
+def public_bundle_html(payload: dict[str, Any]) -> str:
+    rows = "".join(
+        "<tr>"
+        f"<td><code>{html.escape(item['path'])}</code></td>"
+        f"<td>{html.escape(item['category'])}</td>"
+        f"<td><code>{html.escape(item['sha256'])}</code></td>"
+        f"<td>{item['bytes']}</td>"
+        f"<td>{html.escape(item['usage_note'])}</td>"
+        "</tr>"
+        for item in payload["files"]
+    )
+    self_outputs = "".join(
+        f"<li><code>{html.escape(item['path'])}</code>: {html.escape(item['usage_note'])}</li>"
+        for item in payload["self_outputs"]
+    )
+    boundaries = "".join(f"<li>{html.escape(item)}</li>" for item in payload["boundaries"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Public Bundle Manifest</title>
+<style>
+body {{ font-family: system-ui, sans-serif; margin: 2rem; color: #17202a; }}
+table {{ border-collapse: collapse; width: 100%; }}
+td, th {{ border: 1px solid #ccd1d1; padding: 0.45rem; text-align: left; vertical-align: top; }}
+code {{ background: #eef3f8; padding: 0.1rem 0.25rem; }}
+</style>
+</head>
+<body>
+<h1>Public Bundle Manifest</h1>
+<p>Status: {html.escape(payload['status'])}; file count: {payload['file_count']}</p>
+<table><thead><tr><th>Path</th><th>Category</th><th>SHA-256</th><th>Bytes</th><th>Usage</th></tr></thead><tbody>{rows}</tbody></table>
+<h2>Self Outputs</h2><ul>{self_outputs}</ul>
 <h2>Boundaries</h2><ul>{boundaries}</ul>
 </body>
 </html>

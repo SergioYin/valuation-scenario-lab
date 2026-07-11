@@ -77,6 +77,17 @@ Command: `valuation-scenario-lab reproducibility-audit --root . --output demo`
 - `release/release-manifest.json`: ok
 - `release/release-manifest.md`: ok
 
+### 10. Document install and bundle stability
+
+Command: `valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release`
+
+- `release/install-smoke-receipt.json`: ok
+- `release/install-smoke-receipt.md`: ok
+- `release/install-smoke-receipt.html`: ok
+- `release/public-bundle.json`: ok
+- `release/public-bundle.md`: ok
+- `release/public-bundle.html`: ok
+
 ## Boundaries
 
 - No live data.

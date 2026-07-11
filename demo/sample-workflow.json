@@ -14,7 +14,8 @@
     "valuation-scenario-lab fixture-doctor --fixtures examples --policy examples/review-policy.json --format markdown --output demo",
     "valuation-scenario-lab thesis-brief --root . --output demo",
     "valuation-scenario-lab public-readiness-landing --root . --output demo",
-    "valuation-scenario-lab reproducibility-audit --root . --output demo"
+    "valuation-scenario-lab reproducibility-audit --root . --output demo",
+    "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release"
   ],
   "schema_version": "valuation-scenario-lab.sample-workflow.v0.8",
   "status": "pass",
@@ -239,6 +240,45 @@
       "command": "valuation-scenario-lab reproducibility-audit --root . --output demo",
       "name": "Record release reproducibility",
       "step": 9
+    },
+    {
+      "artifact_status": [
+        {
+          "exists": true,
+          "path": "release/install-smoke-receipt.json"
+        },
+        {
+          "exists": true,
+          "path": "release/install-smoke-receipt.md"
+        },
+        {
+          "exists": true,
+          "path": "release/install-smoke-receipt.html"
+        },
+        {
+          "exists": true,
+          "path": "release/public-bundle.json"
+        },
+        {
+          "exists": true,
+          "path": "release/public-bundle.md"
+        },
+        {
+          "exists": true,
+          "path": "release/public-bundle.html"
+        }
+      ],
+      "artifacts": [
+        "release/install-smoke-receipt.json",
+        "release/install-smoke-receipt.md",
+        "release/install-smoke-receipt.html",
+        "release/public-bundle.json",
+        "release/public-bundle.md",
+        "release/public-bundle.html"
+      ],
+      "command": "valuation-scenario-lab install-smoke-receipt --root . --output release && valuation-scenario-lab export-bundle --root . --output release",
+      "name": "Document install and bundle stability",
+      "step": 10
     }
   ],
   "title": "Sample Analyst Workflow Receipt"

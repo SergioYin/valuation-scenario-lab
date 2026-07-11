@@ -1,0 +1,74 @@
+{
+  "boundaries": [
+    "No live data.",
+    "No broker connections.",
+    "No buy/sell/hold advice."
+  ],
+  "entry_point_smoke_commands": [
+    {
+      "command": "valuation-scenario-lab --version",
+      "expected_output_contains": "1.0.0",
+      "network_required": false
+    },
+    {
+      "command": "valuation-scenario-lab selfcheck",
+      "expected_output_contains": "selfcheck passed",
+      "network_required": false
+    },
+    {
+      "command": "valuation-scenario-lab install-smoke-receipt --root . --output release",
+      "expected_output_contains": "wrote release/install-smoke-receipt.json",
+      "network_required": false
+    },
+    {
+      "command": "valuation-scenario-lab export-bundle --root . --output release",
+      "expected_output_contains": "wrote release/public-bundle.json",
+      "network_required": false
+    },
+    {
+      "command": "valuation-scenario-lab validate-release --root . --format markdown",
+      "expected_output_contains": "Status: pass",
+      "network_required": false
+    }
+  ],
+  "expected_files": [
+    {
+      "exists": true,
+      "path": "dist/valuation_scenario_lab-1.0.0-py3-none-any.whl"
+    },
+    {
+      "exists": true,
+      "path": "dist/valuation_scenario_lab-1.0.0.tar.gz"
+    },
+    {
+      "exists": true,
+      "path": "release/public-bundle.json"
+    },
+    {
+      "exists": true,
+      "path": "release/public-bundle.md"
+    },
+    {
+      "exists": true,
+      "path": "release/public-bundle.html"
+    }
+  ],
+  "generated_on": "static-local",
+  "install_commands": [
+    {
+      "command": "python -m pip install --no-index --find-links dist valuation_scenario_lab-1.0.0-py3-none-any.whl",
+      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.0.0",
+      "name": "local wheel",
+      "network_required": false
+    },
+    {
+      "command": "python -m pip install -e .",
+      "expected_output_contains": "Successfully installed valuation-scenario-lab-1.0.0",
+      "name": "editable local checkout",
+      "network_required": false
+    }
+  ],
+  "network_policy": "No network commands are run by this receipt; install commands are documented for offline/local wheel validation.",
+  "schema_version": "valuation-scenario-lab.install-smoke-receipt.v1.0",
+  "status": "documented"
+}
